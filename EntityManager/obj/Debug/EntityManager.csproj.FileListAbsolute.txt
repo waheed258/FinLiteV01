@@ -1,0 +1,12 @@
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\EntityManager\bin\Debug\EntityManager.pdb
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.csprojResolveAssemblyReference.cache
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.dll
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.pdb
+E:\light version\example2\FL_SOLUTION\EntityManager\bin\Debug\EntityManager.pdb
+E:\light version\example2\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.csprojResolveAssemblyReference.cache
+E:\light version\example2\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.dll
+E:\light version\example2\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.pdb
+D:\liteVersion\LT_Latest1\FL_SOLUTION\EntityManager\bin\Debug\EntityManager.pdb
+D:\liteVersion\LT_Latest1\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.csprojResolveAssemblyReference.cache
+D:\liteVersion\LT_Latest1\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.dll
+D:\liteVersion\LT_Latest1\FL_SOLUTION\EntityManager\obj\Debug\EntityManager.pdb

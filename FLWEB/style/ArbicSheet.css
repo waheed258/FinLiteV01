@@ -1,0 +1,14 @@
+﻿body {
+
+    text-align:right;
+    
+    
+}
+
+tr th{
+     text-align:right;
+}
+
+button{
+    padding-right:0px !important;
+}

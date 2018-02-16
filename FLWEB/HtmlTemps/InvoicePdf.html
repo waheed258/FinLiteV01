@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Invocie</title>
+    <style>
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        #companylogo {
+            width: 200px;
+            /*background-color: red;*/
+            height: 20px;
+        }
+
+        #companyadd {
+            width: 70%;
+            /*background-color: #ffcc33;*/
+            margin: auto;
+        }
+
+        #div1{
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body style=" position: relative;
+  width: 21cm;
+  height: 29.7cm;
+  margin: 0 auto;
+  color: #555555;
+  background: #FFFFFF;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-family: SourceSansPro;">
+   
+    <header class="clearfix" style="padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #AAAAAA;">
+      
+     
+      
+        <div id="companyadd" style="float:right;">
+            <h1 class="">{CompanyName}</h1>
+            <address style="text-align: left; width: 80%;right:10px;">
+                {address}<br/>
+                {City}{State}{Country}
+            </address>
+            
+        </div>
+       
+        <div id="companylogo" style="width:25%;">
+            {Image}
+        </div>
+
+    </header>
+    <main>
+        <div id="details" class="clearfix" style="margin-bottom: 50px; clear: both">
+            <center><h2>COMPUTER GENERATED TAX INVOICE</h2></center>
+            <div id="" style="float: right;
+  text-align: right;">
+
+                <table>
+                    <tr>
+                        <td style="font-weight:bold;text-align:left">
+                            Invoice No 
+                        </td><td>:</td>
+                        <td align="left">
+                            {Invoice_No}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold;text-align:left;">Date</td> <td>:</td>
+                        <td align="left">{Date}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: left;">Consultant </td><td>:</td>
+                        <td align="left">{Consultant}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: left;">Client </td><td>:</td>
+                        <td align="left">{Client}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: left;">Currency </td><td>:</td>
+                        <td align="left">{Currency}</td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+            <br/>
+            <div>
+                <table>
+                    <tr>
+                        <td style="font-weight:bold">TO </td>
+                        <td>:</td>
+                        <td>{Client1}</td>
+                    </tr>
+                   
+                </table>
+            </div>
+        </div>
+        <div style="border-radius:5px" id="div1">
+
+            <table id="Table1" style="border: 1px ridge black; width: 100%; margin-bottom: 20px; border-collapse: collapse; border-top-left-radius: 10px;">
+
+
+
+                {MainRows}
+
+
+            </table>
+        </div>
+        <hr>
+    </main>
+
+
+    <footer>
+        <div style="width:33.3%;float:right;">
+            <img src="4.jpg" style="margin-left:200px;">
+        </div>
+        <div style="width:33.3%;float:right;">
+            {Image3}
+         
+        </div>
+        <div style="width:33.3%;float:left;">
+            <img src="2.jpg">
+        </div>
+    </footer>
+
+</body>
+</html>

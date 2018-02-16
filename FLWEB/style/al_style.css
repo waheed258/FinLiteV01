@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ font-family:arial; font-size:13px; color:#000; margin:0px; padding:0px;}
+div{ margin:0px; padding:0px; float:left; width:100%;}
+span{ margin:0px; padding:0px;}
+label{ margin:0px; padding:0px;}
+h1,h2,h3,h4{margin:0px; padding:0px; float:left; width:100%;}
+h1{ font-size:18px; margin:40px 0px;}
+
+.alWrapper{ width:593px; position:relative; margin:0px auto; padding:0px; height:842px; display:table; float:none; border:solid 1px #000; }
+.headeWraper{ width:96%; border-bottom:solid 1px #000; padding:2%;}
+.AdresBox{ width:40%;}
+.signtr{ width:23%;}
+.logoSection{ width:20%; text-align:center;}
+.textMatter{ text-align:center; line-height:20px;}
+.BodyWraper{ width:96%; padding:2%;}
+.footer{ width:100%; position:absolute; bottom:0px; padding:10px 0px; border-top:solid 1px #000;}
+.footer a{ color:#000;}
+.head60{ width:80%;}
+.headingFont{ font-size:16px; font-weight:normal; color:#666; text-decoration:underline;}
+.font11{ font-size:11px;}
+
+
+
+.alignLeft{ text-align:left;}
+.alignRight{ text-align:right;}
+.alignCenter{ text-align:center;}
+.extraPadding{ padding:40px 0px;}
+.marginBottom{ margin:0px 0px 20px 0px;}
+.extraLineHeight{ line-height:30px;}
+
+.pull_right{ float:right;}
+.bordernone{ border:none;}
+
+
+.barcode{ float:right; text-align:right; width:80%;}
+.barcodeAdres{ float:left; width:54%; margin:0px 2% 0px 0px; padding:10px 2%; background-color:#f1f2f7; border-radius:10px;}
+.barcodeNamebox{ float:left; width:34%; margin:0px 0px 0px 2%; padding:10px 2%; background-color:#f1f2f7; border-radius:10px;}
+
+.barcodeTitle{ float:left; width:96%; padding:10px 2%; background-color:#f1f2f7; border-radius:10px; font-size:16px; font-weight:600;}
+.barcodeContentbox{ float:left; width:96%;padding:0px 2%;}
+.barcodeChecklistbox{float:left; width:100%;}
+.barcodeChecklistbox tr{float:left; width:96%; margin:0px; padding:3px 2%; background-color:#fff;}
+.barcodeChecklistbox tr:nth-child(odd){ background-color:#f1f1f1;}
+.barcodeChecklistbox input{ margin:0px 10px 0px 0px;}
+
+.visaChecklistStyle{ margin:0px; padding:0px; border:solid 1px #ccc; border-bottom:none; width:100%;}
+.visaChecklistStyle tr{ } 
+.visaChecklistStyle th{ margin:0px; padding:3px; border-bottom:solid 1px #ccc; text-align:left;}
+.visaChecklistStyle td{ margin:0px; padding:3px; border-bottom:solid 1px #ccc; line-height:20px;}
+.visaChecklistStyle tr:last-child{ margin:0px; padding:3px; border-bottom:none;}
+.visaChecklistStyle ul{ margin:0px; padding:0px; width:100%; list-style:outside;}
+.visaChecklistStyle li{ margin:0px; padding:0px; width:100%;}
+.ulDiv{margin-left:15px; float:left; padding:0px 2%; width:94%;}
+.impnotes{ margin:10px 0px; padding:10px 2%; width:95.6%; border:solid 1px #ccc; line-height:20px;}
+.impnotes ul{ margin:0px; padding:0px;}
+.alWrapper:after{ background-image:url(../images/alLogo.png); background-repeat:no-repeat; content : ""; display: block; position: absolute; top: 0; left: 0;  width: 100%; height: 100%; opacity : 0.1; z-index: -1; background-position:50% 50%; background-size:80% 58%;}

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CC9E87D9-4227-4077-A3A4-BAE874D50EDC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessManager</RootNamespace>
+    <AssemblyName>BusinessManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BACarbonCoefficients.cs" />
+    <Compile Include="BACommission.cs" />
+    <Compile Include="BAIncomeReceipt.cs" />
+    <Compile Include="BAIndividualTitles.cs" />
+    <Compile Include="BALFilereading.cs" />
+    <Compile Include="BALGeneralReceipts.cs" />
+    <Compile Include="BAReport.cs" />
+    <Compile Include="BALAgencyCreditMemo.cs" />
+    <Compile Include="BAAirport.cs" />
+    <Compile Include="BAAirSuppliers.cs" />
+    <Compile Include="BAAutoInvoice.cs" />
+    <Compile Include="BABankAccount.cs" />
+    <Compile Include="BABookDestinations.cs" />
+    <Compile Include="BABookingSource.cs" />
+    <Compile Include="BABranch.cs" />
+    <Compile Include="BACashBook.cs" />
+    <Compile Include="BACities.cs" />
+    <Compile Include="BAClients.cs" />
+    <Compile Include="BACommissionType.cs" />
+    <Compile Include="BAConsultant.cs" />
+    <Compile Include="BAContactLog.cs" />
+    <Compile Include="BAContactNote.cs" />
+    <Compile Include="BAContinents.cs" />
+    <Compile Include="BACountries.cs" />
+    <Compile Include="BACreditCard.cs" />
+    <Compile Include="BADepositTransaction.cs" />
+    <Compile Include="BAForeignCurrency.cs" />
+    <Compile Include="BAGroupTypes.cs" />
+    <Compile Include="BAImportedTickets.cs" />
+    <Compile Include="BALAgencyDebitMemo.cs" />
+    <Compile Include="BALAirTicket.cs" />
+    <Compile Include="BALandarrangement.cs" />
+    <Compile Include="BALandSuppliers.cs" />
+    <Compile Include="BALCharteredAccounts.cs" />
+    <Compile Include="BALGeneralReceipt.cs" />
+    <Compile Include="BALInvoice.cs" />
+    <Compile Include="BALMainAccount.cs" />
+    <Compile Include="BALogin.cs" />
+    <Compile Include="BALServicefee.cs" />
+    <Compile Include="BALSupplierChoice.cs" />
+    <Compile Include="BALTransactions.cs" />
+    <Compile Include="BALProformaInvoice.cs" />
+    <Compile Include="BANonUploadReasons.cs" />
+    <Compile Include="BAPaymentTypes.cs" />
+    <Compile Include="BAReceiptType.cs" />
+    <Compile Include="BARouteMiles.cs" />
+    <Compile Include="BAState.cs" />
+    <Compile Include="BATemplateCategory.cs" />
+    <Compile Include="BATicketType.cs" />
+    <Compile Include="BAVatType.cs" />
+    <Compile Include="BOUtiltiy.cs" />
+    <Compile Include="BAGeneralPayment.cs" />
+    <Compile Include="MirRead.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataManager\DataManager.csproj">
+      <Project>{32e702d3-428c-4ff6-9028-be3305c45406}</Project>
+      <Name>DataManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityManager\EntityManager.csproj">
+      <Project>{79d57ffd-a16a-480f-b87d-9c1610c40d7a}</Project>
+      <Name>EntityManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

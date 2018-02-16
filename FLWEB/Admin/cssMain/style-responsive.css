@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media(max-width:767px){
+body{}
+.full-width { margin:0 auto; width:100%;}
+.mobicon{ display:block; float:left; padding:9px 0px 0px 9px; cursor:pointer;}
+.navigation-wrap{ display:none; width:100%; float:left; background-color:#08376a; position:absolute; top:38px;}
+.navilink{ width:100%; border-bottom:1px solid #a8b4c8; margin:0px; padding:8px 10px; box-sizing:border-box;}
+.navilink:last-child{ border-bottom:none;}
+.right-sec{ margin:0px 9px 0px 0px;}
+.moblogo{ width:50%!important;}
+.moblogo img{ width:100%; height:100%; text-align:left; float:left;}
+.logo-sec { margin:0px; width:100%; text-align:center;}
+.logo-sec img{ width:50%; height:50%;}
+.login{ padding:13px;}
+.register{ padding:13px;} 
+.login span{ display:none; padding:0px;}
+.register span{ display:none; padding:0px;}
+.tvr-wrap { margin:5px 0px 0px 0px; width:100%;}
+.span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9{ width:100%; margin:0px;}
+.span5:first-child{ width:100%; margin:0px 0px 3px 0px;}
+.helpdesk{ display:none;}
+.applyonline-wrap{ height:auto;}
+.apply-panel{ width:100%; margin:0px 0px 0px 0px; float:left; padding:0px; box-sizing: border-box; background:#265d9a; border-bottom:1px solid #a8b4c8;}
+.stepbox{ padding:0px; height:90px; width:30%; margin:7px 35%; float:left; min-width:90px; box-sizing:border-box;  }
+.lwr-panel{ width:100%; padding:0px 9px; box-sizing:border-box; background-color:#b2b2b2; background-image:none; box-shadow:inset 0px 65px 100px #fff; height:auto;}
+.text-container{ padding:10px 20px;}
+.half-panel{ width:100%; padding:0px; margin:0px; display:none;}
+/*.half-panel-content ul li{ width:100%; background-image:none;}
+.half-panel-content ul li a{ text-align:center; padding:4px 0px;}*/
+.footer{  box-sizing:border-box; width:100%; padding:20px 9px;}
+.fotr-left{ width:100%; background-image:none;}
+.fotr-left a{ width:100%;  box-sizing:border-box; padding:4px 1%;}
+.fotr-right{width:100%; margin-left:0px;}
+.connectsocial{ margin:15px 0px 0px;}
+.copy{ width:100%; text-align:center!important; padding:5px 0px;}
+.allrights{ width:100%; text-align:center; line-height:20px;}
+	
+.oneThird{ width:100%; margin:0px;}
+.flag-contry-name{ margin:15px 0px; width:100%;}
+.crncyRate-panel{ width:80%; margin:0px 10%;}
+.wthr-time-panel{width:80%; margin:0px 10%;}
+.wthr-temp-captl{width:50%; border:none;}
+.timePanel{width:50%;  margin:20px 0 10px;}
+.inner-container{ width:100%; padding:0px 9px; box-sizing:border-box;}
+.left-section{width:100%; margin:0px;}
+.right-section{width:100%;}
+.head-lwr-wrap-inner{ height:auto;}
+.imageGallery img{ width:100%;}
+
+.tabs-menu li a{ padding:10px 30px;}
+.visa-cuntry{ width:100%;}
+.visa-search-panel{ width:100%;}
+.mobfullW{ width:100%; margin:0px 0px 5px 0px;}
+.select{ width:115%;}
+.labelname{ text-align:left;}
+.alertbox{ width:100%; margin:0px;}
+.smplstptitle{ background:url("images/smplstpbg.png") repeat scroll 0 bottom/100% 100% #ffffff; box-sizing:border-box; padding:0px 9px;}
+.listing-panel { float:left; margin:0; max-width:380px; overflow-x:scroll; padding:8px 0; width:100%;}
+.listing{ width:100%;}
+
+.alphabet-panel{ width:100%; margin:0px; padding:5px;}
+.alphabet-panel a{ padding:3px 10px;}
+.alpabetWordsWrap a{ width:100%;}
+
+.agentlgn-contentbox{ width:100%; margin:0px;}
+.onethird{ width:100%; margin:0 0.5% 25px; padding:0px 0px 20px; border-bottom:1px solid #dddddd;}
+.onethird:last-child{margin:0 0.5% 0px; border-bottom:none; padding:0px;} 
+.social-icon{ margin:0px 0px 5px;}
+.inputbox, .submitbox, .fotr-last{ width:100%; margin:0px 0px 5px;}
+.paddingtopbtm10{ padding-bottom:2px;}
+.page-title{ padding:5px 10px;}
+.tvr-contentbox{padding:10px;}
+.validationred{ padding:0px 10px; font-size:12px;}
+.register-panel{ width:270px; padding:20px; top:170px;}
+.lgn-listing ul{ display:none;}
+.form-label{ width:100%;}
+.form-value{ width:100%; margin:0px;}
+.form-value:last-child{width:100%; margin:0px;}
+
+.mobfullWidth, .postal, .walkin{ width:100%;}
+
+.ast-panel { background: url("../images/ast-bg.png") no-repeat scroll center 0 / 130% auto rgba(0, 0, 0, 0); margin: 15px auto; width:100%; padding:75px 0px 0px;}
+.tracking-bg { background: url("../images/ref-bg.png") no-repeat scroll center 0 / 130% auto rgba(0, 0, 0, 0); margin: 15px auto; width:100%; padding:75px 0px 0px;}
+.postal a{ background:url("../images/postal.png") no-repeat scroll center 0 rgba(0, 0, 0, 0);}
+.postal a:hover{ background:url("../images/postal-hover.png") no-repeat scroll center 0 rgba(0, 0, 0, 0);}
+.walkin a{ background:url("../images/walkin.png") no-repeat scroll center 0 rgba(0, 0, 0, 0);}
+.walkin a:hover{ background:url("../images/walkin-hover.png") no-repeat scroll center 0 rgba(0, 0, 0, 0);}
+.half-panel-title{ margin:40px 0 20px!important;}
+.methodbtn{ margin:20px 10%; width:80%;}
+
+.refNumTrack { background: url("../images/app-ref.png") no-repeat scroll center 0 rgba(0, 0, 0, 0) !important;}
+.refNumTrack:hover { background: url("../images/app-ref-hover.png") no-repeat scroll center 0 rgba(0, 0, 0, 0) !important;}
+.pass-num { background: url("../images/pass-num.png") no-repeat scroll center 0 rgba(0, 0, 0, 0) !important;}
+.pass-num:hover { background: url("../images/pass-num-hover.png") no-repeat scroll center 0 rgba(0, 0, 0, 0) !important;}
+.accordion_head .span9{ width:90%;}
+.half-panel-title{margin:10px 0 5px!important;}
+.full-box{ padding:10px;}
+#map-canvas{ width:280px!important;}
+#map-canvas2{ width:280px!important;}
+.bankdetailsPanel{height:350px;}
+/*.head-lwr-wrap{height:390px;}*/
+.green{padding:8px}
+.index{height:390px;}
+}
+
+@media (min-width:767px) and (max-width:980px)
+{
+body{}
+.full-width{ width:747px;}
+.mobicon{ display:block; float:left; padding:9px 0px 0px 9px; cursor:pointer;}
+.navigation-wrap{ display:none; width:100%; float:left; background-color:#08376a; position:absolute; top:39px; left:0px;}
+.navilink{ width:100%; border-bottom:1px solid #a8b4c8; margin:0px; padding:8px 10px; box-sizing:border-box;}
+.navilink:last-child{ border-bottom:none;}
+.slideshow{ height:230px;}
+.apply-img img{ width:100%; height:100%;}
+.soical-text-tag{ width:41%;}
+.onethird-matterbox{ min-height:120px;}
+.mobfullWidth{ width: 100%;}
+.postal { width: 50%;}
+.walkin { width: 50%;}
+#map-canvas{ width:230px!important;}
+#map-canvas2{ width:230px!important;}
+.logo-sec img{ width:140px; height:70px;}
+/*.tvr-wrap{ margin:-45px 0 0 55px;}*/
+	}
+	
+@media (min-width:0px) and (max-width:240px)
+{
+.search-panel{ width:120px;}	
+.apply-img img{ width:100%; height:100%;}
+.soical-text-tag{ width:50%;}
+}
+

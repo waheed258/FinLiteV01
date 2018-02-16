@@ -1,0 +1,102 @@
+﻿#time {
+    width: 100%;
+    color: #fff;
+    font-size: 125px;
+    margin-bottom: 50px;
+    display: inline-block;
+    text-align: center;
+    font-family: 'Lato',sans-serif;
+    font-weight: 100;
+}
+
+.lock-screen {background: #1FB3A3 url("../images/lock-screen.jpg") no-repeat fixed 0 0 / cover;}
+.lock-wrapper {margin: 10% auto; max-width: 500px;}
+.lock-wrapper img {
+    position: absolute;
+    left: 33%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 10px solid #fff;
+    width: 160px;
+    height: 160px;
+    background: #fff;
+}
+.lock-name {
+    background: #fff;
+    width: 50%;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 55px;
+    padding: 0 20px;
+    text-align: left;
+    border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
+    color: #1fb5ad;
+}
+.lock-pwd {
+    background: #fff;
+    width: 50%;
+    float: right;
+    height: 50px;
+    line-height: 50px;
+    margin:-50px -76px 0px 0px;
+    padding: 0 0 0 80px;
+    border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    color: #1fb5ad;
+}
+.lock-input {
+    width: 83%;
+    border: none;
+    float: left;
+    margin-right:-30px;
+}
+#txtPassword{
+    width: 70% !important;
+    margin-top: 2px;
+    color: #626f81;
+}
+.btn-lock, .btn-lock:hover {
+    background: #fff;
+    color: #626f81;
+    margin-top: 0px;
+    height:50px;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.lock-box { position: relative;}
+.text-center {text-align: center;}
+.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+.form-control {
+    border: 1px solid #e2e2e4;
+    box-shadow: none;
+    color: #c2c2c2;
+}

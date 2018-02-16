@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32E702D3-428C-4FF6-9028-BE3305C45406}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataManager</RootNamespace>
+    <AssemblyName>DataManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HttpContextShim">
+      <HintPath>..\packages\HttpContextShim.0.0.5\lib\net40\HttpContextShim.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SVS IND Project\SVS IND DEV\Bin\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\HttpContextShim.0.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\HttpContextShim.0.0.5\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\HttpContextShim.0.0.5\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\HttpContextShim.0.0.5\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\HttpContextShim.0.0.5\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAAirport.cs" />
+    <Compile Include="DAAirSuppliers.cs" />
+    <Compile Include="DAAutoInvoice.cs" />
+    <Compile Include="DABankAccount.cs" />
+    <Compile Include="DABookDestinations.cs" />
+    <Compile Include="DABookingSource.cs" />
+    <Compile Include="DABranch.cs" />
+    <Compile Include="DACarbonCorfficients.cs" />
+    <Compile Include="DACashBook.cs" />
+    <Compile Include="DACities.cs" />
+    <Compile Include="DAClients.cs" />
+    <Compile Include="DACommission.cs" />
+    <Compile Include="DACommissionType.cs" />
+    <Compile Include="DAConsultant.cs" />
+    <Compile Include="DAContactLog.cs" />
+    <Compile Include="DAContactNote.cs" />
+    <Compile Include="DAContinents.cs" />
+    <Compile Include="DACountries.cs" />
+    <Compile Include="DACreditCard.cs" />
+    <Compile Include="DADepositTransaction.cs" />
+    <Compile Include="DAForeignCurrency.cs" />
+    <Compile Include="DAGroupTypes.cs" />
+    <Compile Include="DAImportedTickets.cs" />
+    <Compile Include="DAIncomeReceipt.cs" />
+    <Compile Include="DAIndividualTitles.cs" />
+    <Compile Include="DALAgencyCreditMemo.cs" />
+    <Compile Include="DALAgencyDebitMemo.cs" />
+    <Compile Include="DALAirTicket.cs" />
+    <Compile Include="DALandarrangement.cs" />
+    <Compile Include="DALandSuppliers.cs" />
+    <Compile Include="DALCharteredAccounts.cs" />
+    <Compile Include="DALFilereading.cs" />
+    <Compile Include="DALGeneralCharge.cs" />
+    <Compile Include="DALGeneralReceipt.cs" />
+    <Compile Include="DALGeneralReceipts.cs" />
+    <Compile Include="DALInvoice.cs" />
+    <Compile Include="DALMainAccount.cs" />
+    <Compile Include="DALogin.cs" />
+    <Compile Include="DALProformaInvoice.cs" />
+    <Compile Include="DALServicefee.cs" />
+    <Compile Include="DALSupplierChoice.cs" />
+    <Compile Include="DALTransactions.cs" />
+    <Compile Include="DANonUploadReasons.cs" />
+    <Compile Include="DAPaymentTypes.cs" />
+    <Compile Include="DAReceiptType.cs" />
+    <Compile Include="DAReport.cs" />
+    <Compile Include="DARouteMiles.cs" />
+    <Compile Include="DAState.cs" />
+    <Compile Include="DataUtilities.cs" />
+    <Compile Include="DATemplateCategory.cs" />
+    <Compile Include="DATicketType.cs" />
+    <Compile Include="DAVatType.cs" />
+    <Compile Include="DOUtility.cs" />
+    <Compile Include="DAGeneralPayment.cs" />
+    <Compile Include="MySqlDataUtilites.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityManager\EntityManager.csproj">
+      <Project>{79d57ffd-a16a-480f-b87d-9c1610c40d7a}</Project>
+      <Name>EntityManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

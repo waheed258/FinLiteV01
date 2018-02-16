@@ -1,0 +1,27 @@
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\bin\Debug\BusinessManager.dll
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\bin\Debug\BusinessManager.pdb
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\bin\Debug\DataManager.dll
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\bin\Debug\EntityManager.dll
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\bin\Debug\DataManager.pdb
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\bin\Debug\EntityManager.pdb
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.csprojResolveAssemblyReference.cache
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.dll
+E:\TFSWorkSpace\FinanceListVersion\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.pdb
+E:\light version\example2\FL_SOLUTION\BusinessManager\bin\Debug\BusinessManager.dll
+E:\light version\example2\FL_SOLUTION\BusinessManager\bin\Debug\BusinessManager.pdb
+E:\light version\example2\FL_SOLUTION\BusinessManager\bin\Debug\DataManager.dll
+E:\light version\example2\FL_SOLUTION\BusinessManager\bin\Debug\EntityManager.dll
+E:\light version\example2\FL_SOLUTION\BusinessManager\bin\Debug\DataManager.pdb
+E:\light version\example2\FL_SOLUTION\BusinessManager\bin\Debug\EntityManager.pdb
+E:\light version\example2\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.csprojResolveAssemblyReference.cache
+E:\light version\example2\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.dll
+E:\light version\example2\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.pdb
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\bin\Debug\BusinessManager.dll
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\bin\Debug\BusinessManager.pdb
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\bin\Debug\DataManager.dll
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\bin\Debug\EntityManager.dll
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\bin\Debug\DataManager.pdb
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\bin\Debug\EntityManager.pdb
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.csprojResolveAssemblyReference.cache
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.dll
+D:\liteVersion\LT_Latest1\FL_SOLUTION\BusinessManager\obj\Debug\BusinessManager.pdb
