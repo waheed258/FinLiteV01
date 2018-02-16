@@ -391,6 +391,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         try
         {
+            //added 
             if (txtPFAirExcluisvefare.Text != "" && txtPFAirCommisionper.Text != "")
             {
                 decimal exclusiveFare = Convert.ToDecimal(txtPFAirExcluisvefare.Text);
