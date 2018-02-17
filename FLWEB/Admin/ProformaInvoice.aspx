@@ -566,8 +566,12 @@
                                                 <asp:TextBox ID="txtPFDate2" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFDate2" runat="server" ID="rfvtxtPFDate2"
                                                     ValidationGroup="PFairticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
+                                           
 
                                             </div>
+                                                 <asp:CompareValidator ID="CompareValidator1" runat="server" Operator="GreaterThan" Type="Date"
+                                                    ControlToValidate="txtPFDate2" ControlToCompare="txtPFDate1"
+                                                    ErrorMessage="Date must be grater than previous travel date" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
 
                                         </div>
 
@@ -599,9 +603,14 @@
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFDate3" runat="server" ID="rfvtxtPFDate3"
                                                     ValidationGroup="PFairticket" ErrorMessage="Enter Class" Text="Select Date" ForeColor="red" Display="Dynamic" />
+                                               
 
 
                                             </div>
+                                             <asp:CompareValidator ID="CompareValidator2" runat="server" Operator="GreaterThan" Type="Date"
+                                                    ControlToValidate="txtPFDate3" ControlToCompare="txtPFDate2"
+                                                    ErrorMessage="Date must be grater than previous travel date" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
 
                                         <div class="col-sm-12" id="div5" runat="server">
@@ -631,8 +640,12 @@
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFDate4" runat="server" ID="rfvtxtPFDate4"
                                                     ValidationGroup="PFairticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
+                                              
 
                                             </div>
+                                              <asp:CompareValidator ID="CompareValidator3" runat="server" Operator="GreaterThan" Type="Date"
+                                                    ControlToValidate="txtPFDate4" ControlToCompare="txtPFDate3"
+                                                    ErrorMessage="Date must be grater than previous travel date" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
 
                                         </div>
 
@@ -934,6 +947,10 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <asp:TextBox ID="txtPFlandTravelto" runat="server" CssClass="form-control" placeholder="YYYY/MM/DD" />
+                                            <asp:CompareValidator ID="CompareValidator4" runat="server" Operator="GreaterThan" Type="Date"
+                                                    ControlToValidate="txtPFlandTravelto" ControlToCompare="txtPFlandTravelFrom"
+                                                    ErrorMessage="'To Date' must be Greater than from Data" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
+
 
                                         </div>
                                     </div>
