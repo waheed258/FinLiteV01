@@ -419,5 +419,15 @@ namespace DataManager
                                               };
             return ExecuteDataSet("AccCode_ExistorNot", htparams);
         }
+        // added for unique account code checking in Air ,land,client, main and chart of accounts by anitha
+        public DataSet CheckKeyCodeExitorNot(string Key, string FormName)
+        {
+            Hashtable htparams = new Hashtable
+                                              {
+                                                 {"@Key",Key},
+                                                  {"@Type",FormName},
+                                              };
+            return ExecuteDataSet("KeyCode_ExistorNot", htparams);
+        }
     }
 }

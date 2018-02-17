@@ -26,9 +26,10 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtKey_TextChanged" AutoPostBack="true" />
                         <asp:RequiredFieldValidator ControlToValidate="txtKey" runat="server" ID="rfvtxtKey"
                             Display="Dynamic" Text="Enter Key." ErrorMessage="Enter Key." ValidationGroup="paymenttypes" ForeColor="Red" />
+                        <asp:Label ID="lblKeyerr" runat="server" ></asp:Label> 
                     </div>
 
 
