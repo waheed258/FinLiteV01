@@ -42,7 +42,7 @@ public partial class Finance_charteredaccountants : System.Web.UI.Page
             _objChateredAcc.TranCurrency = Convert.ToInt32(ddlCurrency.SelectedValue.ToString());
             _objChateredAcc.BaseCurrency = Convert.ToInt32(ddlDefaultCurrency.SelectedValue.ToString());
             _objChateredAcc.CreatedBy = 0;
-
+            _objChateredAcc.Isclient = 0;
             int Result = _objBalChartedAcc.CharteredAccountInsert(_objChateredAcc);
 
             if (Result > 0)

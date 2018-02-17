@@ -26,6 +26,6 @@ namespace EntityManager
         public int TranCurrency { get; set; }
 
         public int CategoryId { get; set; }
-     
+        public int Isclient { get; set; }
     }
 }
