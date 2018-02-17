@@ -55,8 +55,7 @@ namespace EntityManager
         public int CreatedBy { get; set; }
         public int CommissMethod { get; set; }
         public string SupplMainGIAccCode { get; set; }
-
-
+        public int IsClient { get; set; }
         #region CharteredAccounts
         public int ChartedAccId { get; set; }
         public string ChartedAccName { get; set; }
