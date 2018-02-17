@@ -71,6 +71,7 @@ namespace EntityManager
         public string ContactFax { get; set; }
         public int ContactDeactivate { get; set; }
         public string SupplMainGIAccCode { get; set; }
+        public int IsClient { get; set; }
 
         #region contacts
         public int ContactId { get; set; }
