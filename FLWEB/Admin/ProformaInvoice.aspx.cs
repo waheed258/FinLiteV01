@@ -124,6 +124,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             BindPFInvoiceLineItemsCount();
             //invoice Loading
             BindPFInvoiceDropDown();
+           
 
         }
     }
@@ -391,11 +392,10 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         try
         {
-            //added 
             if (txtPFAirExcluisvefare.Text != "" && txtPFAirCommisionper.Text != "")
             {
                 decimal exclusiveFare = Convert.ToDecimal(txtPFAirExcluisvefare.Text);
-                txtPFAirCommExclu.Text = _objBOUtiltiy.FormatTwoDecimal(((Convert.ToDecimal(txtPFAirCommisionper.Text) * exclusiveFare) / 100).ToString());
+                txtPFAirCommExclu.Text = ((Convert.ToDecimal(txtPFAirCommisionper.Text) * exclusiveFare) / 100).ToString();
 
 
             }
@@ -809,6 +809,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (routing.Contains("/"))
             {
 
+                txtPFAirTravelDate.Enabled = false;
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {
