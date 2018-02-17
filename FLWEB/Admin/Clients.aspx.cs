@@ -206,6 +206,7 @@ public partial class Admin_Clients : System.Web.UI.Page
             }
             if (cmdSubmit.Text == "Submit")
             {
+                objClients.IsClient = 1;
                 int ResultAcc = objBAClients.InsUpdChartAccounts(objClients);
             }
             if (cmdSubmit.Text == "Update")
@@ -273,6 +274,7 @@ public partial class Admin_Clients : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+
 
     private void GetClientDetails(int ClientId)
     {
