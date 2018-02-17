@@ -43,8 +43,10 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtKey_TextChanged"  AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtKey" runat="server" ID="rfvtxtKey" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Key" Text="Enter Key" Display="Dynamic" ForeColor="Red" />
+                         <asp:Label ID="lblKeyerr" runat="server" ></asp:Label>
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
