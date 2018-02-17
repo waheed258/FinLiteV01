@@ -336,5 +336,27 @@ public partial class Admin_Consultant : System.Web.UI.Page
 
 
 
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+        DataTable dt = new DataTable();
+        DataSet ds = new DataSet();
+        ds = _objBOUtiltiy.CheckKeyCodeExitorNot(txtKey.Text, "Consultant");
+
+        ds.Tables.Add(dt);
+
+        if (ds.Tables[0].Rows.Count != 0 || ds.Tables[0].Rows.Count > 0)
+        {
+            lblaccnoerr.Text = "Already Exist";
+            lblaccnoerr.ForeColor = System.Drawing.Color.Red;
+            txtKey.Text = "";
+        }
+        else
+        {
+            lblaccnoerr.Text = "Available";
+            lblaccnoerr.ForeColor = System.Drawing.Color.DarkBlue;
+
+        }
+    }
 }
 
