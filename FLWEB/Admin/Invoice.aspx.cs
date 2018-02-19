@@ -315,7 +315,6 @@ public partial class Admin_Invoice : System.Web.UI.Page
                // ddlAirService.DataSource = ds.Tables[1];
                 if (Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString()) != 0)
                 {
-
                     int ComId = Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString());
 
                     ddlAirService.SelectedValue = ComId.ToString();
@@ -695,7 +694,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             string routing = txtAirRouting.Text;
             if (routing.Contains("/"))
             {
-                txtAirTravelDate.Enabled = false;
+
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {
@@ -2550,6 +2549,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             {
                 drpInvClientName.Items.Insert(0, new ListItem("--Select Client--", "0"));
             }
+            
         }
         catch (Exception ex)
         {
@@ -2748,12 +2748,6 @@ public partial class Admin_Invoice : System.Web.UI.Page
             txtClass2.Enabled = false;
             txtClass3.Enabled = false;
             txtClass4.Enabled = false;
-            txtDate1.Enabled = false;
-            txtDate2.Enabled = false;
-            txtDate3.Enabled = false;
-            txtDate4.Enabled = false;
-            txtAirTravelDate.Enabled = true;
-
 
         }
         catch (Exception ex)

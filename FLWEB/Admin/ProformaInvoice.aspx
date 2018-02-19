@@ -231,9 +231,11 @@
                             </div>
                             <div class="col-sm-2">
                                 <asp:DropDownList ID="drpPFInvClientName" runat="server" CssClass="form-control" OnTextChanged="drpPFInvClientName_TextChanged" AutoPostBack="true">
+                                    <asp:ListItem Text="--Select Client Name--" Value="0" Selected="True"></asp:ListItem>
+
                                 </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ControlToValidate="drpPFInvClientName" runat="server" ID="RequiredFieldValidator2" ValidationGroup="PFinvoice"
-                                    ErrorMessage="Select Client Type" Text="Select Client Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                <asp:RequiredFieldValidator ControlToValidate="drpPFInvClientName" runat="server" ID="rfvdrpPFInvClientName" ValidationGroup="PFinvoice"
+                                    ErrorMessage="Select Client Name" Text="Select Client Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                             </div>
                         </div>
@@ -308,13 +310,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-5">
 
-                                        <button runat="server" id="btnPFOpenFP" class="btn btn-mini" title="AirTicket">
+                                        <button runat="server" id="btnPFOpenFP" class="btn btn-mini">
                                             <i class="fa fa-plane"></i>
                                         </button>
                                         <asp:Button ID="bntCancelFP" runat="server" Text="Cancel" Style="display: none;" />
                                         <%--<asp:Button ID="btnOpenFP" runat="server" Text="Open"  />--%>
                         &nbsp;&nbsp;&nbsp;
-                         <button runat="server" id="btnPFLand" class="btn btn-mini" title="Land Arrangement">
+                         <button runat="server" id="btnPFLand" class="btn btn-mini">
                              <i class="fa  fa-university"></i>
                          </button>
                                         &nbsp;&nbsp;
@@ -343,7 +345,7 @@
                             </div>--%>
                                 </div>
 
-                                <div id="popupdiv" title="AirTicket" class="modalBackground">
+                                <div id="popupdiv" title="Basic modal dialog" class="modalBackground">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -370,8 +372,8 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <asp:DropDownList ID="drpPFTicketType" runat="server" CssClass="form-control">
-                                                    <%--<asp:ListItem Text="--Select Ticket Type--" Value="-1" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="E-Ticket" Value="1"></asp:ListItem>--%>
+                                                    <asp:ListItem Text="--Select Ticket Type--" Value="-1" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="E-Ticket" Value="1"></asp:ListItem>
                                                 </asp:DropDownList>
                                                 <asp:RequiredFieldValidator ControlToValidate="drpPFTicketType" runat="server" ID="rfvdrpPFTicketType" ValidationGroup="PFairticket"
                                                     ErrorMessage="Select Ticket Type" Text="Select Ticket Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="-1" />
@@ -564,12 +566,8 @@
                                                 <asp:TextBox ID="txtPFDate2" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFDate2" runat="server" ID="rfvtxtPFDate2"
                                                     ValidationGroup="PFairticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
-                                           
 
                                             </div>
-                                                 <asp:CompareValidator ID="CompareValidator1" runat="server" Operator="GreaterThan" Type="Date"
-                                                    ControlToValidate="txtPFDate2" ControlToCompare="txtPFDate1"
-                                                    ErrorMessage="Date must be grater than previous travel date" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
 
                                         </div>
 
@@ -601,14 +599,9 @@
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFDate3" runat="server" ID="rfvtxtPFDate3"
                                                     ValidationGroup="PFairticket" ErrorMessage="Enter Class" Text="Select Date" ForeColor="red" Display="Dynamic" />
-                                               
 
 
                                             </div>
-                                             <asp:CompareValidator ID="CompareValidator2" runat="server" Operator="GreaterThan" Type="Date"
-                                                    ControlToValidate="txtPFDate3" ControlToCompare="txtPFDate2"
-                                                    ErrorMessage="Date must be grater than previous travel date" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
-
                                         </div>
 
                                         <div class="col-sm-12" id="div5" runat="server">
@@ -638,12 +631,8 @@
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFDate4" runat="server" ID="rfvtxtPFDate4"
                                                     ValidationGroup="PFairticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
-                                              
 
                                             </div>
-                                              <asp:CompareValidator ID="CompareValidator3" runat="server" Operator="GreaterThan" Type="Date"
-                                                    ControlToValidate="txtPFDate4" ControlToCompare="txtPFDate3"
-                                                    ErrorMessage="Date must be grater than previous travel date" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
 
                                         </div>
 
@@ -850,8 +839,8 @@
                                 PopupControlID="PFlandPanel">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="PFlandPanel"  runat="server" CssClass="panelpopup modalBackground " Width="80%" Height="93%" Style="display: none;">
-                                <div class="panelpopupheaderbox" title="Land Arrangement">
+                            <asp:Panel ID="PFlandPanel" runat="server" CssClass="panelpopup modalBackground " Width="80%" Height="93%" Style="display: none;">
+                                <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton3" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
@@ -861,7 +850,7 @@
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
-                                            <h4 class="panel-title">Land Arrangements</h4>
+                                            <h4 class="panel-title">Land Arrangemnts</h4>
                                         </div>
                                     </header>
                                     <div class="col-sm-12">
@@ -945,10 +934,6 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <asp:TextBox ID="txtPFlandTravelto" runat="server" CssClass="form-control" placeholder="YYYY/MM/DD" />
-                                            <asp:CompareValidator ID="CompareValidator4" runat="server" Operator="GreaterThan" Type="Date"
-                                                    ControlToValidate="txtPFlandTravelto" ControlToCompare="txtPFlandTravelFrom"
-                                                    ErrorMessage="'To Date' must be Greater than from Data" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
-
 
                                         </div>
                                     </div>
@@ -1278,7 +1263,7 @@
                             </cc1:ModalPopupExtender>
 
                             <asp:Panel ID="pnlPFServiceFee" runat="server" CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
-                                <div class="panelpopupheaderbox" title="Service Fee">
+                                <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
@@ -1535,7 +1520,7 @@
                             </cc1:ModalPopupExtender>
 
                             <asp:Panel ID="pnlPFGeneralCharge" runat="server" CssClass="panelpopup" Width="900px" Height="550px" Style="display: none;" BackgroundCssClass="modalBackground">
-                                <div class="panelpopupheaderbox" title="General Charge">
+                                <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton1" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
@@ -1742,7 +1727,7 @@
                                                         <%#Eval("Details")%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Client Total" ItemStyle-HorizontalAlign="Right">
+                                                <asp:TemplateField HeaderText="Client Total">
                                                     <ItemTemplate>
                                                         <%#Eval("ClientTotal")%>
                                                     </ItemTemplate>
@@ -1771,7 +1756,7 @@
                                                         <%#Eval("Count")%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Amount" ItemStyle-HorizontalAlign="Right">
+                                                <asp:TemplateField HeaderText="Amount">
                                                     <ItemTemplate>
                                                         <%#Eval("TotalAmount")%>
                                                     </ItemTemplate>
@@ -2043,7 +2028,6 @@
                                 </div>
                                 <div class="col-sm-3">
                                 </div>
-                                 <div class="overlay">
                                 <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                     <ProgressTemplate>
                                         <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -2052,7 +2036,7 @@
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                             </div>
-                                </div>
+
 
                         </ContentTemplate>
                     </asp:UpdatePanel>
