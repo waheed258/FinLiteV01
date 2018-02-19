@@ -88,6 +88,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 readFile = readFile.Replace("{Image}", "<img style='height:40px;width:250px;'  src='" + "http://flv.swdtcpl.com/Logos/" + dtlRow["comapnylogo"].ToString() + "'></img>");
                                 //readFile = readFile.Replace("{Image3}", "<img style='height:50px;width:70px;margin-left:100px;'  src='" + "http://demofin.swdtcpl.com/img/" + dtlRow["comapnylogo"].ToString() + "'></img>");
 
+
                                 //string strUrl = _objBOUtiltiy.LogoUrl();
                                 //readFile = readFile.Replace("{Image}", "<img   src='" + strUrl + "Logos/" + dtlRow["comapnylogo"].ToString() + "'></img>");
                                 //readFile = readFile.Replace("{Image3}", "<img style='height:50px;width:70px;margin-left:100px;'  src='" + strUrl + "Logos/" + dtlRow["comapnylogo"].ToString() + "'></img>");
@@ -168,10 +169,10 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                             {
                                 if (LandOnly == 0)
                                 {
-                                    sbLandrow.Append("<h3 class='text-center'><strong>Land Invoice Summary</strong></h3>");
+                                    //sbLandrow.Append("<h3 class='text-center'><strong>Land Invoice Summary</strong></h3>");
 
                                     sbLandrow.Append("<tr>");
-                                    sbLandrow.Append("<td colspan='7' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Land Arrangement</td>");
+                                    sbLandrow.Append("<td colspan='7' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Land Invoice Summary</td>");
                                     sbLandrow.Append("</tr>");
 
 
@@ -185,6 +186,8 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
 
                                     sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Incl Amt</td>");
                                     sbLandrow.Append("</tr>");
+
+
                                 }
                             }
 
@@ -194,6 +197,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                             SepLandVat = SepLandVat + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["VAT"].ToString().Trim()) ? ".00" : dtlRow["VAT"].ToString().Trim());
 
 
+                            readFile = readFile.Replace("{SupplName}", dtlRow["LSupplierName"].ToString());
 
 
                             //LandClientTotal = LandClientTotal + LandClientTotal;
