@@ -1744,7 +1744,7 @@
                                                         <%#Eval("Details")%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Client Total">
+                                                <asp:TemplateField HeaderText="Client Total" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <%#Eval("ClientTotal")%>
                                                     </ItemTemplate>
@@ -1773,7 +1773,7 @@
                                                         <%#Eval("Count")%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Amount">
+                                                <asp:TemplateField HeaderText="Amount" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <%#Eval("TotalAmount")%>
                                                     </ItemTemplate>
