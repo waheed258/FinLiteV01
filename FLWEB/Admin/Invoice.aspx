@@ -246,11 +246,9 @@
                             </div>
                             <div class="col-sm-2">
                                 <asp:DropDownList ID="drpInvClientName" runat="server" CssClass="form-control" OnTextChanged="drpInvClientName_TextChanged" AutoPostBack="true">
-                                    <asp:ListItem Text="--Select Client Name--" Value="-1" Selected="True"></asp:ListItem>
-
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ControlToValidate="drpInvClientName" runat="server" ID="rfvdrpInvClientName" ValidationGroup="invoice"
-                                    ErrorMessage="Select Client Name" Text="Select Client Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="-1" />
+                                <asp:RequiredFieldValidator ControlToValidate="drpInvClientName" runat="server" ID="RequiredFieldValidator2" ValidationGroup="invoice"
+                                    ErrorMessage="Select Client Type" Text="Select Client Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                             </div>
                         </div>
