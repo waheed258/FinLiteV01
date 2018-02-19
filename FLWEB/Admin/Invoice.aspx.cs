@@ -690,7 +690,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             string routing = txtAirRouting.Text;
             if (routing.Contains("/"))
             {
-
+                txtAirTravelDate.Enabled = false;
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {
@@ -2743,6 +2743,12 @@ public partial class Admin_Invoice : System.Web.UI.Page
             txtClass2.Enabled = false;
             txtClass3.Enabled = false;
             txtClass4.Enabled = false;
+            txtDate1.Enabled = false;
+            txtDate2.Enabled = false;
+            txtDate3.Enabled = false;
+            txtDate4.Enabled = false;
+            txtAirTravelDate.Enabled = true;
+
 
         }
         catch (Exception ex)

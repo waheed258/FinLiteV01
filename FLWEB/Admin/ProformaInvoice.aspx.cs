@@ -2443,6 +2443,12 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFClass2.Enabled = false;
             txtPFClass3.Enabled = false;
             txtPFClass4.Enabled = false;
+            txtPFDate1.Enabled = false;
+            txtPFDate2.Enabled = false;
+            txtPFDate3.Enabled = false;
+            txtPFDate4.Enabled = false;
+            txtPFAirTravelDate.Enabled = true;
+
         }
         catch (Exception ex)
         {
