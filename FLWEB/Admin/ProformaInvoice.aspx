@@ -879,7 +879,7 @@
                                     <div class="col-sm-12">
                                         <div class="col-sm-2">
                                             <label class="control-label">
-                                                Service<span class="style1">*</span>
+                                                Services<span class="style1">*</span>
                                             </label>
                                         </div>
                                         <div class="col-sm-3">

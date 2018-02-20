@@ -57,7 +57,7 @@
                             <div class="col-sm-2">
                                 <label class="control-label">Account Code</label>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                                 <asp:TextBox ID="txtAccountCode" runat="server" CssClass="form-control"  ReadOnly="true" />
                                
                             </div>
@@ -335,7 +335,7 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">No VAT NO</label>
+                                <label class="control-label">No VAT No</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:CheckBox ID="chkVATNO" runat="server" OnCheckedChanged="chkVATNO_CheckedChanged" AutoPostBack="true" />
@@ -354,7 +354,7 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">Extra AccountNo</label>
+                                <label class="control-label">Ext Acc No</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:TextBox ID="txtExtAcc" runat="server" CssClass="form-control" MaxLength="50" />
@@ -421,7 +421,7 @@
                                 </div>
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-2">
-                                    <label class="control-label">World Span</label>
+                                    <label class="control-label">Worldspan</label>
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txtWorldSpan" runat="server" CssClass="form-control" MaxLength="50" />
@@ -591,6 +591,7 @@
                                         <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                     </asp:DropDownList>
                                 </div>
+                                <div class="col-sm-1"></div>
 
                                 <div class="col-sm-2">
                                     <label class="control-label">Commission%</label>
@@ -599,9 +600,9 @@
                                     <asp:TextBox ID="txtCommPerc" runat="server" CssClass="form-control" MaxLength="20" OnTextChanged="txtCommPerc_TextChanged" placeholder="0.00" Style="text-align: right;" AutoPostBack="true" />
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <asp:CheckBox ID="ChkZeroComm" runat="server" OnCheckedChanged="ChkZeroComm_CheckedChanged" AutoPostBack="true" />
-                                    <label class="control-label">Zero Commission</label>
+                                    <label class="control-label">Zero Commission %</label>
                                 </div>
 
                             </div>
@@ -644,7 +645,7 @@
                                     <label>Treatment Of Supplier VAT On Our Invoices</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <asp:DropDownList ID="dropTreatInvType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                    <asp:DropDownList ID="dropTreatInvType" runat="server" CssClass="form-control"  style="width:231px;" AppendDataBoundItems="true">
                                         <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                     </asp:DropDownList>
                                 </div>
@@ -674,7 +675,7 @@
                                     <asp:CheckBox ID="chkAlphaTicket" runat="server" />
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Allow Alphanumeric Ticket Numbers?</label>
+                                    <label>Ignore duplicates invoice numbers ?</label>
                                 </div>
                             </div>
                         </div>
@@ -684,11 +685,11 @@
                                 <div class="col-sm-2">
                                     <label class="control-label">Allocations</label>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <label class="control-label">Open Item Loading</label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <asp:DropDownList ID="dropAllocItemType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                    <asp:DropDownList ID="dropAllocItemType"  style="width:231px;" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                         <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                     </asp:DropDownList>
                                 </div>
@@ -944,7 +945,7 @@
                         <div class="col-sm-12">
 
                             <div class="col-sm-2">
-                                <label class="control-label">NotePad</label>
+                                <label class="control-label">Notepad</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropNoteType" runat="server" CssClass="form-control" AppendDataBoundItems="true">

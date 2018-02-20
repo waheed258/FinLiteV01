@@ -172,7 +172,7 @@
                 </div>
                 </div>
            </div>
-           <div class="col-sm-12"><h5><b>Ledger Codes</b></h5></div>
+           <div class="col-sm-12"><h5><b>General Ledger Codes</b></h5></div>
            <div class="form-group">
               <div class="col-sm-12">
                 <div class="col-sm-2">

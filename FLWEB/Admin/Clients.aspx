@@ -645,16 +645,17 @@
             <h5><b>Published Fares</b></h5>
             <div class="form-group">
                 <div class="col-sm-12">
-                    <div class="col-sm-1">
+                    <div class="col-sm-1" style="width:20px;">
                         <asp:CheckBox ID="chkIsForce" runat="server" />
 
                     </div>
                     <div class="col-sm-1">
                         <label class="control-label">Force ?</label>
                     </div>
+                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
                         <label class="control-label">
-                            Calculations-Air
+                            Calculations - Air
                         </label>
                     </div>
                     <div class="col-sm-2">
@@ -663,13 +664,14 @@
                         </asp:DropDownList>
 
                     </div>
-                    <div class="col-sm-2">
-                        <label class="control-label">
-                            Land
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-1">
+                        <label class="control-label" >
+                           - Land
                         </label>
                     </div>
                     <div class="col-sm-2">
-                        <asp:DropDownList ID="ddlCalLand" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlCalLand" runat="server" CssClass="form-control" AppendDataBoundItems="true" >
                             <%--<asp:ListItem Text="--Select--" Value="-1"> </asp:ListItem>--%>
                         </asp:DropDownList>
 
