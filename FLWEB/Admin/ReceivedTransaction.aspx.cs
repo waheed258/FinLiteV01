@@ -73,7 +73,9 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                        
                      
                         objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
-                        objTransactionMaster.ReceiptBalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
+
+                       
+
                         objTransactionMaster.AllocatedAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0;
                         objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[8].Text);
                         objTransactionMaster.Details = txtDetails.Text;
@@ -90,6 +92,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                                 objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
                             objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount;
                             ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                            objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
                         }
                         else
                         {
@@ -97,6 +100,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                             objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
                             objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount;
                             ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                            objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
                         }
 
                         result = _objBALTransactions.ReceivedTransactionInsert(objTransactionMaster);
