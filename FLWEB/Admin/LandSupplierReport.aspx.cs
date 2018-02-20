@@ -140,5 +140,13 @@ public partial class Admin_LandSupplierReport : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
-    
+
+    protected void gvLandSupReport_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        DateTime ToDates = DateTime.Now;
+        DateTime FromDate = ToDates.AddMonths(-1);
+        string category = "Land";
+        gvLandSupReport.PageIndex = e.NewPageIndex;
+        landSuplevelReportBind(FromDate, ToDates, category);
+    }
 }
