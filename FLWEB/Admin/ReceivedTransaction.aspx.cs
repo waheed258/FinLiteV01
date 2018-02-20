@@ -299,8 +299,11 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
 
         lblReceiptOpenAmount.Text = (Convert.ToDecimal(lblTotalAvailable.Text) - Convert.ToDecimal(lblAllocatedAmount.Text)).ToString();
 
-        if(txtAmount.Text!="" || txtAmount.Text!= null)
-        ddlAccountNo_SelectedIndexChanged(null, null);
+        if (txtAmount.Text != "" || txtAmount.Text != null)
+        {
+            ddlAccountNo_SelectedIndexChanged(null, null);
+            ChkAllocate_CheckedChanged(null, null);
+        }
     }
     protected void ddlAccountNo_SelectedIndexChanged(object sender, EventArgs e)
     {
