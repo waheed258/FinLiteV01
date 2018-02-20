@@ -128,4 +128,13 @@ public partial class Admin_ClientLevelReport : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+
+    protected void gvClientLevelReport_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+
+        DateTime ToDates = DateTime.Now;
+        DateTime FromDate = ToDates.AddMonths(-1);
+        gvClientLevelReport.PageIndex = e.NewPageIndex;
+        ClientlevelReportBind(FromDate, ToDates);
+    }
 }

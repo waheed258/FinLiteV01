@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="LandSupplierReport.aspx.cs" Inherits="Admin_LandSupplierReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+      <link href="css/pagging.css" rel="stylesheet" />
       <script type="text/javascript">
           $(document).ready(function () {
               DatePickerSet();
@@ -64,7 +65,7 @@
              </div>
 
              <br />
-              <asp:GridView ID="gvLandSupReport" runat="server" AllowPaging="true" Width="100%" PageSize="10"
+              <asp:GridView ID="gvLandSupReport" runat="server" AllowPaging="true" Width="100%" PageSize="10" OnPageIndexChanging="gvLandSupReport_PageIndexChanging"
                         AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
                          ShowHeaderWhenEmpty="true">
                         <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
