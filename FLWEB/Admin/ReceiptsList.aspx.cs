@@ -91,7 +91,7 @@ public partial class Admin_ReceiptsList : System.Web.UI.Page
                     "' OR ClientType LIKE '%" + SearchText +
                     "%' OR clientName LIKE '%" + SearchText +                   
                     "%' OR Convert(ReceiptAmount, 'System.String') LIKE '%" + SearchText +
-                    "%' OR Convert(BalanceAmount, 'System.String') LIKE '%" + SearchText +
+                    "%' OR Convert(InvoiceTotalAmount, 'System.String') LIKE '%" + SearchText +
                     "%' OR Convert(AllocatedAmount, 'System.String') LIKE '%" + SearchText + "%'");
 
                 if (dr.Count() > 0)

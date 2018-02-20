@@ -26,6 +26,7 @@ namespace EntityManager
         public string Messages { get; set; }
         public int CreatedBy { get; set; }
         public string PaymentSourceRef { get; set; }
+        public decimal ReceiptAmountAfterPaid { get; set; }
 
     }
     public class OpenAmountDetails

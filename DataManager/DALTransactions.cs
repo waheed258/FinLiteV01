@@ -33,6 +33,7 @@ namespace DataManager
                 {"@Messages",objTransactionMaster.Messages},
                 {"@CreatedBy",objTransactionMaster.CreatedBy},
                 {"@PaymentSourceRef",objTransactionMaster.PaymentSourceRef},
+                 {"@ReceiptAfterPaid",objTransactionMaster.ReceiptAmountAfterPaid},
               
             };
             return ExecuteNonQuery("ReceivedTransaction_insert_update", htparams,"@return");

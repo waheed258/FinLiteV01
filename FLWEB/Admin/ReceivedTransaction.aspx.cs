@@ -23,6 +23,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+          
             BindClienttypes();
             BindDivision();
             BindReceiptTypes();
@@ -39,13 +40,13 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
         {
             int Allocatedcount = 0;
               int result =0;
-             
+              decimal ReceiptAmountAfterpaid = 0.0M;
             foreach (GridViewRow row in gvData.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
                 {
 
-                    
+         
 
                     TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
                     HiddenField hfInvId = row.FindControl("hfInvId") as HiddenField;
@@ -69,15 +70,35 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                         objTransactionMaster.ClientAccountNo = ddlAccountNo.SelectedItem.Text;
                         objTransactionMaster.ClientAccountNoID = Convert.ToInt32(ddlAccountNo.SelectedValue);
                         objTransactionMaster.PayeeDetails = txtPayeeDetails.Text;
-                        objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                       
+                     
                         objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
                         objTransactionMaster.ReceiptBalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
                         objTransactionMaster.AllocatedAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0;
-                        objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[7].Text);
+                        objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[8].Text);
                         objTransactionMaster.Details = txtDetails.Text;
                         objTransactionMaster.Messages = txtMessage.Text;
                         objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
                         objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
+                       
+
+                        if (row.RowIndex >= 1&& txtThisEntry.Text != "" && txtThisEntry.Text != "0" && txtThisEntry.Text != "0.00")
+                        {
+                            if (ReceiptAmountAfterpaid != 0 || ReceiptAmountAfterpaid != 0.0M)
+                            objTransactionMaster.ReceiptAmount = ReceiptAmountAfterpaid;
+                            else
+                                objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                            objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount;
+                            ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                        }
+                        else
+                        {
+                           
+                            objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                            objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount;
+                            ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                        }
+
                         result = _objBALTransactions.ReceivedTransactionInsert(objTransactionMaster);
 
                        
@@ -220,7 +241,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
             objOpenAmountDetails.ToAccount = ddlAccountNo.SelectedValue;
             objOpenAmountDetails.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
             int ChildResult = _objBALTransactions.OpenAmountDetailsInsertUpdateMaster(objOpenAmountDetails);
-            if(ChildResult >0)
+            if(ChildResult > 0)
             {
                 Response.Redirect("ReceiptsList.aspx");
             }
@@ -358,29 +379,18 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
     {
         try
         {
-            foreach (GridViewRow row in gvData.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
-                    CheckBox chk = row.FindControl("chkSelect") as CheckBox;
-                    if (chk.Checked)
-                    {
-
-                        txtThisEntry.Text = row.Cells[6].Text.ToString();
-
-
-                    }
-                    else
-                    {
-                        txtThisEntry.Text = "0.00";
-                    }
+            //foreach (GridViewRow row in gvData.Rows)
+            //{
+            //    if (row.RowType == DataControlRowType.DataRow)
+            //    {
+            //        TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
+                   
 
                     BindingAmounts();
 
 
-                }
-            }
+               // }
+           // }
         }
 
         catch (Exception ex)
@@ -393,13 +403,15 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
     }
     protected void ChkAllocate_CheckedChanged(object sender, EventArgs e)
     {
+
+        //BindingAmounts();
         foreach (GridViewRow row in gvData.Rows)
         {
             if (row.RowType == DataControlRowType.DataRow)
             {
                 TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
 
-
+                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
                 if (ChkAllocate.Checked)
                 {
 
@@ -409,9 +421,11 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                 }
                 else
                 {
+                    chk.Checked = false;
+
                     txtThisEntry.Text = "0.00";
                 }
-               
+
             }
         }
     }
@@ -650,11 +664,21 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
 
                 TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
                 HiddenField hfAllocatedAmount = row.FindControl("hfAllocatedAmount") as HiddenField;
-              
+                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                //if (chk.Checked || ChkAllocate.Checked)
+                //{
+
+                //    txtThisEntry.Text = row.Cells[6].Text.ToString();
+
+
+                //}
+                //else
+                //{
+                //    txtThisEntry.Text = "0.00";
+                //}
                
-               if (ChkAllocate.Checked)
-                {
-                    txtThisEntry.Text = row.Cells[6].Text.ToString();
+             
+                   // txtThisEntry.Text = row.Cells[6].Text.ToString();
 
                 if (!_objBOUtiltiy.TryParseCheckValue(txtThisEntry.Text, "Decimal"))
                 {
@@ -662,6 +686,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
 
                 }
 
+                //added receipts
                 if (txtThisEntry.Text != "" && txtThisEntry.Text != "0" && txtThisEntry.Text != "0.00")
                 {
 
@@ -692,7 +717,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
 
                     }
 
-                }
+                
                 }
 
             }
