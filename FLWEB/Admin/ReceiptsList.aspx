@@ -64,7 +64,7 @@
                        ShowHeaderWhenEmpty="true">
                         <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                         <Columns>
-                           <asp:TemplateField HeaderText="Receipt Type">
+                           <asp:TemplateField HeaderText="Reciept Type">
                                 <ItemTemplate>
                                     <%#Eval("RecieptType")%>
                                 </ItemTemplate>
@@ -91,11 +91,11 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                       <%--     <asp:TemplateField HeaderText="Receipt Balance Amount" ItemStyle-HorizontalAlign="Right">
+                            <asp:TemplateField HeaderText="Receipt Balance Amount" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <%#Eval("ReceiptBalanceAmount")%>
                                 </ItemTemplate>
-                            </asp:TemplateField>--%>
+                            </asp:TemplateField>
                             
                              <asp:TemplateField HeaderText="Invoice Due Amount" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
