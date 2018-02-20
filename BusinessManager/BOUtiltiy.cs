@@ -565,6 +565,19 @@ namespace BusinessManager
             return _objDOUtility.CheckAccCodeExitorNot(AccountNo, FormName);
         }
 
+        /// <summary>
+        /// Key Exist Or Not 
+        /// </summary>
+        /// <param name="Key"></param>
+        /// <param name="FormName"></param>
+        /// <returns></returns>
+        public DataSet CheckKeyCodeExitorNot(string Key, string FormName)
+        {
+
+            return _objDOUtility.CheckKeyCodeExitorNot(Key, FormName);
+        }
+
+
         // Get Multiple Languages
        
         public DataSet GetLanguageDescription(int LangId)

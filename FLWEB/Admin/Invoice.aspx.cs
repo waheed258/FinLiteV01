@@ -313,18 +313,22 @@ public partial class Admin_Invoice : System.Web.UI.Page
             {
 
                // ddlAirService.DataSource = ds.Tables[1];
-                int ComId = Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString());
+                if (Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString()) != 0)
+                {
+                    int ComId = Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString());
 
-                ddlAirService.SelectedValue = ComId.ToString();
+                    ddlAirService.SelectedValue = ComId.ToString();
+                }
               //  ddlAirService.DataBind();
                // ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
                 VASPopupExtender.Show();
             }
             else
             {
-                VASPopupExtender.Show();
+               // VASPopupExtender.Show();
                 BindAirServiceTypes();
                 ddlAirService.SelectedValue = "0";
+                VASPopupExtender.Show();
           //      ddlAirService.DataSource = null;
            //     ddlAirService.DataBind();
             }
@@ -2545,6 +2549,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             {
                 drpInvClientName.Items.Insert(0, new ListItem("--Select Client--", "0"));
             }
+            
         }
         catch (Exception ex)
         {

@@ -73,6 +73,7 @@ namespace EntityManager
         public string CCellNo { get; set; }
         public string CFax { get; set; }
         public int CDeactivate { get; set; }
+        public int IsClient { get; set; }
 
         #region contacts
         public int ContactId { get; set; }

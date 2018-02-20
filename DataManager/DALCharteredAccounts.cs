@@ -45,7 +45,7 @@ namespace DataManager
                                      {"@BaseCurrency",objChartedAccount.BaseCurrency},
                                          {"@TranCurrency",objChartedAccount.TranCurrency},
                                          {"@CategoryId",objChartedAccount.CategoryId},
-                                         
+                                          {"@IsClient",objChartedAccount.Isclient}
                                      };
           return ExecuteNonQuery("CharteredAccounts_Insert", htParams);
       }

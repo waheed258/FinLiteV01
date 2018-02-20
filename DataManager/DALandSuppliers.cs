@@ -150,6 +150,7 @@ namespace DataManager
                                           {"@CategoryId",objEMLandSupp.CategoryId},
                                           {"@RefType",objEMLandSupp.RefType},
                                           {"@RefId",objEMLandSupp.RefId},
+                                          {"@IsClient",objEMLandSupp.IsClient}
                                     };
           int IsSuccess = ExecuteNonQuery("CharteredAccounts_Insert", htparams);
           return IsSuccess;

@@ -46,9 +46,10 @@
                                 <label class="control-label">Key(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtReceiptKey" runat="server" Cssclass="form-control" MaxLength="3" />
+                                <asp:TextBox ID="txtReceiptKey" runat="server" Cssclass="form-control" MaxLength="3" OnTextChanged="txtReceiptKey_TextChanged" AutoPostBack="true" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtReceiptKey" runat="server" ID="rfvtxtReceiptKey" ValidationGroup="receipt"
                                     ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                 <asp:Label ID="lblKeyerr" runat="server" ></asp:Label> 
 
                             </div>
                             <div class="col-sm-1"></div>

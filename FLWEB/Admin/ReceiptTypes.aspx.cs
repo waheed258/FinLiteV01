@@ -210,4 +210,25 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
         chkDeactivate.Checked = false;
         ChkDefaultReciepts.Checked = false;
     }
+    protected void txtReceiptKey_TextChanged(object sender, EventArgs e)
+    {
+        DataTable dt = new DataTable();
+        DataSet ds = new DataSet();
+        ds = _BOUtility.CheckKeyCodeExitorNot(txtReceiptKey.Text, "ReceiptType");
+
+        ds.Tables.Add(dt);
+
+        if (ds.Tables[0].Rows.Count != 0 || ds.Tables[0].Rows.Count > 0)
+        {
+            lblKeyerr.Text = "Already Exist";
+            lblKeyerr.ForeColor = System.Drawing.Color.Red;
+            txtReceiptKey.Text = "";
+        }
+        else
+        {
+            lblKeyerr.Text = "Available";
+            lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
+
+        }
+    }
 }

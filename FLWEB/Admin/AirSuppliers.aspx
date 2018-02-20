@@ -57,7 +57,7 @@
                                 <%--<label class="control-label" runat="server"></label>--%>
                                 <asp:Label CssClass="control-label" runat="server" Text="Account Code"></asp:Label>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                                 <asp:TextBox ID="txtAccountCode" runat="server" CssClass="form-control" ReadOnly="true" />
                                 <%--<asp:DropDownList ID="drpMainAccounts" runat="server"></asp:DropDownList>--%>
                             </div>
@@ -313,7 +313,7 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">No VAT NO</label>
+                                <label class="control-label">No VAT No</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:CheckBox ID="chkVATNO" runat="server" OnCheckedChanged="chkVATNO_CheckedChanged" AutoPostBack="true" />
@@ -332,7 +332,7 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">Extra Account</label>
+                                <label class="control-label">Ext Account</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:TextBox ID="txtExtAcc" runat="server" CssClass="form-control" MaxLength="50" />
@@ -471,7 +471,7 @@
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                             </div>
-
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-2">
                                 <label class="control-label">Commission%</label>
                             </div>
@@ -479,9 +479,9 @@
                                 <asp:TextBox ID="txtCommPerc" runat="server" CssClass="form-control" MaxLength="20" OnTextChanged="txtCommPerc_TextChanged" placeholder="0.00" Style="text-align: right;" AutoPostBack="true" />
                             </div>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <asp:CheckBox ID="ChkZeroComm" runat="server" OnCheckedChanged="ChkZeroComm_CheckedChanged" AutoPostBack="true" />
-                                <label class="control-label">Zero Commission</label>
+                                <label class="control-label">Zero Commission %</label>
                             </div>
 
                         </div>
@@ -512,7 +512,7 @@
                                 <asp:CheckBox ID="chkClientInvoice" runat="server" OnCheckedChanged="chkClientInvoice_CheckedChanged" AutoPostBack="true" />
                             </div>
                             <div class="col-sm-8">
-                                <label>Client Tax Invoice(Agency To Issue Tax Invoices To Clients On Behalf Of This Supplier)</label>
+                                <label>Client Tax Invoice (Agency To Issue Tax Invoices To Clients On Behalf Of This Supplier)</label>
                             </div>
                         </div>
                     </div>
@@ -524,7 +524,7 @@
                                 <label>Treatment Of Supplier VAT On Our Invoices</label>
                             </div>
                             <div class="col-sm-4">
-                                <asp:DropDownList ID="dropTreatInvType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropTreatInvType" runat="server" CssClass="form-control" AppendDataBoundItems="true" style="width:231px;">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                             </div>
@@ -540,7 +540,7 @@
                                 <asp:CheckBox ID="chkPrinTaxInvoice" runat="server" />
                             </div>
                             <div class="col-sm-7">
-                                <label>Principal Tax Invoice(Issue Combined Remittance Advice And Tax Invoice To Principal)?</label>
+                                <label>Principal Tax Invoice (Issue Combined Remittance Advice And Tax Invoice To Principal)?</label>
                             </div>
                         </div>
                     </div>
@@ -564,11 +564,11 @@
                             <div class="col-sm-2">
                                 <label class="control-label">Allocations</label>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label class="control-label">Open Item Loading</label>
                             </div>
                             <div class="col-sm-4">
-                                <asp:DropDownList ID="dropAllocItemType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropAllocItemType" runat="server" CssClass="form-control" AppendDataBoundItems="true" style="width:231px;">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                             </div>
@@ -594,7 +594,7 @@
                                 <asp:CheckBox ID="chkBusiness" runat="server" />
                             </div>
 
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                                 <label class="control-label">First Class</label>
                             </div>
                             <div class="col-sm-1">
@@ -616,7 +616,7 @@
                         <div class="col-sm-12">
 
                             <div class="col-sm-2">
-                                <label class="control-label">NotePad</label>
+                                <label class="control-label">Notepad</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropNoteType" runat="server" CssClass="form-control" AppendDataBoundItems="true">

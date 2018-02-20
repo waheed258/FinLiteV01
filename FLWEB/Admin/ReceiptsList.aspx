@@ -64,7 +64,7 @@
                        ShowHeaderWhenEmpty="true">
                         <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                         <Columns>
-                           <asp:TemplateField HeaderText="Reciept Type">
+                           <asp:TemplateField HeaderText="Receipt Type">
                                 <ItemTemplate>
                                     <%#Eval("RecieptType")%>
                                 </ItemTemplate>

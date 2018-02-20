@@ -135,4 +135,12 @@ public partial class Admin_AirSupplierLevelReport : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+    protected void gvAirSupplLevelReport_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        DateTime ToDates = DateTime.Now;
+        DateTime FromDate = ToDates.AddMonths(-1);
+        string category = "Air Tickets";
+        gvAirSupplLevelReport.PageIndex = e.NewPageIndex;
+        AirSuppllevelReportBind(FromDate, ToDates, category);
+    }
 }

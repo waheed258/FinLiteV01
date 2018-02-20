@@ -189,6 +189,7 @@ namespace DataManager
                                          {"@CategoryId",objClients.CategoryId},
                                          {"@RefType",objClients.RefType},
                                          {"@RefId",objClients.RefId},
+                                         {"@IsClient",objClients.IsClient}
                                     };
             int IsSuccess = ExecuteNonQuery("CharteredAccounts_Insert", htparams);
             return IsSuccess;

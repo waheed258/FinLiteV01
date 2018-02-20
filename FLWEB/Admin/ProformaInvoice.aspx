@@ -231,11 +231,11 @@
                             </div>
                             <div class="col-sm-2">
                                 <asp:DropDownList ID="drpPFInvClientName" runat="server" CssClass="form-control" OnTextChanged="drpPFInvClientName_TextChanged" AutoPostBack="true">
-                                    <asp:ListItem Text="--Select Client Name--" Value="-1" Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="--Select Client Name--" Value="0" Selected="True"></asp:ListItem>
 
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="drpPFInvClientName" runat="server" ID="rfvdrpPFInvClientName" ValidationGroup="PFinvoice"
-                                    ErrorMessage="Select Client Name" Text="Select Client Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="-1" />
+                                    ErrorMessage="Select Client Name" Text="Select Client Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                             </div>
                         </div>
@@ -310,13 +310,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-5">
 
-                                        <button runat="server" id="btnPFOpenFP" class="btn btn-mini" title="AirTicket">
+                                        <button runat="server" id="btnPFOpenFP" class="btn btn-mini">
                                             <i class="fa fa-plane"></i>
                                         </button>
                                         <asp:Button ID="bntCancelFP" runat="server" Text="Cancel" Style="display: none;" />
                                         <%--<asp:Button ID="btnOpenFP" runat="server" Text="Open"  />--%>
                         &nbsp;&nbsp;&nbsp;
-                         <button runat="server" id="btnPFLand" class="btn btn-mini" title="Land Arrangement">
+                         <button runat="server" id="btnPFLand" class="btn btn-mini">
                              <i class="fa  fa-university"></i>
                          </button>
                                         &nbsp;&nbsp;
@@ -345,7 +345,7 @@
                             </div>--%>
                                 </div>
 
-                                <div id="popupdiv" title="AirTicket" class="modalBackground">
+                                <div id="popupdiv" title="Basic modal dialog" class="modalBackground">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -372,8 +372,8 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <asp:DropDownList ID="drpPFTicketType" runat="server" CssClass="form-control">
-                                                    <%--<asp:ListItem Text="--Select Ticket Type--" Value="-1" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="E-Ticket" Value="1"></asp:ListItem>--%>
+                                                    <asp:ListItem Text="--Select Ticket Type--" Value="-1" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="E-Ticket" Value="1"></asp:ListItem>
                                                 </asp:DropDownList>
                                                 <asp:RequiredFieldValidator ControlToValidate="drpPFTicketType" runat="server" ID="rfvdrpPFTicketType" ValidationGroup="PFairticket"
                                                     ErrorMessage="Select Ticket Type" Text="Select Ticket Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="-1" />
@@ -839,8 +839,8 @@
                                 PopupControlID="PFlandPanel">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="PFlandPanel"  runat="server" CssClass="panelpopup modalBackground " Width="80%" Height="93%" Style="display: none;">
-                                <div class="panelpopupheaderbox" title="Land Arrangement">
+                            <asp:Panel ID="PFlandPanel" runat="server" CssClass="panelpopup modalBackground " Width="80%" Height="93%" Style="display: none;">
+                                <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton3" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
@@ -850,7 +850,7 @@
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
-                                            <h4 class="panel-title">Land Arrangements</h4>
+                                            <h4 class="panel-title">Land Arrangemnts</h4>
                                         </div>
                                     </header>
                                     <div class="col-sm-12">
@@ -879,7 +879,7 @@
                                     <div class="col-sm-12">
                                         <div class="col-sm-2">
                                             <label class="control-label">
-                                                Service<span class="style1">*</span>
+                                                Services<span class="style1">*</span>
                                             </label>
                                         </div>
                                         <div class="col-sm-3">
@@ -1263,7 +1263,7 @@
                             </cc1:ModalPopupExtender>
 
                             <asp:Panel ID="pnlPFServiceFee" runat="server" CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
-                                <div class="panelpopupheaderbox" title="Service Fee">
+                                <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
@@ -1520,7 +1520,7 @@
                             </cc1:ModalPopupExtender>
 
                             <asp:Panel ID="pnlPFGeneralCharge" runat="server" CssClass="panelpopup" Width="900px" Height="550px" Style="display: none;" BackgroundCssClass="modalBackground">
-                                <div class="panelpopupheaderbox" title="General Charge">
+                                <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton1" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
@@ -2028,7 +2028,6 @@
                                 </div>
                                 <div class="col-sm-3">
                                 </div>
-                                 <div class="overlay">
                                 <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                     <ProgressTemplate>
                                         <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -2037,7 +2036,7 @@
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                             </div>
-                                </div>
+
 
                         </ContentTemplate>
                     </asp:UpdatePanel>

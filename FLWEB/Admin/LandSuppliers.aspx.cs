@@ -195,6 +195,7 @@ public partial class Admin_LandSuppliers : System.Web.UI.Page
             }
             if (cmdSubmit.Text == "Submit")
             {
+                objEmLandSupp.IsClient = 0;
                 int ChartedLResult = objLandSuppliers.InsUpdChartAccounts(objEmLandSupp);
             }
             if (cmdSubmit.Text == "Update")

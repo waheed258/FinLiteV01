@@ -336,6 +336,7 @@ public partial class Admin_AirSuppliers : System.Web.UI.Page
                 objEMAirsupp.AccCode = txtAccountCode.Text + txtGiAccountSUb.Text;
                 objEMAirsupp.CategoryId = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["CategoryId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["CategoryId"].ToString());
                 objEMAirsupp.RefType = "AirSupplier";
+              
             }
             int Result = objAirSupplier.InsUpdAirSupplier(objEMAirsupp);
 
@@ -345,6 +346,7 @@ public partial class Admin_AirSuppliers : System.Web.UI.Page
             }
             if (cmdSubmit.Text == "Submit")
             {
+                objEMAirsupp.IsClient = 0;
                 int ChartedResult = objAirSupplier.InsUpdChartAccounts(objEMAirsupp);
             }
             if (cmdSubmit.Text == "Update")

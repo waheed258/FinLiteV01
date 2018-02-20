@@ -82,7 +82,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             //general Charge
             DataSet objDs = null; // Single sp
             BindPFGenServiceTypes();
-            PFAirTicketType();
+
             BindPFGenCreditCardType();
             txtPFRateNet.Enabled = false;
             txtPFVatAmount.Enabled = false;
@@ -391,11 +391,10 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         try
         {
-            //added 
             if (txtPFAirExcluisvefare.Text != "" && txtPFAirCommisionper.Text != "")
             {
                 decimal exclusiveFare = Convert.ToDecimal(txtPFAirExcluisvefare.Text);
-                txtPFAirCommExclu.Text = _objBOUtiltiy.FormatTwoDecimal(((Convert.ToDecimal(txtPFAirCommisionper.Text) * exclusiveFare) / 100).ToString());
+                txtPFAirCommExclu.Text = ((Convert.ToDecimal(txtPFAirCommisionper.Text) * exclusiveFare) / 100).ToString();
 
 
             }
@@ -403,8 +402,6 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (txtPFAirCommExclu.Text != "" && txtPFAirCommVat.Text != "")
             {
                 decimal commisionInclAmount = Convert.ToDecimal(GlobalClass.exclVatSum(txtPFAirCommExclu.Text, txtPFAirCommVat.Text));
-
-//                decimal commisionInclAmount = Convert.ToDecimal(GlobalClass.exclVatSum(txtPFAirCommExclu.Text, txtPFAirCommVat.Text));
                 // decimal inclusiveAmount = (exclusiveFare * Convert.ToDecimal(txtVatPer.Text)) / 100;
                 txtPFAirAgentVat.Text = commisionInclAmount.ToString();
                 txtPFAirCommInclu.Text = (commisionInclAmount + Convert.ToDecimal(txtPFAirCommExclu.Text)).ToString();
@@ -2368,8 +2365,6 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         }
     }
 
-
-
     //protected void btnPFDraftPdf_Click(object sender, EventArgs e)
     //{
     //    try
@@ -2442,6 +2437,12 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFClass2.Enabled = false;
             txtPFClass3.Enabled = false;
             txtPFClass4.Enabled = false;
+            txtPFDate1.Enabled = false;
+            txtPFDate2.Enabled = false;
+            txtPFDate3.Enabled = false;
+            txtPFDate4.Enabled = false;
+            txtPFAirTravelDate.Enabled = true;
+
         }
         catch (Exception ex)
         {
@@ -2449,39 +2450,6 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
 
-
-    }
-
-
-    private void PFAirTicketType()
-    {
-        try
-        {
-            BATicketType objTicketType = new BATicketType();
-            int TId = 0;
-            DataSet dtTicketType = new DataSet();
-            dtTicketType = objTicketType.GetTicketType(TId);
-            if (dtTicketType.Tables[0].Rows.Count > 0)
-            {
-                drpPFTicketType.DataSource = dtTicketType.Tables[0];
-                drpPFTicketType.DataTextField = "TDesc";
-                drpPFTicketType.DataValueField = "TId";
-                drpPFTicketType.DataBind();
-                drpPFTicketType.Items.Insert(0, new ListItem("--Select Type--", "0"));
-            }
-            else
-            {
-                drpPFTicketType.DataSource = null;
-                drpPFTicketType.DataBind();
-                drpPFTicketType.Items.Insert(0, new ListItem("--Select Type--", "0"));
-            }
-        }
-        catch (Exception ex)
-        {
-
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
 
     }
 
@@ -2613,7 +2581,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             {
                 pnlPFServiceFee.Visible = true;
                 PFSerPopupExtender.Show();
-                
+
             }
             else
             {
@@ -2671,13 +2639,15 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
             if (ds.Tables[1].Rows.Count > 0)
             {
+                if (Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString()) != 0)
+                {
+                    // ddlAirService.DataSource = ds.Tables[1];
+                    int ComId = Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString());
 
-                // ddlAirService.DataSource = ds.Tables[1];
-                int ComId = Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString());
-
-                ddlPFAirService.SelectedValue = ComId.ToString();
-                //  ddlAirService.DataBind();
-                // ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
+                    ddlPFAirService.SelectedValue = ComId.ToString();
+                    //  ddlAirService.DataBind();
+                    // ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
+                }
                 AirPFPopupExtender.Show();
             }
             else

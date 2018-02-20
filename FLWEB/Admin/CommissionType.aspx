@@ -47,9 +47,10 @@
                         <label class="control-label">Key(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3"/>
+                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtKey_TextChanged" AutoPostBack="true"/>
                          <asp:RequiredFieldValidator ControlToValidate="txtKey" runat="server" ID="rfvtxtKey" ValidationGroup="CommType"
                             ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
+                        <asp:Label ID="lblKeyerr" runat="server" ></asp:Label> 
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
@@ -171,7 +172,7 @@
                 </div>
                 </div>
            </div>
-           <div class="col-sm-12"><h5><b>Ledger Codes</b></h5></div>
+           <div class="col-sm-12"><h5><b>General Ledger Codes</b></h5></div>
            <div class="form-group">
               <div class="col-sm-12">
                 <div class="col-sm-2">
