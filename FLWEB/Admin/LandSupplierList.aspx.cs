@@ -138,8 +138,9 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                    "LSupplierName='" + SearchText +
-                    "' OR ComDesc LIKE '%" + SearchText +
+                    "LSupAccountCode='" + SearchText +
+                    "' OR LSupplierName LIKE '%" + SearchText +
+                    "%' OR ComDesc LIKE '%" + SearchText +
                     "%' OR LTelephone LIKE '%" + SearchText +
                     "%' OR LEmail LIKE '%" + SearchText +
                     "%' OR QuickAccount LIKE '%" + SearchText +

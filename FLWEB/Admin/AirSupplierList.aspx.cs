@@ -126,8 +126,9 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                    "SupplierName='" + SearchText +
-                    "' OR ComDesc LIKE '%" + SearchText +
+                    "SupAccountCode='" + SearchText +
+                    "' OR SupplierName LIKE '%" + SearchText +
+                     "%' OR ComDesc LIKE '%" + SearchText +
                     "%' OR Telephone LIKE '%" + SearchText +
                     "%' OR Email LIKE '%" + SearchText +
                     "%' OR QuickAccount LIKE '%" + SearchText +
