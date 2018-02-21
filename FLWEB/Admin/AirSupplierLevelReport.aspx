@@ -89,7 +89,7 @@
                                     <%#Eval("TicketAmount")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="Paied Amount" ItemStyle-HorizontalAlign="Right">
+                             <asp:TemplateField HeaderText="Paid Amount" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <%#Eval("SupPaiedAmoount")%>
                                 </ItemTemplate>
