@@ -144,72 +144,72 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
                 }
 
 
-                Transaction objTransaction = new Transaction();
-                int FmAccountNoId = 0;
-                objTransaction.FmAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value.ToString());
-                objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
-                string category = ddlAccType.SelectedItem.Text;
-                DataSet ds = _objBALTransactions.Transaction_GetAccountsData(FmAccountNoId, Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue), "PT", category);
+                //Transaction objTransaction = new Transaction();
+                //int FmAccountNoId = 0;
+                //objTransaction.FmAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value.ToString());
+                //objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+                //string category = ddlAccType.SelectedItem.Text;
+                //DataSet ds = _objBALTransactions.Transaction_GetAccountsData(FmAccountNoId, Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue), "PT", category);
 
-                List<string> FmAcccode = new List<string>();
-                List<string> FmMainAccCode = new List<string>();
-                List<string> RefMainAcc = new List<string>();
-                List<string> RefAccCode = new List<string>();
-                List<string> AllocateAmt = new List<string>();
+                //List<string> FmAcccode = new List<string>();
+                //List<string> FmMainAccCode = new List<string>();
+                //List<string> RefMainAcc = new List<string>();
+                //List<string> RefAccCode = new List<string>();
+                //List<string> AllocateAmt = new List<string>();
 
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow dtlRow in ds.Tables[0].Rows)
-                    {
-                        FmAcccode.Add(dtlRow["AccCode"].ToString());
-                        FmMainAccCode.Add(dtlRow["MainAccCode"].ToString());
-                        AllocateAmt.Add(dtlRow["AllocatedAmount"].ToString());
-                    }
-                }
-                if (ds.Tables[1].Rows.Count > 0)
-                {
-                    foreach (DataRow dtlRow in ds.Tables[1].Rows)
-                    {
-                        RefAccCode.Add(dtlRow["BankAcNo"].ToString());
-                        RefMainAcc.Add(dtlRow["MainAccCode"].ToString());
-                    }
-                }
-                int count = FmAcccode.Count;
+                //if (ds.Tables[0].Rows.Count > 0)
+                //{
+                //    foreach (DataRow dtlRow in ds.Tables[0].Rows)
+                //    {
+                //        FmAcccode.Add(dtlRow["AccCode"].ToString());
+                //        FmMainAccCode.Add(dtlRow["MainAccCode"].ToString());
+                //        AllocateAmt.Add(dtlRow["AllocatedAmount"].ToString());
+                //    }
+                //}
+                //if (ds.Tables[1].Rows.Count > 0)
+                //{
+                //    foreach (DataRow dtlRow in ds.Tables[1].Rows)
+                //    {
+                //        RefAccCode.Add(dtlRow["BankAcNo"].ToString());
+                //        RefMainAcc.Add(dtlRow["MainAccCode"].ToString());
+                //    }
+                //}
+                //int count = FmAcccode.Count;
 
-                for (int i = 0; i <= count - 1; i++)
-                {
-                    objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                    objTransaction.FmAccountNO = FmAcccode[i].ToString();
-                    objTransaction.MainAccount = FmMainAccCode[i].ToString();
-                    objTransaction.ReferenceAccountNO = RefAccCode[i].ToString();
-                    objTransaction.CreditAmount = 0;
-                    objTransaction.ReferenceNo = txtSourceRef.Text;
-                    // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
-                    // objTransaction.InvoiceNo = "";
+                //for (int i = 0; i <= count - 1; i++)
+                //{
+                //    objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                //    objTransaction.FmAccountNO = FmAcccode[i].ToString();
+                //    objTransaction.MainAccount = FmMainAccCode[i].ToString();
+                //    objTransaction.ReferenceAccountNO = RefAccCode[i].ToString();
+                //    objTransaction.CreditAmount = 0;
+                //    objTransaction.ReferenceNo = txtSourceRef.Text;
+                //    // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
+                //    // objTransaction.InvoiceNo = "";
 
-                    objTransaction.ReferenceType = "PT";
-                    objTransaction.CreatedBy = 0;
+                //    objTransaction.ReferenceType = "PT";
+                //    objTransaction.CreatedBy = 0;
 
-                    objTransaction.BalanceAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                    _objBALTransactions.TransactionInsert(objTransaction);
-
-
-
-                    objTransaction.CreditAmount = Convert.ToDecimal(AllocateAmt[i].ToString());
-                    objTransaction.FmAccountNO = RefAccCode[i].ToString();
-                    objTransaction.MainAccount = RefMainAcc[i].ToString();
-                    objTransaction.ReferenceAccountNO = FmAcccode[i].ToString();
-                    objTransaction.DebitAmount = 0;
-                    objTransaction.ReferenceNo = txtSourceRef.Text;
-
-                    objTransaction.ReferenceType = "PT";
-                    objTransaction.CreatedBy = 0;
-
-                    objTransaction.BalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
-                    _objBALTransactions.TransactionInsert(objTransaction);
+                //    objTransaction.BalanceAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                //    _objBALTransactions.TransactionInsert(objTransaction);
 
 
-                }
+
+                //    objTransaction.CreditAmount = Convert.ToDecimal(AllocateAmt[i].ToString());
+                //    objTransaction.FmAccountNO = RefAccCode[i].ToString();
+                //    objTransaction.MainAccount = RefMainAcc[i].ToString();
+                //    objTransaction.ReferenceAccountNO = FmAcccode[i].ToString();
+                //    objTransaction.DebitAmount = 0;
+                //    objTransaction.ReferenceNo = txtSourceRef.Text;
+
+                //    objTransaction.ReferenceType = "PT";
+                //    objTransaction.CreatedBy = 0;
+
+                //    objTransaction.BalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
+                //    _objBALTransactions.TransactionInsert(objTransaction);
+
+
+                //}
 
 
                 ReceivedTransaction objOpenAmountDetails = new ReceivedTransaction();
