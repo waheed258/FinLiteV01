@@ -81,9 +81,10 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                    <asp:ListItem Text="--Select Category--" Value="0" Selected="True"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ControlToValidate="ddlCategory" runat="server" ID="rfvddlCategory" ValidationGroup="CommType"
-                        ErrorMessage="Select Category" Text="Select  Category" Display="Dynamic" ForeColor="Red" InitialValue="-1"/>
+                        ErrorMessage="Select Category" Text="Select  Category" Display="Dynamic" ForeColor="Red" InitialValue="0"/>
                 </div>
                 </div>
             </div>
@@ -103,9 +104,11 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:DropDownList ID="ddlDefaultType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                    <asp:ListItem Text="--Select Default Type--" Value="0" Selected="True"></asp:ListItem>
+
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ControlToValidate="ddlDefaultType" runat="server" ID="rfvddlDefaultType" ValidationGroup="CommType"
-                        ErrorMessage="Select Default Type" Text="Select Default Type" Display="Dynamic" ForeColor="Red" InitialValue="-1"/>
+                        ErrorMessage="Select Default Type" Text="Select Default Type" Display="Dynamic" ForeColor="Red" InitialValue="0"/>
                     </div>
                 </div>
             </div>

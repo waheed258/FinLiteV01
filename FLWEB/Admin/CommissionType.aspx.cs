@@ -45,14 +45,16 @@ public partial class CommissionType : System.Web.UI.Page
     #region PublicMethods
        public void BindType()
          {
+             ddlDefaultType.Items.Clear();
              try
              {
                  DataSet ds = _objBOUtility.getType();
-                 ddlDefaultType.Items.Add(new ListItem("-Select-", "0"));
                  ddlDefaultType.DataSource = ds;
                  ddlDefaultType.DataTextField = "TypeName";
                  ddlDefaultType.DataValueField = "TypeId";
                  ddlDefaultType.DataBind();
+                 ddlDefaultType.Items.Insert(0, new ListItem("--Select Default Type--", "0"));
+
 
              }
              catch(Exception ex)
@@ -62,15 +64,16 @@ public partial class CommissionType : System.Web.UI.Page
          }
        public void BindCategory()
        {
+           ddlCategory.Items.Clear();
            try
            {
               
                DataSet ds = objBACommType.GetCategory();
-               ddlCategory.Items.Add(new ListItem("-Select-", "0"));
                ddlCategory.DataSource = ds;
                ddlCategory.DataTextField = "CategoryName";
                ddlCategory.DataValueField= "CategoryId";
                ddlCategory.DataBind();
+               ddlCategory.Items.Insert(0, new ListItem("--Select Category--", "0"));
            }
            catch(Exception ex)
            {
