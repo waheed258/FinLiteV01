@@ -137,7 +137,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">
-                                    <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
+                                    <asp:ListItem Text="-Select State-" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropState" runat="server" ID="rfvdropState" ValidationGroup="landsupplier"
                                     ErrorMessage="Select State" Text="Select State" class="validationred" Display="Dynamic" InitialValue="0" ForeColor="Red" />
@@ -162,7 +162,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropCity" runat="server" CssClass="form-control" AppendDataBoundItems="true">
-                                    <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
+                                    <asp:ListItem Text="-Select City-" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropCity" runat="server" ID="rfvdropCity" ValidationGroup="landsupplier"
                                     ErrorMessage="Select City" Text="Select City" class="validationred" Display="Dynamic" InitialValue="0" ForeColor="Red" />

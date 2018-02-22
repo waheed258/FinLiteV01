@@ -891,14 +891,14 @@ public partial class Admin_AirSuppliers : System.Web.UI.Page
                 dropState.DataTextField = "Name";
                 dropState.DataValueField = "Id";
                 dropState.DataBind();
-                dropState.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropState.Items.Insert(0, new ListItem("--Select Country--", "0"));
 
             }
             else
             {
                 dropState.DataSource = null;
                 dropState.DataBind();
-                dropState.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropState.Items.Insert(0, new ListItem("--Select Country--", "0"));
 
             }
         }
@@ -925,14 +925,14 @@ public partial class Admin_AirSuppliers : System.Web.UI.Page
                 dropCity.DataTextField = "Name";
                 dropCity.DataValueField = "Id";
                 dropCity.DataBind();
-                dropCity.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropCity.Items.Insert(0, new ListItem("-- Select City --", "0"));
 
             }
             else
             {
                 dropCity.DataSource = null;
                 dropCity.DataBind();
-                dropCity.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropCity.Items.Insert(0, new ListItem("-- Select City--", "0"));
 
             }
         }
