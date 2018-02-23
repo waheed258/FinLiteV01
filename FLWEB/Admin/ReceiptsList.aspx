@@ -84,6 +84,11 @@
                                     <%#Eval("ReceiptAmount")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Previous Client Balance" ItemStyle-HorizontalAlign="Right">
+                                <ItemTemplate>
+                                    <%#Eval("ClientBalanceAmount")%>
+                                </ItemTemplate>
+                            </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Allocated Amount" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>

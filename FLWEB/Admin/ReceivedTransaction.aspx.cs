@@ -41,6 +41,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
             int Allocatedcount = 0;
               int result =0;
               decimal ReceiptAmountAfterpaid = 0.0M;
+              decimal PreviousAmountAfterpaid = 0.0M;
             foreach (GridViewRow row in gvData.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -84,23 +85,44 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                         objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
                        
 
-                        if (row.RowIndex >= 1&& txtThisEntry.Text != "" && txtThisEntry.Text != "0" && txtThisEntry.Text != "0.00")
+                        if (  txtThisEntry.Text != "" || txtThisEntry.Text != "0" || txtThisEntry.Text != "0.00")
                         {
                             if (ReceiptAmountAfterpaid != 0 || ReceiptAmountAfterpaid != 0.0M)
                             objTransactionMaster.ReceiptAmount = ReceiptAmountAfterpaid;
                             else
-                                objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                            objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount;
-                            ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
-                            objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
+                            objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                            if (PreviousAmountAfterpaid != 0 || PreviousAmountAfterpaid != 0.0M)
+                                objTransactionMaster.PrvClientOpenAmount = PreviousAmountAfterpaid;
+                            else
+                                objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
+                            if (objTransactionMaster.PrvClientOpenAmount > objTransactionMaster.AllocatedAmount)
+                            {
+                                objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount;
+                                PreviousAmountAfterpaid = Math.Abs(objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount);
+                           
+                            }
+                            else
+                            {
+                                objTransactionMaster.ReceiptAmountAfterPaid = Math.Abs(objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount) ;
+                                PreviousAmountAfterpaid = objTransactionMaster.PrvClientOpenAmount;
+                            }
+                          
+                                ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                                objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid + PreviousAmountAfterpaid;
                         }
                         else
                         {
                            
-                            objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                            objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount;
-                            ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
-                            objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
+                            //objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                            ////if (objTransactionMaster.PrvClientOpenAmount != 0 || objTransactionMaster.PrvClientOpenAmount != 0.0M)
+                            ////{
+                            ////    objTransactionMaster.ReceiptAmount = objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount;
+                            ////}
+                            
+                            //objTransactionMaster.ReceiptAmountAfterPaid =Math.Abs( objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount);
+                            ////objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmountAfterPaid + objTransactionMaster.PrvClientOpenAmount != 0.0M ? Convert.ToDecimal(objTransactionMaster.PrvClientOpenAmount) : 0;
+                            //ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                            //objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
                         }
 
                         result = _objBALTransactions.ReceivedTransactionInsert(objTransactionMaster);
@@ -386,18 +408,18 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
     {
         try
         {
-            //foreach (GridViewRow row in gvData.Rows)
-            //{
-            //    if (row.RowType == DataControlRowType.DataRow)
-            //    {
-            //        TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
-                   
+            foreach (GridViewRow row in gvData.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
 
+                     txtThisEntry.Text = row.Cells[6].Text.ToString();
                     BindingAmounts();
 
 
-               // }
-           // }
+                }
+            }
         }
 
         catch (Exception ex)
