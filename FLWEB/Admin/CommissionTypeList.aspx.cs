@@ -123,6 +123,11 @@ public partial class Admin_CommissionTypeList : System.Web.UI.Page
                         gvCommTypeList.DataSource = dr.CopyToDataTable();
                         gvCommTypeList.DataBind();
                     }
+                    else
+                    {
+                        gvCommTypeList.DataSource = dr;
+                        gvCommTypeList.DataBind();
+                    }
                 }
             }
             catch (Exception ex)

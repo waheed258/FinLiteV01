@@ -142,7 +142,7 @@ public partial class Admin_DraftPdf : System.Web.UI.Page
                             sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + dtlRow["AirPortTaxes"] + "</td>");
                             sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + dtlRow["AirVatonFare"] + "</td>");
 
-                            sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'><br/><br/>" + dtlRow["AirClientTotal"] + "</td>");
+                            sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + dtlRow["AirClientTotal"] + "</td>");
                             sbMainrow.Append("</tr>");
                             Flight = 1;
                         }

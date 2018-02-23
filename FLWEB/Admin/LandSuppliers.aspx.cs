@@ -838,14 +838,14 @@ public partial class Admin_LandSuppliers : System.Web.UI.Page
                 dropState.DataTextField = "Name";
                 dropState.DataValueField = "Id";
                 dropState.DataBind();
-                dropState.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropState.Items.Insert(0, new ListItem("--Select State--", "0"));
 
             }
             else
             {
                 dropState.DataSource = null;
                 dropState.DataBind();
-                dropState.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropState.Items.Insert(0, new ListItem("--Select State--", "0"));
 
             }
         }
@@ -868,7 +868,7 @@ public partial class Admin_LandSuppliers : System.Web.UI.Page
             {
                 dropCity.DataSource = ds.Tables[0];
                 dropCity.Items.Clear();
-                dropCity.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropCity.Items.Insert(0, new ListItem("--Select City--", "0"));
                 // dropCity.Items.Add(new ListItem("-Please Select-", "0"));
                 dropCity.DataTextField = "Name";
                 dropCity.DataValueField = "Id";
@@ -880,7 +880,7 @@ public partial class Admin_LandSuppliers : System.Web.UI.Page
             {
                 dropCity.DataSource = null;
                 dropCity.DataBind();
-                dropCity.Items.Insert(0, new ListItem("-- Please Select --", "0"));
+                dropCity.Items.Insert(0, new ListItem("--Select City--", "0"));
 
             }
         }

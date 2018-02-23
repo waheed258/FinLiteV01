@@ -112,7 +112,9 @@
 
                         </ItemTemplate>
                     </asp:TemplateField>
+                        
                 </Columns>
+                <EmptyDataTemplate>No Record Available  </EmptyDataTemplate>
             </asp:GridView>
         </div>
      </section>
