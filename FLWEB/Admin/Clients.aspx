@@ -993,11 +993,10 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:DropDownList ID="ddlNoteType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
-                            <%--<asp:ListItem Text="--Select--" Value="-1"> </asp:ListItem>--%>
+                            <asp:ListItem Text="--Select Note Type--" Value="0"> </asp:ListItem>
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ControlToValidate="ddlNoteType" runat="server"
-                            ID="rfvddlNoteType" ValidationGroup="client" ErrorMessage="Select Note Type."
-                            Text="Select Note Type." ForeColor="Red" Display="Dynamic" InitialValue="0s" />
+                        <asp:RequiredFieldValidator ControlToValidate="ddlNoteType" runat="server" ID="rfvNoteType"
+                        Display="Dynamic" Text="Select Note Type." ErrorMessage="Select Note Type." ValidationGroup="client" ForeColor="Red" InitialValue="0" />
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">

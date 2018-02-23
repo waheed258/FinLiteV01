@@ -852,7 +852,7 @@ public partial class Admin_Clients : System.Web.UI.Page
     {
         try
         {
-
+            ddlNoteType.Items.Clear();
             BAContactNote objBANote = new BAContactNote();
 
             int NotePadId = 0;
