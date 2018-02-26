@@ -39,6 +39,29 @@ public partial class Admin_BankAccount : System.Web.UI.Page
     {
         Response.Redirect("BankAccount.aspx");
     }
+    protected void txtAccountNumber_TextChanged(object sender, EventArgs e)
+    {
+        DataTable dt = new DataTable();
+        DataSet ds = new DataSet();
+        ds = _objBOUtility.CheckKeyCodeExitorNot(txtAccountNumber.Text, "BankAccount");
+
+        ds.Tables.Add(dt);
+
+        if (ds.Tables[1].Rows.Count != 0 || ds.Tables[1].Rows.Count > 0)
+        {
+            lblaccNumber.Text = "Already Exist";
+            lblaccNumber.ForeColor = System.Drawing.Color.Red;
+            txtAccountNumber.Text = "";
+        }
+        else
+        {
+            lblaccNumber.Text = "Available";
+            lblaccNumber.ForeColor = System.Drawing.Color.DarkBlue;
+
+        }
+    }
+
+
     #region PrivateMethods
         private void InsertUpdateBankAccDetails()
          {
@@ -192,4 +215,5 @@ public partial class Admin_BankAccount : System.Web.UI.Page
 
            }
        }
+   
 }

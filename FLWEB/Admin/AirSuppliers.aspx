@@ -445,10 +445,10 @@
                                 <asp:TextBox ID="txtGiAccountSUb" runat="server"  OnTextChanged="txtGiAccountSUb_TextChanged" AutoPostBack="true" CssClass="form-control" MaxLength="3" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtGiAccountSUb" runat="server" ID="rfvtxtGiAccount1" ValidationGroup="airsupplier"
                                     ErrorMessage="Enter QuickGI Account" Text="Enter QuickGI Account" class="validationred" Display="Dynamic" ForeColor="Red" />
-                                <asp:RegularExpressionValidator ControlToValidate="txtGiAccountSUb" runat="server" ForeColor="Red"
+                                <%--<asp:RegularExpressionValidator ControlToValidate="txtGiAccountSUb" runat="server" ForeColor="Red"
                                     ID="revtxtGiAccount1" ValidationGroup="airsupplier" ErrorMessage="Enter Only Numbers."
                                     Text="Enter Only Numbers." ValidationExpression="^(0|[0-9]\d*)$"
-                                    Display="Dynamic"></asp:RegularExpressionValidator>
+                                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
                                  <asp:Label ID="lblaccnoerr" runat="server" ></asp:Label> 
                             </div>
                             <div class="col-sm-1"></div>

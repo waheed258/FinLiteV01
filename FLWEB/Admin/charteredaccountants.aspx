@@ -93,7 +93,7 @@
                          </div>
                        <div class="col-sm-2">
                      <asp:TextBox ID="txtCharAcountCode" runat="server" class="form-control" OnTextChanged="txtCharAcountCode_TextChanged" AutoPostBack="true" />
-                   <%--<asp:RequiredFieldValidator ID="rfvAcCode" runat="server" ControlToValidate="txtCharAcountCode" ForeColor="Red" Display="Dynamic" ErrorMessage="Enter Account Code" ValidationGroup="accounts"></asp:RequiredFieldValidator>--%>
+                   <asp:RequiredFieldValidator ID="rfvAcCode" runat="server" ControlToValidate="txtCharAcountCode" ForeColor="Red" Display="Dynamic" ErrorMessage="Enter Account Code" ValidationGroup="accounts"></asp:RequiredFieldValidator>
                     <asp:Label ID="lblaccnoerr" runat="server" ></asp:Label>
                 </div>
 

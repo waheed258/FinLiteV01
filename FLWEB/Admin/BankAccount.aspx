@@ -87,8 +87,10 @@
                         <label class="control-label">Account Number(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtAccountNumber" runat="server" CssClass="form-control" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtAccountNumber" runat="server" ID="rfvtxtAccountNumber" ValidationGroup="BankAcc"
+                        <asp:TextBox ID="txtAccountNumber" runat="server" CssClass="form-control" OnTextChanged="txtAccountNumber_TextChanged" AutoPostBack="true"/>
+                       <asp:Label ID="lblaccNumber" runat="server" ></asp:Label>
+                        
+                          <asp:RequiredFieldValidator ControlToValidate="txtAccountNumber" runat="server" ID="rfvtxtAccountNumber" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Account Number" Text="Enter Account Number" Display="Dynamic" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtAccountNumber" runat="server" ID="revtxtAccountNumber" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Valid Account Number" Text="Enter Valid Account Number" Display="Dynamic" ForeColor="Red" ValidationExpression="^[0-9]*$" />
