@@ -386,7 +386,7 @@
                                                 ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic"></asp:RegularExpressionValidator>
                                        
                                             <asp:CompareValidator ID="cmpTxtENtry" runat="server" ValueToCompare="0" ControlToValidate="txtThisEntry" ValidationGroup="rct" ForeColor="Red"
-                                            ErrorMessage ="Must enter amount" Operator="GreaterThan" Type="Integer"></asp:CompareValidator>
+                                            ErrorMessage ="Must enter amount" Operator="GreaterThan" Type="Double"></asp:CompareValidator>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
