@@ -54,6 +54,8 @@ public partial class Admin_IndividualTitlesList : System.Web.UI.Page
             {
                 gvTitlesList.DataSource = null;
                 gvTitlesList.DataBind();
+                Label lblEmptyMessage = gvTitlesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -118,6 +120,14 @@ public partial class Admin_IndividualTitlesList : System.Web.UI.Page
                     gvTitlesList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvTitlesList.DataSource = dr.CopyToDataTable();
                     gvTitlesList.DataBind();
+                }
+                else
+                {
+                    gvTitlesList.DataSource = null;
+                    gvTitlesList.DataBind();
+
+                    Label lblEmptyMessage = gvTitlesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

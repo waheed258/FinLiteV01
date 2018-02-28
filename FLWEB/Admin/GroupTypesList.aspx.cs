@@ -86,6 +86,8 @@ public partial class Admin_GroupTypesList : System.Web.UI.Page
             {
                 gvGroupTypesList.DataSource = null;
                 gvGroupTypesList.DataBind();
+                Label lblEmptyMessage = gvGroupTypesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -131,6 +133,14 @@ public partial class Admin_GroupTypesList : System.Web.UI.Page
                     gvGroupTypesList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvGroupTypesList.DataSource = dr.CopyToDataTable();
                     gvGroupTypesList.DataBind();
+                }
+                else
+                {
+                    gvGroupTypesList.DataSource = null;
+                    gvGroupTypesList.DataBind();
+
+                    Label lblEmptyMessage = gvGroupTypesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

@@ -53,6 +53,8 @@ public partial class Admin_CharteredAccountsList : System.Web.UI.Page
             {
                 gvCharteredAccountsList.DataSource = null;
                 gvCharteredAccountsList.DataBind();
+                Label lblEmptyMessage = gvCharteredAccountsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
 
@@ -105,6 +107,14 @@ public partial class Admin_CharteredAccountsList : System.Web.UI.Page
                     gvCharteredAccountsList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvCharteredAccountsList.DataSource = dr.CopyToDataTable();
                     gvCharteredAccountsList.DataBind();
+                }
+                else
+                {
+                    gvCharteredAccountsList.DataSource = null;
+                    gvCharteredAccountsList.DataBind();
+
+                    Label lblEmptyMessage = gvCharteredAccountsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

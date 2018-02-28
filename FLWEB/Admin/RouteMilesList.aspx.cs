@@ -75,6 +75,8 @@ public partial class Admin_RouteMilesList : System.Web.UI.Page
             {
                 gvRMList.DataSource = null;
                 gvRMList.DataBind();
+                Label lblEmptyMessage = gvRMList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -119,6 +121,14 @@ public partial class Admin_RouteMilesList : System.Web.UI.Page
                     gvRMList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvRMList.DataSource = dr.CopyToDataTable();
                     gvRMList.DataBind();
+                }
+                else
+                {
+                    gvRMList.DataSource = null;
+                    gvRMList.DataBind();
+
+                    Label lblEmptyMessage = gvRMList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

@@ -91,6 +91,8 @@ public partial class Admin_PaymentTypesList : System.Web.UI.Page
             {
                 gvPaymentTypesList.DataSource = null;
                 gvPaymentTypesList.DataBind();
+                Label lblEmptyMessage = gvPaymentTypesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch(Exception ex)
@@ -139,6 +141,14 @@ public partial class Admin_PaymentTypesList : System.Web.UI.Page
                     gvPaymentTypesList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvPaymentTypesList.DataSource = dr.CopyToDataTable();
                     gvPaymentTypesList.DataBind();
+                }
+                else
+                {
+                    gvPaymentTypesList.DataSource = null;
+                    gvPaymentTypesList.DataBind();
+
+                    Label lblEmptyMessage = gvPaymentTypesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

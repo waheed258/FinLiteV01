@@ -86,7 +86,9 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                        <EmptyDataTemplate>No Record Available</EmptyDataTemplate>
+                       <EmptyDataTemplate>
+                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
+                            </EmptyDataTemplate>
                     </asp:GridView>
 
 

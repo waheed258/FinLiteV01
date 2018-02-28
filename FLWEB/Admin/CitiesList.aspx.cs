@@ -78,6 +78,8 @@ public partial class Admin_CitiesList : System.Web.UI.Page
             {
                 gvCitiesList.DataSource = null;
                 gvCitiesList.DataBind();
+                Label lblEmptyMessage = gvCitiesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch(Exception ex)
@@ -133,6 +135,14 @@ public partial class Admin_CitiesList : System.Web.UI.Page
                     gvCitiesList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvCitiesList.DataSource = dr.CopyToDataTable();
                     gvCitiesList.DataBind();
+                }
+                else
+                {
+                    gvCitiesList.DataSource = null;
+                    gvCitiesList.DataBind();
+
+                    Label lblEmptyMessage = gvCitiesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

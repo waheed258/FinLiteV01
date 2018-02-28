@@ -51,6 +51,8 @@ public partial class Admin_MainAccountList : System.Web.UI.Page
             {
                 gvMainAccList.DataSource = null;
                 gvMainAccList.DataBind();
+                Label lblEmptyMessage = gvMainAccList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -93,6 +95,14 @@ public partial class Admin_MainAccountList : System.Web.UI.Page
                     gvMainAccList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvMainAccList.DataSource = dr.CopyToDataTable();
                     gvMainAccList.DataBind();
+                }
+                else
+                {
+                    gvMainAccList.DataSource = null;
+                    gvMainAccList.DataBind();
+
+                    Label lblEmptyMessage = gvMainAccList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }
