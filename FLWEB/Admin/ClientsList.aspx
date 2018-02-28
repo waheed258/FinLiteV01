@@ -170,7 +170,9 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <EmptyDataTemplate>No Record Available</EmptyDataTemplate>
+                 <EmptyDataTemplate>
+                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
+                            </EmptyDataTemplate>
             </asp:GridView>
 
             <asp:Panel ID="pnlCreditCard" runat="server" CssClass="WhiteBG" Style="width: 70%; padding: 5px; min-height: 96px; position: fixed; z-index: 100001; left: 16%; top: 5px; display: none; overflow:scroll; height:400px;">

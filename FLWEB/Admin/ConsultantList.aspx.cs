@@ -87,6 +87,9 @@ public partial class Admin_ConsultantList : System.Web.UI.Page
             {
                 gvConsultantList.DataSource = null;
                 gvConsultantList.DataBind();
+
+                Label lblEmptyMessage = gvConsultantList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch(Exception ex)
@@ -138,6 +141,14 @@ public partial class Admin_ConsultantList : System.Web.UI.Page
                     gvConsultantList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvConsultantList.DataSource = dr.CopyToDataTable();
                     gvConsultantList.DataBind();
+                }
+                else
+                {
+                    gvConsultantList.DataSource = null;
+                    gvConsultantList.DataBind();
+
+                    Label lblEmptyMessage = gvConsultantList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

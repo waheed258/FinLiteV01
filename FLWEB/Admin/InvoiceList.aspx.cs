@@ -70,6 +70,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             {
                 gvInvoiceList.DataSource = null;
                 gvInvoiceList.DataBind();
+                Label lblEmptyMessage = gvInvoiceList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
 
@@ -772,6 +774,14 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                     gvInvoiceList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvInvoiceList.DataSource = dr.CopyToDataTable();
                     gvInvoiceList.DataBind();
+                }
+                else
+                {
+                    gvInvoiceList.DataSource = null;
+                    gvInvoiceList.DataBind();
+
+                    Label lblEmptyMessage = gvInvoiceList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

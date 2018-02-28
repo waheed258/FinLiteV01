@@ -50,6 +50,9 @@ public partial class Admin_SupplierChoiceList : System.Web.UI.Page
             {
                 gvSupChoiceList.DataSource = null;
                 gvSupChoiceList.DataBind();
+
+                Label lblEmptyMessage = gvSupChoiceList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch(Exception ex)
@@ -113,6 +116,14 @@ public partial class Admin_SupplierChoiceList : System.Web.UI.Page
                     gvSupChoiceList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvSupChoiceList.DataSource = dr.CopyToDataTable();
                     gvSupChoiceList.DataBind();
+                }
+                else
+                {
+                    gvSupChoiceList.DataSource = null;
+                    gvSupChoiceList.DataBind();
+
+                    Label lblEmptyMessage = gvSupChoiceList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

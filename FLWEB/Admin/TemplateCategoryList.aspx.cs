@@ -127,6 +127,14 @@ public partial class Admin_TemplateCategoryList : System.Web.UI.Page
                     gvTemplateCategoryList.DataSource = dr.CopyToDataTable();
                     gvTemplateCategoryList.DataBind();
                 }
+                else
+                {
+                    gvTemplateCategoryList.DataSource = null;
+                    gvTemplateCategoryList.DataBind();
+
+                    Label lblEmptyMessage = gvTemplateCategoryList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
+                }
             }
         }
         catch (Exception ex)

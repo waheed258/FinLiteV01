@@ -97,6 +97,9 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             {
                 gvClientsList.DataSource = null;
                 gvClientsList.DataBind();
+
+                Label lblEmptyMessage = gvClientsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -388,6 +391,14 @@ public partial class Admin_ClientsList : System.Web.UI.Page
                     gvClientsList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvClientsList.DataSource = dr.CopyToDataTable();
                     gvClientsList.DataBind();
+                }
+                else
+                {
+                    gvClientsList.DataSource = null;
+                    gvClientsList.DataBind();
+
+                    Label lblEmptyMessage = gvClientsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

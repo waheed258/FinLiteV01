@@ -74,6 +74,8 @@ public partial class Admin_ForeignCurrencyList : System.Web.UI.Page
                  {
                      gvForeignCurrencyList.DataSource = null;
                      gvForeignCurrencyList.DataBind();
+                     Label lblEmptyMessage = gvForeignCurrencyList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                     lblEmptyMessage.Text = "Currently there are no records in System";
                  }
 
 
@@ -128,6 +130,14 @@ public partial class Admin_ForeignCurrencyList : System.Web.UI.Page
                        gvForeignCurrencyList.PageSize = int.Parse(ViewState["ps"].ToString());
                        gvForeignCurrencyList.DataSource = dr.CopyToDataTable();
                        gvForeignCurrencyList.DataBind();
+                   }
+                   else
+                   {
+                       gvForeignCurrencyList.DataSource = null;
+                       gvForeignCurrencyList.DataBind();
+
+                       Label lblEmptyMessage = gvForeignCurrencyList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                       lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                    }
                }
            }

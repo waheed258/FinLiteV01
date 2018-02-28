@@ -75,6 +75,8 @@ public partial class Admin_BankAccountList : System.Web.UI.Page
             {
                 gvBankAccountList.DataSource = null;
                 gvBankAccountList.DataBind();
+                Label lblEmptyMessage = gvBankAccountList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 
@@ -123,6 +125,14 @@ public partial class Admin_BankAccountList : System.Web.UI.Page
                     gvBankAccountList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvBankAccountList.DataSource = dr.CopyToDataTable();
                     gvBankAccountList.DataBind();
+                }
+                else
+                {
+                    gvBankAccountList.DataSource = null;
+                    gvBankAccountList.DataBind();
+
+                    Label lblEmptyMessage = gvBankAccountList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

@@ -73,6 +73,9 @@ public partial class Admin_ContactLogList : System.Web.UI.Page
             {
                 gvConLogList.DataSource = null;
                 gvConLogList.DataBind();
+
+                Label lblEmptyMessage = gvConLogList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
         }
@@ -114,6 +117,14 @@ public partial class Admin_ContactLogList : System.Web.UI.Page
                     gvConLogList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvConLogList.DataSource = dr.CopyToDataTable();
                     gvConLogList.DataBind();
+                }
+                else
+                {
+                    gvConLogList.DataSource = null;
+                    gvConLogList.DataBind();
+
+                    Label lblEmptyMessage = gvConLogList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

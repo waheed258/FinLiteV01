@@ -78,6 +78,8 @@ public partial class Admin_BookingDestinationsList : System.Web.UI.Page
             {
                 gvDestinationsList.DataSource = null;
                 gvDestinationsList.DataBind();
+                Label lblEmptyMessage = gvDestinationsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -124,6 +126,14 @@ public partial class Admin_BookingDestinationsList : System.Web.UI.Page
                     gvDestinationsList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvDestinationsList.DataSource = dr.CopyToDataTable();
                     gvDestinationsList.DataBind();
+                }
+                else
+                {
+                    gvDestinationsList.DataSource = null;
+                    gvDestinationsList.DataBind();
+
+                    Label lblEmptyMessage = gvDestinationsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

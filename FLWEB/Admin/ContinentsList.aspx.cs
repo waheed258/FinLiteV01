@@ -76,6 +76,8 @@ public partial class Admin_ContinentsList : System.Web.UI.Page
             {
                 gvContinentsList.DataSource = null;
                 gvContinentsList.DataBind();
+                Label lblEmptyMessage = gvContinentsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -121,6 +123,14 @@ public partial class Admin_ContinentsList : System.Web.UI.Page
                     gvContinentsList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvContinentsList.DataSource = dr.CopyToDataTable();
                     gvContinentsList.DataBind();
+                }
+                else
+                {
+                    gvContinentsList.DataSource = null;
+                    gvContinentsList.DataBind();
+
+                    Label lblEmptyMessage = gvContinentsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

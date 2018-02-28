@@ -73,6 +73,8 @@ public partial class Admin_VatTypeList : System.Web.UI.Page
             {
                 gvVatList.DataSource = null;
                 gvVatList.DataBind();
+                Label lblEmptyMessage = gvVatList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 
@@ -127,6 +129,14 @@ public partial class Admin_VatTypeList : System.Web.UI.Page
                     gvVatList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvVatList.DataSource = dr.CopyToDataTable();
                     gvVatList.DataBind();
+                }
+                else
+                {
+                    gvVatList.DataSource = null;
+                    gvVatList.DataBind();
+
+                    Label lblEmptyMessage = gvVatList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

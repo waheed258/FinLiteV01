@@ -73,6 +73,8 @@ public partial class Admin_TicketTypeList : System.Web.UI.Page
                  {
                      gvTicketTypeList.DataSource = null;
                      gvTicketTypeList.DataBind();
+                     Label lblEmptyMessage = gvTicketTypeList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                     lblEmptyMessage.Text = "Currently there are no records in System";
                  }
 
 
@@ -124,6 +126,14 @@ public partial class Admin_TicketTypeList : System.Web.UI.Page
                        gvTicketTypeList.PageSize = int.Parse(ViewState["ps"].ToString());
                        gvTicketTypeList.DataSource = dr.CopyToDataTable();
                        gvTicketTypeList.DataBind();
+                   }
+                   else
+                   {
+                       gvTicketTypeList.DataSource = null;
+                       gvTicketTypeList.DataBind();
+
+                       Label lblEmptyMessage = gvTicketTypeList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                       lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                    }
                }
            }

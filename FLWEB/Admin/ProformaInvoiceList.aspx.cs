@@ -61,6 +61,9 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             {
                 gvPFInvoiceList.DataSource = null;
                 gvPFInvoiceList.DataBind();
+
+                Label lblEmptyMessage = gvPFInvoiceList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
 
@@ -588,6 +591,14 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                     gvPFInvoiceList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvPFInvoiceList.DataSource = dr.CopyToDataTable();
                     gvPFInvoiceList.DataBind();
+                }
+                else
+                {
+                    gvPFInvoiceList.DataSource = null;
+                    gvPFInvoiceList.DataBind();
+
+                    Label lblEmptyMessage = gvPFInvoiceList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

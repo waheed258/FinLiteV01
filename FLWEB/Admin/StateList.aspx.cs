@@ -73,6 +73,8 @@ public partial class Admin_StateList : System.Web.UI.Page
                   {
                       gvStateList.DataSource = null;
                       gvStateList.DataBind();
+                      Label lblEmptyMessage = gvStateList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                      lblEmptyMessage.Text = "Currently there are no records in System";
                   }
 
 
@@ -124,6 +126,14 @@ public partial class Admin_StateList : System.Web.UI.Page
                          gvStateList.PageSize = int.Parse(ViewState["ps"].ToString());
                          gvStateList.DataSource = dr.CopyToDataTable();
                          gvStateList.DataBind();
+                     }
+                     else
+                     {
+                         gvStateList.DataSource = null;
+                         gvStateList.DataBind();
+
+                         Label lblEmptyMessage = gvStateList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                         lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                      }
                  }
              }

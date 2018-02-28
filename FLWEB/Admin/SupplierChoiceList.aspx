@@ -61,7 +61,7 @@
             &nbsp;
 
                 <asp:HiddenField ID="hf_SupChoiceId" runat="server" Value="0" />
-            <asp:GridView ID="gvSupChoiceList" runat="server" AllowPaging="true" EmptyDataText="No Data Found" PageSize="10"
+            <asp:GridView ID="gvSupChoiceList" runat="server" AllowPaging="true"   PageSize="10"
                 AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
                 Width="100%" OnRowCommand="gvSupChoiceList_RowCommand" OnPageIndexChanging="gvSupChoiceList_PageIndexChanging" OnSorting="gvSupChoiceList_Sorting">
 
@@ -100,6 +100,9 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
+                <EmptyDataTemplate>
+                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
+                            </EmptyDataTemplate>
             </asp:GridView>
         </div>
         </div>

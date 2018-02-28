@@ -74,6 +74,9 @@ public partial class Admin_CommissionTypeList : System.Web.UI.Page
                     {
                         gvCommTypeList.DataSource = null;
                         gvCommTypeList.DataBind();
+
+                        Label lblEmptyMessage = gvCommTypeList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                        lblEmptyMessage.Text = "Currently there are no records in System";
                     }
 
                 }
@@ -125,8 +128,11 @@ public partial class Admin_CommissionTypeList : System.Web.UI.Page
                     }
                     else
                     {
-                        gvCommTypeList.DataSource = dr;
+                        gvCommTypeList.DataSource = null;
                         gvCommTypeList.DataBind();
+
+                        Label lblEmptyMessage = gvCommTypeList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                        lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                     }
                 }
             }

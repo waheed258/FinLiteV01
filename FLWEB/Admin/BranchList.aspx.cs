@@ -69,6 +69,9 @@ public partial class Admin_BranchList : System.Web.UI.Page
             {
                 gvBranchDetailsList.DataSource = null;
                 gvBranchDetailsList.DataBind();
+
+                Label lblEmptyMessage = gvBranchDetailsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 
@@ -145,6 +148,14 @@ public partial class Admin_BranchList : System.Web.UI.Page
                     gvBranchDetailsList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvBranchDetailsList.DataSource = dr.CopyToDataTable();
                     gvBranchDetailsList.DataBind();
+                }
+                else
+                {
+                    gvBranchDetailsList.DataSource = null;
+                    gvBranchDetailsList.DataBind();
+
+                    Label lblEmptyMessage = gvBranchDetailsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

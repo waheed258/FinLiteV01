@@ -63,7 +63,7 @@
 
             <asp:GridView ID="gvBankAccountList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
                 AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
-                OnRowCommand="gvBankAccountList_RowCommand"  OnPageIndexChanging="gvBankAccountList_PageIndexChanging" OnSorting="gvBankAccountList_Sorting" ShowHeaderWhenEmpty="true">
+                OnRowCommand="gvBankAccountList_RowCommand" OnPageIndexChanging="gvBankAccountList_PageIndexChanging" OnSorting="gvBankAccountList_Sorting" ShowHeaderWhenEmpty="true">
                 <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                 <Columns>
                     <asp:TemplateField HeaderText="Key">
@@ -96,7 +96,7 @@
                             <%#Eval("AccountHolder")%>
                         </ItemTemplate>
                     </asp:TemplateField>
-                   
+
                     <asp:TemplateField HeaderText="Actions">
                         <ItemTemplate>
                             <table>
@@ -113,7 +113,10 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <EmptyDataTemplate>No Record Available</EmptyDataTemplate>
+                <EmptyDataTemplate>
+                    <h4>
+                        <asp:Label ID="lblEmptyMessage" Text="" runat="server" /></h4>
+                </EmptyDataTemplate>
             </asp:GridView>
         </div>
     </section>

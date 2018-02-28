@@ -82,6 +82,8 @@ public partial class Admin_CountriesList : System.Web.UI.Page
             {
                 gvCountriesList.DataSource = null;
                 gvCountriesList.DataBind();
+                Label lblEmptyMessage = gvCountriesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
         catch (Exception ex)
@@ -132,6 +134,14 @@ public partial class Admin_CountriesList : System.Web.UI.Page
                     gvCountriesList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvCountriesList.DataSource = dr.CopyToDataTable();
                     gvCountriesList.DataBind();
+                }
+                else
+                {
+                    gvCountriesList.DataSource = null;
+                    gvCountriesList.DataBind();
+
+                    Label lblEmptyMessage = gvCountriesList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

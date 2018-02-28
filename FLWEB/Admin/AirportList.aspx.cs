@@ -72,6 +72,8 @@ public partial class Admin_AirportList : System.Web.UI.Page
              {
                  gvAirportList.DataSource = null;
                  gvAirportList.DataBind();
+                 Label lblEmptyMessage = gvAirportList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                 lblEmptyMessage.Text = "Currently there are no records in System";
              }
         }
         catch(Exception ex)
@@ -114,6 +116,14 @@ public partial class Admin_AirportList : System.Web.UI.Page
                     gvAirportList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvAirportList.DataSource = dr.CopyToDataTable();
                     gvAirportList.DataBind();
+                }
+                else
+                {
+                    gvAirportList.DataSource = null;
+                    gvAirportList.DataBind();
+
+                    Label lblEmptyMessage = gvAirportList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

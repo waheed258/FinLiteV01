@@ -77,6 +77,9 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
             {
                 gvLandSupplierList.DataSource = null;
                 gvLandSupplierList.DataBind();
+
+                Label lblEmptyMessage = gvLandSupplierList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
 
@@ -151,6 +154,14 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
                     gvLandSupplierList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvLandSupplierList.DataSource = dr.CopyToDataTable();
                     gvLandSupplierList.DataBind();
+                }
+                else
+                {
+                    gvLandSupplierList.DataSource = null;
+                    gvLandSupplierList.DataBind();
+
+                    Label lblEmptyMessage = gvLandSupplierList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

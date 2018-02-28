@@ -98,7 +98,7 @@
                 </div>
 
                 <div>
-                    <asp:GridView runat="server" ID="gvPFInvoiceList" EmptyDataText="No Data Found" PageSize="10" 
+                    <asp:GridView runat="server" ID="gvPFInvoiceList" PageSize="10" 
                         AllowPaging="true" DataKeyNames="PFInvId,clientemail" AutoGenerateColumns="false" Width="100%" Height="50%"
                         CssClass="table table-striped table-bordered" OnSorting="gvPFInvoiceList_Sorting" OnPageIndexChanging="gvPFInvoiceList_PageIndexChanging">
                         <RowStyle />
@@ -126,8 +126,11 @@
                                     <asp:ImageButton ID="imgPFPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20"  OnClick="imgPFPdf_Click"  />
                                 </ItemTemplate>
                             </asp:TemplateField>
-
+                            
                         </Columns>
+                        <EmptyDataTemplate>
+                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
+                            </EmptyDataTemplate>
                     </asp:GridView>
                     <asp:Label ID="lblresult" runat="server" />
                     <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />

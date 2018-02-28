@@ -17,7 +17,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
     BOUtiltiy _BOUtility = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             ViewState["ps"] = 10;
             BindAirSupplierList();
@@ -29,7 +29,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
     {
         string supplierId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Supplier")
-        {            
+        {
             Response.Redirect("AirSuppliers.aspx?SupplierId=" + supplierId);
         }
 
@@ -42,14 +42,14 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
 
     private void BindAirSupplierList()
     {
-        
+
         try
         {
             gvAirSupplierList.PageSize = int.Parse(ViewState["ps"].ToString());
             int SupplierId = 0;
             DataSet ds = objAirSupplier.GetAirSuppliers(SupplierId);
             Session["dt"] = ds.Tables[0];
-            if(ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 gvAirSupplierList.DataSource = ds.Tables[0];
 
@@ -74,7 +74,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
             }
         }
 
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
@@ -89,16 +89,16 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
             int Result = objAirSupplier.DeleteAirSupplier(SupplierId);
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
-    
+
     protected void gvAirSupplierList_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvAirSupplierList.PageIndex = e.NewPageIndex;
-      //  BindAirSupplierList();
+        //  BindAirSupplierList();
         SearchItemFromList(txtSearch.Text.Trim());
 
     }
@@ -109,7 +109,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
     protected void DropPage_SelectedIndexChanged(object sender, EventArgs e)
     {
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
-      //  BindAirSupplierList();
+        //  BindAirSupplierList();
         SearchItemFromList(txtSearch.Text.Trim());
     }
 
@@ -139,6 +139,13 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
                     gvAirSupplierList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvAirSupplierList.DataSource = dr.CopyToDataTable();
                     gvAirSupplierList.DataBind();
+
+                }
+                else
+                {
+                    gvAirSupplierList.DataBind();
+                    Label lblEmptyMessage = gvAirSupplierList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }
@@ -178,22 +185,22 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
 
         foreach (Control control in controlCollection)
         {
-           
+
 
             if (control is TextBox)
             {
-              
-               
+
+
                 string text = ((TextBox)control).ID;
-               string place= (((TextBox)control).FindControl(text) as TextBox).Text;
+                string place = (((TextBox)control).FindControl(text) as TextBox).Text;
 
 
-            
+
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow dtlRow in ds.Tables[0].Rows)
                     {
-                        
+
                         if (dtlRow["Label"].ToString() == text)
                         {
                             string PreviousLabel = dtlRow["Label"].ToString();
@@ -205,7 +212,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
                     }
                 }
                 //((TextBox)control).Text = "بحث";
-                
+
             }
             if (control is DropDownList)
             {
@@ -236,7 +243,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
 
             if (control is Button)
             {
-              
+
                 string id = ((Button)control).ID;
                 string text = ((Button)control).Text;
                 if (ds.Tables[0].Rows.Count > 0)
@@ -257,9 +264,9 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
             }
             if (control is Label)
             {
-              
+
                 string text = ((Label)control).ID;
-              
+
             }
             foreach (GridViewRow row in gvAirSupplierList.Rows)
 
@@ -285,7 +292,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
 
                                 }
                             }
-                              
+
                         }
                     }
                 }
@@ -342,13 +349,13 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
     //}
     public void GetLanguage()
     {
-        
-    List<WebControl> wcs = new List<WebControl>();
-    GetControlList<WebControl>(Page.Controls, wcs);
-    foreach (WebControl childControl in wcs)
-    {
-        string control = childControl.ToString();
-    }
+
+        List<WebControl> wcs = new List<WebControl>();
+        GetControlList<WebControl>(Page.Controls, wcs);
+        foreach (WebControl childControl in wcs)
+        {
+            string control = childControl.ToString();
+        }
 
     }
 
@@ -366,65 +373,65 @@ where T : Control
         }
     }
 
-//    private void GetControlList<T>(ControlCollection controlCollection, List<T> resultCollection)
-//where T : Control
-//    {
-//        foreach (Control control in controlCollection)
-//        {
-//            //if (control.GetType() == typeof(T))
-//            if (control is T) // This is cleaner
-//                resultCollection.Add((T)control);
+    //    private void GetControlList<T>(ControlCollection controlCollection, List<T> resultCollection)
+    //where T : Control
+    //    {
+    //        foreach (Control control in controlCollection)
+    //        {
+    //            //if (control.GetType() == typeof(T))
+    //            if (control is T) // This is cleaner
+    //                resultCollection.Add((T)control);
 
-//            if (control.HasControls())
-//                GetControlList(control.Controls, resultCollection);
+    //            if (control.HasControls())
+    //                GetControlList(control.Controls, resultCollection);
 
-//            int langId = Convert.ToInt32(Session["LanguageId"]);
+    //            int langId = Convert.ToInt32(Session["LanguageId"]);
 
-//            DataSet ds = _BOUtility.GetLanguageDescription(langId);
+    //            DataSet ds = _BOUtility.GetLanguageDescription(langId);
 
-//            if (ds.Tables[0].Rows[0]["Label"].ToString() == control.ToString())
-//            {
-//                string PreviousLabel = ds.Tables[0].Rows[0]["Label"].ToString();
-//                string LatestlabelDescrip = ds.Tables[0].Rows[0]["LabelDescription"].ToString();
+    //            if (ds.Tables[0].Rows[0]["Label"].ToString() == control.ToString())
+    //            {
+    //                string PreviousLabel = ds.Tables[0].Rows[0]["Label"].ToString();
+    //                string LatestlabelDescrip = ds.Tables[0].Rows[0]["LabelDescription"].ToString();
 
-//                string Latest = PreviousLabel.Replace(PreviousLabel, LatestlabelDescrip);
-//            }
-//        }
+    //                string Latest = PreviousLabel.Replace(PreviousLabel, LatestlabelDescrip);
+    //            }
+    //        }
 
-     
 
-     
-//    }
 
-//    private void GetControlList<T>(ControlCollection controlCollection, List<T> resultCollection)
-//where T : Control
-//    {
-//        foreach (Control control in controlCollection)
-//        {
-//            //if (control.GetType() == typeof(T))
-//            if (control is T) // This is cleaner
-//                resultCollection.Add((T)control);
 
-//            if (control.HasControls())
-//                GetControlList(control.Controls, resultCollection);
-//        }
-//        int langId = Convert.ToInt32(Session["LanguageId"]);
+    //    }
 
-//        DataSet ds = _BOUtility.GetLanguageDescription(langId);
+    //    private void GetControlList<T>(ControlCollection controlCollection, List<T> resultCollection)
+    //where T : Control
+    //    {
+    //        foreach (Control control in controlCollection)
+    //        {
+    //            //if (control.GetType() == typeof(T))
+    //            if (control is T) // This is cleaner
+    //                resultCollection.Add((T)control);
 
-//        List<TextBox> allControls = new List<TextBox>();
-//        GetControlList<TextBox>(Page.Controls, allControls);
-//        foreach (var childControl in allControls)
-//        {
-//            //     call for all controls of the page
-//            if (ds.Tables[0].Rows[0]["Label"].ToString() == childControl.ToString())
-//            {
-//                string PreviousLabel = ds.Tables[0].Rows[0]["Label"].ToString();
-//                string LatestlabelDescrip = ds.Tables[0].Rows[0]["LabelDescription"].ToString();
+    //            if (control.HasControls())
+    //                GetControlList(control.Controls, resultCollection);
+    //        }
+    //        int langId = Convert.ToInt32(Session["LanguageId"]);
 
-//                string Latest = PreviousLabel.Replace(PreviousLabel, LatestlabelDescrip);
-//            }
-//        }
-//    }
+    //        DataSet ds = _BOUtility.GetLanguageDescription(langId);
+
+    //        List<TextBox> allControls = new List<TextBox>();
+    //        GetControlList<TextBox>(Page.Controls, allControls);
+    //        foreach (var childControl in allControls)
+    //        {
+    //            //     call for all controls of the page
+    //            if (ds.Tables[0].Rows[0]["Label"].ToString() == childControl.ToString())
+    //            {
+    //                string PreviousLabel = ds.Tables[0].Rows[0]["Label"].ToString();
+    //                string LatestlabelDescrip = ds.Tables[0].Rows[0]["LabelDescription"].ToString();
+
+    //                string Latest = PreviousLabel.Replace(PreviousLabel, LatestlabelDescrip);
+    //            }
+    //        }
+    //    }
 
 }
