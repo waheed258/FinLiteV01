@@ -91,6 +91,7 @@
 
          }
          </script>
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
@@ -379,9 +380,13 @@
                                     <asp:TemplateField  HeaderText="This Entry" HeaderStyle-CssClass="panel-heading" ItemStyle-Width="100px" ItemStyle-CssClass="gradeC" >
                                         <ItemTemplate>
                                             <asp:TextBox style="width:100px" ID="txtThisEntry" runat="server" CssClass="form-control decimalRight" OnTextChanged="txtThisEntry_TextChanged" Text="" AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
-                                            <asp:RegularExpressionValidator ControlToValidate="txtThisEntry" runat="server" ID="rextxtThisEntry" ValidationGroup="gvvalida"
-                                                ErrorMessage="Enter  number only." Text="Enter  number only."
+                                            <asp:RequiredFieldValidator runat="server" ValidationGroup="rct" ID="rfvThisEntry" ControlToValidate="txtThisEntry" ErrorMessage="Please enter amount" ForeColor="Red" Display="Dynamic" CssClass="validationred"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtThisEntry" runat="server" ID="rextxtThisEntry" ValidationGroup="rct"
+                                                ErrorMessage="Enter  number only." Text="Enter  number only." ForeColor="Red"
                                                 ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic"></asp:RegularExpressionValidator>
+                                       
+                                            <asp:CompareValidator ID="cmpTxtENtry" runat="server" ValueToCompare="0" ControlToValidate="txtThisEntry" ValidationGroup="rct" ForeColor="Red"
+                                            ErrorMessage ="Must enter amount" Operator="GreaterThan" Type="Integer"></asp:CompareValidator>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -416,7 +421,7 @@
 
                         <div class="col-sm-2">
                             <asp:Button runat="server" ID="btnSave" class="btn btn-primary green" ValidationGroup="rct"
-                                Text="Save" OnClick="btnSave_Click" />
+                                Text="Save" OnClick="btnSave_Click"  />
                         </div>
                         <div class="col-sm-2">
                             <asp:Button runat="server" ID="btnClear" class="btn btn-primary green" ValidationGroup="rct"
