@@ -64,7 +64,7 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
 
                         for (int i = 0; i < values.Length; i++)
                         {
-                            for (int j = i; j <= i; j++)
+                            for (int j = i; j < InvidValue.Length ; j++)
                             {
                                 values[i] = values[i].Trim();
                                 InvidValue[j] = InvidValue[j].Trim();
