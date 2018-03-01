@@ -119,6 +119,11 @@
                                     <%#Eval("InvDocumentNo")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                             <asp:TemplateField HeaderText="Status">
+                                <ItemTemplate>
+                                    <%#Eval("receiptStatus")%>
+                                </ItemTemplate>
+                            </asp:TemplateField>
 
                         </Columns>
                         <EmptyDataTemplate>No Record Available</EmptyDataTemplate>
