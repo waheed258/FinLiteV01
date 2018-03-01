@@ -694,7 +694,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             string routing = txtAirRouting.Text;
             if (routing.Contains("/"))
             {
-
+                txtAirTravelDate.Enabled = false;
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {

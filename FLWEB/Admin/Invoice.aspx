@@ -51,15 +51,24 @@
             max-height: 40px !important;
         }
 
-        .overlay {
+         .overlaypop {
             position: fixed;
             z-index: 999;
             top: 400px;
-            left: 600px;
+            left: 750px;
             filter: alpha(opacity=60);
             opacity: 0.6;
             -moz-opacity: 0.8;
-        } 
+        }
+        .overlay {
+            position: fixed;
+            z-index: 999;
+            top: 300px;
+            left: 800px;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
     </style>
 
     <script type="text/javascript">
@@ -325,13 +334,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-5">
 
-                                        <button runat="server" id="btnOpenFP" class="btn btn-mini">
+                                        <button runat="server" id="btnOpenFP" class="btn btn-mini" title="AirTicket">
                                             <i class="fa fa-plane"></i>
                                         </button>
                                         <asp:Button ID="bntCancelFP" runat="server" Text="Cancel" Style="display: none;" />
                                         <%--<asp:Button ID="btnOpenFP" runat="server" Text="Open"  />--%>
                         &nbsp;&nbsp;&nbsp;
-                         <button runat="server" id="btnLand" class="btn btn-mini">
+                         <button runat="server" id="btnLand" class="btn btn-mini" title="Land Arrangement">
                              <i class="fa  fa-university"></i>
                          </button>
                                         &nbsp;&nbsp;
@@ -360,7 +369,7 @@
                             </div>--%>
                                 </div>
 
-                                <div id="popupdiv" class="modalBackground">
+                                <div id="popupdiv" class="modalBackground" title="AirTicket">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -600,7 +609,7 @@
                                                     ValidationGroup="airticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
 
                                             </div>
-
+                                            <asp:CompareValidator ID="cmvDate2" runat="server" ControlToValidate="txtDate2" ControlToCompare="txtDate1" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
                                         </div>
 
                                         <div class="col-sm-12" id="div2" runat="server">
@@ -634,6 +643,7 @@
 
 
                                             </div>
+                                             <asp:CompareValidator ID="CmvDate3" runat="server" ControlToValidate="txtDate3" ControlToCompare="txtDate2" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
                                         </div>
 
                                         <div class="col-sm-12" id="div5" runat="server">
@@ -665,7 +675,7 @@
                                                     ValidationGroup="airticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
 
                                             </div>
-
+                                             <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="txtDate4" ControlToCompare="txtDate3" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
                                         </div>
 
                                     </div>
@@ -691,7 +701,7 @@
                                             <div class="col-sm-2">
                                                 <asp:TextBox ID="txtAirReturnDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
                                             </div>
-
+                                             <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="txtAirReturnDate" ControlToCompare="txtDate4" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -860,7 +870,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -889,8 +899,8 @@
                             </div>--%>
                                 </div>
 
-                                <div class="form-group">
-                                    <header class="panel-heading">
+                                <div class="form-group" title="Land Arrangement" >
+                                    <header class="panel-heading" >
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                             <h4 class="panel-title">Land Arrangements</h4>
@@ -1305,7 +1315,7 @@
                                     </div>
                                 </div>
 
-                                <div class="overlay">
+                                <div class="overlaypop">
                                     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                         <ProgressTemplate>
                                             <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1325,13 +1335,13 @@
                                 PopupControlID="pnlServiceFee">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="pnlServiceFee" runat="server" CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlServiceFee" runat="server"  CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
                                 </div>
-                                <div id="Serpopupdiv" class="modalBackground">
+                                <div id="Serpopupdiv" class="modalBackground" title="Service Fee">
 
                                     <div class="form-group">
                                         <header class="panel-heading">
@@ -1566,7 +1576,7 @@
                                     </div>
 
 
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1591,7 +1601,7 @@
                                 <asp:ImageButton ID="ImageButton1" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
                                 </div>
-                                <div id="popupServfeediv" class="modalBackground">
+                                <div id="popupServfeediv" class="modalBackground" title="General Charge">
 
                                     <div class="form-group">
                                         <header class="panel-heading">
@@ -1766,7 +1776,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress3" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />

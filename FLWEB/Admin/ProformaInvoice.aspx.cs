@@ -806,6 +806,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (routing.Contains("/"))
             {
 
+                txtPFAirTravelDate.Enabled = false;
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {
