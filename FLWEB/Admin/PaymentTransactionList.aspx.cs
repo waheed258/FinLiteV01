@@ -47,6 +47,8 @@ public partial class Admin_PaymentTransactionList : System.Web.UI.Page
             {
                 gvPaymentList.DataSource = null;
                 gvPaymentList.DataBind();
+                Label lblEmptyMessage = gvPaymentList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 
@@ -118,6 +120,14 @@ public partial class Admin_PaymentTransactionList : System.Web.UI.Page
                     gvPaymentList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvPaymentList.DataSource = dr.CopyToDataTable();
                     gvPaymentList.DataBind();
+                }
+                else
+                {
+                    gvPaymentList.DataSource = null;
+                    gvPaymentList.DataBind();
+
+                    Label lblEmptyMessage = gvPaymentList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

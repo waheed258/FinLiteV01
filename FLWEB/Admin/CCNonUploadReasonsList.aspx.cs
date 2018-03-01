@@ -88,6 +88,10 @@ public partial class Admin_CCNonUploadReasonsList : System.Web.UI.Page
             {
                 gvNonUploadList.DataSource = null;
                 gvNonUploadList.DataBind();
+
+                Label lblEmptyMessage = gvNonUploadList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
+              
             }
         }
         catch (Exception ex)
@@ -130,6 +134,14 @@ public partial class Admin_CCNonUploadReasonsList : System.Web.UI.Page
                     gvNonUploadList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvNonUploadList.DataSource = dr.CopyToDataTable();
                     gvNonUploadList.DataBind();
+                }
+                else
+                {
+                    gvNonUploadList.DataSource = null;
+                    gvNonUploadList.DataBind();
+
+                    Label lblEmptyMessage = gvNonUploadList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

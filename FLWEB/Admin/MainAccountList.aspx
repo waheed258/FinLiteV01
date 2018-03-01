@@ -58,7 +58,7 @@
                &nbsp;
 
                 <asp:HiddenField ID="hf_AirportId" runat="server" Value="0" />
-                <asp:GridView ID="gvMainAccList" runat="server" AllowPaging="true" EmptyDataText="No Data Found" PageSize="10" OnPageIndexChanging="gvMainAccList_PageIndexChanging" OnSorting="gvMainAccList_Sorting"
+                <asp:GridView ID="gvMainAccList" runat="server" AllowPaging="true"  PageSize="10" OnPageIndexChanging="gvMainAccList_PageIndexChanging" OnSorting="gvMainAccList_Sorting"
                     AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
                     Width="100%">
 
@@ -96,6 +96,9 @@
                        
                        
                     </Columns>
+                      <EmptyDataTemplate>
+                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
+                            </EmptyDataTemplate>
                 </asp:GridView>
             </div>
         </div>

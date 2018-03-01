@@ -53,6 +53,8 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
             {
                 gvDepositTransactionList.DataSource = null;
                 gvDepositTransactionList.DataBind();
+                Label lblEmptyMessage = gvDepositTransactionList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
 
@@ -133,6 +135,14 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
                     gvDepositTransactionList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvDepositTransactionList.DataSource = dr.CopyToDataTable();
                     gvDepositTransactionList.DataBind();
+                }
+                else
+                {
+                    gvDepositTransactionList.DataSource = null;
+                    gvDepositTransactionList.DataBind();
+
+                    Label lblEmptyMessage = gvDepositTransactionList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

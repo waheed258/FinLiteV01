@@ -45,6 +45,14 @@ public partial class Admin_GeneralReceiptsList : System.Web.UI.Page
                     gvGeneralReceiptsList.DataSource = dr.CopyToDataTable();
                     gvGeneralReceiptsList.DataBind();
                 }
+                else
+                {
+                    gvGeneralReceiptsList.DataSource = null;
+                    gvGeneralReceiptsList.DataBind();
+
+                    Label lblEmptyMessage = gvGeneralReceiptsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
+                }
             }
         }
         catch (Exception ex)
@@ -86,6 +94,8 @@ public partial class Admin_GeneralReceiptsList : System.Web.UI.Page
             {
                 gvGeneralReceiptsList.DataSource = null;
                 gvGeneralReceiptsList.DataBind();
+                Label lblEmptyMessage = gvGeneralReceiptsList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 

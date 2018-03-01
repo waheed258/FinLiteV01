@@ -46,6 +46,8 @@ public partial class Admin_GeneralRececiptList : System.Web.UI.Page
             {
                 gvGenReceiptList.DataSource = null;
                 gvGenReceiptList.DataBind();
+                Label lblEmptyMessage = gvGenReceiptList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 
@@ -92,6 +94,14 @@ public partial class Admin_GeneralRececiptList : System.Web.UI.Page
                     gvGenReceiptList.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvGenReceiptList.DataSource = dr.CopyToDataTable();
                     gvGenReceiptList.DataBind();
+                }
+                else
+                {
+                    gvGenReceiptList.DataSource = null;
+                    gvGenReceiptList.DataBind();
+
+                    Label lblEmptyMessage = gvGenReceiptList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }

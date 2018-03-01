@@ -57,6 +57,8 @@ public partial class Admin_ImportTicketList : System.Web.UI.Page
             {
                 gvImportTickets.DataSource = ds;
                 gvImportTickets.DataBind();
+                Label lblEmptyMessage = gvImportTickets.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                lblEmptyMessage.Text = "Currently there are no records in System";
             }
 
 
@@ -115,6 +117,14 @@ public partial class Admin_ImportTicketList : System.Web.UI.Page
                     gvImportTickets.PageSize = int.Parse(ViewState["ps"].ToString());
                     gvImportTickets.DataSource = dr.CopyToDataTable();
                     gvImportTickets.DataBind();
+                }
+                else
+                {
+                    gvImportTickets.DataSource = null;
+                    gvImportTickets.DataBind();
+
+                    Label lblEmptyMessage = gvImportTickets.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
                 }
             }
         }
