@@ -451,7 +451,9 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             _objEMPFInvoice.ServiceTot = Convert.ToDecimal(string.IsNullOrEmpty(txtPFSerClientTotal.Text) ? 0 : Convert.ToDecimal(txtPFSerClientTotal.Text));
             _objEMPFInvoice.GenChargeTot = Convert.ToDecimal(string.IsNullOrEmpty(txtPFClientTotal.Text) ? 0 : Convert.ToDecimal(txtPFClientTotal.Text));
             _objEMPFInvoice.Message = txtPFInvClntMesg.Text;
-            _objEMPFInvoice.MessageType = Convert.ToInt32(ddlPFInvMesg.SelectedValue.ToString());
+            _objEMPFInvoice.MessageType = (string.IsNullOrEmpty(ddlPFInvMesg.SelectedValue.ToString())) ? 0 : Convert.ToInt32(ddlPFInvMesg.SelectedValue.ToString());
+
+            //string.IsNullOrEmpty(ddlPFInvMesg.SelectedValue.ToString())) ? 0 : Convert.ToInt32(ddlPFInvMesg.SelectedValue.ToString()
             _objEMPFInvoice.TempUniqCode = Session["TempUniqCode"].ToString();
             //_objEmInvoice.Message = string.IsNullOrEmpty(txtAirRouting.Text) ? "" : txtAirRouting.Text;
             //_objEmInvoice.AirMiles = string.IsNullOrEmpty(txtAirMiles.Text) ? "" : txtAirMiles.Text;
@@ -1211,7 +1213,8 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
     protected void btnSerCancel_Click(object sender, EventArgs e)
     {
-
+        PFServiceFeeClear();
+        PFSerPopupExtender.Hide();
     }
     private void InsertUpdatePFServiceFee()
     {
@@ -1803,7 +1806,8 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
     protected void Cancel_Click(object sender, EventArgs e)
     {
-
+        LandArrangemntsClear();
+        landPFPopExtender.Hide();
     }
     protected void Reset_Click(object sender, EventArgs e)
     {
@@ -1949,14 +1953,15 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 txtPFlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal((Convert.ToDecimal(txtPFlandTotalExcl.Text) + Convert.ToDecimal(txtPFlandExclVatAmount.Text)).ToString());
 
             }
+            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
+
             if (txtPFlandCommPer.Text != "")
             {
                 txtPFlandCommPer_TextChanged(null, null);
             }
             landPFPopExtender.Show();
 
-            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
-
+          
         }
         catch (Exception ex)
         {
@@ -2409,7 +2414,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFAirCommVat.Text = "";
             txtPFAirVatinclTax.Text = "";
             txtPFAirAgentVat.Text = "";
-            // txtAirClientTot.Text = "";
+            txtPFAirClientTot.Text = "";
             txtPFAirCommInclu.Text = "";
             ddlPFAirPayment.SelectedIndex = -1;
             txtPFAirDueToBsp.Text = "";
@@ -2487,7 +2492,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             DDPFlandCreditCard.SelectedIndex = -1;
             txtPFlandNoncmbl.Text = "";
             txtPFlandCommIncl.Text = "";
-            //txtlandDuefromclient.Text = "";
+            txtPFlandDuefromclient.Text = "";
             txtPFlandLessComm.Text = "";
             txtPFlandDuetoSupplier.Text = "";
             txtPFlandCO2.Text = "";
@@ -2512,7 +2517,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFSerVatAmount.Text = "";
             ddlPFPaymentMethod.SelectedIndex = -1;
             chkPFMerge.Checked = false;
-            // txtSerClientTotal.Text = "";
+            txtPFSerClientTotal.Text = "";
             ddlPFCreditCardType.SelectedIndex = -1;
             ddlPFCollectVia.SelectedIndex = -1;
             txtPFTASFMPD.Text = "";
@@ -2537,7 +2542,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFgenvat.Text = "";
             txtPFVatAmount.Text = "";
             txtPFExcluAmount.Text = "";
-            // txtClientTotal.Text = "";
+             txtPFClientTotal.Text = "";
 
         }
         catch (Exception ex)
@@ -2733,5 +2738,29 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         txtPFlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
         landPFPopExtender.Show();
+    }
+    protected void LandClose_Click(object sender, ImageClickEventArgs e)
+    {
+        try
+        {
+            LandArrangemntsClear();
+            AirPFPopupExtender.Hide();
+
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void GCClose_Click(object sender, ImageClickEventArgs e)
+    {
+        PFGeneralChargeClear();
+        GenPFPopupExtender.Hide();
+    }
+    protected void GenCancel_Click(object sender, EventArgs e)
+    {
+        PFGeneralChargeClear();
+        GenPFPopupExtender.Hide();
     }
 }

@@ -122,8 +122,8 @@
 
                             <asp:TemplateField HeaderText="Sending Options">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click" />
-                                    <asp:ImageButton ID="imgPFPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20"  OnClick="imgPFPdf_Click"  />
+                                    <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click"  title="Mail" />
+                                    <asp:ImageButton ID="imgPFPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20"  OnClick="imgPFPdf_Click"  title="Pdf"  />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             

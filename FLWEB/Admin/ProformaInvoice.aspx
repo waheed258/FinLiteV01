@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="ProformaInvoice.aspx.cs" Inherits="Admin_ProformaInvoice" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master"   AutoEventWireup="true" CodeFile="ProformaInvoice.aspx.cs" Inherits="Admin_ProformaInvoice" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -859,7 +859,7 @@
                                 <div class="form-group">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
-                                            <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
+                                            <asp:ImageButton ID="LandClose" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="LandClose_Click" />
                                             <h4 class="panel-title">Land Arrangemnts</h4>
                                         </div>
                                     </header>
@@ -1540,7 +1540,7 @@
                                     <div class="form-group">
                                         <header class="panel-heading">
                                             <div style="padding-top: 3px; padding-right: 3px;">
-                                                <asp:ImageButton ID="ImageButton1" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
+                                                <asp:ImageButton ID="GCClose" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="GCClose_Click" />
                                                 <h4 class="panel-title">General Charge</h4>
                                             </div>
                                         </header>
@@ -1698,7 +1698,7 @@
                                             <asp:Button runat="server" ID="PFGenSubmit" class="btn btn-primary" ValidationGroup="PFgeneralcharge"
                                                 Text="Submit" OnClick="btnPFGencharge_click" />&nbsp;
                     <asp:Button runat="server" ID="GenCancel"
-                        class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnCancel_Click" />
+                        class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="GenCancel_Click" />
 
 
                                         </div>
