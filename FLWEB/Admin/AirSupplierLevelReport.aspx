@@ -1,9 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="AirSupplierLevelReport.aspx.cs" Inherits="Admin_AirSupplierLevelReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-      <link href="css/pagging.css" rel="stylesheet" />
-     <script type="text/javascript">
-         $(document).ready(function () {
+          <%-- <script type="text/javascript">
+   $(document).ready(function () {
              DatePickerSet();
              var prm = Sys.WebForms.PageRequestManager.getInstance();
              prm.add_endRequest(function () {
@@ -35,7 +34,48 @@
                  autoclose: true
              }).attr('readonly', 'false');;
          }
-         </script>
+         </script>--%>
+
+
+    <script type="text/javascript">
+       
+
+        $(document).ready(function () {
+           
+            $("#ContentPlaceHolder1_txtFromDate").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate() +1);
+                    var dd = dtMax.getDate();
+                    var mm = dtMax.getMonth() + 1;
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtToDate").datepicker("option", "minDate", dtFormatted);
+                }
+            });
+
+            $("#ContentPlaceHolder1_txtToDate").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate() - 1);
+                    var dd = dtMax.getDate();
+                    var mm = dtMax.getMonth() + 1;
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtFromDate").datepicker("option", "maxDate", dtFormatted)
+                }
+            });
+            $("#btnSuppliSubmit").Click(function ()
+            {
+                var todate = document.getElementById("#ContentPlaceHolder1_txtToDate").Value();
+                alert(todate);
+                var newdate = new Date(todate);
+                alert(newdate);
+
+            })
+        });
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
      <asp:Button ID="btnPdf" runat="server" OnClick="btnPdf_Click" Text="PDF" OnClientClick = "SetTarget();"/>
@@ -68,7 +108,7 @@
              </div>
              <br />
 
-              <asp:GridView ID="gvAirSupplLevelReport" runat="server" AllowPaging="true" Width="100%" PageSize="10" OnPageIndexChanging="gvAirSupplLevelReport_PageIndexChanging"
+              <asp:GridView ID="gvAirSupplLevelReport" runat="server" AllowPaging="true" Width="100%" PageSize="10"
                         AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
                          ShowHeaderWhenEmpty="true">
                         <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
@@ -89,7 +129,7 @@
                                     <%#Eval("TicketAmount")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="Paid Amount" ItemStyle-HorizontalAlign="Right">
+                             <asp:TemplateField HeaderText="Paied Amount" ItemStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <%#Eval("SupPaiedAmoount")%>
                                 </ItemTemplate>
