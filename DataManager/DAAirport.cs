@@ -19,6 +19,7 @@ namespace DataManager
                                             {"@AirKey",objEMAirport.AirKey},
                                             {"@AirportName",objEMAirport.AirportName},
                                             {"@AirCity",objEMAirport.AirCity},
+                                            {"@AirState",objEMAirport.AirState},
                                             {"@AirCountry",objEMAirport.AirCountry},
                                             {"@CountryDetails",objEMAirport.CountryDetails},
                                             {"@CreatedBy",objEMAirport.CreatedBy},

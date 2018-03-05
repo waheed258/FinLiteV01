@@ -34,18 +34,20 @@
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="assets/stylesheets/theme-custom.css"/>
 
-   
+    <script src="js/JQuery2.js"></script>
     <!-- Head Libs -->
    <%-- <script src="assets/vendor/modernizr/modernizr.js"></script>--%>
 
     <%-- loded jquery and jquery ui by anitha for invoice jquery model popup --%>
     
-    <link href="/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+<link href="/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
      <%--<script src="/Scripts/jquery-1.8.js"></script>--%>
-    <script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
+   <script src="/jquery-ui-1.12.1/jquery-ui.js"></script>
+    
+  
 
     <%--Dropdown Search Box--%>
-    <script src="js/JQuery2.js"></script>
+   
     <script src="js/select2.min.js"></script>
     <link href="css/select2.min.css" rel="stylesheet" />
     <%-- Dropdown Search Box --%>
@@ -189,8 +191,8 @@
     </form>
 
 
-    <!-- Vendor -->
-    <%--<script src="assets/vendor/jquery/jquery.js"></script>--%>
+   <%-- <!-- Vendor -->
+    <%--<script src="assets/vendor/jquery/jquery.js"></script>
     <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
     <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
@@ -212,7 +214,7 @@
     <script src="assets/vendor/gauge/gauge.js"></script>
     <script src="assets/vendor/snap-svg/snap.svg.js"></script>
     <script src="assets/vendor/liquid-meter/liquid.meter.js"></script>
-    <script src="assets/vendor/chartist/chartist.js"></script>
+    <script src="assets/vendor/chartist/chartist.js"></script>--%>
 
     <!-- Theme Base, Components and Settings -->
     <script src="assets/javascripts/theme.js"></script>

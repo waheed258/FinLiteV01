@@ -13,6 +13,7 @@ namespace EntityManager
       public string AirKey { get; set; }
       public string AirportName { get; set; }
       public int AirCity { get; set; }
+      public int AirState { get; set; }
       public int AirCountry { get; set; }
       public int CountryDetails { get; set; }
       public int CreatedBy { get; set; }

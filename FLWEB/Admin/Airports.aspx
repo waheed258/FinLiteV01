@@ -6,6 +6,23 @@
             color: #FF0000;
         }
     </style>
+     <script>
+
+         $(document).ready(function () {
+             DrpSearch();
+             var prm = Sys.WebForms.PageRequestManager.getInstance();
+             prm.add_endRequest(function () {
+                 DrpSearch();
+             });
+
+         });
+
+         function DrpSearch() {
+             $('#<%= dropCountry.ClientID %>').select2();
+             $('#<%= dropState.ClientID %>').select2();
+             $('#<%= dropCity.ClientID %>').select2();
+        };
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
      <asp:Label ID="lblMsg" runat="server"></asp:Label>
@@ -65,8 +82,9 @@
                                 <label class="control-label">Country (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropCountry" runat="server" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dropCountry_SelectedIndexChanged">
-                                    <asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>
+                                <asp:DropDownList ID="dropCountry" runat="server" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" 
+                                    OnSelectedIndexChanged="dropCountry_SelectedIndexChanged">
+                                    <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
 
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropCountry" runat="server" ID="rfvdropCountry" ValidationGroup="airport"
@@ -79,26 +97,45 @@
                        <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">City (<span class="style1">*</span>)</label>
+                                <label class="control-label">State (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropCity" runat="server" CssClass="form-control" AppendDataBoundItems="true">
-                                    <asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>
+                                <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" 
+                                    OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">
+                                    <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ControlToValidate="dropCity" runat="server" ID="rfvdropState" ValidationGroup="airport"
+                                <asp:RequiredFieldValidator ControlToValidate="dropState" runat="server" ID="rfvdropState" ValidationGroup="airport"
+                                    ErrorMessage="Select State" Text="Select State" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="-1" />
+                               
+                                </div>
+                             <div class="col-sm-1"></div>
+                         <div class="col-sm-2">
+                              <label class="control-label">City (<span class="style1">*</span>)</label>
+
+                         </div>
+                           <div class="col-sm-3">
+                                <asp:DropDownList ID="dropCity" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                    <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ControlToValidate="dropCity" runat="server" ID="rfvdropCity" ValidationGroup="airport"
                                     ErrorMessage="Select City" Text="Select City" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="-1" />
                                
                                 </div>
-                         <div class="col-sm-1"></div>
+                          
+                            </div>
+                        </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                         
                            <div class="col-sm-6">
                                 <asp:CheckBox ID="chkCountryDetails" runat="server" />
                                <label>Exclude Country Details from Extended Routes?</label>
                                
                             </div>
-                          
                             </div>
                         </div>
-                    
+
                 </ContentTemplate>
             </asp:UpdatePanel>
             <div class="form-group"></div>
@@ -106,7 +143,7 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-3">
-                    <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="airport"
+                    <asp:Button runat="server" ID="cmdSubmit" CssClass="btn btn-success" ValidationGroup="airport"
                         Text="Submit" OnClick="cmdSubmit_Click"/>&nbsp;
                     <asp:Button runat="server" ID="btnCancel"
                         class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click"/>&nbsp;

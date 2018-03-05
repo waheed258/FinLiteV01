@@ -2,7 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
       <link href="css/pagging.css" rel="stylesheet" />
-      <script type="text/javascript">
+      <style>
+        .imgright {
+            Width: 50px;
+            Height: 30px;
+            margin-left: 1100px;
+        }
+    </style>
+      <%--<script type="text/javascript">
           $(document).ready(function () {
               DatePickerSet();
               var prm = Sys.WebForms.PageRequestManager.getInstance();
@@ -33,10 +40,38 @@
                   autoclose: true
               }).attr('readonly', 'false');;
           }
-         </script>
+         </script>--%>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#ContentPlaceHolder1_txtLandFromDate").datepicker({
+                maxDate: '0',
+                numberOfMonths: 1,
+                dateFormat: 'yy-mm-dd',
+                onClose: function (selectedDate) {
+                    $("#ContentPlaceHolder1_txtLandToDate").datepicker("option", "minDate", selectedDate);
+                }
+            }).attr('readonly', 'false');;
+
+            $("#ContentPlaceHolder1_txtLandToDate").datepicker({
+                maxDate: '0',
+                numberOfMonths: 1,
+                dateFormat: 'yy-mm-dd',
+                onClose: function (selectedDate) {
+                    $("#ContentPlaceHolder1_txtFromDate").datepicker("option", "maxDate", selectedDate);
+                }
+            }).attr('readonly', 'false');;
+        });
+        function SetTarget() {
+
+            document.forms[0].target = "_blank";
+
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:Button ID="btnPdf" runat="server" OnClick="btnPdf_Click" Text="PDF" OnClientClick = "SetTarget();"/>
+    <%--<asp:Button ID="btnPdf" runat="server" OnClick="btnPdf_Click" Text="PDF" OnClientClick = "SetTarget();"/>--%>
+    <asp:ImageButton ID="btnPdf" runat="server" OnClick="btnPdf_Click" OnClientClick="SetTarget();"  ImageUrl="~/images/PdfIcon.png"  CssClass="imgright"  />
      <asp:Label ID="lblMsg" runat="server"></asp:Label>
     <section class="panel">
           <header class="panel-heading">
