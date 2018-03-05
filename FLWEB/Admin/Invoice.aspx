@@ -2,6 +2,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server"> 
+
+   
     <style type="text/css">
         .modalBackground {
             /*filter: alpha(opacity=90);
@@ -51,33 +53,24 @@
             max-height: 40px !important;
         }
 
-         .overlaypop {
-            position: fixed;
-            z-index: 999;
-            top: 400px;
-            left: 750px;
-            filter: alpha(opacity=60);
-            opacity: 0.6;
-            -moz-opacity: 0.8;
-        }
         .overlay {
             position: fixed;
             z-index: 999;
-            top: 300px;
-            left: 800px;
+            top: 400px;
+            left: 600px;
             filter: alpha(opacity=60);
             opacity: 0.6;
             -moz-opacity: 0.8;
-        }
+        } 
     </style>
 
     <script type="text/javascript">
 
 
-        function showProgress() {
+      <%--  function showProgress() {
             var updateProgress = $get("<%= UpdateProgress.ClientID %>");
             updateProgress.style.display = "block";
-        }
+        }--%>
 
 
         $(document).ready(function () {
@@ -89,6 +82,9 @@
 
         });
 
+
+
+
         function DatePickerSet() {
             $('#ContentPlaceHolder1_txtInvDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtInvDate").datepicker({
@@ -98,13 +94,15 @@
                 autoclose: true
             }).attr('readonly', 'false');;
             //  $('#ContentPlaceHolder1_txtAirTravelDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
-            $("#ContentPlaceHolder1_txtAirTravelDate").datepicker({
+        <%--    $("#ContentPlaceHolder1_txtAirTravelDate").datepicker({
 
                 format: 'yyyy-mm-dd',
 
                 autoclose: true
 
             }).attr('readonly', 'false');;
+
+
             //  $('#ContentPlaceHolder1_txtAirReturnDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtAirReturnDate").datepicker({
 
@@ -112,7 +110,35 @@
 
                 autoclose: true
 
-            }).attr('readonly', 'true');;
+            }).attr('readonly', 'true');;--%>
+
+
+
+            var daysToAdd = 1;
+            $("#ContentPlaceHolder1_txtAirTravelDate").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate() + daysToAdd);
+                    var dd = dtMax.getDate();
+                    var mm = dtMax.getMonth() + 1;
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtAirReturnDate").datepicker("option", "minDate", dtFormatted);
+                }
+            });
+
+            $("#ContentPlaceHolder1_txtAirReturnDate").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate() - daysToAdd);
+                    var dd = dtMax.getDate();
+                    var mm = dtMax.getMonth() + 1;
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtAirTravelDate").datepicker("option", "maxDate", dtFormatted)
+                }
+            });
+
             // $('#ContentPlaceHolder1_txtDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtDate4").datepicker({
 
@@ -334,13 +360,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-5">
 
-                                        <button runat="server" id="btnOpenFP" class="btn btn-mini" title="AirTicket">
+                                        <button runat="server" id="btnOpenFP" class="btn btn-mini">
                                             <i class="fa fa-plane"></i>
                                         </button>
                                         <asp:Button ID="bntCancelFP" runat="server" Text="Cancel" Style="display: none;" />
                                         <%--<asp:Button ID="btnOpenFP" runat="server" Text="Open"  />--%>
                         &nbsp;&nbsp;&nbsp;
-                         <button runat="server" id="btnLand" class="btn btn-mini" title="Land Arrangement">
+                         <button runat="server" id="btnLand" class="btn btn-mini">
                              <i class="fa  fa-university"></i>
                          </button>
                                         &nbsp;&nbsp;
@@ -369,7 +395,7 @@
                             </div>--%>
                                 </div>
 
-                                <div id="popupdiv" class="modalBackground" title="AirTicket">
+                                <div id="popupdiv" class="modalBackground">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -609,7 +635,7 @@
                                                     ValidationGroup="airticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
 
                                             </div>
-                                            <asp:CompareValidator ID="cmvDate2" runat="server" ControlToValidate="txtDate2" ControlToCompare="txtDate1" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
 
                                         <div class="col-sm-12" id="div2" runat="server">
@@ -643,7 +669,6 @@
 
 
                                             </div>
-                                             <asp:CompareValidator ID="CmvDate3" runat="server" ControlToValidate="txtDate3" ControlToCompare="txtDate2" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
                                         </div>
 
                                         <div class="col-sm-12" id="div5" runat="server">
@@ -675,7 +700,7 @@
                                                     ValidationGroup="airticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
 
                                             </div>
-                                             <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="txtDate4" ControlToCompare="txtDate3" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
 
                                     </div>
@@ -701,7 +726,7 @@
                                             <div class="col-sm-2">
                                                 <asp:TextBox ID="txtAirReturnDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
                                             </div>
-                                             <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="txtAirReturnDate" ControlToCompare="txtDate4" ErrorMessage="must be greater than previous travel date"  Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -862,7 +887,7 @@
                                         <div class="col-sm-5">
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:Button runat="server" ID="btnAirSubmit" OnClientClick="showProgress()" OnClick="btnAirSubmit_Click1" class="btn btn-primary" ValidationGroup="airticket"
+                                            <asp:Button runat="server" ID="btnAirSubmit"  OnClick="btnAirSubmit_Click1" class="btn btn-primary" ValidationGroup="airticket"
                                                 Text="Submit" />&nbsp;
                     <asp:Button runat="server" ID="btnCancel"
                         class="btn btn-danger" ValidationGroup="" OnClick="btnCancel_Click" Text="Cancel" />
@@ -870,7 +895,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -899,8 +924,8 @@
                             </div>--%>
                                 </div>
 
-                                <div class="form-group" title="Land Arrangement" >
-                                    <header class="panel-heading" >
+                                <div class="form-group">
+                                    <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                             <h4 class="panel-title">Land Arrangements</h4>
@@ -1305,7 +1330,7 @@
                                         <div class="col-sm-5">
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:Button ID="LandArrSubmit" runat="server" class="btn btn-primary" OnClick="LandArrSubmit_Click" OnClientClick="showProgress()" Text="Submit" ValidationGroup="landsupplier" />&nbsp;&nbsp;
+                                            <asp:Button ID="LandArrSubmit" runat="server" class="btn btn-primary" OnClick="LandArrSubmit_Click"  Text="Submit" ValidationGroup="landsupplier" />&nbsp;&nbsp;
                                     <asp:Button ID="Cancle" runat="server" class="btn btn-danger" OnClick="Cancel_Click" Text="Cancel" />
                                         </div>
                                         <%--<div class="col-sm-4">
@@ -1315,7 +1340,7 @@
                                     </div>
                                 </div>
 
-                                <div class="overlaypop">
+                                <div class="overlay">
                                     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                         <ProgressTemplate>
                                             <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1335,13 +1360,13 @@
                                 PopupControlID="pnlServiceFee">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="pnlServiceFee" runat="server"  CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlServiceFee" runat="server" CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
                                 </div>
-                                <div id="Serpopupdiv" class="modalBackground" title="Service Fee">
+                                <div id="Serpopupdiv" class="modalBackground">
 
                                     <div class="form-group">
                                         <header class="panel-heading">
@@ -1566,7 +1591,7 @@
                                         <div class="col-sm-5">
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:Button runat="server" ID="SerSubmit" class="btn btn-primary" OnClientClick="showProgress()" ValidationGroup="servicefee"
+                                            <asp:Button runat="server" ID="SerSubmit" class="btn btn-primary"  ValidationGroup="servicefee"
                                                 Text="Submit" OnClick="ServFee_click" />&nbsp;
                     <asp:Button runat="server" ID="SerCancel"
                         class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnSerCancel_Click" />
@@ -1576,7 +1601,7 @@
                                     </div>
 
 
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1601,7 +1626,7 @@
                                 <asp:ImageButton ID="ImageButton1" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
                                 </div>
-                                <div id="popupServfeediv" class="modalBackground" title="General Charge">
+                                <div id="popupServfeediv" class="modalBackground">
 
                                     <div class="form-group">
                                         <header class="panel-heading">
@@ -1767,7 +1792,7 @@
                                         </div>
                                         <div class="col-sm-3">
 
-                                            <asp:Button runat="server" ID="GenSubmit" class="btn btn-primary" OnClientClick="showProgress()" ValidationGroup="generalcharge"
+                                            <asp:Button runat="server" ID="GenSubmit" class="btn btn-primary"  ValidationGroup="generalcharge"
                                                 Text="Submit" OnClick="btnGencharge_click" />&nbsp;
                     <asp:Button runat="server" ID="GenCancel"
                         class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="GenCancel_Click" />
@@ -1776,7 +1801,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress3" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -2140,7 +2165,7 @@
                                 <div class="col-sm-5">
                                 </div>
                                 <div class="col-sm-5">
-                                    <asp:Button runat="server" ID="btnInvSave" class="btn btn-primary green" ValidationGroup="invoice" OnClientClick="showProgress()"
+                                    <asp:Button runat="server" ID="btnInvSave" class="btn btn-primary green" ValidationGroup="invoice"
                                         Text="Submit" OnClick="btnInvSave_Click" />&nbsp;
                               <%--<asp:Button ID="btnACAnalysis" runat="server" CssClass=" btn btn-info" ValidationGroup="analysis" Text="A/C Analysis" />--%>
                                     <asp:Button runat="server" ID="btnInvCancel"

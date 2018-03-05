@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master"   AutoEventWireup="true" CodeFile="ProformaInvoice.aspx.cs" Inherits="Admin_ProformaInvoice" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="ProformaInvoice.aspx.cs" Inherits="Admin_ProformaInvoice" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -37,20 +37,11 @@
             max-height: 40px !important;
         }
 
-        .overlaypop {
-            position: fixed;
-            z-index: 999;
-            top: 400px;
-            left: 750px;
-            filter: alpha(opacity=60);
-            opacity: 0.6;
-            -moz-opacity: 0.8;
-        }
         .overlay {
             position: fixed;
             z-index: 999;
-            top: 300px;
-            left: 800px;
+            top: 400px;
+            left: 600px;
             filter: alpha(opacity=60);
             opacity: 0.6;
             -moz-opacity: 0.8;
@@ -319,13 +310,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-5">
 
-                                        <button runat="server" id="btnPFOpenFP" class="btn btn-mini" title="AirTicket">
+                                        <button runat="server" id="btnPFOpenFP" class="btn btn-mini">
                                             <i class="fa fa-plane"></i>
                                         </button>
                                         <asp:Button ID="bntCancelFP" runat="server" Text="Cancel" Style="display: none;" />
                                         <%--<asp:Button ID="btnOpenFP" runat="server" Text="Open"  />--%>
                         &nbsp;&nbsp;&nbsp;
-                         <button runat="server" id="btnPFLand" class="btn btn-mini" title="Land Arrangement">
+                         <button runat="server" id="btnPFLand" class="btn btn-mini">
                              <i class="fa  fa-university"></i>
                          </button>
                                         &nbsp;&nbsp;
@@ -347,14 +338,14 @@
                                 BackgroundCssClass="popupextndrBg" BehaviorID="btnPFOpenFP" CancelControlID="bntCancelFP"
                                 PopupControlID="pnlPFFlight">
                             </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlPFFlight" runat="server" CssClass="panelpopup" Width="1000px" Height="500px" Style="display: none;"  BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlPFFlight" runat="server" CssClass="panelpopup" Width="1000px" Height="500px" Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="cmdClose" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
                                 </div>
 
-                                <div id="popupdiv" title="AirTicket" class="modalBackground">
+                                <div id="popupdiv" title="Basic modal dialog" class="modalBackground">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -480,12 +471,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <asp:HiddenField ID="hf_PF_Rout_Id1" runat="server" Value="0" />
+                                     <asp:HiddenField ID="hf_PF_Rout_Id1" runat="server" Value="0" />
                                     <asp:HiddenField ID="hf_PF_Rout_Id2" runat="server" Value="0" />
                                     <asp:HiddenField ID="hf_PF_Rout_Id3" runat="server" Value="0" />
                                     <asp:HiddenField ID="hf_PF_Rout_Id4" runat="server" Value="0" />
 
-                                    <div class="form-group" id="PFdivRouteHead" runat="server">
+                                    <div class="form-group"   id="PFdivRouteHead" runat="server">
                                         <div class="col-sm-12">
                                             <div class="col-sm-2">
                                                 <label class="control-label">
@@ -577,7 +568,7 @@
                                                     ValidationGroup="PFairticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
 
                                             </div>
-                                            <asp:CompareValidator ID="cmvDate2" runat="server" ControlToValidate="txtPFDate2" ControlToCompare="txtPFDate1" ErrorMessage="must be greater than previous travel date" Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
 
                                         <div class="col-sm-12" id="div2" runat="server">
@@ -611,7 +602,6 @@
 
 
                                             </div>
-                                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="txtPFDate3" ControlToCompare="txtPFDate2" ErrorMessage="must be greater than previous travel date" Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
                                         </div>
 
                                         <div class="col-sm-12" id="div5" runat="server">
@@ -643,7 +633,7 @@
                                                     ValidationGroup="PFairticket" ErrorMessage="Select Date" Text="Select Date" ForeColor="red" Display="Dynamic" />
 
                                             </div>
-                                            <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="txtPFDate4" ControlToCompare="txtPFDate3" ErrorMessage="must be greater than previous travel date" Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
 
                                     </div>
@@ -651,7 +641,7 @@
 
 
 
-
+                                    
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
@@ -674,7 +664,7 @@
                                             <div class="col-sm-2">
                                                 <asp:TextBox ID="txtPFAirReturnDate" runat="server" CssClass="form-control" placeholder="YYYY/MM/DD" />
                                             </div>
-                                            <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="txtPFAirReturnDate" ControlToCompare="txtPFDate4" ErrorMessage="must be greater than previous travel date" Operator="GreaterThanEqual" ForeColor="Red"></asp:CompareValidator>
+
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -829,7 +819,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -859,7 +849,7 @@
                                 <div class="form-group">
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
-                                            <asp:ImageButton ID="LandClose" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="LandClose_Click" />
+                                            <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                             <h4 class="panel-title">Land Arrangemnts</h4>
                                         </div>
                                     </header>
@@ -893,7 +883,7 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:DropDownList ID="DDPFlandService" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="DDPFlandService_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:DropDownList ID="DDPFlandService" runat="server" CssClass="form-control" AppendDataBoundItems="true"  OnSelectedIndexChanged="DDPFlandService_SelectedIndexChanged" AutoPostBack="true">
                                                 <%--<asp:ListItem Text="--Select--" Value="-1" Selected="True"></asp:ListItem>--%>
                                             </asp:DropDownList>
                                             <asp:RequiredFieldValidator ControlToValidate="DDPFlandService" runat="server" ID="rfvDDPFlandService" ValidationGroup="PFlandsupplier"
@@ -1251,7 +1241,7 @@
                                             <asp:Button ID="Reset" runat="server" class="btn btn-info" OnClick="Reset_Click" Text="Reset" />
                                         </div>--%>
                                     </div>
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1314,8 +1304,8 @@
                                                     <%--<asp:ListItem Text="--Select TicketNo--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>
                                             </div>
-                                            <asp:RequiredFieldValidator ControlToValidate="ddlPFSoureceref" runat="server" ID="rfvddlPFSoureceref" ValidationGroup="PFservicefee"
-                                                ErrorMessage="Select Service Ref" Text="Select Service Ref" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                           <asp:RequiredFieldValidator ControlToValidate="ddlPFSoureceref" runat="server" ID="rfvddlPFSoureceref" ValidationGroup="PFservicefee"
+                                                    ErrorMessage="Select Service Ref" Text="Select Service Ref" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                                             <div class="col-sm-1">
                                                 <label class="control-label">
@@ -1370,7 +1360,7 @@
                                                     Exclusive Amount<span class="style1">*</span></label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtPFExclusAmount" runat="server" class="form-control" ReadOnly="true" placeholder="0.00" Style="text-align: right;" />
+                                                <asp:TextBox ID="txtPFExclusAmount" runat="server" class="form-control" ReadOnly="true" placeholder="0.00" Style="text-align: right;"    />
 
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPFExclusAmount" runat="server" ID="rfvtxtPFExclusAmount" ValidationGroup="PFservicefee"
@@ -1510,7 +1500,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1540,7 +1530,7 @@
                                     <div class="form-group">
                                         <header class="panel-heading">
                                             <div style="padding-top: 3px; padding-right: 3px;">
-                                                <asp:ImageButton ID="GCClose" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="GCClose_Click" />
+                                                <asp:ImageButton ID="ImageButton1" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                                 <h4 class="panel-title">General Charge</h4>
                                             </div>
                                         </header>
@@ -1698,12 +1688,12 @@
                                             <asp:Button runat="server" ID="PFGenSubmit" class="btn btn-primary" ValidationGroup="PFgeneralcharge"
                                                 Text="Submit" OnClick="btnPFGencharge_click" />&nbsp;
                     <asp:Button runat="server" ID="GenCancel"
-                        class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="GenCancel_Click" />
+                        class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnCancel_Click" />
 
 
                                         </div>
                                     </div>
-                                    <div class="overlaypop">
+                                    <div class="overlay">
                                         <asp:UpdateProgress ID="UpdateProgress3" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -2038,15 +2028,13 @@
                                 </div>
                                 <div class="col-sm-3">
                                 </div>
-                                <div class="overlay">
-                                    <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="updatepanel1">
-                                        <ProgressTemplate>
-                                            <img src="../images/loading.gif" alt="" height="40" width="40" />
-                                            <br />
-                                            <h4>Please wait....</h4>
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
-                                </div>
+                                <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="updatepanel1">
+                                    <ProgressTemplate>
+                                        <img src="../images/loading.gif" alt="" height="40" width="40" />
+                                        <br />
+                                        <h4>Please wait....</h4>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
 
 

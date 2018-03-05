@@ -239,6 +239,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             string Type = "Air";
             DataSet ds = new DataSet();
             ds = _doUtilities.GetServiceTypeByType(Type);
+            ViewState["ddlPFAirService"] = ds.Tables[0];
 
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -271,6 +272,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             BAAirSuppliers _boAirSupplier = new BAAirSuppliers();
             DataSet ds = new DataSet();
             ds = _boAirSupplier.GetAirSuppliers(supplierid);
+            ViewState["PFCommissionBasedonAirline"] = ds.Tables[2];
 
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -286,6 +288,13 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             {
                 ddlPFAirLine.DataSource = null;
                 ddlPFAirLine.DataBind();
+            }
+
+            DataSet dsvat = _doUtilities.getVatByType();
+
+            if (dsvat.Tables[0].Rows.Count > 0)
+            {
+                ViewState["PFget_VatRateByType"] = dsvat.Tables[0];
             }
         }
         catch (Exception ex)
@@ -374,10 +383,19 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         try
         {
-            DataSet ds = new DataSet();
-            string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlPFType.SelectedValue)));
-            txtPFAirCommVat.Text = vatRate;
-            txtPFVatPer.Text = vatRate;
+            if (ViewState["PFget_VatRateByType"].ToString() != null)
+            {
+                DataTable dt = (DataTable)ViewState["PFget_VatRateByType"];
+                //string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlType.SelectedValue)));
+                string vatRate = (dt.AsEnumerable()
+                    .Where(p => p["TypeId"].ToString() == Convert.ToInt32(ddlPFType.SelectedValue).ToString())
+                    .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+
+                txtPFAirCommVat.Text = vatRate;
+                txtPFVatPer.Text = vatRate;
+            }
+
+           
 
         }
         catch (Exception ex)
@@ -453,7 +471,6 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             _objEMPFInvoice.Message = txtPFInvClntMesg.Text;
             _objEMPFInvoice.MessageType = (string.IsNullOrEmpty(ddlPFInvMesg.SelectedValue.ToString())) ? 0 : Convert.ToInt32(ddlPFInvMesg.SelectedValue.ToString());
 
-            //string.IsNullOrEmpty(ddlPFInvMesg.SelectedValue.ToString())) ? 0 : Convert.ToInt32(ddlPFInvMesg.SelectedValue.ToString()
             _objEMPFInvoice.TempUniqCode = Session["TempUniqCode"].ToString();
             //_objEmInvoice.Message = string.IsNullOrEmpty(txtAirRouting.Text) ? "" : txtAirRouting.Text;
             //_objEmInvoice.AirMiles = string.IsNullOrEmpty(txtAirMiles.Text) ? "" : txtAirMiles.Text;
@@ -808,7 +825,6 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (routing.Contains("/"))
             {
 
-                txtPFAirTravelDate.Enabled = false;
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {
@@ -1110,7 +1126,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             string ddlText = ddlPFGenchrgType.SelectedItem.Text;
             int ddlValue = Convert.ToInt32(ddlPFGenchrgType.SelectedItem.Value);
             txtPFDetails.Text = ddlText;
-            var VatPer = _objDalService.getVatPercentage(ddlValue, ddlText);
+            var VatPer = _objDalService.getVatPercentage();
             if (VatPer != "" && VatPer != null)
             {
                 txtPFgenvat.Text = VatPer.ToString();
@@ -1213,8 +1229,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
     protected void btnSerCancel_Click(object sender, EventArgs e)
     {
-        PFServiceFeeClear();
-        PFSerPopupExtender.Hide();
+
     }
     private void InsertUpdatePFServiceFee()
     {
@@ -1302,6 +1317,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             string Type = "SF";
             DataSet ds = new DataSet();
             ds = _doUtilities.GetServiceTypeByType(Type);
+            ViewState["PFServiceType_GetDataByTYpe"] = ds.Tables[1];
 
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -1412,6 +1428,8 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (ds.Tables[0].Rows.Count > 0)
             {
                 ddlPFSoureceref.DataSource = ds.Tables[0];
+                ViewState["ddlPFSoureceref"] = ds.Tables[0];
+
                 ddlPFSoureceref.DataTextField = "AirTicketNo";
                 ddlPFSoureceref.DataValueField = "TicketId";
                 ddlPFSoureceref.DataBind();
@@ -1434,19 +1452,40 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         try
         {
-            DataSet ds = new DataSet();
+           
             int airtickno = Convert.ToInt32(ddlPFSoureceref.SelectedItem.Value.ToString());
-            string tempuniqcode = " ";
-            ds = _objBalservice.BindPassengerNames(tempuniqcode, airtickno);
-
-            if (ds.Tables[1].Rows.Count > 0)
+           
+            if (ViewState["ddlPFSoureceref"].ToString() != null)
             {
-                ddlPFPassengerName.DataSource = ds.Tables[1];
-                ddlPFPassengerName.DataTextField = "AirPassenger";
-                ddlPFPassengerName.DataValueField = "TicketId";
-                ddlPFPassengerName.DataBind();
+                DataTable dt = (DataTable)ViewState["ddlPFSoureceref"];
+
+                var PassengerList = from list in dt.AsEnumerable()
+                                    where Convert.ToInt32(list["TicketId"]) == Convert.ToInt32(ddlPFSoureceref.SelectedValue)
+                                    select new
+                                    {
+                                        PaxName = list["AirPassenger"].ToString(),
+                                        TicketId = list["TicketId"].ToString(),
+                                        // type = list["Type"].ToString()
+                                    };
+
+
+                string type = (dt.AsEnumerable()
+                    .Where(p => p["TicketId"].ToString() == Convert.ToInt32(ddlPFSoureceref.SelectedValue).ToString())
+                    .Select(p => p["type"].ToString())).FirstOrDefault();
+
+
+                if (PassengerList.ToString() != null)
+                {
+                    //BindVatBasedOnTicket(Convert.ToInt32(type));
+                    ddlPFPassengerName.DataSource = PassengerList;
+                    ddlPFPassengerName.DataTextField = "PaxName";
+                    ddlPFPassengerName.DataValueField = "TicketId";
+
+                    ddlPFPassengerName.DataBind();
+                }
 
             }
+
             else
             {
                 ddlPFPassengerName.DataSource = null;
@@ -1557,7 +1596,13 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         try
         {
             txtPFserDetails.Text = ddlPFServiceType.SelectedItem.Text;
-            var VatPer = _objDalService.getVatPercentage(Convert.ToInt32(ddlPFServiceType.SelectedItem.Value), txtPFserDetails.Text);
+          //  var VatPer = _objDalService.getVatPercentage();
+
+            DataTable dt = (DataTable)ViewState["PFServiceType_GetDataByTYpe"];
+            string VatPer = (dt.AsEnumerable()
+                .Where(p => p["ComId"].ToString() == Convert.ToInt32(ddlPFServiceType.SelectedItem.Value).ToString())
+                .Where(p => p["ComDesc"].ToString() == txtPFserDetails.Text.ToString())
+                .Select(p => p["VatRate"].ToString())).FirstOrDefault();
 
 
             if (VatPer != null)
@@ -1639,10 +1684,20 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         try
         {
-            txtPFLandExlVatPer.Text = _doUtilities.getVatByType(DDPFlandType.SelectedIndex).ToString();
 
+            if (ViewState["PFget_VatRateByType"] != null)
+            {
+                DataTable dt = (DataTable)ViewState["PFget_VatRateByType"];
 
-            txtPFLandVatPer.Text = _doUtilities.getVatByType(DDPFlandType.SelectedIndex).ToString();
+                string vatRate = (dt.AsEnumerable()
+                    .Where(p => p["TypeId"].ToString() == DDPFlandType.SelectedItem.Value.ToString())
+                    .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+                vatRate = _objBOUtiltiy.FormatTwoDecimal(vatRate.ToString());
+
+                txtPFLandExlVatPer.Text = vatRate;
+                txtPFLandVatPer.Text = vatRate;
+            }
+
             if (txtPFLandVatPer.Text != "0.00")
             {
                 txtPFlandExclVatAmount.Text = ((Convert.ToDecimal(txtPFlandTotalExcl.Text) * Convert.ToDecimal(txtPFLandVatPer.Text)) / 100).ToString();
@@ -1661,6 +1716,9 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 txtPFlandTotalIncl.Text = txtPFlandTotalExcl.Text;
 
             }
+
+           
+          
             txtPFlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal(txtPFlandTotalIncl.Text);
             txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
         }
@@ -1806,8 +1864,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
     protected void Cancel_Click(object sender, EventArgs e)
     {
-        LandArrangemntsClear();
-        landPFPopExtender.Hide();
+
     }
     protected void Reset_Click(object sender, EventArgs e)
     {
@@ -1826,6 +1883,9 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             int landSupId = 0;
             DataSet datasetland = new DataSet();
             datasetland = objBalandSuppliers.GetLandSupplier(landSupId);
+
+            ViewState["PFAllCommissionTypes_Land"] = datasetland.Tables[1];
+
             if (datasetland.Tables[0].Rows.Count > 0)
             {
                 DDPFlandSupplier.DataSource = datasetland.Tables[0];
@@ -1953,15 +2013,14 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 txtPFlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal((Convert.ToDecimal(txtPFlandTotalExcl.Text) + Convert.ToDecimal(txtPFlandExclVatAmount.Text)).ToString());
 
             }
-            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
-
             if (txtPFlandCommPer.Text != "")
             {
                 txtPFlandCommPer_TextChanged(null, null);
             }
             landPFPopExtender.Show();
 
-          
+            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
+
         }
         catch (Exception ex)
         {
@@ -2212,6 +2271,8 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 drpPFInvBookDest.DataBind();
                 drpPFInvBookDest.Items.Insert(0, new ListItem("--Select Booking Destination--", "0"));
 
+                ViewState["drpPFInvClientName"] = ds.Tables[5];
+                ViewState["PFCommissionType"] = ds.Tables[6];
             }
             else
             {
@@ -2244,24 +2305,61 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         {
             int clientTypeId = Convert.ToInt32(drpPFInvClientType.SelectedItem.Value.ToString());
 
-            DataSet ds = new DataSet();
-            ds = _objBOUtiltiy.InvoiceDdlBinding(clientTypeId);
-
-            if (ds.Tables[0].Rows.Count > 0)
+            if (clientTypeId > 0)
             {
+                //DataSet ds = new DataSet();
+                //ds = _objBOUtiltiy.InvoiceDdlBinding(clientTypeId);
 
-                drpPFInvClientName.DataSource = ds.Tables[0];
-                drpPFInvClientName.DataTextField = "ClientName";
-                drpPFInvClientName.DataValueField = "ClientId";
-                drpPFInvClientName.DataBind();
-                drpPFInvClientName.Items.Insert(0, new ListItem("--Select Client Name--", "0"));
+                DataTable dt = (DataTable)ViewState["drpPFInvClientName"];
+
+                var clientNameList = from list in dt.AsEnumerable()
+                                     where Convert.ToInt32(list["ClientType"]) == clientTypeId
+                                     select new
+                                     {
+                                         ClientName = list["ClientNameAccount"].ToString(),
+                                         ClientId = list["ClientId"].ToString()
+                                     };
+
+                if (clientNameList.ToString() != null)
+                {
+
+                    drpPFInvClientName.DataSource = clientNameList;
+                    drpPFInvClientName.DataTextField = "ClientName";
+                    drpPFInvClientName.DataValueField = "ClientId";
+                    drpPFInvClientName.DataBind();
+                    drpPFInvClientName.Items.Insert(0, new ListItem("--Select Client--", "0"));
+                }
+                else
+                {
+                    drpPFInvClientName.Items.Insert(0, new ListItem("--Select Client Name--", "0"));
+                    drpPFInvClientName.DataSource = null;
+                    drpPFInvClientName.DataBind();
+                }
             }
             else
             {
-
-                drpPFInvClientName.DataSource = null;
-                drpPFInvClientName.DataBind();
+                drpPFInvClientName.Items.Insert(0, new ListItem("--Select Client Name--", "0"));
             }
+
+
+            //DataSet ds = new DataSet();
+            //ds = _objBOUtiltiy.InvoiceDdlBinding(clientTypeId);
+
+            //if (ds.Tables[0].Rows.Count > 0)
+            //{
+
+            //    drpPFInvClientName.DataSource = ds.Tables[0];
+            //    drpPFInvClientName.DataTextField = "ClientName";
+            //    drpPFInvClientName.DataValueField = "ClientId";
+            //    drpPFInvClientName.DataBind();
+            //    drpPFInvClientName.Items.Insert(0, new ListItem("--Select Client Name--", "0"));
+            //}
+            //else
+            //{
+
+            //    drpPFInvClientName.DataSource = null;
+            //    drpPFInvClientName.DataBind();
+            //}
         }
         catch (Exception ex)
         {
@@ -2414,7 +2512,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFAirCommVat.Text = "";
             txtPFAirVatinclTax.Text = "";
             txtPFAirAgentVat.Text = "";
-            txtPFAirClientTot.Text = "";
+            // txtAirClientTot.Text = "";
             txtPFAirCommInclu.Text = "";
             ddlPFAirPayment.SelectedIndex = -1;
             txtPFAirDueToBsp.Text = "";
@@ -2492,7 +2590,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             DDPFlandCreditCard.SelectedIndex = -1;
             txtPFlandNoncmbl.Text = "";
             txtPFlandCommIncl.Text = "";
-            txtPFlandDuefromclient.Text = "";
+            //txtlandDuefromclient.Text = "";
             txtPFlandLessComm.Text = "";
             txtPFlandDuetoSupplier.Text = "";
             txtPFlandCO2.Text = "";
@@ -2517,7 +2615,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFSerVatAmount.Text = "";
             ddlPFPaymentMethod.SelectedIndex = -1;
             chkPFMerge.Checked = false;
-            txtPFSerClientTotal.Text = "";
+            // txtSerClientTotal.Text = "";
             ddlPFCreditCardType.SelectedIndex = -1;
             ddlPFCollectVia.SelectedIndex = -1;
             txtPFTASFMPD.Text = "";
@@ -2542,7 +2640,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             txtPFgenvat.Text = "";
             txtPFVatAmount.Text = "";
             txtPFExcluAmount.Text = "";
-             txtPFClientTotal.Text = "";
+            // txtClientTotal.Text = "";
 
         }
         catch (Exception ex)
@@ -2639,36 +2737,55 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             //ddlAirService.Items.Clear();
 
             int supplierid = Convert.ToInt32(ddlPFAirLine.SelectedValue.ToString());
-            BAAirSuppliers _boAirSupplier = new BAAirSuppliers();
-            DataSet ds = new DataSet();
-            ds = _boAirSupplier.GetAirSuppliers(supplierid);
 
-            if (ds.Tables[1].Rows.Count > 0)
+            if (ViewState["PFCommissionBasedonAirline"].ToString() != null)
             {
-                if (Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString()) != 0)
-                {
-                    // ddlAirService.DataSource = ds.Tables[1];
-                    int ComId = Convert.ToInt32(ds.Tables[1].Rows[0]["ComId"].ToString());
+                DataTable dt = (DataTable)ViewState["PFCommissionBasedonAirline"];
+            
+              string ComId = (dt.AsEnumerable()
+                    .Where(p => p["SupplierId"].ToString() == supplierid.ToString())
+                    .Select(p => p["ComId"].ToString())).FirstOrDefault();
 
-                    ddlPFAirService.SelectedValue = ComId.ToString();
-                    //  ddlAirService.DataBind();
-                    // ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
-                }
-                AirPFPopupExtender.Show();
+              if (ComId.ToString() != "0")
+              {
+
+                  ddlPFAirService.SelectedValue = ComId.ToString();
+              }
+              else
+              {
+                  if (ViewState["ddlPFAirService"].ToString() != null)
+                  {
+                      //DataTable dtair = (DataTable)ViewState["ddlPFAirService"];
+
+                      //ddlPFAirService.DataSource = dtair;
+                      //ddlPFAirService.DataTextField = "ComDesc";
+                      //ddlPFAirService.DataValueField = "ComId";
+                      //ddlPFAirService.DataBind();
+                      //ddlPFAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
+
+                      AirPFPopupExtender.Show();
+                      BindPFAirServiceTypes();
+                      ddlPFAirService.SelectedValue = "0";
+
+                  }
+
+                  ddlPFAirService.SelectedValue = "0";
+                  //  VASPopupExtender.Show();
+              }
+
+              AirPFPopupExtender.Show();
             }
-            else
-            {
-                AirPFPopupExtender.Show();
-                BindPFAirServiceTypes();
-                ddlPFAirService.SelectedValue = "0";
-                //      ddlAirService.DataSource = null;
-                //     ddlAirService.DataBind();
-            }
 
-            int commId = Convert.ToInt32(ddlPFAirService.SelectedItem.Value);
-            DataSet comds = _objBOUtiltiy.GetCommissionPerc(commId);
+            decimal commperc = 0;
+            int commId = Convert.ToInt32(ddlPFAirService.SelectedValue);
 
-            decimal commperc = string.IsNullOrEmpty(comds.Tables[0].Rows[0]["ComDComm"].ToString()) ? 0 : Convert.ToDecimal(comds.Tables[0].Rows[0]["ComDComm"].ToString());
+
+            DataTable commdt = (DataTable)ViewState["PFCommissionType"];
+            commperc = Convert.ToDecimal((commdt.AsEnumerable()
+                .Where(p => p["ComId"].ToString() == commId.ToString())
+                .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+
+            commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
 
             txtPFAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
             txtPFAirCommisionper_TextChanged(null, null);
@@ -2686,39 +2803,39 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         try
         {
             //  DDlandService.Items.Clear();
-            DataSet ds = new DataSet();
-
             int supplierid = Convert.ToInt32(DDPFlandSupplier.SelectedValue.ToString());
-            BALandSuppliers objBalandSuppliers = new BALandSuppliers();
-            ds = objBalandSuppliers.GetLandSupplier(supplierid);
+          
+            DataTable dt = (DataTable)ViewState["PFAllCommissionTypes_Land"];
+            string comId = (dt.AsEnumerable()
+                .Where(p => p["LSupplierId"].ToString() == supplierid.ToString())
+                .Select(p => p["ComId"].ToString())).FirstOrDefault();
 
-
-
-            if (ds.Tables[2].Rows.Count > 0)
+            if (comId.ToString() != "0")
             {
-
-                //    DDlandService.DataSource = ds.Tables[2];
-                int ComId = Convert.ToInt32(ds.Tables[2].Rows[0]["ComId"].ToString());
-
-                DDPFlandService.SelectedValue = ComId.ToString();
-                //   DDlandService.DataBind();
+                DDPFlandService.SelectedValue = comId;
                 landPFPopExtender.Show();
             }
+
             else
             {
                 landPFPopExtender.Show();
                 BindPFAirServiceTypes();
                 DDPFlandService.SelectedValue = "0";
-                //  DDlandService.DataSource = null;
-                //   DDlandService.DataBind();
             }
 
-            int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
-            DataSet commds = _objBOUtiltiy.GetCommissionPerc(commId);
+            decimal commperc = 0;
 
-            decimal commperc = string.IsNullOrEmpty(commds.Tables[0].Rows[0]["ComDComm"].ToString()) ? 0 : Convert.ToDecimal(commds.Tables[0].Rows[0]["ComDComm"].ToString());
+            int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
+            DataTable commdt = (DataTable)ViewState["PFCommissionType"];
+            commperc = Convert.ToDecimal((commdt.AsEnumerable()
+                .Where(p => p["ComId"].ToString() == commId.ToString())
+                .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+
+            commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
 
             txtPFlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
+
+
         }
 
 
@@ -2730,37 +2847,19 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     }
     protected void DDPFlandService_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
-        DataSet ds = _objBOUtiltiy.GetCommissionPerc(commId);
+      
+        decimal commperc = 0;
 
-        decimal commperc = string.IsNullOrEmpty(ds.Tables[0].Rows[0]["ComDComm"].ToString()) ? 0 : Convert.ToDecimal(ds.Tables[0].Rows[0]["ComDComm"].ToString());
+        int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
+        DataTable commdt = (DataTable)ViewState["PFCommissionType"];
+        commperc = Convert.ToDecimal((commdt.AsEnumerable()
+            .Where(p => p["ComId"].ToString() == commId.ToString())
+            .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+
+        commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
 
         txtPFlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
         landPFPopExtender.Show();
-    }
-    protected void LandClose_Click(object sender, ImageClickEventArgs e)
-    {
-        try
-        {
-            LandArrangemntsClear();
-            AirPFPopupExtender.Hide();
-
-        }
-        catch (Exception ex)
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
-    }
-    protected void GCClose_Click(object sender, ImageClickEventArgs e)
-    {
-        PFGeneralChargeClear();
-        GenPFPopupExtender.Hide();
-    }
-    protected void GenCancel_Click(object sender, EventArgs e)
-    {
-        PFGeneralChargeClear();
-        GenPFPopupExtender.Hide();
     }
 }

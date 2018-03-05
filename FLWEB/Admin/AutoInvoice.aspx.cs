@@ -785,7 +785,14 @@ public partial class Admin_AutoInvoice : System.Web.UI.Page
             string ddlText = ddlGenchrgType.SelectedItem.Text;
             int ddlValue = Convert.ToInt32(ddlGenchrgType.SelectedItem.Value);
             txtDetails.Text = ddlText;
-            var VatPer = _objDalService.getVatPercentage(ddlValue, ddlText);
+
+            DataTable dt = (DataTable)ViewState["ServiceType_GetDataByTYpe"];
+            string VatPer = (dt.AsEnumerable()
+                .Where(p => p["ComId"].ToString() == ddlValue.ToString())
+                .Where(p => p["ComDesc"].ToString() == ddlText.ToString())
+                .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+
+
             if (VatPer != "" && VatPer != null)
             {
                 txtgenvat.Text = VatPer.ToString();
@@ -797,6 +804,7 @@ public partial class Admin_AutoInvoice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
@@ -958,7 +966,7 @@ public partial class Admin_AutoInvoice : System.Web.UI.Page
             string Type = "SF";
             DataSet ds = new DataSet();
             ds = _doUtilities.GetServiceTypeByType(Type);
-
+            ViewState["ServiceType_GetDataByTYpe"] = ds.Tables[1];
             if (ds.Tables[0].Rows.Count > 0)
             {
                 ddlServiceType.DataSource = ds.Tables[0];
@@ -1197,19 +1205,44 @@ public partial class Admin_AutoInvoice : System.Web.UI.Page
     protected void ddlServiceType_SelectedIndexChanged(object sender, EventArgs e)
     {
 
-        txtserDetails.Text = ddlServiceType.SelectedItem.Text;
-        var VatPer = _objDalService.getVatPercentage(Convert.ToInt32(ddlServiceType.SelectedItem.Value), txtserDetails.Text);
-        if (VatPer != null)
+        try
         {
-            txtSerVatPer.Text = VatPer.ToString();
-        }
+            txtserDetails.Text = ddlServiceType.SelectedItem.Text;
 
-        if (txtExclusAmount.Text != "")
-        {
-            getClientTotal();
+            DataTable dt = (DataTable)ViewState["ServiceType_GetDataByTYpe"];
+            string VatPer = (dt.AsEnumerable()
+                .Where(p => p["ComId"].ToString() == Convert.ToInt32(ddlServiceType.SelectedItem.Value).ToString())
+                .Where(p => p["ComDesc"].ToString() == txtserDetails.Text.ToString())
+                .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+
+
+            if (VatPer != null)
+            {
+                txtSerVatPer.Text = VatPer;
+            }
+            else
+            {
+                txtSerVatPer.Text = "0.00";
+                txtSerVatAmount.Text = "0.00";
+                txtDetails.Text = "";
+                txtExclusAmount.Text = txtSerClientTotal.Text;
+
+            }
+
+            if (txtSerClientTotal.Text != "")
+            {
+
+                getClientTotal();
+            }
+            SerPopupExtender.Show();
         }
-        SerPopupExtender.Show();
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
     }
+
     //protected void txtExclusAmount_TextChanged(object sender, EventArgs e)
     //{
     //    try
@@ -1256,16 +1289,28 @@ public partial class Admin_AutoInvoice : System.Web.UI.Page
         }
     }
 
+
+
     //land methods
     protected void DDType_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
         {
-            txtLandExlVatPer.Text = _doUtilities.getVatByType(DDlandType.SelectedIndex).ToString();
+            if (ViewState["get_VatRateByType"] != null)
+            {
+                DataTable dt = (DataTable)ViewState["get_VatRateByType"];
+
+                string vatRate = (dt.AsEnumerable()
+                    .Where(p => p["TypeId"].ToString() == DDlandType.SelectedItem.Value.ToString())
+                    .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+                vatRate = _objBOUtiltiy.FormatTwoDecimal(vatRate.ToString());
+
+                txtLandExlVatPer.Text = vatRate;
+                txtLandVatPer.Text = vatRate;
+            }
 
 
-            txtLandVatPer.Text = txtLandExlVatPer.Text;
-            if (txtLandVatPer.Text != "")
+            if (txtLandVatPer.Text != "0.00")
             {
                 txtlandExclVatAmount.Text = ((Convert.ToDecimal(txtlandTotalExcl.Text) * Convert.ToDecimal(txtLandVatPer.Text)) / 100).ToString();
                 txtlandTotalIncl.Text = (Convert.ToDecimal(txtlandExclVatAmount.Text) + Convert.ToDecimal(txtlandTotalExcl.Text)).ToString();
@@ -1295,6 +1340,7 @@ public partial class Admin_AutoInvoice : System.Web.UI.Page
         landPopExtender.Show();
 
     }
+
     // Payment Menthod Select Payment Bind Credit card
     protected void DDlandPayment_SelectedIndexChanged(object sender, EventArgs e)
     {
