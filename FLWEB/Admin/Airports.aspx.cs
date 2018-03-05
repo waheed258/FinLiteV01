@@ -1,39 +1,68 @@
-﻿using System;
+﻿using BusinessManager;
+using EntityManager;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Text;
-using EntityManager;
-using BusinessManager;
 
 public partial class Admin_Airports : System.Web.UI.Page
 {
     EMAirport objemAirport = new EMAirport();
     BAAirport objBAAirport = new BAAirport();
-    BALServicefee _objBalservice = new BALServicefee();
+  
     BOUtiltiy _BOUtilities = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             BindCountries();
-            if(!string.IsNullOrEmpty(Request.QueryString["AirportId"]))
+            if (!string.IsNullOrEmpty(Request.QueryString["AirportId"]))
             {
-                int airportId =Convert.ToInt32(Request.QueryString["AirportId"].ToString());
+                int airportId = Convert.ToInt32(Request.QueryString["AirportId"].ToString());
                 GetAirport(airportId);
                 cmdSubmit.Text = "Update";
             }
         }
     }
-    
+
     protected void cmdSubmit_Click(object sender, EventArgs e)
     {
         InsertUpdateAirport();
     }
 
+
+    protected void dropCountry_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        dropCountry.Focus();
+        dropState.Items.Clear();
+        dropCity.Items.Clear();
+        Get_State_Country();
+       
+    }
+    protected void dropState_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        dropState.Focus();
+        Get_City_State();
+    }
+
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AirportList.aspx");
+    }
+    protected void btnreset_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Airports.aspx");
+    }
+    
+    #endregion
+
+    #region PrivateMethods
     private void InsertUpdateAirport()
     {
         try
@@ -43,28 +72,29 @@ public partial class Admin_Airports : System.Web.UI.Page
             objemAirport.Deactivate = Convert.ToInt32(chkDeactivate.Checked);
             objemAirport.AirportName = txtAirportName.Text;
             objemAirport.AirCountry = Convert.ToInt32(dropCountry.SelectedValue);
+            objemAirport.AirState = Convert.ToInt32(dropState.SelectedValue);
             objemAirport.AirCity = Convert.ToInt32(dropCity.SelectedValue);
             objemAirport.CountryDetails = Convert.ToInt32(chkCountryDetails.Checked);
 
             int Result = objBAAirport.InsUpdtAirport(objemAirport);
-            if(Result > 0)
-            {                
+            if (Result > 0)
+            {
                 lblMsg.Text = _BOUtilities.ShowMessage("success", "Success", "Airport Details created Successfully");
                 ClearControls();
                 Response.Redirect("AirportList.aspx");
-                
+
             }
             else
             {
                 lblMsg.Text = _BOUtilities.ShowMessage("info", "Info", "Airport Details  was not created please try again");
-               
+
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _BOUtilities.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
-          
+
         }
     }
 
@@ -73,7 +103,7 @@ public partial class Admin_Airports : System.Web.UI.Page
         try
         {
             DataSet ds = objBAAirport.GetAirport(AirportId);
-            if(ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[0].Rows.Count > 0)
             {
                 hf_AirportId.Value = ds.Tables[0].Rows[0]["AirportId"].ToString();
                 txtAirKey.Text = ds.Tables[0].Rows[0]["AirKey"].ToString();
@@ -81,12 +111,15 @@ public partial class Admin_Airports : System.Web.UI.Page
                 chkDeactivate.Checked = Convert.ToBoolean(ds.Tables[0].Rows[0]["Deactivate"]);
                 txtAirportName.Text = ds.Tables[0].Rows[0]["AirportName"].ToString();
                 dropCountry.SelectedIndex = dropCountry.Items.IndexOf(dropCountry.Items.FindByValue(ds.Tables[0].Rows[0]["AirCountry"].ToString()));
-                Get_City_Country();
+                dropCountry.SelectedIndex = dropCountry.Items.IndexOf(dropCountry.Items.FindByValue(ds.Tables[0].Rows[0]["AirCountry"].ToString()));
+                Get_State_Country();
+                dropState.SelectedIndex = dropState.Items.IndexOf(dropState.Items.FindByValue(ds.Tables[0].Rows[0]["AirState"].ToString()));
+                Get_City_State();
                 dropCity.SelectedIndex = dropCity.Items.IndexOf(dropCity.Items.FindByValue(ds.Tables[0].Rows[0]["AirCity"].ToString()));
                 chkCountryDetails.Checked = Convert.ToBoolean(ds.Tables[0].Rows[0]["CountryDetails"]);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
             Label1.Text = "Some Technical Error occurred,Please visit after some time";
@@ -102,6 +135,7 @@ public partial class Admin_Airports : System.Web.UI.Page
             if (ds.Tables[0].Rows.Count > 0)
             {
                 dropCountry.DataSource = ds.Tables[0];
+                dropCountry.Items.Add(new ListItem("-Select-", "-1"));
                 dropCountry.DataTextField = "Name";
                 dropCountry.DataValueField = "Id";
                 dropCountry.DataBind();
@@ -119,14 +153,44 @@ public partial class Admin_Airports : System.Web.UI.Page
         }
     }
 
-    public void Get_City_Country()
+    private void Get_State_Country()
     {
         try
         {
-            dropCity.Items.Clear();
+
+            dropState.Items.Clear();
             DataSet ds = new DataSet();
             int country_id = Convert.ToInt32(dropCountry.SelectedValue.ToString());
-            ds = _BOUtilities.get_City_Country(country_id);
+            ds = _BOUtilities.get_State_Country(country_id);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                dropState.DataSource = ds.Tables[0];
+                dropState.Items.Clear();
+                dropState.Items.Add(new ListItem("-Select-", "-1"));
+                dropState.DataTextField = "Name";
+                dropState.DataValueField = "Id";
+                dropState.DataBind();
+            }
+            else
+            {
+                dropState.DataSource = null;
+                dropState.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void Get_City_State()
+    {
+        try
+        {
+
+           
+            DataSet ds = new DataSet();
+            int state_id = Convert.ToInt32(dropState.SelectedValue.ToString());
+            ds = _BOUtilities.get_City_State(state_id);
             if (ds.Tables[0].Rows.Count > 0)
             {
                 dropCity.DataSource = ds.Tables[0];
@@ -138,31 +202,16 @@ public partial class Admin_Airports : System.Web.UI.Page
             }
             else
             {
-                dropCity.DataSource = null;
-                dropCity.DataBind();
+                dropState.DataSource = null;
+                dropState.DataBind();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
-            Label1.Text = "Some Technical Error occurred,Please visit after some time";
         }
     }
-
-    protected void dropCountry_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        Get_City_Country();
-    }
-    protected void btnCancel_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("AirportList.aspx");
-    }
-    protected void btnreset_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Airports.aspx");
-    }
-
-    void ClearControls()
+    private void ClearControls()
     {
         hf_AirportId.Value = "0";
         txtAirKey.Text = "";
@@ -171,5 +220,8 @@ public partial class Admin_Airports : System.Web.UI.Page
         chkCountryDetails.Checked = false;
         dropCity.SelectedValue = "-1";
         dropCountry.SelectedValue = "-1";
-    }
+    } 
+
+    #endregion
+  
 }
