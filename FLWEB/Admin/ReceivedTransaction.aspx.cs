@@ -104,7 +104,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                             else
                             {
                                 objTransactionMaster.ReceiptAmountAfterPaid = Math.Abs(objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount) ;
-                                PreviousAmountAfterpaid = objTransactionMaster.PrvClientOpenAmount;
+                                PreviousAmountAfterpaid = 0.0M;
                             }
                           
                                 ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
@@ -400,10 +400,10 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
     {
         Response.Redirect("ReceiptsList.aspx");
     }
-    protected void chkSelect_CheckedChanged(object sender, EventArgs e)
-    {
-        AllocateWithGridRowCheck();
-    }
+    //protected void chkSelect_CheckedChanged(object sender, EventArgs e)
+    //{
+    //    AllocateWithGridRowCheck();
+    //}
     private void AllocateWithGridRowCheck()
     {
         try
