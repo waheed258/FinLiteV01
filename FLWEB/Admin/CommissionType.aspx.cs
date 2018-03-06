@@ -21,11 +21,13 @@ public partial class CommissionType : System.Web.UI.Page
             BindType();
             BindCategory();
             BindVAT();
+            BindLandSubCategories();
             if (!string.IsNullOrEmpty(Request.QueryString["ComId"]))
             {
                 int commId = Convert.ToInt32(Request.QueryString["ComId"]);
                 btnSubmit.Text = "Update";
                 GetCommType(commId);
+               
             }
         }
     }
@@ -71,7 +73,7 @@ public partial class CommissionType : System.Web.UI.Page
                DataSet ds = objBACommType.GetCategory();
                ddlCategory.DataSource = ds;
                ddlCategory.DataTextField = "CategoryName";
-               ddlCategory.DataValueField= "CategoryId";
+               ddlCategory.DataValueField = "CategoryId";
                ddlCategory.DataBind();
                ddlCategory.Items.Insert(0, new ListItem("--Select Category--", "0"));
            }
@@ -93,6 +95,24 @@ public partial class CommissionType : System.Web.UI.Page
                ddlDefaultVAT.DataBind();
            }
            catch(Exception ex)
+           {
+               ExceptionLogging.SendExcepToDB(ex);
+           }
+       }
+       public void BindLandSubCategories()
+       {
+           ddlLandSubCategory.Items.Clear();
+           try
+           {
+
+               DataSet ds = objBACommType.GetLandSubCategory();
+               ddlLandSubCategory.DataSource = ds;
+               ddlLandSubCategory.DataTextField = "LSC_Name";
+               ddlLandSubCategory.DataValueField = "LSC_Id";
+               ddlLandSubCategory.DataBind();
+               ddlLandSubCategory.Items.Insert(0, new ListItem("--Select LandSub Category--", "0"));
+           }
+           catch (Exception ex)
            {
                ExceptionLogging.SendExcepToDB(ex);
            }
