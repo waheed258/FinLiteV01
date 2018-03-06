@@ -339,11 +339,11 @@
                                 <RowStyle CssClass="gradeA odd" />
                                 <Columns>
 
-                              <asp:TemplateField>
-                                <ItemTemplate>
+                             <%-- <asp:TemplateField>
+                              <ItemTemplate>
                                 <asp:CheckBox ID="chkSelect" runat="server" AutoPostBack="true"  OnCheckedChanged="chkSelect_CheckedChanged"/>
-                                </ItemTemplate>
-                                   </asp:TemplateField>
+                                </ItemTemplate>-
+                                   </asp:TemplateField>--%>
                                     <asp:TemplateField HeaderText="SN" HeaderStyle-CssClass="panel-heading" ItemStyle-CssClass="gradeC">
                                         <ItemTemplate>
                                             <asp:HiddenField ID="hfInvId" runat="server" Value='<%#Eval("InvId")%>' />
