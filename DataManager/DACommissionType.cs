@@ -61,6 +61,12 @@ namespace DataManager
             return ExecuteDataSet("Category_Get");
 
         }
+        public DataSet GetLandSubCategory()
+        {
+
+            return ExecuteDataSet("[LandSubCategories_Get]");
+
+        }
         public DataSet GetVAT(int vatId)
         {
             Hashtable htparams = new Hashtable
