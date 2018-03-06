@@ -78,7 +78,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                        
 
                         objTransactionMaster.AllocatedAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0;
-                        objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[8].Text);
+                        objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[7].Text);
                         objTransactionMaster.Details = txtDetails.Text;
                         objTransactionMaster.Messages = txtMessage.Text;
                         objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
@@ -414,7 +414,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                 {
                     TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
 
-                     txtThisEntry.Text = row.Cells[6].Text.ToString();
+                     txtThisEntry.Text = row.Cells[5].Text.ToString();
                     BindingAmounts();
 
 
@@ -440,17 +440,17 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
             {
                 TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
 
-                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                //CheckBox chk = row.FindControl("chkSelect") as CheckBox;
                 if (ChkAllocate.Checked)
                 {
 
-                    txtThisEntry.Text = row.Cells[6].Text.ToString();
+                    txtThisEntry.Text = row.Cells[5].Text.ToString();
                     BindingAmounts();
 
                 }
                 else
                 {
-                    chk.Checked = false;
+                    //chk.Checked = false;
 
                     txtThisEntry.Text = "0.00";
                 }
@@ -720,7 +720,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                 {
 
                     ThisEntryAmount = Convert.ToDecimal(txtThisEntry.Text);
-                    InvoiceOpenAmount = Convert.ToDecimal(row.Cells[6].Text);
+                    InvoiceOpenAmount = Convert.ToDecimal(row.Cells[5].Text);
 
                     OpenAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
                     OpenAmount = OpenAmount + Convert.ToDecimal(hfAllocatedAmount.Value);
@@ -742,7 +742,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                         Allocatedcount = Allocatedcount + 1;
                         AllocatedTotalAmount = AllocatedTotalAmount + ThisEntryAmount;
 
-                        row.Cells[8].Text = _objBOUtiltiy.FormatTwoDecimal((InvoiceOpenAmount - ThisEntryAmount).ToString());
+                        row.Cells[7].Text = _objBOUtiltiy.FormatTwoDecimal((InvoiceOpenAmount - ThisEntryAmount).ToString());
 
                     }
 
