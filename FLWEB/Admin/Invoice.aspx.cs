@@ -1420,11 +1420,11 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
 
             DataTable commdt = (DataTable)ViewState["CommissionType"];
-            commperc = Convert.ToDecimal((commdt.AsEnumerable()
+        string  comm = (commdt.AsEnumerable()
                 .Where(p => p["ComId"].ToString() == commId.ToString())
-                .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+                .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
-            commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
+            commperc = string.IsNullOrEmpty(comm.ToString()) ? 0 : Convert.ToDecimal(comm.ToString());
             txtAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
             txtAirCommisionper_TextChanged(null, null);
 
