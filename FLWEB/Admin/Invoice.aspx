@@ -151,7 +151,7 @@
             $("#ContentPlaceHolder1_txtDate1").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -159,7 +159,7 @@
             $("#ContentPlaceHolder1_txtDate2").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -167,7 +167,7 @@
             $("#ContentPlaceHolder1_txtDate3").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -175,7 +175,7 @@
             $("#ContentPlaceHolder1_txtlandTravelFrom").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -184,7 +184,7 @@
             $("#ContentPlaceHolder1_txtlandTravelto").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -192,7 +192,7 @@
             $("#ContentPlaceHolder1_txtSerTravelDate").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;

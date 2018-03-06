@@ -67,7 +67,7 @@
         function DatePickerSet() {
             $('#ContentPlaceHolder1_txtPFInvDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFInvDate").datepicker({
-                format: 'yyyy-mm-dd',
+                format: 'yy-mm-dd',
                 startDate: '-9d',
                 endDate: '0d',
                 autoclose: true
@@ -75,7 +75,7 @@
             //  $('#ContentPlaceHolder1_txtAirTravelDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFAirTravelDate").datepicker({
 
-                format: 'yyyy-mm-dd',
+                format: 'yy-mm-dd',
 
                 autoclose: true
 
@@ -83,7 +83,7 @@
             //  $('#ContentPlaceHolder1_txtAirReturnDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker({
 
-                format: 'yyyy-mm-dd',
+                format: 'yy-mm-dd',
 
                 autoclose: true
 
@@ -92,7 +92,7 @@
             $("#ContentPlaceHolder1_txtPFDate4").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -100,7 +100,7 @@
             $("#ContentPlaceHolder1_txtPFDate1").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -108,7 +108,7 @@
             $("#ContentPlaceHolder1_txtPFDate2").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -116,7 +116,7 @@
             $("#ContentPlaceHolder1_txtPFDate3").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -124,7 +124,7 @@
             $("#ContentPlaceHolder1_txtPFlandTravelFrom").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -133,7 +133,7 @@
             $("#ContentPlaceHolder1_txtPFlandTravelto").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -141,7 +141,7 @@
             $("#ContentPlaceHolder1_txtPFSerTravelDate").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -2028,6 +2028,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                 </div>
+                                  <div class="overlay">
                                 <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                     <ProgressTemplate>
                                         <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -2035,6 +2036,7 @@
                                         <h4>Please wait....</h4>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
+                                      </div>
                             </div>
 
 
