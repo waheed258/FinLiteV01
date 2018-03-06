@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataManager;
 using EntityManager;
+using System.Data;
 namespace BusinessManager
 {
     public class BALAirTicket
@@ -36,7 +37,10 @@ namespace BusinessManager
         }
 
 
-
+        public DataSet AllCommissionTypes_GetComPercentage()
+        {
+            return _objDALAirTicket.ExecuteDataSet("AllCommissionTypes_GetComPercentage");
+        }
 
     }
 }

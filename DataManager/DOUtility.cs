@@ -55,15 +55,10 @@ namespace DataManager
             return ExecuteDataSet("[Type_Get]");
         }
 
-        public object getVatByType(int typeId)
+        public DataSet getVatByType()
         {
-            Hashtable htParams = new Hashtable
-                                     {
-                                          
-                                         {"@TypeId",typeId},
-                                       
-                                     };
-            return ExecuteScalar("get_VatRateByType", htParams);
+
+            return ExecuteDataSet("get_VatRateByType");
         }
 
 
