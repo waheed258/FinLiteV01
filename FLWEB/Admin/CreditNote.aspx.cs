@@ -47,151 +47,151 @@ public partial class Admin_CreditNote : System.Web.UI.Page
         if (!IsPostBack)
         {
             
-            BindSerTicketNumber();
-            BIndRefundType();
-            lblRoutes1.Enabled = false;
-            lblRoutes2.Enabled = false;
-            lblRoutes3.Enabled = false;
-            lblRoutes4.Enabled = false;
-            txtAirCommInclu.Enabled = false;
-            txtVatPer.Enabled = false;
-            txtAirVatOnFare.Enabled = false;
-            txtAirClientTot.Enabled = false;
-            txtAirDueToBsp.Enabled = false;
-            txtAirCommVat.Enabled = false;
-            txtAirAgentVat.Enabled = false;
-            ddlInvMesg.Enabled = false;
-            DDLACMSupplier.Enabled = false;
-            DDLACMType.Enabled = false;
-            txtRefundAmt.Enabled = false;
+         //   BindSerTicketNumber();
+         //   BIndRefundType();
+         //   lblRoutes1.Enabled = false;
+         //   lblRoutes2.Enabled = false;
+         //   lblRoutes3.Enabled = false;
+         //   lblRoutes4.Enabled = false;
+         //   txtAirCommInclu.Enabled = false;
+         //   txtVatPer.Enabled = false;
+         //   txtAirVatOnFare.Enabled = false;
+         //   txtAirClientTot.Enabled = false;
+         //   txtAirDueToBsp.Enabled = false;
+         //   txtAirCommVat.Enabled = false;
+         //   txtAirAgentVat.Enabled = false;
+         //   ddlInvMesg.Enabled = false;
+         //   DDLACMSupplier.Enabled = false;
+         //   DDLACMType.Enabled = false;
+         //   txtRefundAmt.Enabled = false;
 
-            BindTypes();
-            BindAirServiceTypes();
-            BindAirLine();
-            //general Charge
-            DataSet objDs = null; // Single sp
-            //  BindGenServiceTypes();
+         //   BindTypes();
+         //   BindAirServiceTypes();
+         //   BindAirLine();
+         //   //general Charge
+         //   DataSet objDs = null; // Single sp
+         //   //  BindGenServiceTypes();
 
-            //   BindGenCreditCardType();
-            //txtRateNet.Enabled = false;
-            //txtVatAmount.Enabled = false;
-            //txtExcluAmount.Enabled = false;
-            //txtClientTotal.Enabled = false;
-            //service fee---
-            BindSerServiceTypes();
-            ddlPassengerName.Enabled = false;
+         //   //   BindGenCreditCardType();
+         //   //txtRateNet.Enabled = false;
+         //   //txtVatAmount.Enabled = false;
+         //   //txtExcluAmount.Enabled = false;
+         //   //txtClientTotal.Enabled = false;
+         //   //service fee---
+         //   BindSerServiceTypes();
+         //   ddlPassengerName.Enabled = false;
          
-            BindPaymentType();
+         //   BindPaymentType();
 
-            ddlCreditCardType.Enabled = false;
-            ddlCollectVia.Enabled = false;
-            txtTASFMPD.Enabled = false;
-            //txtClientTotal.Enabled = false;
-            rfvtxtTASFMPD.Enabled = false;
-            rfvddlCollectVia.Enabled = false;
-            rfvddlCreditCardType.Enabled = false;
-            ddlTicketno.Enabled = false;
+         //   ddlCreditCardType.Enabled = false;
+         //   ddlCollectVia.Enabled = false;
+         //   txtTASFMPD.Enabled = false;
+         //   //txtClientTotal.Enabled = false;
+         //   rfvtxtTASFMPD.Enabled = false;
+         //   rfvddlCollectVia.Enabled = false;
+         //   rfvddlCreditCardType.Enabled = false;
+         //   ddlTicketno.Enabled = false;
 
-            //land
-            BindLandSuppliers();
-            BindType();
-            BindLandPaymentType();
-            BindLandService();
-            DDlandCreditCard.Enabled = false;
-            txtLandVatPer.Enabled = false;
-            txtLandExlVatPer.Enabled = false;
-            txtlandExclVatAmount.Enabled = false;
-            txtlandDuefromclient.Enabled = false;
-            txtlandLessComm.Enabled = false;
-            txtlandDuetoSupplier.Enabled = false;
-            txtlandCommIncl.Enabled = false;
-            txtlandVatAmount.Enabled = false;
-            txtlandCommExcl.Enabled = false;
+         //   //land
+         //   BindLandSuppliers();
+         //   BindType();
+         //   BindLandPaymentType();
+         //   BindLandService();
+         //   DDlandCreditCard.Enabled = false;
+         //   txtLandVatPer.Enabled = false;
+         //   txtLandExlVatPer.Enabled = false;
+         //   txtlandExclVatAmount.Enabled = false;
+         //   txtlandDuefromclient.Enabled = false;
+         //   txtlandLessComm.Enabled = false;
+         //   txtlandDuetoSupplier.Enabled = false;
+         //   txtlandCommIncl.Enabled = false;
+         //   txtlandVatAmount.Enabled = false;
+         //   txtlandCommExcl.Enabled = false;
 
-            txtlandCmblIncl.Enabled = false;
-            txtlandcmblExcl.Enabled = false;
-            txtlandTotalcmblIncl.Enabled = false;
-            Session["TempUniqCode"] = "";
-            Session["RoutTempID"] = "";
-            BindInvoiceLineItems();
+         //   txtlandCmblIncl.Enabled = false;
+         //   txtlandcmblExcl.Enabled = false;
+         //   txtlandTotalcmblIncl.Enabled = false;
+         //   Session["TempUniqCode"] = "";
+         //   Session["RoutTempID"] = "";
+         //   BindInvoiceLineItems();
          
-            //invoice Loading
-            AirTicketType();
-            BindInvoiceDropDown();
-            //Acm
-            BindAcmType();
+         //   //invoice Loading
+         //   AirTicketType();
+         //   BindInvoiceDropDown();
+         //   //Acm
+         //   BindAcmType();
       
-            //Adm
-         //   BindADMCreditCrard();
-            BindADMType();
-            BindAdmSuppliers();
-            //edit for Invoice
-            if (!string.IsNullOrEmpty(Request.QueryString["InvId"]))
-            {
-                int InvId = Convert.ToInt32(Request.QueryString["InvId"]);
-                btnInvSave.Text = "Update";
-                //Button1.Style.Add("display", "none");
-                InvListGrid.Columns[6].Visible = false;
-                drpInvClientType.Enabled = false;
-                drpInvClientName.Enabled = false;
-                txtInvDate.Enabled = false;
-                ddlInvCosultant.Enabled = false;
-                txtInvBookNo.Enabled = false;
-                drpInvBookingSrc.Enabled = false;
-                drpInvBookDest.Enabled = false;
-                ddlInvPdfPrintStyle.Enabled = false;
+         //   //Adm
+         ////   BindADMCreditCrard();
+         //   BindADMType();
+         //   BindAdmSuppliers();
+         //   //edit for Invoice
+         //   if (!string.IsNullOrEmpty(Request.QueryString["InvId"]))
+         //   {
+         //       int InvId = Convert.ToInt32(Request.QueryString["InvId"]);
+         //       btnInvSave.Text = "Update";
+         //       //Button1.Style.Add("display", "none");
+         //       InvListGrid.Columns[6].Visible = false;
+         //       drpInvClientType.Enabled = false;
+         //       drpInvClientName.Enabled = false;
+         //       txtInvDate.Enabled = false;
+         //       ddlInvCosultant.Enabled = false;
+         //       txtInvBookNo.Enabled = false;
+         //       drpInvBookingSrc.Enabled = false;
+         //       drpInvBookDest.Enabled = false;
+         //       ddlInvPdfPrintStyle.Enabled = false;
               
-            }
-            //AirTicket ROuting
+         //   }
+         //   //AirTicket ROuting
 
-            AirticketRouting_Disabled();
+         //   AirticketRouting_Disabled();
 
-            BindPrintStyle();
+         //   BindPrintStyle();
 
 
         }
     }
-    private void AirticketRouting_Disabled()
-    {
+    //private void AirticketRouting_Disabled()
+    //{
 
-        try
-        {
-            txtDate1.Enabled = false;
-            txtDate2.Enabled = false;
-            txtDate3.Enabled = false;
-            txtDate4.Enabled = false;
-            txtFlightNo1.Enabled = false;
-            txtFlightNo2.Enabled = false;
-            txtFlightNo3.Enabled = false;
-            txtFlightNo4.Enabled = false;
-            txtClass1.Enabled = false;
-            txtClass2.Enabled = false;
-            txtClass3.Enabled = false;
-            txtClass4.Enabled = false;
+    //    try
+    //    {
+    //        txtDate1.Enabled = false;
+    //        txtDate2.Enabled = false;
+    //        txtDate3.Enabled = false;
+    //        txtDate4.Enabled = false;
+    //        txtFlightNo1.Enabled = false;
+    //        txtFlightNo2.Enabled = false;
+    //        txtFlightNo3.Enabled = false;
+    //        txtFlightNo4.Enabled = false;
+    //        txtClass1.Enabled = false;
+    //        txtClass2.Enabled = false;
+    //        txtClass3.Enabled = false;
+    //        txtClass4.Enabled = false;
 
-            rfvtxtFlightNo1.Enabled = false;
-            rfvtxtClass1.Enabled = false;
-            rfvtxtDate1.Enabled = false;
+    //        rfvtxtFlightNo1.Enabled = false;
+    //        rfvtxtClass1.Enabled = false;
+    //        rfvtxtDate1.Enabled = false;
 
-            rfvtxtFlightNo2.Enabled = false;
-            rfvtxtClass2.Enabled = false;
-            rfvtxtDate2.Enabled = false;
+    //        rfvtxtFlightNo2.Enabled = false;
+    //        rfvtxtClass2.Enabled = false;
+    //        rfvtxtDate2.Enabled = false;
 
-            rfvtxtFlightNo3.Enabled = false;
-            rfvtxtClass3.Enabled = false;
-            rfvtxtDate3.Enabled = false;
+    //        rfvtxtFlightNo3.Enabled = false;
+    //        rfvtxtClass3.Enabled = false;
+    //        rfvtxtDate3.Enabled = false;
 
-            rfvtxtFlightNo4.Enabled = false;
-            rfvtxtClass4.Enabled = false;
-            rfvtxtDate4.Enabled = false;
-        }
+    //        rfvtxtFlightNo4.Enabled = false;
+    //        rfvtxtClass4.Enabled = false;
+    //        rfvtxtDate4.Enabled = false;
+    //    }
 
-        catch (Exception ex)
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
-    }
+    //    catch (Exception ex)
+    //    {
+    //        lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+    //        ExceptionLogging.SendExcepToDB(ex);
+    //    }
+    //}
     protected void cmdClose_Click(object sender, ImageClickEventArgs e)
     {
         try
@@ -443,19 +443,19 @@ public partial class Admin_CreditNote : System.Web.UI.Page
 
     private void BindVatByType()
     {
-        try
-        {
-            DataSet ds = new DataSet();
-            string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlType.SelectedValue)));
-            txtAirCommVat.Text = vatRate;
-            txtVatPer.Text = vatRate;
+        //try
+        //{
+        //    DataSet ds = new DataSet();
+        //    string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlType.SelectedValue)));
+        //    txtAirCommVat.Text = vatRate;
+        //    txtVatPer.Text = vatRate;
 
-        }
-        catch (Exception ex)
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
+        //}
+        //catch (Exception ex)
+        //{
+        //    lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+        //    ExceptionLogging.SendExcepToDB(ex);
+        //}
     }
 
     private void commExcAmount()
@@ -921,32 +921,32 @@ public partial class Admin_CreditNote : System.Web.UI.Page
     }
     protected void txtAirRouting_TextChanged(object sender, EventArgs e)
     {
-        try
-        {
-            AirticketRouting_Disabled();
-            //divRouteHead.Visible = true;
-            //divRouting.Visible = true;
-            routingLablesShow();
+        //try
+        //{
+        //    AirticketRouting_Disabled();
+        //    //divRouteHead.Visible = true;
+        //    //divRouting.Visible = true;
+        //    routingLablesShow();
 
-            VASPopupExtender.Show();
-            txtFlightNo1.Text = "";
-            txtFlightNo2.Text = "";
-            txtFlightNo3.Text = "";
-            txtFlightNo4.Text = "";
-            txtClass1.Text = "";
-            txtClass2.Text = "";
-            txtClass3.Text = "";
-            txtClass4.Text = "";
-            txtDate1.Text = "";
-            txtDate2.Text = "";
-            txtDate3.Text = "";
-            txtDate4.Text = "";
-        }
-        catch (Exception ex)
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
+        //    VASPopupExtender.Show();
+        //    txtFlightNo1.Text = "";
+        //    txtFlightNo2.Text = "";
+        //    txtFlightNo3.Text = "";
+        //    txtFlightNo4.Text = "";
+        //    txtClass1.Text = "";
+        //    txtClass2.Text = "";
+        //    txtClass3.Text = "";
+        //    txtClass4.Text = "";
+        //    txtDate1.Text = "";
+        //    txtDate2.Text = "";
+        //    txtDate3.Text = "";
+        //    txtDate4.Text = "";
+        //}
+        //catch (Exception ex)
+        //{
+        //    lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+        //    ExceptionLogging.SendExcepToDB(ex);
+        //}
 
     }
 
@@ -1632,37 +1632,37 @@ public partial class Admin_CreditNote : System.Web.UI.Page
     protected void ddlServiceType_SelectedIndexChanged(object sender, EventArgs e)
     {
 
-        try
-        {
-            txtserDetails.Text = ddlServiceType.SelectedItem.Text;
-            var VatPer = _objDalService.getVatPercentage(Convert.ToInt32(ddlServiceType.SelectedItem.Value), txtserDetails.Text);
+        //try
+        //{
+        //    txtserDetails.Text = ddlServiceType.SelectedItem.Text;
+        //    var VatPer = _objDalService.getVatPercentage(Convert.ToInt32(ddlServiceType.SelectedItem.Value), txtserDetails.Text);
 
 
-            if (VatPer != null)
-            {
-                txtSerVatPer.Text = VatPer.ToString();
-            }
-            else
-            {
-                txtSerVatPer.Text = "0.00";
-                txtSerVatAmount.Text = "0.00";
-                //txtDetails.Text = "";
-                txtExclusAmount.Text = txtSerClientTotal.Text;
+        //    if (VatPer != null)
+        //    {
+        //        txtSerVatPer.Text = VatPer.ToString();
+        //    }
+        //    else
+        //    {
+        //        txtSerVatPer.Text = "0.00";
+        //        txtSerVatAmount.Text = "0.00";
+        //        //txtDetails.Text = "";
+        //        txtExclusAmount.Text = txtSerClientTotal.Text;
 
-            }
+        //    }
 
-            if (txtSerClientTotal.Text != "")
-            {
+        //    if (txtSerClientTotal.Text != "")
+        //    {
 
-                getClientTotal();
-            }
-            SerPopupExtender.Show();
-        }
-        catch (Exception ex)
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
+        //        getClientTotal();
+        //    }
+        //    SerPopupExtender.Show();
+        //}
+        //catch (Exception ex)
+        //{
+        //    lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+        //    ExceptionLogging.SendExcepToDB(ex);
+        //}
     }
     //protected void txtExclusAmount_TextChanged(object sender, EventArgs e)
     //{
@@ -1713,40 +1713,40 @@ public partial class Admin_CreditNote : System.Web.UI.Page
     //land methods
     protected void DDType_SelectedIndexChanged(object sender, EventArgs e)
     {
-        try
-        {
-            txtLandExlVatPer.Text = _doUtilities.getVatByType(DDlandType.SelectedIndex).ToString();
+        //try
+        //{
+        //    txtLandExlVatPer.Text = _doUtilities.getVatByType(DDlandType.SelectedIndex).ToString();
 
 
-            txtLandVatPer.Text = _doUtilities.getVatByType(DDlandType.SelectedIndex).ToString();
-            if (txtLandVatPer.Text != "0.00")
-            {
-                txtlandExclVatAmount.Text = ((Convert.ToDecimal(txtlandTotalExcl.Text) * Convert.ToDecimal(txtLandVatPer.Text)) / 100).ToString();
-                txtlandTotalIncl.Text = (Convert.ToDecimal(txtlandExclVatAmount.Text) + Convert.ToDecimal(txtlandTotalExcl.Text)).ToString();
+        //    txtLandVatPer.Text = _doUtilities.getVatByType(DDlandType.SelectedIndex).ToString();
+        //    if (txtLandVatPer.Text != "0.00")
+        //    {
+        //        txtlandExclVatAmount.Text = ((Convert.ToDecimal(txtlandTotalExcl.Text) * Convert.ToDecimal(txtLandVatPer.Text)) / 100).ToString();
+        //        txtlandTotalIncl.Text = (Convert.ToDecimal(txtlandExclVatAmount.Text) + Convert.ToDecimal(txtlandTotalExcl.Text)).ToString();
 
-                if (txtlandCommPer.Text != "")
-                {
-                    txtlandTotalExcl_TextChanged(null, null);
-                    txtlandCommPer_TextChanged(null, null);
-                }
+        //        if (txtlandCommPer.Text != "")
+        //        {
+        //            txtlandTotalExcl_TextChanged(null, null);
+        //            txtlandCommPer_TextChanged(null, null);
+        //        }
 
 
-            }
-            else
-            {
-                txtlandTotalIncl.Text = txtlandTotalExcl.Text;
+        //    }
+        //    else
+        //    {
+        //        txtlandTotalIncl.Text = txtlandTotalExcl.Text;
 
-            }
-            txtlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal(txtlandTotalIncl.Text);
-            txtlandDuefromclient.Text = txtlandTotalIncl.Text;
-        }
-        catch (Exception ex)
-        {
+        //    }
+        //    txtlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal(txtlandTotalIncl.Text);
+        //    txtlandDuefromclient.Text = txtlandTotalIncl.Text;
+        //}
+        //catch (Exception ex)
+        //{
 
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
-        }
-        landPopExtender.Show();
+        //    lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+        //    ExceptionLogging.SendExcepToDB(ex);
+        //}
+        //landPopExtender.Show();
 
     }
 

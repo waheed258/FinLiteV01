@@ -89,15 +89,10 @@ namespace DataManager
 
            return ExecuteDataSet("ServiceType_GetData");
        }
-       public object getVatPercentage(int ComId, string ComDesc)
+       public object getVatPercentage()
        {
-           Hashtable htParams = new Hashtable
-                                     {
-                                       
-                                         {"@ComId",ComId},
-                                         {"@ComDesc",ComDesc}
-                                     };
-           return ExecuteScalar("GetServGen_VatRate", htParams);
+           
+           return ExecuteScalar("GetServGen_VatRate");
        }
     }
 }
