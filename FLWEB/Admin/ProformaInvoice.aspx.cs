@@ -2834,9 +2834,10 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             
             int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
             DataTable commdt = (DataTable)ViewState["PFCommissionType"];
-            commperc = Convert.ToDecimal((commdt.AsEnumerable()
-                .Where(p => p["ComId"].ToString() == commId.ToString())
-                .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+
+            string commper = (commdt.AsEnumerable()
+         .Where(p => p["ComId"].ToString() == commId.ToString())
+         .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
             commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
 
