@@ -40,108 +40,196 @@
         .overlay {
             position: fixed;
             z-index: 999;
-            top: 400px;
-            left: 600px;
+            top: 300px;
+            left: 850px;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
+          .overlaypop {
+            position: fixed;
+            z-index: 999;
+            top: 300px;
+            left: 750px;
             filter: alpha(opacity=60);
             opacity: 0.6;
             -moz-opacity: 0.8;
         }
     </style>
-    <script type="text/javascript">
+  <script type="text/javascript">
 
-        function showProgress() {
-            var updateProgress = $get("<%= UpdateProgress.ClientID %>");
-            updateProgress.style.display = "block";
-        }
 
-        $(document).ready(function () {
-            DatePickerSet();
-            var prm = Sys.WebForms.PageRequestManager.getInstance();
-            prm.add_endRequest(function () {
-                DatePickerSet();
+      $(document).ready(function () {
+          DatePickerSet();
+          var prm = Sys.WebForms.PageRequestManager.getInstance();
+          prm.add_endRequest(function () {
+              DatePickerSet();
+          });
 
-            });
+      });
 
-        });
 
-        function DatePickerSet() {
-            $('#ContentPlaceHolder1_txtPFInvDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
+
+      function DatePickerSet() {
+          $('#ContentPlaceHolder1_txtPFInvDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFInvDate").datepicker({
-                format: 'yy-mm-dd',
+                format: 'yyyy-mm-dd',
                 startDate: '-9d',
                 endDate: '0d',
                 autoclose: true
             }).attr('readonly', 'false');;
-            //  $('#ContentPlaceHolder1_txtAirTravelDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
+
+
+
             $("#ContentPlaceHolder1_txtPFAirTravelDate").datepicker({
 
-                format: 'yy-mm-dd',
+                onSelect: function (selected) {
 
-                autoclose: true
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFDate1").datepicker("option", "maxDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFDate2").datepicker("option", "maxDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFDate3").datepicker("option", "maxDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFDate4").datepicker("option", "maxDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFAirTravelDate").val(dtFormatted);
+                }
+            }).attr('readonly', 'true');;
 
-            }).attr('readonly', 'false');;
-            //  $('#ContentPlaceHolder1_txtAirReturnDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtPFAirTravelDate").datepicker("option", "maxDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").val(dtFormatted);
 
-                format: 'yy-mm-dd',
-
-                autoclose: true
-
+                }
             }).attr('readonly', 'true');;
-            // $('#ContentPlaceHolder1_txtDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
-            $("#ContentPlaceHolder1_txtPFDate4").datepicker({
 
-                numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
-                autoclose: true,
-
-            }).attr('readonly', 'true');;
-            //   $('#ContentPlaceHolder1_txtDate1').val('<%=System.DateTime.Now.ToShortDateString()%>');
+            //--------------------------------------------------------------------------------------------
             $("#ContentPlaceHolder1_txtPFDate1").datepicker({
+                onSelect: function (selected) {
+                    debugger;
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var y = dtMax.getFullYear();
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var dtFormatted = mm + '/' + dd + '/' + y;
 
-                numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
-                autoclose: true,
+                    $("#ContentPlaceHolder1_txtPFDate2").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker("option", "minDate", dtFormatted);
+
+                    $("#ContentPlaceHolder1_txtPFDate2").val('');
+                    $("#ContentPlaceHolder1_txtPFDate3").val('');
+                    $("#ContentPlaceHolder1_txtPFDate4").val('');
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").val('');
+                    $("#ContentPlaceHolder1_txtPFAirTravelDate").val($("#ContentPlaceHolder1_txtPFDate1").val());
+
+
+
+                }
+
 
             }).attr('readonly', 'true');;
-            //    $('#ContentPlaceHolder1_txtDate2').val('<%=System.DateTime.Now.ToShortDateString()%>');
+
+
+
+
             $("#ContentPlaceHolder1_txtPFDate2").datepicker({
-
-                numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
-                autoclose: true,
-
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtPFDate3").datepicker("option", "minDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFDate3").val('');
+                    $("#ContentPlaceHolder1_txtPFDate4").val('');
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").val('');
+                    $("#ContentPlaceHolder1_txtPFDate2").val(dtFormatted);
+                }
             }).attr('readonly', 'true');;
-            //     $('#ContentPlaceHolder1_txtDate3').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFDate3").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtPFDate4").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFDate4").val('');
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").val('');
+                    $("#ContentPlaceHolder1_txtPFDate3").val(dtFormatted);
+                }
+            }).attr('readonly', 'true');;
 
-                numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
-                autoclose: true,
+            $("#ContentPlaceHolder1_txtPFDate4").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    //  $("#ContentPlaceHolder1_txtDate1").datepicker("option", "minDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFAirReturnDate").val('');
+                    $("#ContentPlaceHolder1_txtPFDate4").val(dtFormatted);
+                }
 
             }).attr('readonly', 'true');;
-            $('#ContentPlaceHolder1_txtPFlandTravelFrom').val('<%=System.DateTime.Now.ToShortDateString()%>');
+
+
+           // $('#ContentPlaceHolder1_txtPFlandTravelFrom').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFlandTravelFrom").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtPFlandTravelto").datepicker("option", "minDate", dtFormatted);
+                    $("#ContentPlaceHolder1_txtPFlandTravelFrom").val(dtFormatted);
 
-                numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
-                autoclose: true,
-
+                }
             }).attr('readonly', 'true');;
 
-            // $('#ContentPlaceHolder1_txtlandTravelto').val('<%=System.DateTime.Now.ToShortDateString()%>');
             $("#ContentPlaceHolder1_txtPFlandTravelto").datepicker({
+                onSelect: function (selected) {
+                    var dtMax = new Date(selected);
+                    dtMax.setDate(dtMax.getDate());
+                    var dd = ('0' + dtMax.getDate()).slice(-2);
+                    var mm = ('0' + (dtMax.getMonth() + 1)).slice(-2);
+                    var y = dtMax.getFullYear();
+                    var dtFormatted = mm + '/' + dd + '/' + y;
+                    $("#ContentPlaceHolder1_txtPFlandTravelFrom").datepicker("option", "maxDate", dtFormatted)
+                    $("#ContentPlaceHolder1_txtPFlandTravelto").val(dtFormatted);
 
-                numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
-                autoclose: true,
 
+                }
             }).attr('readonly', 'true');;
-            // $('#ContentPlaceHolder1_txtSerTravelDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
+
+
+
+
             $("#ContentPlaceHolder1_txtPFSerTravelDate").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'yyyy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -153,32 +241,31 @@
             $('#<%= drpPFInvBookDest.ClientID %>').select2();
             $('#<%= ddlPFInvPdfPrintStyle.ClientID %>').select2();
 
-            //ddlPFInvPdfPrintStyle
-            //Airticket
-          <%--  $('#<%= drpPFTicketType.ClientID %>').select2();
-            $('#<%= ddlPFAirLine.ClientID %>').select2();
-            $('#<%= drpPFAirPassenger.ClientID %>').select2();
-            $('#<%= ddlPFAirService.ClientID %>').select2();
-            $('#<%= ddlPFType.ClientID %>').select2();
-            $('#<%= ddlPFAirPayment.ClientID %>').select2();
-
-            $('#<%= DDPFlandSupplier.ClientID %>').select2();
-            $('#<%= DDPFlandService.ClientID %>').select2();
-            $('#<%= DDPFlandType.ClientID %>').select2();
-            $('#<%= DDPFlandPayment.ClientID %>').select2();
-            $('#<%= DDPFlandCreditCard.ClientID %>').select2();
-
-            $('#<%= ddlPFServiceType.ClientID %>').select2();
-            $('#<%= ddlPFSoureceref.ClientID %>').select2();
-            $('#<%= ddlPFPassengerName.ClientID %>').select2();
-            $('#<%= ddlPFPaymentMethod.ClientID %>').select2();
-            $('#<%= ddlPFCreditCardType.ClientID %>').select2();
-            $('#<%= ddlPFCollectVia.ClientID %>').select2();
-
-            $('#<%= ddlPFGenchrgType.ClientID %>').select2();
-            $('#<%= ddlPFPassengerNames.ClientID %>').select2();
-            $('#<%= ddlPFCrdCardType.ClientID %>').select2();--%>
+            //Air Ticket
+           <%-- $('#<%= drpTicketType.ClientID %>').select2();
+            $('#<%= ddlAirLine.ClientID %>').select2();
+            $('#<%= ddlAirService.ClientID %>').select2();
+            $('#<%= ddlType.ClientID %>').select2();
+            $('#<%= ddlAirPayment.ClientID %>').select2();
+            //Land Suppliers
+            $('#<%= DDlandSupplier.ClientID %>').select2();
+            $('#<%= DDlandService.ClientID %>').select2();
+            $('#<%= DDlandType.ClientID %>').select2();
+            $('#<%= DDlandPayment.ClientID %>').select2();
+            $('#<%= DDlandCreditCard.ClientID %>').select2();
+            //Service Fee
+            $('#<%= ddlServiceType.ClientID %>').select2();
+            $('#<%= ddlSoureceref.ClientID %>').select2();
+            $('#<%= ddlPassengerName.ClientID %>').select2();
+            $('#<%= ddlPaymentMethod.ClientID %>').select2();
+            $('#<%= ddlCreditCardType.ClientID %>').select2();
+            $('#<%= ddlCollectVia.ClientID %>').select2();
+            //GenneralCharge
+            $('#<%= ddlGenchrgType.ClientID %>').select2();
+            $('#<%= ddlPassengerNames.ClientID %>').select2();
+            $('#<%= ddlCrdCardType.ClientID %>').select2();--%>
         }
+
     </script>
 
 </asp:Content>
@@ -819,7 +906,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -850,7 +937,7 @@
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
-                                            <h4 class="panel-title">Land Arrangemnts</h4>
+                                            <h4 class="panel-title">Land Arrangements</h4>
                                         </div>
                                     </header>
                                     <div class="col-sm-12">
@@ -1241,7 +1328,7 @@
                                             <asp:Button ID="Reset" runat="server" class="btn btn-info" OnClick="Reset_Click" Text="Reset" />
                                         </div>--%>
                                     </div>
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1500,7 +1587,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1693,7 +1780,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="overlay">
+                                    <div class="overlaypop">
                                         <asp:UpdateProgress ID="UpdateProgress3" runat="server" AssociatedUpdatePanelID="updatepanel1">
                                             <ProgressTemplate>
                                                 <img src="../images/loading.gif" alt="" height="40" width="40" />
@@ -1727,7 +1814,7 @@
                                                         <%#Eval("Details")%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Client Total">
+                                                <asp:TemplateField HeaderText="Client Total" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <%#Eval("ClientTotal")%>
                                                     </ItemTemplate>
@@ -1756,7 +1843,7 @@
                                                         <%#Eval("Count")%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Amount">
+                                                <asp:TemplateField HeaderText="Amount" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <%#Eval("TotalAmount")%>
                                                     </ItemTemplate>

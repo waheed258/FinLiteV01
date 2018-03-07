@@ -824,7 +824,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             string routing = txtPFAirRouting.Text;
             if (routing.Contains("/"))
             {
-
+                txtPFAirTravelDate.Enabled = false;
                 String[] RoutingArray = routing.Split('/');
                 for (int i = 0; i < RoutingArray.Length - 1; i++)
                 {
@@ -2013,13 +2013,17 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 txtPFlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal((Convert.ToDecimal(txtPFlandTotalExcl.Text) + Convert.ToDecimal(txtPFlandExclVatAmount.Text)).ToString());
 
             }
+            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
             if (txtPFlandCommPer.Text != "")
             {
                 txtPFlandCommPer_TextChanged(null, null);
             }
             landPFPopExtender.Show();
 
-            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
+            if (txtPFlandCommPer.Text == "")
+            {
+                txtPFlandDuetoSupplier.Text = txtPFlandTotalIncl.Text;
+            }
 
         }
         catch (Exception ex)
