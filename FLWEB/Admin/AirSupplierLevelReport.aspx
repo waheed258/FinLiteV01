@@ -112,11 +112,11 @@
                 ShowHeaderWhenEmpty="true">
                 <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                 <Columns>
-                    <asp:TemplateField HeaderText="Trans Date">
+                 <%--   <asp:TemplateField HeaderText="Trans Date">
                         <ItemTemplate>
                             <%#Eval("TransDate")%>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
 
                     <asp:TemplateField HeaderText="Supplier Name">
                         <ItemTemplate>
