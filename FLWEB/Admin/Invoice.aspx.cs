@@ -1377,6 +1377,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         try
         {
             //ddlAirService.Items.Clear();
+            decimal commperc = 0;
 
             int supplierid = Convert.ToInt32(ddlAirLine.SelectedValue.ToString());
 
@@ -1394,8 +1395,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 }
                 else
                 {
-                    if (ViewState["ddlAirService"].ToString() != null)
-                    {
+                  //  if (ViewState["ddlAirService"].ToString() != null)
+                 //   {
                         //DataTable dtair = (DataTable)ViewState["ddlAirService"];
 
                         //ddlAirService.DataSource = dtair;
@@ -1403,9 +1404,10 @@ public partial class Admin_Invoice : System.Web.UI.Page
                         //ddlAirService.DataValueField = "ComId";
                         //ddlAirService.DataBind();
                         //ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
-                        ddlAirService.SelectedValue = "0";
-                    }
-
+                    //    ddlAirService.SelectedValue = "0";
+                      
+                //    }
+                    txtAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
                     ddlAirService.SelectedValue = "0";
                     //  VASPopupExtender.Show();
                 }
@@ -1415,7 +1417,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
 
 
-            decimal commperc = 0;
+            
             int commId = Convert.ToInt32(ddlAirService.SelectedValue);
 
 
@@ -2476,7 +2478,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
         try
         {
 
-        
+
+            decimal commperc = 0;
 
             int supplierid = Convert.ToInt32(DDlandSupplier.SelectedValue.ToString());
 
@@ -2496,11 +2499,11 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 landPopExtender.Show();
                 BindAirServiceTypes();
                 DDlandService.SelectedValue = "0";
+                txtlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
             }
 
 
-            decimal commperc = 0;
-
+         
             int commId = Convert.ToInt32(DDlandService.SelectedItem.Value);
             DataTable commdt = (DataTable)ViewState["CommissionType"];
             commperc = Convert.ToDecimal((commdt.AsEnumerable()

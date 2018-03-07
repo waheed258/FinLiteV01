@@ -412,7 +412,11 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (txtPFAirExcluisvefare.Text != "" && txtPFAirCommisionper.Text != "")
             {
                 decimal exclusiveFare = Convert.ToDecimal(txtPFAirExcluisvefare.Text);
-                txtPFAirCommExclu.Text = ((Convert.ToDecimal(txtPFAirCommisionper.Text) * exclusiveFare) / 100).ToString();
+
+                exclusiveFare = ((Convert.ToDecimal(txtPFAirCommisionper.Text) * exclusiveFare) / 100);
+                txtPFAirCommExclu.Text = _objBOUtiltiy.FormatTwoDecimal(exclusiveFare.ToString()).ToString(); 
+                    
+                    
 
 
             }
@@ -2013,17 +2017,13 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 txtPFlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal((Convert.ToDecimal(txtPFlandTotalExcl.Text) + Convert.ToDecimal(txtPFlandExclVatAmount.Text)).ToString());
 
             }
-            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
             if (txtPFlandCommPer.Text != "")
             {
                 txtPFlandCommPer_TextChanged(null, null);
             }
             landPFPopExtender.Show();
 
-            if (txtPFlandCommPer.Text == "")
-            {
-                txtPFlandDuetoSupplier.Text = txtPFlandTotalIncl.Text;
-            }
+            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
 
         }
         catch (Exception ex)
@@ -2739,7 +2739,7 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         try
         {
             //ddlAirService.Items.Clear();
-
+            decimal commperc = 0;
             int supplierid = Convert.ToInt32(ddlPFAirLine.SelectedValue.ToString());
 
             if (ViewState["PFCommissionBasedonAirline"].ToString() != null)
@@ -2770,26 +2770,27 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                       AirPFPopupExtender.Show();
                       BindPFAirServiceTypes();
                       ddlPFAirService.SelectedValue = "0";
-
+                    
                   }
 
                   ddlPFAirService.SelectedValue = "0";
                   //  VASPopupExtender.Show();
+                  txtPFAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
               }
 
               AirPFPopupExtender.Show();
             }
 
-            decimal commperc = 0;
+           
             int commId = Convert.ToInt32(ddlPFAirService.SelectedValue);
 
 
             DataTable commdt = (DataTable)ViewState["PFCommissionType"];
-            commperc = Convert.ToDecimal((commdt.AsEnumerable()
+          string  comm = (commdt.AsEnumerable()
                 .Where(p => p["ComId"].ToString() == commId.ToString())
-                .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+                .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
-            commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
+          commperc = string.IsNullOrEmpty(comm.ToString()) ? 0 : Convert.ToDecimal(comm.ToString());
 
             txtPFAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
             txtPFAirCommisionper_TextChanged(null, null);
@@ -2807,6 +2808,8 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
         try
         {
             //  DDlandService.Items.Clear();
+            decimal commperc = 0;
+
             int supplierid = Convert.ToInt32(DDPFlandSupplier.SelectedValue.ToString());
           
             DataTable dt = (DataTable)ViewState["PFAllCommissionTypes_Land"];
@@ -2825,10 +2828,10 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
                 landPFPopExtender.Show();
                 BindPFAirServiceTypes();
                 DDPFlandService.SelectedValue = "0";
+                txtPFlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
             }
 
-            decimal commperc = 0;
-
+            
             int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
             DataTable commdt = (DataTable)ViewState["PFCommissionType"];
             commperc = Convert.ToDecimal((commdt.AsEnumerable()

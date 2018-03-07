@@ -755,7 +755,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                         AllocatedTotalAmount = AllocatedTotalAmount + ThisEntryAmount;
 
                         row.Cells[7].Text = _objBOUtiltiy.FormatTwoDecimal((InvoiceOpenAmount - ThisEntryAmount).ToString());
-
+                        ChkAllocate.Checked = true;
                     }
 
                 
