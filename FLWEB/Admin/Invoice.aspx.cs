@@ -330,9 +330,11 @@ public partial class Admin_Invoice : System.Web.UI.Page
             // _objEmInvoice.invDocumentNo = Guid;
 
             int Result = _objBalInvoice.InsertInvoice(_objEmInvoice);
-
+           
             if (Result > 0)
             {
+                btnInvSave.Enabled = false;
+
                 Session["TempUniqCode"] = _objEmInvoice.TempUniqCode;
                 string invDocumentNo = _objEmInvoice.invDocumentNo;
                 DataSet dsMainacc = new DataSet();
@@ -2506,11 +2508,11 @@ public partial class Admin_Invoice : System.Web.UI.Page
          
             int commId = Convert.ToInt32(DDlandService.SelectedItem.Value);
             DataTable commdt = (DataTable)ViewState["CommissionType"];
-            commperc = Convert.ToDecimal((commdt.AsEnumerable()
+          string  commper = (commdt.AsEnumerable()
                 .Where(p => p["ComId"].ToString() == commId.ToString())
-                .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+                .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
-            commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
+          commperc = string.IsNullOrEmpty(commper.ToString()) ? 0 : Convert.ToDecimal(commper.ToString());
 
             txtlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
