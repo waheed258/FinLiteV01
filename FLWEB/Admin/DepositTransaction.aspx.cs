@@ -13,6 +13,8 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 {
     BALInvoice _objBALInvoice = new BALInvoice();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["UserLoginId"] == null)
@@ -21,6 +23,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+
             BindClienttypes();
             BindReciptTypes();
             txtDepstConsultant.Text = Session["UserFullName"].ToString();
@@ -28,6 +31,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             gvReciptData.DataBind();
             BindSecondRecieptsGrid();
             BindBankAccounts();
+
         }
     }
     #region PrivateMethods
@@ -117,14 +121,20 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
     #region gridMethods
 
-    private void  BindUnbankedReceipts(int RType,int CType)
+    private void BindUnbankedReceipts(int RType, int CType)
     {
+        DataTable dts;
+
         BADepositTransaction objBADepositTransaction = new BADepositTransaction();
-        DataSet objUnbankReceiptsList= objBADepositTransaction.getUnbankReceipts(RType, CType);
+        DataSet objUnbankReceiptsList = objBADepositTransaction.getUnbankReceipts(RType, CType);
         if (objUnbankReceiptsList.Tables[0].Rows.Count > 0)
         {
             gvReciptData.DataSource = objUnbankReceiptsList.Tables[0];
             gvReciptData.DataBind();
+
+            dts = objUnbankReceiptsList.Tables[0];
+            ViewState["test"] = dts;
+
         }
         else
         {
@@ -132,6 +142,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             gvReciptData.DataBind();
             lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Invoice records not found for this client.");
         }
+       
     }
 
     protected void BindSecondRecieptsGrid()
@@ -143,6 +154,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
     private void GetSelectedRows()
     {
+        DataTable dtss = (DataTable)ViewState["test"];
         DataTable dt;
         if (ViewState["GetUnbankedRecords"] != null)
             dt = (DataTable)ViewState["GetUnbankedRecords"];
@@ -154,6 +166,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             if (chk.Checked)
             {
                 dt = AddGridRow(gvReciptData.Rows[i], dt);
+                dtss = RemoveRow(gvReciptData.Rows[i], dtss);
             }
             else
             {
@@ -226,7 +239,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             {
                 sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
             }
-            
+
         }
         spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
         spnCurDpstCount.InnerText = gvSeocondRecipts.Rows.Count.ToString();
@@ -242,6 +255,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
                 int Rtype = 0;
                 BindUnbankedReceipts(Rtype, Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
                 UnBankedReciptsCount();
+
             }
             else if (ddldpstReceiptType.SelectedIndex > 0 && ddlDepstClientPredfix.SelectedIndex > 0)
             {
@@ -253,19 +267,23 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
-        
+
     }
     protected void chkSelect_CheckedChanged(object sender, EventArgs e)
     {
         GetSelectedRows();
-       
+
         BindSecondRecieptsGrid();
         ThisDepositReciptsCount();
+
+        gvReciptData.DataSource = ViewState["test"];
+        gvReciptData.DataBind();
+
     }
     protected void ddldpstReceiptType_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -288,7 +306,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
@@ -298,64 +316,64 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     {
         try
         {
-           
+
             EmDepositMaster objEmDepositMaster = new EmDepositMaster();
             objEmDepositMaster.DepositDate = Convert.ToDateTime(txtDpstDate.Text);
-            objEmDepositMaster.DepositClientPrefix =  Convert.ToInt32(ddlDepstClientPredfix.SelectedValue);
-            objEmDepositMaster.DepositComments =txtDpstComments.Text;
+            objEmDepositMaster.DepositClientPrefix = Convert.ToInt32(ddlDepstClientPredfix.SelectedValue);
+            objEmDepositMaster.DepositComments = txtDpstComments.Text;
             objEmDepositMaster.DepositConsultant = txtDepstConsultant.Text;
             objEmDepositMaster.DepositRecieptType = Convert.ToInt32(ddldpstReceiptType.SelectedValue);
             objEmDepositMaster.DepositSourceRef = txtDpstSourceRef.Text;
-            objEmDepositMaster.TotalRecieptsDeposited =Convert.ToInt32( spnCurDpstCount.InnerText);
+            objEmDepositMaster.TotalRecieptsDeposited = Convert.ToInt32(spnCurDpstCount.InnerText);
             objEmDepositMaster.TotalDepositAmount = Convert.ToDecimal(spnThisDepositAmnt.InnerText);
-            objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue); 
-            BADepositTransaction  objBADepositTransaction = new BADepositTransaction();
-        int result =  objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
-        if (result > 0)
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
-            // clearcontrols();
-            for (int i = 0; i < gvReciptData.Rows.Count; i++)
+            objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
+            BADepositTransaction objBADepositTransaction = new BADepositTransaction();
+            int result = objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
+            if (result > 0)
             {
-                CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
-                if (chk.Checked)
+                lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
+                // clearcontrols();
+                for (int i = 0; i < gvReciptData.Rows.Count; i++)
                 {
-                    EMDepositChild objEMDepositChild = new EMDepositChild();
-                    objEMDepositChild.ReceiptId = Convert.ToInt32(gvReciptData.Rows[i].Cells[1].Text);
-                    objEMDepositChild.RecieptDate = Convert.ToDateTime ( gvReciptData.Rows[i].Cells[2].Text);
-                    objEMDepositChild.ReceiptType = gvReciptData.Rows[i].Cells[3].Text;
-                    objEMDepositChild.ReciptClient = gvReciptData.Rows[i].Cells[4].Text;
-                    objEMDepositChild.ReceiptAmount = Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text);
-                    objEMDepositChild.InvoiceId =  Convert.ToInt32(gvReciptData.Rows[i].Cells[7].Text);
-                    objEMDepositChild.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue); 
-                    objEMDepositChild.DepositTransMasterId = result;
-                 int childResult =   objBADepositTransaction.insertDepositChild(objEMDepositChild);
-                    if(childResult>0)
+                    CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
+                    if (chk.Checked)
                     {
-                        lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
-                        Response.Redirect("DepositTransactionList");
+                        EMDepositChild objEMDepositChild = new EMDepositChild();
+                        objEMDepositChild.ReceiptId = Convert.ToInt32(gvReciptData.Rows[i].Cells[1].Text);
+                        objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                        objEMDepositChild.ReceiptType = gvReciptData.Rows[i].Cells[3].Text;
+                        objEMDepositChild.ReciptClient = gvReciptData.Rows[i].Cells[4].Text;
+                        objEMDepositChild.ReceiptAmount = Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text);
+                        objEMDepositChild.InvoiceId = Convert.ToInt32(gvReciptData.Rows[i].Cells[7].Text);
+                        objEMDepositChild.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
+                        objEMDepositChild.DepositTransMasterId = result;
+                        int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
+                        if (childResult > 0)
+                        {
+                            lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
+                            Response.Redirect("DepositTransactionList");
+                        }
+                        else
+                        {
+                            lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
+                        }
+
+
+                        //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                        //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
                     }
                     else
                     {
-                        lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
+
                     }
+                }
 
 
-                    //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                    //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                }
-                else
-                {
-                    
-                }
             }
-          
-
-        }
-        else
-        {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Deposit  was not Added plase try again");
-        }
+            else
+            {
+                lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Deposit  was not Added plase try again");
+            }
         }
         catch (Exception ex)
         {
@@ -369,4 +387,59 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     {
         Response.Redirect("DepositTransactionList", false);
     }
+    protected void chkSelect1_CheckedChanged(object sender, EventArgs e)
+    {
+        GetSelectedRows1();
+        BindfirstRecieptsGrid();
+        ThisDepositReciptsCount1();
+        gvSeocondRecipts.DataSource = ViewState["GetUnbankedRecords"];
+        gvSeocondRecipts.DataBind();
+    }
+
+    private void GetSelectedRows1()
+    {
+        DataTable dtss = (DataTable)ViewState["test"];
+        DataTable dt;
+        if (ViewState["GetUnbankedRecords"] != null)
+            dt = (DataTable)ViewState["GetUnbankedRecords"];
+        else
+            dt = CreateTable();
+        for (int i = 0; i < gvSeocondRecipts.Rows.Count; i++)
+        {
+            CheckBox chk = (CheckBox)gvSeocondRecipts.Rows[i].Cells[0].FindControl("chkSelect1");
+            if (chk.Checked)
+            {
+               
+                dtss = AddGridRow(gvSeocondRecipts.Rows[i], dtss);
+                dt = RemoveRow(gvSeocondRecipts.Rows[i], dt);
+            }
+            else
+            {
+                dtss = RemoveRow(gvSeocondRecipts.Rows[i], dtss);
+            }
+        }
+        ViewState["GetUnbankedRecords"] = dt;
+    }
+    protected void BindfirstRecieptsGrid()
+    {
+        DataTable dt = (DataTable)ViewState["test"];
+        gvReciptData.DataSource = dt;
+        gvReciptData.DataBind();
+    }
+    private void ThisDepositReciptsCount1()
+    {
+        decimal sum = 0.0M;
+        for (int i = 0; i < gvReciptData.Rows.Count; i++)
+        {
+            CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
+            if (chk.Checked)
+            {
+                sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
+            }
+
+        }
+        spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
+        spnCurDpstCount.InnerText = gvSeocondRecipts.Rows.Count.ToString();
+    }
+
 }

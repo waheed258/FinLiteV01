@@ -156,6 +156,12 @@
                                 <FooterStyle BackColor="#08376a" />
                                 <RowStyle CssClass="gradeA odd" />
                                 <Columns>
+
+                                    <asp:TemplateField>
+                                <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect1" runat="server" AutoPostBack="true"  OnCheckedChanged="chkSelect1_CheckedChanged"/>
+                                </ItemTemplate>
+                                   </asp:TemplateField>
                                    <asp:BoundField DataField="ReceivedTransactionId" HeaderText="SN">
                                         <ItemStyle HorizontalAlign="Center" />
                                         <HeaderStyle HorizontalAlign="Center" />
