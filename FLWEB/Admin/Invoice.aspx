@@ -246,7 +246,7 @@
             $("#ContentPlaceHolder1_txtSerTravelDate").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
@@ -1064,7 +1064,7 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <%--<asp:TextBox ID="txtlandTravelFrom" runat="server" CssClass="form-control" placeholder="mm/dd/yy" MaxLength="50" />--%>
-                                            <asp:TextBox ID="txtlandTravelFrom" runat="server" CssClass="form-control" />
+                                            <asp:TextBox ID="txtlandTravelFrom" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD"/>
                                             <asp:RequiredFieldValidator ControlToValidate="txtlandTravelFrom" runat="server" ID="rfvtxtlandTravelFrom" ValidationGroup="landsupplier"
                                                 ErrorMessage="Select Travel Date" Text="Select Travel Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                                         </div>

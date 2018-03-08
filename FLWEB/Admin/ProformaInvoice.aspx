@@ -229,7 +229,7 @@
             $("#ContentPlaceHolder1_txtPFSerTravelDate").datepicker({
 
                 numberOfMonths: 1,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd',
                 autoclose: true,
 
             }).attr('readonly', 'true');;
