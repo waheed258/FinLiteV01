@@ -183,7 +183,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         dt.Columns.Add("RecieptType");
         dt.Columns.Add("ClientType");
         dt.Columns.Add("ClientAcNo");
-        dt.Columns.Add("AllocatedAmount");
+        dt.Columns.Add("AllocatedAmount",typeof(decimal));
         dt.Columns.Add("invoiceId");
         dt.AcceptChanges();
         return dt;
@@ -200,7 +200,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             dt.Rows[rowscount]["RecieptType"] = gvRow.Cells[3].Text;
             dt.Rows[rowscount]["ClientType"] = gvRow.Cells[4].Text;
             dt.Rows[rowscount]["ClientAcNo"] = gvRow.Cells[5].Text;
-            dt.Rows[rowscount]["AllocatedAmount"] = gvRow.Cells[6].Text;
+            dt.Rows[rowscount]["AllocatedAmount"] = Convert.ToDecimal( gvRow.Cells[6].Text);
             dt.Rows[rowscount]["invoiceId"] = gvRow.Cells[7].Text;
             dt.AcceptChanges();
         }
@@ -220,29 +220,24 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
     private void UnBankedReciptsCount()
     {
-        decimal sum = 0.0M;
-        for (int i = 0; i < gvReciptData.Rows.Count; i++)
-        {
-            sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
-        }
+        decimal? sum = 0.0M;
+        //for (int i = 0; i < gvReciptData.Rows.Count; i++)
+        //{
+        //    sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
+        //}
+        DataTable dt = (DataTable)ViewState["test"];
+        sum = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
         unBankAmount.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
-        unBankCount.InnerText = gvReciptData.Rows.Count.ToString();
+        unBankCount.InnerText = dt.Rows.Count.ToString();
     }
 
     private void ThisDepositReciptsCount()
     {
-        decimal sum = 0.0M;
-        for (int i = 0; i < gvReciptData.Rows.Count; i++)
-        {
-            CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
-            if (chk.Checked)
-            {
-                sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
-            }
-
-        }
-        spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
-        spnCurDpstCount.InnerText = gvSeocondRecipts.Rows.Count.ToString();
+        decimal? sumAmounts = 0.0M;
+        DataTable dt = (DataTable)ViewState["GetUnbankedRecords"];
+        sumAmounts = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
+        spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sumAmounts.ToString());
+        spnCurDpstCount.InnerText = dt.Rows.Count.ToString();
     }
     #endregion gridMethods
 
@@ -280,6 +275,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
         BindSecondRecieptsGrid();
         ThisDepositReciptsCount();
+        UnBankedReciptsCount();
 
         gvReciptData.DataSource = ViewState["test"];
         gvReciptData.DataBind();
@@ -391,7 +387,9 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     {
         GetSelectedRows1();
         BindfirstRecieptsGrid();
-        ThisDepositReciptsCount1();
+        
+        ThisDepositReciptsCount();
+        UnBankedReciptsCount();
         gvSeocondRecipts.DataSource = ViewState["GetUnbankedRecords"];
         gvSeocondRecipts.DataBind();
     }
@@ -429,15 +427,17 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     private void ThisDepositReciptsCount1()
     {
         decimal sum = 0.0M;
-        for (int i = 0; i < gvReciptData.Rows.Count; i++)
-        {
-            CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
-            if (chk.Checked)
-            {
-                sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
-            }
+        //for (int i = 0; i < gvReciptData.Rows.Count; i++)
+        //{
+        //    CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
+        //    if (chk.Checked)
+        //    {
+        //        sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
+        //    }
 
-        }
+        //}
+      
+       
         spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
         spnCurDpstCount.InnerText = gvSeocondRecipts.Rows.Count.ToString();
     }
