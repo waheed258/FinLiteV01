@@ -2015,13 +2015,20 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             if (txtPFlandTotalExcl.Text != "" && txtPFlandExclVatAmount.Text != "")
             {
                 txtPFlandTotalIncl.Text = _objBOUtiltiy.FormatTwoDecimal((Convert.ToDecimal(txtPFlandTotalExcl.Text) + Convert.ToDecimal(txtPFlandExclVatAmount.Text)).ToString());
-
             }
+
+            txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
+
             if (txtPFlandCommPer.Text != "")
             {
                 txtPFlandCommPer_TextChanged(null, null);
             }
             landPFPopExtender.Show();
+
+            if (txtPFlandCommPer.Text == "")
+            {
+                txtPFlandDuetoSupplier.Text = txtPFlandTotalIncl.Text;
+            }
 
             txtPFlandDuefromclient.Text = txtPFlandTotalIncl.Text;
 
@@ -2860,11 +2867,11 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
         int commId = Convert.ToInt32(DDPFlandService.SelectedItem.Value);
         DataTable commdt = (DataTable)ViewState["PFCommissionType"];
-        commperc = Convert.ToDecimal((commdt.AsEnumerable()
+      string  commper =(commdt.AsEnumerable()
             .Where(p => p["ComId"].ToString() == commId.ToString())
-            .Select(p => p["ComDComm"].ToString())).FirstOrDefault());
+            .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
-        commperc = string.IsNullOrEmpty(commperc.ToString()) ? 0 : Convert.ToDecimal(commperc.ToString());
+      commperc = string.IsNullOrEmpty(commper.ToString()) ? 0 : Convert.ToDecimal(commper.ToString());
 
         txtPFlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
