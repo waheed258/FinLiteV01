@@ -131,15 +131,20 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         {
             gvReciptData.DataSource = objUnbankReceiptsList.Tables[0];
             gvReciptData.DataBind();
-
             dts = objUnbankReceiptsList.Tables[0];
-            ViewState["test"] = dts;
-
+            ViewState["RightGridTotalRecords"] = dts;
+            UnBankedReciptsCount();
+            ThisDepositReciptsCount();
         }
         else
         {
             gvReciptData.DataSource = null;
             gvReciptData.DataBind();
+            gvSeocondRecipts.DataSource = null;
+            gvSeocondRecipts.DataBind();
+            ViewState["RightGridTotalRecords"] = null;
+            UnBankedReciptsCount();
+            ThisDepositReciptsCount();
             lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Invoice records not found for this client.");
         }
        
@@ -147,33 +152,33 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
     protected void BindSecondRecieptsGrid()
     {
-        DataTable dt = (DataTable)ViewState["GetUnbankedRecords"];
+        DataTable dt = (DataTable)ViewState["getLeftGirdRecords"];
         gvSeocondRecipts.DataSource = dt;
         gvSeocondRecipts.DataBind();
     }
 
-    private void GetSelectedRows()
+    private void GetRightSelectedRows()
     {
-        DataTable dtss = (DataTable)ViewState["test"];
-        DataTable dt;
-        if (ViewState["GetUnbankedRecords"] != null)
-            dt = (DataTable)ViewState["GetUnbankedRecords"];
+        DataTable rightGridDatatable = (DataTable)ViewState["RightGridTotalRecords"];
+        DataTable leftGridDt;
+        if (ViewState["getLeftGirdRecords"] != null)
+            leftGridDt = (DataTable)ViewState["getLeftGirdRecords"];
         else
-            dt = CreateTable();
+            leftGridDt = CreateTable();
         for (int i = 0; i < gvReciptData.Rows.Count; i++)
         {
             CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
             if (chk.Checked)
             {
-                dt = AddGridRow(gvReciptData.Rows[i], dt);
-                dtss = RemoveRow(gvReciptData.Rows[i], dtss);
+                leftGridDt = AddGridRow(gvReciptData.Rows[i], leftGridDt);
+                rightGridDatatable = RemoveRow(gvReciptData.Rows[i], rightGridDatatable);
             }
             else
             {
-                dt = RemoveRow(gvReciptData.Rows[i], dt);
+                leftGridDt = RemoveRow(gvReciptData.Rows[i], leftGridDt);
             }
         }
-        ViewState["GetUnbankedRecords"] = dt;
+        ViewState["getLeftGirdRecords"] = leftGridDt;
     }
     private DataTable CreateTable()
     {
@@ -221,23 +226,35 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     private void UnBankedReciptsCount()
     {
         decimal? sum = 0.0M;
-        //for (int i = 0; i < gvReciptData.Rows.Count; i++)
-        //{
-        //    sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
-        //}
-        DataTable dt = (DataTable)ViewState["test"];
-        sum = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
-        unBankAmount.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
-        unBankCount.InnerText = dt.Rows.Count.ToString();
+        DataTable dt = (DataTable)ViewState["RightGridTotalRecords"];
+        if (dt != null)
+        {
+            sum = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
+            unBankAmount.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
+            unBankCount.InnerText =  dt.Rows.Count.ToString();
+        }
+        else
+        {
+            unBankAmount.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
+            unBankCount.InnerText = "0";
+        }
     }
 
     private void ThisDepositReciptsCount()
     {
         decimal? sumAmounts = 0.0M;
-        DataTable dt = (DataTable)ViewState["GetUnbankedRecords"];
-        sumAmounts = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
-        spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sumAmounts.ToString());
-        spnCurDpstCount.InnerText = dt.Rows.Count.ToString();
+        DataTable dt = (DataTable)ViewState["getLeftGirdRecords"];
+        if (dt != null)
+        {
+            sumAmounts = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
+            spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sumAmounts.ToString());
+            spnCurDpstCount.InnerText = dt.Rows.Count.ToString();
+        }
+        else
+        {
+            spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sumAmounts.ToString());
+            spnCurDpstCount.InnerText = "0";
+        }
     }
     #endregion gridMethods
 
@@ -249,17 +266,18 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             {
                 int Rtype = 0;
                 BindUnbankedReceipts(Rtype, Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
-                UnBankedReciptsCount();
+               
 
             }
             else if (ddldpstReceiptType.SelectedIndex > 0 && ddlDepstClientPredfix.SelectedIndex > 0)
             {
                 BindUnbankedReceipts(Convert.ToInt32(ddldpstReceiptType.SelectedValue), Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
-                UnBankedReciptsCount();
+               
             }
             else
             {
-
+                UnBankedReciptsCount();
+                ThisDepositReciptsCount();
             }
         }
         catch (Exception ex)
@@ -271,13 +289,13 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     }
     protected void chkSelect_CheckedChanged(object sender, EventArgs e)
     {
-        GetSelectedRows();
+        GetRightSelectedRows();
 
         BindSecondRecieptsGrid();
         ThisDepositReciptsCount();
         UnBankedReciptsCount();
 
-        gvReciptData.DataSource = ViewState["test"];
+        gvReciptData.DataSource = ViewState["RightGridTotalRecords"];
         gvReciptData.DataBind();
 
     }
@@ -289,17 +307,18 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             {
                 int CType = 0;
                 BindUnbankedReceipts(Convert.ToInt32(ddldpstReceiptType.SelectedValue), CType);
-                UnBankedReciptsCount();
+                
 
             }
             else if (ddldpstReceiptType.SelectedIndex > 0 && ddlDepstClientPredfix.SelectedIndex > 0)
             {
                 BindUnbankedReceipts(Convert.ToInt32(ddldpstReceiptType.SelectedValue), Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
-                UnBankedReciptsCount();
+               
             }
             else
             {
-
+                UnBankedReciptsCount();
+                ThisDepositReciptsCount();
             }
         }
         catch (Exception ex)
@@ -383,63 +402,46 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     {
         Response.Redirect("DepositTransactionList", false);
     }
-    protected void chkSelect1_CheckedChanged(object sender, EventArgs e)
+    protected void chkRightSelect_CheckedChanged(object sender, EventArgs e)
     {
-        GetSelectedRows1();
+        GetLeftSelectedRows();
         BindfirstRecieptsGrid();
         
         ThisDepositReciptsCount();
         UnBankedReciptsCount();
-        gvSeocondRecipts.DataSource = ViewState["GetUnbankedRecords"];
+        gvSeocondRecipts.DataSource = ViewState["getLeftGirdRecords"];
         gvSeocondRecipts.DataBind();
     }
 
-    private void GetSelectedRows1()
+    private void GetLeftSelectedRows()
     {
-        DataTable dtss = (DataTable)ViewState["test"];
-        DataTable dt;
-        if (ViewState["GetUnbankedRecords"] != null)
-            dt = (DataTable)ViewState["GetUnbankedRecords"];
+        DataTable rightGridRecords = (DataTable)ViewState["RightGridTotalRecords"];
+        DataTable leftGirdRecords;
+        if (ViewState["getLeftGirdRecords"] != null)
+            leftGirdRecords = (DataTable)ViewState["getLeftGirdRecords"];
         else
-            dt = CreateTable();
+            leftGirdRecords = CreateTable();
         for (int i = 0; i < gvSeocondRecipts.Rows.Count; i++)
         {
-            CheckBox chk = (CheckBox)gvSeocondRecipts.Rows[i].Cells[0].FindControl("chkSelect1");
+            CheckBox chk = (CheckBox)gvSeocondRecipts.Rows[i].Cells[0].FindControl("chkRightSelect");
             if (chk.Checked)
             {
-               
-                dtss = AddGridRow(gvSeocondRecipts.Rows[i], dtss);
-                dt = RemoveRow(gvSeocondRecipts.Rows[i], dt);
+
+                rightGridRecords = AddGridRow(gvSeocondRecipts.Rows[i], rightGridRecords);
+                leftGirdRecords = RemoveRow(gvSeocondRecipts.Rows[i], leftGirdRecords);
             }
             else
             {
-                dtss = RemoveRow(gvSeocondRecipts.Rows[i], dtss);
+                rightGridRecords = RemoveRow(gvSeocondRecipts.Rows[i], rightGridRecords);
             }
         }
-        ViewState["GetUnbankedRecords"] = dt;
+        ViewState["getLeftGirdRecords"] = leftGirdRecords;
     }
     protected void BindfirstRecieptsGrid()
     {
-        DataTable dt = (DataTable)ViewState["test"];
+        DataTable dt = (DataTable)ViewState["RightGridTotalRecords"];
         gvReciptData.DataSource = dt;
         gvReciptData.DataBind();
     }
-    private void ThisDepositReciptsCount1()
-    {
-        decimal sum = 0.0M;
-        //for (int i = 0; i < gvReciptData.Rows.Count; i++)
-        //{
-        //    CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
-        //    if (chk.Checked)
-        //    {
-        //        sum += Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text.ToString());
-        //    }
-
-        //}
-      
-       
-        spnThisDepositAmnt.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
-        spnCurDpstCount.InnerText = gvSeocondRecipts.Rows.Count.ToString();
-    }
-
+  
 }
