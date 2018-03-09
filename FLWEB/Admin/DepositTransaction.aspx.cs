@@ -8,6 +8,7 @@ using System.Data;
 using DataManager;
 using BusinessManager;
 using EntityManager;
+using System.Data.SqlClient;
 
 public partial class Admin_DepositTransaction : System.Web.UI.Page
 {
@@ -348,18 +349,22 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             {
                 lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
                 // clearcontrols();
-                for (int i = 0; i < gvReciptData.Rows.Count; i++)
+                DataTable rightGridRecords = (DataTable)ViewState["RightGridTotalRecords"];
+
+
+
+                for (int i = 0; i < rightGridRecords.Rows.Count; i++)
                 {
-                    CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
-                    if (chk.Checked)
-                    {
+                    //CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
+                    //if (chk.Checked)
+                    //{
                         EMDepositChild objEMDepositChild = new EMDepositChild();
-                        objEMDepositChild.ReceiptId = Convert.ToInt32(gvReciptData.Rows[i].Cells[1].Text);
-                        objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                        objEMDepositChild.ReceiptType = gvReciptData.Rows[i].Cells[3].Text;
-                        objEMDepositChild.ReciptClient = gvReciptData.Rows[i].Cells[4].Text;
-                        objEMDepositChild.ReceiptAmount = Convert.ToDecimal(gvReciptData.Rows[i].Cells[6].Text);
-                        objEMDepositChild.InvoiceId = Convert.ToInt32(gvReciptData.Rows[i].Cells[7].Text);
+                        objEMDepositChild.ReceiptId = Convert.ToInt32(rightGridRecords.Rows[i]["ReceivedTransactionId"].ToString());
+                        objEMDepositChild.RecieptDate = Convert.ToDateTime(rightGridRecords.Rows[i][2].ToString());
+                        objEMDepositChild.ReceiptType = rightGridRecords.Rows[i][3].ToString();
+                        objEMDepositChild.ReciptClient = rightGridRecords.Rows[i][4].ToString();
+                        objEMDepositChild.ReceiptAmount = Convert.ToDecimal(rightGridRecords.Rows[i][6].ToString());
+                        objEMDepositChild.InvoiceId = Convert.ToInt32(rightGridRecords.Rows[i][7].ToString());
                         objEMDepositChild.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
                         objEMDepositChild.DepositTransMasterId = result;
                         int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
@@ -376,11 +381,11 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
 
                         //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
                         //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
 
-                    }
+                    //}
                 }
 
 
