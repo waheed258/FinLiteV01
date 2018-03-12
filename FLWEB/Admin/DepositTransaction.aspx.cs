@@ -357,6 +357,9 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
                 DataColumn dtc = new DataColumn("DepositTransMasterId", typeof(System.Int32));
                 dtc.DefaultValue = result;
                 leftGirdRecords.Columns.Add(dtc);
+                DataColumn depositAcId = new DataColumn("DepositAccountId", typeof(System.Int32));
+                depositAcId.DefaultValue = ddlDepositAcoount.SelectedValue;
+                leftGirdRecords.Columns.Add(depositAcId);
 
                
 
@@ -382,6 +385,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
                     SBC.ColumnMappings.Add("AllocatedAmount", "ReceiptAmount");
                     SBC.ColumnMappings.Add("invoiceId", "InvoiceId");
                     SBC.ColumnMappings.Add("DepositTransMasterId", "DepositTransMasterId");
+                    SBC.ColumnMappings.Add("DepositAccountId", "DepositAcId");
                     SBC.DestinationTableName = "DepositTranasctionsChild";
                     SBC.WriteToServer(leftGirdRecords);
                 }
