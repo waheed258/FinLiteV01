@@ -389,7 +389,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
                 //    SBC.DestinationTableName = "DepositTranasctionsChild";
                 //    SBC.WriteToServer(leftGirdRecords);
                 //}
-                Response.Redirect("DepositTransactionList");
+                //Response.Redirect("DepositTransactionList");
 
 
 
