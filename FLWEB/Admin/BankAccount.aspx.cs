@@ -14,6 +14,7 @@ public partial class Admin_BankAccount : System.Web.UI.Page
     EMBankAccount objBankAc = new EMBankAccount();
     BABankAccount objBABankAc = new BABankAccount();
     BOUtiltiy _objBOUtility = new BOUtiltiy();
+    BAAirSuppliers objAirSupplier = new BAAirSuppliers();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -84,10 +85,55 @@ public partial class Admin_BankAccount : System.Web.UI.Page
                  objBankAc.InternetBankingLink = txtInternetBankingWebLink.Text.Trim();
                  objBankAc.StatementFormat = Convert.ToInt32(ddlStatementFormat.SelectedValue);
                  objBankAc.CreatedBy = 0;
-                 int result = objBABankAc.InsUpdBankAccount(objBankAc);
-                 if(result > 0)
+
+
+                 //Charted Accounts Insert
+
+                 DataSet ds = _objBOUtility.getMainAccounts();
+
+                 if (btnSubmit.Text == "Update")
                  {
-                     
+                     objBankAc.AccCode = txtAccountNumber.Text;
+                     objBankAc.ChartedMasterAccName = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["MainAccId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["MainAccId"].ToString());
+                     objBankAc.ChartedAccName = txtBankName.Text;
+                     objBankAc.Type = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["AcType"].ToString()) ? "0" : ds.Tables[1].Rows[0]["AcType"].ToString();
+                     objBankAc.RefType = "BankAccount";
+                     objBankAc.RefId = hf_BankAcId.Value;
+                 }
+
+                 if (btnSubmit.Text == "Submit")
+                 {
+
+                     objBankAc.ChartedAccName = txtBankName.Text;
+                     objBankAc.ChartedMasterAccName = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["MainAccId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["MainAccId"].ToString());
+                     objBankAc.Type = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["AcType"].ToString()) ? "0" : ds.Tables[1].Rows[0]["AcType"].ToString();
+                     objBankAc.BaseCurrency = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["BaseCurrency"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["BaseCurrency"].ToString());
+                     objBankAc.TranCurrency = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["TranCurrency"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["TranCurrency"].ToString());
+                     objBankAc.DepartmentId = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["DepartmentId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["DepartmentId"].ToString());
+                     objBankAc.AccCode = txtAccountNumber.Text;
+                     objBankAc.CategoryId = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["CategoryId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["CategoryId"].ToString());
+                     objBankAc.RefType = "BankAccount";
+                 }
+
+                 int Result = objBABankAc.InsUpdBankAccount(objBankAc);
+
+                 if (btnSubmit.Text == "Submit")
+                 {
+                     objBankAc.RefId = Result.ToString();
+                 }
+                 if (btnSubmit.Text == "Submit")
+                 {
+                     objBankAc.IsClient = 0;
+                     int ChartedResult = objBABankAc.InsUpdChartAccounts(objBankAc);
+                 }
+                 if (btnSubmit.Text == "Update")
+                 {
+                     int AccountUpdate = objBABankAc.UpdateChartAccounts(objBankAc);
+                 }
+
+                 if (Result > 0)
+                 {
+                    
                          labelError.Text = _objBOUtility.ShowMessage("success", "Success", "Bank Account Details Created Successfully");
                          clearcontrols();
                          Response.Redirect("BankAccountList.aspx");

@@ -24,5 +24,18 @@ namespace BusinessManager
         {
             return objDABankAc.DeleteBankAccount(BankAcId);
         }
+
+
+        //CharteredAccounts
+
+        public int InsUpdChartAccounts(EMBankAccount objBankAc)
+        {
+            return objDABankAc.InsUpdChartAccounts(objBankAc);
+        }
+        //Charted Accounts Update 
+        public int UpdateChartAccounts(EMBankAccount objBankAc)
+        {
+            return objDABankAc.UpdChartAccounts(objBankAc);
+        }
     }
 }

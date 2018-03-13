@@ -58,6 +58,45 @@ namespace DataManager
 
        }
 
+       //CharteredAccounts
+
+       public int InsUpdChartAccounts(EMBankAccount objBankAc)
+       {
+           Hashtable htparams = new Hashtable
+                                    {
+                                         {"@ChartedAccId",objBankAc.ChartedAccId},
+                                         {"@ChartedAccName",objBankAc.ChartedAccName},
+                                         {"@ChartedMasterAccName",objBankAc.ChartedMasterAccName},
+                                         {"@Type",objBankAc.Type},
+                                         {"@AccCode",objBankAc.AccCode},
+                                         {"@CompanyId",objBankAc.CompanyId},
+                                         {"@BranchId",objBankAc.BranchId},
+                                         {"@CreatedBy",objBankAc.CreatedBy},
+                                         {"@DepartmentId",objBankAc.DepartmentId},
+                                         {"@BaseCurrency",objBankAc.BaseCurrency},
+                                         {"@TranCurrency",objBankAc.TranCurrency},
+                                         {"@CategoryId",objBankAc.CategoryId},
+                                         {"@RefType",objBankAc.RefType},
+                                          {"@RefId",objBankAc.RefId},
+                                          {"@IsClient",objBankAc.IsClient}
+                                    };
+           int IsSuccess = ExecuteNonQuery("CharteredAccounts_Insert", htparams);
+           return IsSuccess;
+       }
+
+       //CharteredAccounts Update
+       public int UpdChartAccounts(EMBankAccount objBankAc)
+       {
+           Hashtable htparams = new Hashtable
+                                    {
+                                         {"@ChartedAccName",objBankAc.ChartedAccName},
+                                          {"@RefType",objBankAc.RefType},
+                                          {"@RefId",objBankAc.RefId},
+                                    };
+           int IsSuccess = ExecuteNonQuery("CharteredAccounts_Update", htparams);
+           return IsSuccess;
+       }
+
     }
     
 }
