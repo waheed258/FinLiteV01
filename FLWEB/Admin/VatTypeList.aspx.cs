@@ -27,10 +27,12 @@ public partial class Admin_VatTypeList : System.Web.UI.Page
     }
     protected void gvVatList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string id = e.CommandArgument.ToString();
+
         if (e.CommandName == "Edit Vat Details")
         {
-            int VatId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("VatType.aspx?VatId=" + VatId);
+           // int VatId = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("VatType.aspx?VatId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypt(id)));
         }
         if (e.CommandName == "Delete Vat Details")
         {
