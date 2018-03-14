@@ -26,6 +26,8 @@ namespace EntityManager
         public int StatementFormat { get; set; }
         public int CreatedBy { get; set; }
         public int IsClient { get; set; }
+        public string MainAccCode { get; set; }
+        public string GIAccountCode { get; set; }
 
         #region CharteredAccounts
         public int ChartedAccId { get; set; }

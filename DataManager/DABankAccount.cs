@@ -32,7 +32,9 @@ namespace DataManager
                 {"@GiPaymentBatch",objBankAc.GiPaymentBatch},
                 {"@InternetBankingLink",objBankAc.InternetBankingLink},
                 {"@StatementFormat",objBankAc.StatementFormat},
-                {"@CreatedBy",objBankAc.CreatedBy}
+                {"@CreatedBy",objBankAc.CreatedBy},
+                {"@BankMainAccCode",objBankAc.MainAccCode},
+                {"@BankGiAccount",objBankAc.GIAccountCode}
             };
             int IsSuccess = ExecuteNonQuery("BankAccounts_InsertUpdate", htparams);
             return IsSuccess;
@@ -78,7 +80,8 @@ namespace DataManager
                                          {"@CategoryId",objBankAc.CategoryId},
                                          {"@RefType",objBankAc.RefType},
                                           {"@RefId",objBankAc.RefId},
-                                          {"@IsClient",objBankAc.IsClient}
+                                          {"@IsClient",objBankAc.IsClient},
+                                          
                                     };
            int IsSuccess = ExecuteNonQuery("CharteredAccounts_Insert", htparams);
            return IsSuccess;

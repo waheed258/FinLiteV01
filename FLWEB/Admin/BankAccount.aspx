@@ -38,17 +38,26 @@
         <div class="panel-body">
             <div class="form-group">
                 <div class="col-sm-12">
+                  
                     <div class="col-sm-2">
+                        <label class="control-label">Account Code</label>
+                    </div>
+                    <div class="col-sm-1">
+                         <asp:TextBox ID="txtAccountCode" runat="server" CssClass="form-control" ReadOnly="true" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                      <div class="col-sm-1">
                         <label class="control-label">Key(<span class="style1">*</span>)</label>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
                     
                         <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtKey_TextChanged"  AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtKey" runat="server" ID="rfvtxtKey" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Key" Text="Enter Key" Display="Dynamic" ForeColor="Red" />
                          <asp:Label ID="lblKeyerr" runat="server" ></asp:Label>
                     </div>
-                    <div class="col-sm-1"></div>
+                  
                     <div class="col-sm-2">
                         <asp:CheckBox ID="chkDeactivate" runat="server" />
                         <label class="control-label">Deactivate?</label>

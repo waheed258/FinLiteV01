@@ -20,6 +20,7 @@ public partial class Admin_BankAccount : System.Web.UI.Page
         if (!IsPostBack)
         {
             BindGraphics();
+            BindMainAccounts();
             if (!string.IsNullOrEmpty(Request.QueryString["BankAcId"]))
             {
                 int bankAccId = Convert.ToInt32(Request.QueryString["BankAcId"]);
@@ -64,6 +65,32 @@ public partial class Admin_BankAccount : System.Web.UI.Page
 
 
     #region PrivateMethods
+
+    public void BindMainAccounts()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+
+            DataSet ds = _objBOUtility.getMainAccounts();
+            dt = ds.Tables[4];
+            if (ds.Tables[4].Rows.Count > 0)
+            {
+                txtAccountCode.Text = ds.Tables[4].Rows[0]["MainAccCode"].ToString();
+          
+                //txt1.Text = objDS.Tables[0].Rows[0]["ColumnName"].ToString();
+            }
+            else
+            {
+
+            }
+        }
+        catch (Exception ex)
+        {
+            ExceptionLogging.SendExcepToDB(ex);
+       
+        }
+    }
         private void InsertUpdateBankAccDetails()
          {
              try
@@ -85,6 +112,8 @@ public partial class Admin_BankAccount : System.Web.UI.Page
                  objBankAc.InternetBankingLink = txtInternetBankingWebLink.Text.Trim();
                  objBankAc.StatementFormat = Convert.ToInt32(ddlStatementFormat.SelectedValue);
                  objBankAc.CreatedBy = 0;
+                 objBankAc.MainAccCode = txtAccountCode.Text;
+                 objBankAc.GIAccountCode = txtAccountCode.Text  + txtAccountNumber.Text;
 
 
                  //Charted Accounts Insert
@@ -93,10 +122,10 @@ public partial class Admin_BankAccount : System.Web.UI.Page
 
                  if (btnSubmit.Text == "Update")
                  {
-                     objBankAc.AccCode = txtAccountNumber.Text;
-                     objBankAc.ChartedMasterAccName = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["MainAccId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["MainAccId"].ToString());
+                     objBankAc.AccCode = txtAccountCode.Text + '/' + txtAccountNumber.Text;
+                     objBankAc.ChartedMasterAccName = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["MainAccId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[4].Rows[0]["MainAccId"].ToString());
                      objBankAc.ChartedAccName = txtBankName.Text;
-                     objBankAc.Type = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["AcType"].ToString()) ? "0" : ds.Tables[1].Rows[0]["AcType"].ToString();
+                     objBankAc.Type = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["AcType"].ToString()) ? "0" : ds.Tables[4].Rows[0]["AcType"].ToString();
                      objBankAc.RefType = "BankAccount";
                      objBankAc.RefId = hf_BankAcId.Value;
                  }
@@ -105,13 +134,13 @@ public partial class Admin_BankAccount : System.Web.UI.Page
                  {
 
                      objBankAc.ChartedAccName = txtBankName.Text;
-                     objBankAc.ChartedMasterAccName = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["MainAccId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["MainAccId"].ToString());
-                     objBankAc.Type = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["AcType"].ToString()) ? "0" : ds.Tables[1].Rows[0]["AcType"].ToString();
-                     objBankAc.BaseCurrency = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["BaseCurrency"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["BaseCurrency"].ToString());
-                     objBankAc.TranCurrency = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["TranCurrency"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["TranCurrency"].ToString());
-                     objBankAc.DepartmentId = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["DepartmentId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["DepartmentId"].ToString());
-                     objBankAc.AccCode = txtAccountNumber.Text;
-                     objBankAc.CategoryId = string.IsNullOrEmpty(ds.Tables[1].Rows[0]["CategoryId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[1].Rows[0]["CategoryId"].ToString());
+                     objBankAc.ChartedMasterAccName = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["MainAccId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[4].Rows[0]["MainAccId"].ToString());
+                     objBankAc.Type = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["AcType"].ToString()) ? "0" : ds.Tables[4].Rows[0]["AcType"].ToString();
+                     objBankAc.BaseCurrency = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["BaseCurrency"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[4].Rows[0]["BaseCurrency"].ToString());
+                     objBankAc.TranCurrency = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["TranCurrency"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[4].Rows[0]["TranCurrency"].ToString());
+                     objBankAc.DepartmentId = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["DepartmentId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[4].Rows[0]["DepartmentId"].ToString());
+                     objBankAc.AccCode = txtAccountCode.Text + '/' + txtAccountNumber.Text;
+                     objBankAc.CategoryId = string.IsNullOrEmpty(ds.Tables[4].Rows[0]["CategoryId"].ToString()) ? 0 : Convert.ToInt32(ds.Tables[4].Rows[0]["CategoryId"].ToString());
                      objBankAc.RefType = "BankAccount";
                  }
 
