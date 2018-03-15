@@ -145,6 +145,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                 DataSet ds = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlAccountNo.SelectedValue), Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue), "RT", category);
                 string FmAcccode = "";
                 string FmMainAccCode = "";
+               
                 string RefMainAcc = "";
                 string RefAccCode = "";
 
@@ -156,17 +157,19 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
 
                 if (ds.Tables[1].Rows.Count > 0)
                 {
-                    RefAccCode = ds.Tables[1].Rows[0]["BankAcNo"].ToString();
+                    RefAccCode = ds.Tables[1].Rows[0]["BankGiAccount"].ToString();
                     RefMainAcc = ds.Tables[1].Rows[0]["MainAccCode"].ToString();
+
                 }
 
 
                 objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
                 objTransaction.FmAccountNO = FmAcccode;
-                objTransaction.MainAccount = FmMainAccCode;
+                objTransaction.FmMainAccount = FmMainAccCode;
                 objTransaction.ReferenceAccountNO = RefAccCode;
                 objTransaction.CreditAmount = 0;
                 objTransaction.ReferenceNo = txtSourceRef.Text;
+                objTransaction.ToMainAccount = RefMainAcc;
                 // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
                 // objTransaction.InvoiceNo = "";
 

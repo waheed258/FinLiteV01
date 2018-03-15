@@ -163,7 +163,7 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
 
                 objTransaction.FmAccountNoId = Convert.ToInt32(ddlGRFmAccCode.SelectedValue);
                 objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlGRToAccCode.SelectedValue);
-                string category = "";
+                string category = ddlGRCategory.SelectedItem.Text;
                 DataSet Dsaccount = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlGRFmAccCode.SelectedValue), Convert.ToInt32(ddlGRToAccCode.SelectedValue), "GRT", category);
                 string FmAcccode = "";
                 string FmMainAccCode = "";
@@ -178,17 +178,18 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
 
                 if (Dsaccount.Tables[1].Rows.Count > 0)
                 {
-                    RefAccCode = Dsaccount.Tables[1].Rows[0]["BankAcNo"].ToString();
+                    RefAccCode = Dsaccount.Tables[1].Rows[0]["BankGiAccount"].ToString();
                     RefMainAcc = Dsaccount.Tables[1].Rows[0]["MainAccCode"].ToString();
                 }
 
 
                 objTransaction.DebitAmount = string.IsNullOrEmpty(txtGRPaymentAmount.Text) ? (0.0M) : Convert.ToDecimal(txtGRPaymentAmount.Text);
                 objTransaction.FmAccountNO = FmAcccode;
-                objTransaction.MainAccount = FmMainAccCode;
+                objTransaction.FmMainAccount = FmMainAccCode;
                 objTransaction.ReferenceAccountNO = RefAccCode;
                 objTransaction.CreditAmount = 0;
                 objTransaction.ReferenceNo = "0";
+                objTransaction.ToMainAccount = RefMainAcc;
                 // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
                 // objTransaction.InvoiceNo = "";
 
@@ -200,18 +201,18 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
 
 
 
-                objTransaction.CreditAmount = string.IsNullOrEmpty(txtGRPaymentAmount.Text) ? (0.0M) : Convert.ToDecimal(txtGRPaymentAmount.Text);
-                objTransaction.FmAccountNO = RefAccCode;
-                objTransaction.MainAccount = RefMainAcc;
-                objTransaction.ReferenceAccountNO = FmAcccode;
-                objTransaction.DebitAmount = 0;
-                objTransaction.ReferenceNo = "0";
+                //objTransaction.CreditAmount = string.IsNullOrEmpty(txtGRPaymentAmount.Text) ? (0.0M) : Convert.ToDecimal(txtGRPaymentAmount.Text);
+                //objTransaction.FmAccountNO = RefAccCode;
+                //objTransaction.FmMainAccount = RefMainAcc;
+                //objTransaction.ReferenceAccountNO = FmAcccode;
+                //objTransaction.DebitAmount = 0;
+                //objTransaction.ReferenceNo = "0";
 
-                objTransaction.ReferenceType = "GRT";
-                objTransaction.CreatedBy = 0;
+                //objTransaction.ReferenceType = "GRT";
+                //objTransaction.CreatedBy = 0;
 
-                objTransaction.BalanceAmount = 0;
-                _objBALTransactions.TransactionInsert(objTransaction);
+                //objTransaction.BalanceAmount = 0;
+                //_objBALTransactions.TransactionInsert(objTransaction);
 
                 lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "GeneralPayment created Successfully");
 

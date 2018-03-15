@@ -135,13 +135,57 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
                                         objTransactionMaster.categoryName = ddlAccType.SelectedItem.Text;
                                         objTransactionMaster.MainAccount = lblMainAcc.Text;
                                         objTransactionMaster.CategoryId = Convert.ToInt32(ddlAccType.SelectedValue.ToString());
-                                        _objBALTransactions.PaymentTransactionInsert(objTransactionMaster);
+                                      _objBALTransactions.PaymentTransactionInsert(objTransactionMaster);
                                     }
                                 }
                             }
                         }
                     }
                 }
+
+
+                Transaction objTransaction = new Transaction();
+
+                objTransaction.FmAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value.ToString());
+                objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlAccountNo.SelectedItem.Value.ToString());
+                string category = ddlAccType.SelectedItem.Text;
+                DataSet ds = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value.ToString()),
+                    Convert.ToInt32(ddlAccountNo.SelectedItem.Value.ToString()), "PT", category);
+                string FmAcccode = "";
+                string FmMainAccCode = "";
+               
+                string RefMainAcc = "";
+                string RefAccCode = "";
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    RefAccCode = ds.Tables[0].Rows[0]["AccCode"].ToString();
+                    RefMainAcc = ds.Tables[0].Rows[0]["MainAccCode"].ToString();
+                }
+
+                if (ds.Tables[1].Rows.Count > 0)
+                {
+                    FmAcccode = ds.Tables[1].Rows[0]["BankGiAccount"].ToString();
+                    FmMainAccCode = ds.Tables[1].Rows[0]["MainAccCode"].ToString();
+
+                }
+
+
+                objTransaction.CreditAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                objTransaction.FmAccountNO = FmAcccode;
+                objTransaction.FmMainAccount = FmMainAccCode;
+                objTransaction.ReferenceAccountNO = RefAccCode;
+                objTransaction.DebitAmount = 0;
+                objTransaction.ReferenceNo = txtSourceRef.Text;
+                objTransaction.ToMainAccount = RefMainAcc;
+                // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
+                // objTransaction.InvoiceNo = "";
+
+                objTransaction.ReferenceType = "PT";
+                objTransaction.CreatedBy = 0;
+
+                objTransaction.BalanceAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                _objBALTransactions.TransactionInsert(objTransaction);
 
 
                 //Transaction objTransaction = new Transaction();
