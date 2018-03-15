@@ -152,12 +152,13 @@ namespace DataManager
                 {"@ReferenceNo",objtransaction.ReferenceNo},               
                 {"@InvoiceId",objtransaction.InvoiceId},
                 {"@InvoiceNo",objtransaction.InvoiceNo},
-                {"@MainAccount",objtransaction.MainAccount},
+                {"@FmMainAccount",objtransaction.FmMainAccount},
                 {"@ReferenceType",objtransaction.ReferenceType},
                  {"@FmAccountNoId",objtransaction.FmAccountNoId},
                 {"@ReferenceAccountNoId",objtransaction.ReferenceAccountNoId},
                 {"@BalanceAmount",objtransaction.BalanceAmount},
-                {"@CreatedBy",objtransaction.CreatedBy}
+                {"@CreatedBy",objtransaction.CreatedBy},
+                 {"@ToMainAccount",objtransaction.ToMainAccount},
               
             };
             return ExecuteNonQuery("Transactions_Insert", htparams);

@@ -56,12 +56,13 @@ namespace EntityManager
         public DateTime TransactionDate { get; set; }
         public int InvoiceId { get; set; }
         public string InvoiceNo { get; set; }
-        public string MainAccount { get; set; }
+        public string FmMainAccount { get; set; }
         public string ReferenceType { get; set; }
         public int FmAccountNoId { get; set; }
         public int ReferenceAccountNoId { get; set; }
         public decimal BalanceAmount { get; set; }
         public int CreatedBy { get; set; }
+        public string ToMainAccount { get; set; }
     }
 
 }

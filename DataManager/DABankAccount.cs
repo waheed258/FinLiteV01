@@ -36,7 +36,7 @@ namespace DataManager
                 {"@BankMainAccCode",objBankAc.MainAccCode},
                 {"@BankGiAccount",objBankAc.GIAccountCode}
             };
-            int IsSuccess = ExecuteNonQuery("BankAccounts_InsertUpdate", htparams);
+            int IsSuccess = ExecuteNonQuery("BankAccounts_InsertUpdate", htparams,  "@return");
             return IsSuccess;
         }
        public DataSet GetBankAccount(int BankAcId)
