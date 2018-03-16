@@ -34,8 +34,8 @@ public partial class Admin_BookingDestinationsList : System.Web.UI.Page
         string DestId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Destination Details")
         {
-            
-            Response.Redirect("BookingDestinations.aspx?BookDestId=" + DestId);
+
+            Response.Redirect("BookingDestinations.aspx?BookDestId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(DestId,true)));
         }
         else if (e.CommandName == "Delete Destination Details")
         {

@@ -31,6 +31,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
             {
                 int invid = 0;
                 int companyId = 0;
+                var qs = "0";
 
                 string TempuniqCode = "";
 
@@ -41,7 +42,9 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
 
                 if (!string.IsNullOrEmpty(Request.QueryString["id"]))
                 {
-                    invid = Convert.ToInt32(Request.QueryString["id"]);
+                    string getId = Convert.ToString(Request.QueryString["id"]);
+                    qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+                    invid = Convert.ToInt32(qs);
                 }
 
 

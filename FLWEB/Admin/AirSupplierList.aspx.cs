@@ -30,7 +30,7 @@ public partial class Admin_AirSupplierList : System.Web.UI.Page
         string supplierId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Supplier")
         {
-            Response.Redirect("AirSuppliers.aspx?SupplierId=" + supplierId);
+            Response.Redirect("AirSuppliers.aspx?SupplierId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(supplierId,true)));
         }
 
         if (e.CommandName == "Delete Supplier")

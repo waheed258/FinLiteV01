@@ -70,7 +70,7 @@ public partial class Admin_SupplierChoiceList : System.Web.UI.Page
         string ChoiceId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Choice")
         {
-            Response.Redirect("SupplierChoice.aspx?SupplierChoiceId=" + ChoiceId);
+            Response.Redirect("SupplierChoice.aspx?SupplierChoiceId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(ChoiceId,true)));
         }
         if(e.CommandName == "Delete Choice")
         {

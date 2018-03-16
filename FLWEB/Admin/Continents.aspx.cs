@@ -16,12 +16,23 @@ public partial class Admin_Continents : System.Web.UI.Page
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["ContinentId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["ContinentId"]);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["ContinentId"]))
             {
-                int ContId = Convert.ToInt32(Request.QueryString["ContinentId"]);
-                GetContinents(ContId);
+                // int ContId = Convert.ToInt32(Request.QueryString["ContinentId"]);
+                GetContinents(Convert.ToInt32(qs));
                 cmdSubmit.Text = "Update";
             }
         }

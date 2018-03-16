@@ -31,7 +31,7 @@ public partial class Admin_CreditCardList : System.Web.UI.Page
         string CreditId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Credit")
         {
-            Response.Redirect("CreditCardType.aspx?CreditCardId=" + CreditId);
+            Response.Redirect("CreditCardType.aspx?CreditCardId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(CreditId,true)));
         }
         if(e.CommandName == "Delete Credit")
         {

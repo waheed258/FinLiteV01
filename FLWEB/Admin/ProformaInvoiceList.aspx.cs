@@ -541,9 +541,10 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
     {
         ImageButton btndetails = sender as ImageButton;
         GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
-        int PFInvId = Convert.ToInt32(gvPFInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString());
+     //   int PFInvId = Convert.ToInt32(gvPFInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString());
+        string PFInvId = gvPFInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString();
        // Response.Redirect("ProformaInvoicePdf.aspx?id=" + PFInvId);
-        string url = "ProformaInvoicePdf.aspx?id=" + PFInvId;
+        string url = "ProformaInvoicePdf.aspx?id=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(PFInvId,true));
         string fullURL = "window.open('" + url + "', '_blank');";
         ScriptManager.RegisterStartupScript(this, typeof(string), "_blank", fullURL, true);
     }

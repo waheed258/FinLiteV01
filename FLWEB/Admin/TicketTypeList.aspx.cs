@@ -27,10 +27,13 @@ public partial class Admin_TicketTypeList : System.Web.UI.Page
     }
     protected void gvTicketTypeList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string id = e.CommandArgument.ToString();
+
+
         if (e.CommandName == "Edit Ticket Details")
         {
-            int TId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("TicketType.aspx?TId=" + TId);
+           // int TId = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("TicketType.aspx?TId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(id,true)));
         }
         if (e.CommandName == "Delete Ticket Details")
         {
@@ -162,4 +165,6 @@ public partial class Admin_TicketTypeList : System.Web.UI.Page
                ExceptionLogging.SendExcepToDB(ex);
            }
        }
+
+      
 }

@@ -17,12 +17,25 @@ public partial class Admin_ContactNote : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["NotePadId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["NotePadId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
+
+
             if (!string.IsNullOrEmpty(Request.QueryString["NotePadId"]))
             {
-                string NoteId = Request.QueryString["NotePadId"].ToString();
+               // string NoteId = Request.QueryString["NotePadId"].ToString();
 
 
-                GetContactNote(Convert.ToInt32(NoteId));
+                GetContactNote(Convert.ToInt32(qs));
                 cmdSubmit.Text = "Update";
 
             }

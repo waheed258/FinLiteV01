@@ -38,7 +38,7 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
         string LsupplierId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit LSupplier")
         {
-            Response.Redirect("LandSuppliers.aspx?LSupplierId=" + LsupplierId);
+            Response.Redirect("LandSuppliers.aspx?LSupplierId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(LsupplierId,true)));
         }
 
         if (e.CommandName == "Delete LSupplier")

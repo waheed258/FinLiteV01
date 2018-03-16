@@ -18,10 +18,21 @@ public partial class Admin_CreditCardType : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["CreditCardId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["CreditCardId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["CreditCardId"]))
             {
-                string CreditId = Request.QueryString["CreditCardId"].ToString();
-                GetCreditCard(Convert.ToInt32(CreditId));
+                //string CreditId = qs.ToString();
+                GetCreditCard(Convert.ToInt32(qs));
                 cmdSubmit.Text = "Update";
             }
 

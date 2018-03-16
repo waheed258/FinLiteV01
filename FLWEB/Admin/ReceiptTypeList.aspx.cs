@@ -31,7 +31,7 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
         string receiptId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Receipt")
         {
-            Response.Redirect("ReceiptTypes.aspx?ReceiptId=" + receiptId);
+            Response.Redirect("ReceiptTypes.aspx?ReceiptId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(receiptId,true)));
         }
         if(e.CommandName == "Delete Receipt")
         {

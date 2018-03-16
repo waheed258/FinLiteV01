@@ -32,7 +32,7 @@ public partial class Admin_VatType : System.Web.UI.Page
         else
         {
             string getId = Convert.ToString(Request.QueryString["VatId"]);
-            qs = _objBOUtility.Decrypt(HttpUtility.UrlDecode(getId));
+            qs = _objBOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
 
         }
 

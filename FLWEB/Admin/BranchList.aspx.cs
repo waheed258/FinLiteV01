@@ -29,15 +29,17 @@ public partial class Admin_BranchList : System.Web.UI.Page
     }
     protected void gvBranchDetailsList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+
+        string branchid = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Branch Details")
         {
-            int branchid = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("Branch.aspx?BranchId=" + branchid);
+          //  int branchid = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("Branch.aspx?BranchId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(branchid,true)));
         }
         if (e.CommandName == "Delete Branch Details")
         {
-            int branchid = Convert.ToInt32(e.CommandArgument);
-            deleteBranchDetails(branchid);
+           // int branchid = Convert.ToInt32(qs);
+            deleteBranchDetails(Convert.ToInt32(branchid));
             BindBranchDetails();
         }
     }

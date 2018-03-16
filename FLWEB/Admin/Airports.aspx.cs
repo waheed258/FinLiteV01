@@ -21,9 +21,20 @@ public partial class Admin_Airports : System.Web.UI.Page
         if (!IsPostBack)
         {
             BindCountries();
+            var qs = "0";
+            if (Request.QueryString["AirportId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["AirportId"]);
+                qs = _BOUtilities.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["AirportId"]))
             {
-                int airportId = Convert.ToInt32(Request.QueryString["AirportId"].ToString());
+                int airportId = Convert.ToInt32(qs);
                 GetAirport(airportId);
                 cmdSubmit.Text = "Update";
             }

@@ -37,9 +37,21 @@ public partial class Admin_Clients : System.Web.UI.Page
             BindMainAccounts();
             BindGroupMaster();
 
+            var qs = "0";
+            if (Request.QueryString["ClientId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["ClientId"]);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
+ 
             if (!string.IsNullOrEmpty(Request.QueryString["ClientId"]))
             {
-                int ClientId = Convert.ToInt32(Request.QueryString["ClientId"].ToString());
+                int ClientId = Convert.ToInt32(qs);
                 GetClientDetails(ClientId);
                 cmdSubmit.Text = "Update";
             }

@@ -19,35 +19,35 @@ namespace BusinessManager
     {
         public static string[] formats = { "MM/dd/yyyy", "M/d/yyyy", "dd/MM/yyyy", "yyyy-MM-dd'T'HH:mm:ss'Z'", "dd-MM-yyyy", "yyyy-MM-dd", "yyyy/MM/dd", "yyyy/MM/d", "yyyy/M/d", "yyyy/M/dd", "M/dd/yyyy", "d/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "MMMM dd, yyyy" };
         private DOUtility _objDOUtility = new DOUtility();
-      
 
-        public string Encrypt(string toEncrypt, bool useHashing)
+
+        public string Encrypts(string toEncrypt, bool useHashing)
         {
-            //byte[] keyArray;
-            //byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
+            byte[] keyArray;
+            byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
 
-            ////System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
-            //// Get the key from config file
-            //string key = "dinoosys@!@#";
-            ////System.Windows.Forms.MessageBox.Show(key);
-            //if (useHashing)
-            //{
-            //    MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
-            //    keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-            //    hashmd5.Clear();
-            //}
-            //else
-            //    keyArray = UTF8Encoding.UTF8.GetBytes(key);
+            //System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
+            // Get the key from config file
+            string key = "dinoosys@!@#";
+            //System.Windows.Forms.MessageBox.Show(key);
+            if (useHashing)
+            {
+                MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+                keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                hashmd5.Clear();
+            }
+            else
+                keyArray = UTF8Encoding.UTF8.GetBytes(key);
 
-            //TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
-            //tdes.Key = keyArray;
-            //tdes.Mode = CipherMode.ECB;
-            //tdes.Padding = PaddingMode.PKCS7;
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+            tdes.Key = keyArray;
+            tdes.Mode = CipherMode.ECB;
+            tdes.Padding = PaddingMode.PKCS7;
 
-            //ICryptoTransform cTransform = tdes.CreateEncryptor();
-            //byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
-            //tdes.Clear();
-            //return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+            ICryptoTransform cTransform = tdes.CreateEncryptor();
+            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+            tdes.Clear();
+            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
 
             string ResultString = string.Empty;
             try
@@ -62,34 +62,37 @@ namespace BusinessManager
             }
             return ResultString;
         }
-        public string Decrypt(string cipherString, bool useHashing)
+        public string Decrypts(string cipherString, bool useHashing)
         {
-            //byte[] keyArray;
-            //byte[] toEncryptArray = Convert.FromBase64String(cipherString);
+            //space replace to "+" 
+            cipherString = cipherString.Replace(" ", "+");
 
-            ////System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
-            ////Get your key from config file to open the lock!
-            //string key = "dinoosys@!@#";
+            byte[] keyArray;
+            byte[] toEncryptArray = Convert.FromBase64String(cipherString);
 
-            //if (useHashing)
-            //{
-            //    MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
-            //    keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-            //    hashmd5.Clear();
-            //}
-            //else
-            //    keyArray = UTF8Encoding.UTF8.GetBytes(key);
+            //System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
+            //Get your key from config file to open the lock!
+            string key = "dinoosys@!@#";
 
-            //TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
-            //tdes.Key = keyArray;
-            //tdes.Mode = CipherMode.ECB;
-            //tdes.Padding = PaddingMode.PKCS7;
+            if (useHashing)
+            {
+                MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+                keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                hashmd5.Clear();
+            }
+            else
+                keyArray = UTF8Encoding.UTF8.GetBytes(key);
 
-            //ICryptoTransform cTransform = tdes.CreateDecryptor();
-            //byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+            tdes.Key = keyArray;
+            tdes.Mode = CipherMode.ECB;
+            tdes.Padding = PaddingMode.PKCS7;
 
-            //tdes.Clear();
-            //return UTF8Encoding.UTF8.GetString(resultArray);
+            ICryptoTransform cTransform = tdes.CreateDecryptor();
+            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+            tdes.Clear();
+            return UTF8Encoding.UTF8.GetString(resultArray);
             string ResultString = string.Empty;
             try
             {
@@ -107,7 +110,7 @@ namespace BusinessManager
             }
             return ResultString;
         }
-      
+
         public string ShowMessage(string sOperation, string TitleMessage, string sMessage)
         {
             StringBuilder sbMessage = new StringBuilder();
@@ -233,7 +236,7 @@ namespace BusinessManager
         {
             return "R";
         }
- 
+
         public string LogoUrl(string Logo)
         {
             return "http://salesdemo.dinoosystech.com/pdfimages/" + Logo;
@@ -245,16 +248,16 @@ namespace BusinessManager
         public decimal sumExclVat;
         public string ExcluvatCau(string ExclusisveAmnt, string vat)
         {
-         
+
             if (ExclusisveAmnt != "" && vat != "")
             {
                 decimal exclusiveDecimal = Convert.ToDecimal(ExclusisveAmnt);
                 decimal exclusiveVatPer = Convert.ToDecimal(vat);
-                 sumExclVat = (exclusiveDecimal * exclusiveVatPer) / 100;
-               
-                
+                sumExclVat = (exclusiveDecimal * exclusiveVatPer) / 100;
+
+
             }
-            return sumExclVat.ToString(string.Format("0.{0}", new string('0', 2))); 
+            return sumExclVat.ToString(string.Format("0.{0}", new string('0', 2)));
         }
 
         public decimal SumExcAndVatAmount;
@@ -278,7 +281,7 @@ namespace BusinessManager
             if (ExclusisveAmnt != "")
             {
                 ExlusiveAmountDec = Convert.ToDecimal(ExclusisveAmnt);
-               
+
 
 
             }
@@ -294,7 +297,7 @@ namespace BusinessManager
 
         public string FormateNumberWithComma(int value)
         {
-            string  formatevalue= value.ToString("#,##0");
+            string formatevalue = value.ToString("#,##0");
             return formatevalue;
         }
 
@@ -390,7 +393,7 @@ namespace BusinessManager
             return _objDOUtility.GetAccountTypeOfSuppl();
         }
 
-       
+
         public DataSet GetAccNoofClientandSuppl(int AccType)
         {
             return _objDOUtility.GetAccNoofClientandSuppl(AccType);
@@ -435,7 +438,7 @@ namespace BusinessManager
         {
             return _objDOUtility.getCountries();
         }
-      
+
 
         public DataSet get_State_Country(int Id)
         {
@@ -482,10 +485,10 @@ namespace BusinessManager
 
             return _objDOUtility.GetGroupMaster(Id);
         }
-   
 
-      
-       
+
+
+
         public DataSet GetStatement()
         {
             return _objDOUtility.GetStatement();
@@ -515,7 +518,7 @@ namespace BusinessManager
             return _objDOUtility.GetCalCulLand();
         }
 
-      
+
         public DataSet GetImportedTicket()
         {
             return _objDOUtility.GetImportedTicket();
@@ -533,8 +536,8 @@ namespace BusinessManager
         {
             return _objDOUtility.GetErrorList();
         }
-     
-      
+
+
 
         public DataSet GetGroup(string Type)
         {
@@ -545,7 +548,7 @@ namespace BusinessManager
             return _objDOUtility.GetReceiptTypes(ReciptId);
         }
 
-        public DataSet GetBankAccounts( int BankId)
+        public DataSet GetBankAccounts(int BankId)
         {
 
             return _objDOUtility.GetBankAccounts(BankId);
@@ -580,7 +583,7 @@ namespace BusinessManager
 
 
         // Get Multiple Languages
-       
+
         public DataSet GetLanguageDescription(int LangId)
         {
 
@@ -672,7 +675,7 @@ namespace BusinessManager
         }
 
 
-         public string Decrypt(string EncryptedText)
+        public string Decrypt(string EncryptedText)
         {
             byte[] inputByteArray = new byte[EncryptedText.Length + 1];
             byte[] rgbIV = { 0x21, 0x43, 0x56, 0x87, 0x10, 0xfd, 0xea, 0x1c };
@@ -680,7 +683,7 @@ namespace BusinessManager
 
             try
             {
-                key = System.Text.Encoding.UTF8.GetBytes("aMCmAcMA");
+                key = System.Text.Encoding.UTF8.GetBytes("McaMCAMA");
                 DESCryptoServiceProvider des = new DESCryptoServiceProvider();
                 inputByteArray = Convert.FromBase64String(EncryptedText);
                 MemoryStream ms = new MemoryStream();
@@ -704,7 +707,7 @@ namespace BusinessManager
             byte[] key = { };
             try
             {
-                key = System.Text.Encoding.UTF8.GetBytes("aMCmAcMA");
+                key = System.Text.Encoding.UTF8.GetBytes("McaMCAMA");
                 DESCryptoServiceProvider des = new DESCryptoServiceProvider();
                 MemoryStream ms = new MemoryStream();
                 CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(key, rgbIV), CryptoStreamMode.Write);
@@ -725,4 +728,4 @@ namespace BusinessManager
 }
 
 
- 
+

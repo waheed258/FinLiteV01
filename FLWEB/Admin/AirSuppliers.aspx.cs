@@ -35,9 +35,25 @@ public partial class Admin_AirSuppliers : System.Web.UI.Page
             BindMainAccounts();
             BindGroupMaster();
 
+            var qs = "0";
+            if (Request.QueryString["SupplierId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["SupplierId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
+
+
             if (!string.IsNullOrEmpty(Request.QueryString["SupplierId"]))
             {
-                string supplierId = Request.QueryString["SupplierId"].ToString();
+
+                string supplierId = qs;
+
+               // string supplierId = Request.QueryString["SupplierId"].ToString();
 
                 GetAirSuppliers(Convert.ToInt32(supplierId));
                 cmdSubmit.Text = "Update";

@@ -30,7 +30,7 @@ public partial class Admin_AirportList : System.Web.UI.Page
         string airportId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Air")
         {
-            Response.Redirect("Airports.aspx?AirportId=" + airportId);
+            Response.Redirect("Airports.aspx?AirportId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(airportId,true)));
         }
         if(e.CommandName == "Delete Air")
         {

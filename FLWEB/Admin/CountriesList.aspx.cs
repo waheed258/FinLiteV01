@@ -35,8 +35,8 @@ public partial class Admin_CountriesList : System.Web.UI.Page
          string CountryId =e.CommandArgument.ToString();
         if(e.CommandName == "Edit Countries Details")
         {
-           
-            Response.Redirect("Countries.aspx?Id=" +CountryId);
+
+            Response.Redirect("Countries.aspx?Id=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(CountryId,true)));
 
         }
         else if(e.CommandName == "Delete Countries Details")

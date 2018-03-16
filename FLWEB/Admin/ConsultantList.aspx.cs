@@ -41,8 +41,8 @@ public partial class Admin_ConsultantList : System.Web.UI.Page
         string ConsultId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Consultant Details")
         {
-           
-            Response.Redirect("Consultant.aspx?ConsultantId=" + ConsultId);
+
+            Response.Redirect("Consultant.aspx?ConsultantId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(ConsultId,true)));
         }
         else if (e.CommandName == "Delete Consultant Details")
         {

@@ -23,9 +23,19 @@ public partial class State : System.Web.UI.Page
         if(!IsPostBack)
         {
             BindCountries();
+            var qs = "0";
+            if (Request.QueryString["StateId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["StateId"]);
+                qs = objBOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["StateId"]))
             {
-                int Stateid = Convert.ToInt32(Request.QueryString["StateId"]);
+                int Stateid = Convert.ToInt32(qs);
                 btnSubmit.Text = "Update";
                 getStateDetails(Stateid);
             }
