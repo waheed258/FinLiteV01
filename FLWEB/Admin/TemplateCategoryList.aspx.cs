@@ -26,53 +26,53 @@ public partial class Admin_TemplateCategoryList : System.Web.UI.Page
     {
         Response.Redirect("TemplateCategory.aspx");
     }
-   
+
     #region PrivateMethods
     private void BindTemplateCategoryDetails()
-         {
-             try
-             {
-                 gvTemplateCategoryList.PageSize = int.Parse(ViewState["ps"].ToString());
-                 int Id = 0;
-                 DataSet ds = objBATemplateCategory.GetTemplateCategory(Id);
-                 Session["dt"] = ds.Tables[0];
-                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                 {
-                     gvTemplateCategoryList.DataSource = ds.Tables[0];
-                     string sortDirection = "ASC", sortExpression;
-                     if (ViewState["so"] != null)
-                     {
-                         sortDirection = ViewState["so"].ToString();
-                     }
-                     if (ViewState["se"] != null)
-                     {
-                         sortExpression = ViewState["se"].ToString();
-                         ds.Tables[0].DefaultView.Sort = sortExpression + " " + sortDirection;
-                     }
-                     gvTemplateCategoryList.DataBind();
-                 }
-                 else
-                 {
-                     gvTemplateCategoryList.DataSource = null;
-                     gvTemplateCategoryList.DataBind();
-                 }
+    {
+        try
+        {
+            gvTemplateCategoryList.PageSize = int.Parse(ViewState["ps"].ToString());
+            int Id = 0;
+            DataSet ds = objBATemplateCategory.GetTemplateCategory(Id);
+            Session["dt"] = ds.Tables[0];
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                gvTemplateCategoryList.DataSource = ds.Tables[0];
+                string sortDirection = "ASC", sortExpression;
+                if (ViewState["so"] != null)
+                {
+                    sortDirection = ViewState["so"].ToString();
+                }
+                if (ViewState["se"] != null)
+                {
+                    sortExpression = ViewState["se"].ToString();
+                    ds.Tables[0].DefaultView.Sort = sortExpression + " " + sortDirection;
+                }
+                gvTemplateCategoryList.DataBind();
+            }
+            else
+            {
+                gvTemplateCategoryList.DataSource = null;
+                gvTemplateCategoryList.DataBind();
+            }
 
 
 
-             }
-             catch(Exception ex)
-             {
-                 lblMsg.Text = "";
-                 ExceptionLogging.SendExcepToDB(ex);
-             }
-         }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = "";
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
     private void deleteTemplateCategoryDetails(int Id)
     {
         try
         {
             int result = objBATemplateCategory.DeleteTemplateCategory(Id);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
         }
@@ -80,30 +80,30 @@ public partial class Admin_TemplateCategoryList : System.Web.UI.Page
     #endregion
     protected void gvTemplateCategoryList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        int Id = Convert.ToInt32(e.CommandArgument);
+        string Id = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Template")
         {
 
-            Response.Redirect("TemplateCategory.aspx?Id=" + Id);
+            Response.Redirect("TemplateCategory.aspx?Id=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(Id, true)));
         }
         if (e.CommandName == "Delete Template")
         {
-           
-            deleteTemplateCategoryDetails(Id);
+
+            deleteTemplateCategoryDetails(Convert.ToInt32(Id));
             BindTemplateCategoryDetails();
         }
-   }
+    }
     protected void gvTemplateCategoryList_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvTemplateCategoryList.PageIndex = e.NewPageIndex;
         SearchItemFromList(txtSearch.Text.Trim());
-       // BindTemplateCategoryDetails();
+        // BindTemplateCategoryDetails();
     }
     protected void DropPage_SelectedIndexChanged(object sender, EventArgs e)
     {
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
         SearchItemFromList(txtSearch.Text.Trim());
-       // BindTemplateCategoryDetails();
+        // BindTemplateCategoryDetails();
     }
     protected void imgsearch_Click(object sender, ImageClickEventArgs e)
     {
