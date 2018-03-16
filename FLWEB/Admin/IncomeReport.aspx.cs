@@ -98,6 +98,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     }
                 }
             }
+            else
+            {
+                htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
+                htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Income</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalIncome) + "</td>");
+                htmlTable.Append("</tr>");
+            }
             if (objds.Tables[2].Rows.Count > 0)
             {
                 foreach (DataRow dtlRow in objds.Tables[2].Rows)

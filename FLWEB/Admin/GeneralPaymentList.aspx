@@ -71,14 +71,15 @@
                                     <%#Eval("PaymentDate")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Main Account Code">
-                                <ItemTemplate>
-                                    <%#Eval("MainAcCode")%>
-                                </ItemTemplate>
-                            </asp:TemplateField>
+                           
                             <asp:TemplateField HeaderText="From Account" >
                                 <ItemTemplate>
                                     <%#Eval("BankName")%>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="ToMain Account">
+                                <ItemTemplate>
+                                    <%#Eval("MainAcCode")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="To Account" >

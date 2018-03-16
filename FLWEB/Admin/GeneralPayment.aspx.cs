@@ -123,18 +123,28 @@ public partial class Admin_GeneralPayment : System.Web.UI.Page
             _objEmGenPytmAc.FromAccCodeId = Convert.ToInt32(ddlFmAccCode.SelectedValue);
           
             _objEmGenPytmAc.ToAccCodeId = Convert.ToInt32(ddlToAccCode.SelectedValue.ToString());
-           // _objEmGenPytmAc.ToMainAcCode = 
+       
             _objEmGenPytmAc.PaymentAmount = Convert.ToDecimal(txtpytmAmount.Text);
             _objEmGenPytmAc.CategoryId = Convert.ToInt32(ddlCategory.SelectedValue);
             _objEmGenPytmAc.PaymentDate = Convert.ToDateTime(txtDate.Text);
             _objEmGenPytmAc.CreatedBy = 0;
 
+            //string category = ddlGRCategory.SelectedItem.Text;
+
+            //DataSet Dsaccount = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlGRFmAccCode.SelectedValue), Convert.ToInt32(ddlGRToAccCode.SelectedValue), "GRT", category);
+
+
+            //if (Dsaccount.Tables.Count > 0 && Dsaccount.Tables[0].Rows.Count > 0)
+            //{
+            //    _objEMGeneralReceipts.GRSupplierMainAccCode = Dsaccount.Tables[0].Rows[0]["MainAcName"].ToString();
+            //    _objEMGeneralReceipts.GRSupplierFromAccCode = Dsaccount.Tables[0].Rows[0]["ChartedAccName"].ToString();
+            //}
+            
             DataSet ds = _objBAGencategory.Get_MainAccCode(Convert.ToInt32(ddlToAccCode.SelectedValue));
               if(ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
             {
                 _objEmGenPytmAc.FmMainAcCode = ds.Tables[0].Rows[0]["MainAcName"].ToString();
-
-               
+              
             }
               if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
               {

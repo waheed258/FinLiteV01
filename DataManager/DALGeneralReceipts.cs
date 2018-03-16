@@ -27,11 +27,12 @@ namespace DataManager
             };
            return ExecuteNonQuery("[GeneralReceipts_Insert]", htparams);
        }
-       public DataSet Get_MainAccCode(int ChartedAccId)
+       public DataSet Get_MainAccCode(int supplierId,string category)
        {
            Hashtable htparams = new Hashtable
                                             {
-                                                {"@ChartedAcc",ChartedAccId},
+                                                {"@SupplierId",supplierId},
+                                                 {"@category",category},
                                             };
            return ExecuteDataSet("GeneralReceipts_GetMainAccCode", htparams);
        }
