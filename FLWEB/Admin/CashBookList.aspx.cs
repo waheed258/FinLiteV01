@@ -31,7 +31,7 @@ public partial class Admin_CashBookList : System.Web.UI.Page
         string cashBookId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Cash")
         {
-            Response.Redirect("CashBookType.aspx?CashBookId=" + cashBookId);
+            Response.Redirect("CashBookType.aspx?CashBookId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(cashBookId,true)));
            
         }
         if(e.CommandName == "Delete Cash")

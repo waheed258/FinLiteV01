@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="BookingSource.aspx.cs" Inherits="Admin_BookingSource" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
-<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
-    rel="stylesheet" type="text/css" />
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
         function popup() {
@@ -14,7 +14,7 @@
             $(".ui-dialog-titlebar").hide();
 
             $("#dialog").dialog({
-               // title: "jQuery Dialog Popup",
+                // title: "jQuery Dialog Popup",
                 //buttons: {
                 //    Close: function () {
                 //        $(this).dialog('close');
@@ -27,10 +27,10 @@
             });
             return false;
         };
-</script>
+    </script>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:Label ID="labelError" runat="server"></asp:Label>
     <style type="text/css">
         .style1 {
@@ -61,10 +61,10 @@
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
-                         <asp:CheckBox ID="ChkDeactivate" runat="server"/>
+                        <asp:CheckBox ID="ChkDeactivate" runat="server" />
                         <label class="control-label">Deactivate?</label>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="form-group">
@@ -88,19 +88,19 @@
                 </div>
                 <div class="col-sm-3">
                     <asp:Button runat="server" ID="btnSubmit" class="btn btn-success" ValidationGroup="BookSource"
-                        Text="Submit" OnClientClick="popup()" OnClick="btnSubmit_Click"/>&nbsp;<asp:Button runat="server" ID="btnCancel"
-                            class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click"/>&nbsp;<asp:Button runat="server" ID="btnReset"
-                                class="btn btn-primary green" Text="Reset" OnClick="btnReset_Click"/>
+                        Text="Submit" OnClientClick="popup()" OnClick="btnSubmit_Click" />&nbsp;<asp:Button runat="server" ID="btnCancel"
+                            class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;<asp:Button runat="server" ID="btnReset"
+                                class="btn btn-primary green" Text="Reset" OnClick="btnReset_Click" />
 
                 </div>
             </div>
         </div>
 
         <div id="dialog" style="display: none">
-   <img src="../images/loading.gif" alt="" height="40" width="40" />
-                                        <br />
-                                        <h4>Please wait....</h4>
-</div>
+            <img src="../images/loading.gif" alt="" height="40" width="40" />
+            <br />
+            <h4>Please wait....</h4>
+        </div>
 
     </section>
 </asp:Content>

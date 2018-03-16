@@ -19,10 +19,21 @@ public partial class Admin_Countries : System.Web.UI.Page
         {
             BindContinents();
             BindTravelCategory();
+            var qs = "0";
+            if (Request.QueryString["Id"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["Id"]);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
             {
-                int CountryId = Convert.ToInt32(Request.QueryString["Id"]);
-                GetCountries(CountryId);
+                // int CountryId = Convert.ToInt32(Request.QueryString["Id"]);
+                GetCountries(Convert.ToInt32(qs));
                 cmdSubmit.Text = "Update";
             }
         }
@@ -62,7 +73,7 @@ public partial class Admin_Countries : System.Web.UI.Page
                 objCountries.VATOrGSTRate = Convert.ToDecimal(txtVatOrGstRate.Text);
             }
 
-          
+
             objCountries.TravelCategory = Convert.ToInt32(ddlTravelCategory.SelectedValue);
             objCountries.CreatedBy = 0;
 
@@ -95,24 +106,24 @@ public partial class Admin_Countries : System.Web.UI.Page
             DataSet ds = objBACountries.GetCountries(Id);
             if (ds.Tables[0].Rows.Count > 0)
             {
-               
-                    hf_Id.Value = ds.Tables[0].Rows[0]["Id"].ToString();
-                    txtKey.Text = ds.Tables[0].Rows[0]["CountryKey"].ToString();
-                    txtKey.Enabled = false;
-                    txtDescription.Text = ds.Tables[0].Rows[0]["Name"].ToString();
-                    ddlContinent.SelectedIndex = ddlContinent.Items.IndexOf(ddlContinent.Items.FindByValue(ds.Tables[0].Rows[0]["Continent"].ToString()));
-                    txtTimeZone.Text = ds.Tables[0].Rows[0]["TimeZoneUTC"].ToString();
-                    txtDialCode.Text = ds.Tables[0].Rows[0]["DialCode"].ToString();
-                    txtVatOrGstRate.Text = ds.Tables[0].Rows[0]["VATOrGSTRate"].ToString();
-                    ddlTravelCategory.SelectedIndex = ddlTravelCategory.Items.IndexOf(ddlTravelCategory.Items.FindByValue(ds.Tables[0].Rows[0]["TravelCategory"].ToString()));
-                
-             
+
+                hf_Id.Value = ds.Tables[0].Rows[0]["Id"].ToString();
+                txtKey.Text = ds.Tables[0].Rows[0]["CountryKey"].ToString();
+                txtKey.Enabled = false;
+                txtDescription.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+                ddlContinent.SelectedIndex = ddlContinent.Items.IndexOf(ddlContinent.Items.FindByValue(ds.Tables[0].Rows[0]["Continent"].ToString()));
+                txtTimeZone.Text = ds.Tables[0].Rows[0]["TimeZoneUTC"].ToString();
+                txtDialCode.Text = ds.Tables[0].Rows[0]["DialCode"].ToString();
+                txtVatOrGstRate.Text = ds.Tables[0].Rows[0]["VATOrGSTRate"].ToString();
+                ddlTravelCategory.SelectedIndex = ddlTravelCategory.Items.IndexOf(ddlTravelCategory.Items.FindByValue(ds.Tables[0].Rows[0]["TravelCategory"].ToString()));
+
+
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-                 lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-                 ExceptionLogging.SendExcepToDB(ex);
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
         }
     }
 

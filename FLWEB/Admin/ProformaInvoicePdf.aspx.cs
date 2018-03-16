@@ -31,7 +31,7 @@ public partial class Admin_ProformaInvoicePdf : System.Web.UI.Page
             {
                 int PFinvid = 0;
                 int PFcompanyId = 0;
-
+                var qs = "0";
                 string PFTempuniqCode = "";
 
                 if (!string.IsNullOrEmpty(Session["UserCompanyId"].ToString()))
@@ -41,10 +41,11 @@ public partial class Admin_ProformaInvoicePdf : System.Web.UI.Page
 
                 if (!string.IsNullOrEmpty(Request.QueryString["id"]))
                 {
-                    PFinvid = Convert.ToInt32(Request.QueryString["id"]);
+                    string getId = Convert.ToString(Request.QueryString["id"]);
+                    qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+                    PFinvid = Convert.ToInt32(qs);
                 }
-
-
+ 
 
                 DataSet objds = objBALPFInvoice.GetPFServiceFeeMergeValue(PFinvid, PFTempuniqCode);
 

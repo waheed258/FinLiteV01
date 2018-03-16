@@ -16,12 +16,23 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
     BOUtiltiy _BOUtility = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             BindCountries();
+            var qs = "0";
+            if (Request.QueryString["Id"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["Id"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
             {
-                int CityId = Convert.ToInt32(Request.QueryString["Id"].ToString());
+                int CityId = Convert.ToInt32(qs);
                 GetCities(CityId);
                 cmdSubmit.Text = "Update";
             }
@@ -32,7 +43,7 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
     {
         InsertUpdateCities();
     }
-    
+
     private void InsertUpdateCities()
     {
         try
@@ -51,7 +62,7 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
                 lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Cities Details Created Successfully");
                 ClearControls();
                 Response.Redirect("CitiesList.aspx");
-                
+
             }
             else
             {
@@ -71,9 +82,9 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
     {
         try
         {
-            
+
             DataSet ds = objBACities.GetCities(Id);
-            if(ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[0].Rows.Count > 0)
             {
                 hf_CitiesId.Value = ds.Tables[0].Rows[0]["Id"].ToString();
                 txtCityKey.Text = ds.Tables[0].Rows[0]["CityKey"].ToString();
@@ -87,7 +98,7 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
 
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
         }
@@ -120,7 +131,7 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
                 dropCountry.DataBind();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
         }
@@ -150,7 +161,7 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
                 dropState.DataBind();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
         }

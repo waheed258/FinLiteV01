@@ -570,11 +570,13 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     {
         try
         {
+
             ImageButton btndetails = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
-            int invid = Convert.ToInt32(gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString());
+            //int invid = Convert.ToInt32(gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString());
+            string invid = gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString();
             //Response.Redirect("InvoicePdf.aspx?id=" + invid);
-            string url = "InvoicePdf.aspx?id=" + invid;
+            string url = "InvoicePdf.aspx?id=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(invid,true));
             string fullURL = "window.open('" + url + "', '_blank');";
             ScriptManager.RegisterStartupScript(this, typeof(string), "_blank", fullURL, true);
 
@@ -607,10 +609,13 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
     protected void gvInvoiceList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string id = e.CommandArgument.ToString();
+
+
         if (e.CommandName == "Edit Invoice")
         {
-            int InvId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("Invoice.aspx?InvId=" + InvId);
+          //  int InvId = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("Invoice.aspx?InvId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(id,true)));
         }
 
 

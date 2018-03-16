@@ -34,7 +34,7 @@ public partial class Admin_ContinentsList : System.Web.UI.Page
         string ContId = e.CommandArgument.ToString();
         if(e.CommandName=="Edit Continents Details")
         {
-           Response.Redirect("Continents.aspx?ContinentId=" + ContId);
+            Response.Redirect("Continents.aspx?ContinentId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(ContId,true)));
         }
         else if(e.CommandName=="Delete Continents Details")
         {

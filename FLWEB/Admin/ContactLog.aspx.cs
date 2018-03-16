@@ -18,9 +18,20 @@ public partial class Admin_ContactLog : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["LogId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["LogId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if(!string.IsNullOrEmpty(Request.QueryString["LogId"]))
             {
-                int logId = Convert.ToInt32(Request.QueryString["LogId"].ToString());
+                int logId = Convert.ToInt32(qs);
                 GetContactLog(logId);
                 cmdSubmit.Text = "Update";
             }

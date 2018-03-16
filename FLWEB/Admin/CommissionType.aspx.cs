@@ -21,9 +21,20 @@ public partial class CommissionType : System.Web.UI.Page
             BindType();
             BindCategory();
             BindVAT();
+            var qs = "0";
+            if (Request.QueryString["ComId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["ComId"]);
+                qs = _objBOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["ComId"]))
             {
-                int commId = Convert.ToInt32(Request.QueryString["ComId"]);
+                int commId = Convert.ToInt32(qs);
                 btnSubmit.Text = "Update";
                 GetCommType(commId);
             }

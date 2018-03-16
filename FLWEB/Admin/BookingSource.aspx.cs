@@ -18,9 +18,20 @@ public partial class Admin_BookingSource : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["BookId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["BookId"]);
+                qs = objBOUtilty.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["BookId"]))
             {
-                int BookingId = Convert.ToInt32(Request.QueryString["BookId"]);
+                int BookingId = Convert.ToInt32(qs);
                 btnSubmit.Text = "Update";
                 GetBookSource(BookingId);
             }

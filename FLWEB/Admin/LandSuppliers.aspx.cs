@@ -33,11 +33,24 @@ public partial class Admin_LandSuppliers : System.Web.UI.Page
             BindMainAccounts();
             BindGroupMaster();
 
+            var qs = "0";
+            if (Request.QueryString["LSupplierId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["LSupplierId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
+
+
             if (!string.IsNullOrEmpty(Request.QueryString["LSupplierId"]))
             {
-                string LsupplierId = Request.QueryString["LSupplierId"].ToString();
+               // string LsupplierId = Request.QueryString["LSupplierId"].ToString();
 
-
+                string LsupplierId = qs;
                 GetLandSuppliers(Convert.ToInt32(LsupplierId));
                 cmdSubmit.Text = "Update";
 

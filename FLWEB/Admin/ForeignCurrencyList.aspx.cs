@@ -28,15 +28,16 @@ public partial class Admin_ForeignCurrencyList : System.Web.UI.Page
     }
     protected void gvForeignCurrencyList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string Id = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Currency Details")
         {
-            int Id = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("ForeignCurrency.aspx?Id=" + Id);
+           // int Id = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("ForeignCurrency.aspx?Id=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(Id,true)));
         }
         if (e.CommandName == "Delete Currency Details")
         {
-            int Id = Convert.ToInt32(e.CommandArgument);
-            deleteCurrencyDetails(Id);
+            //int Id = Convert.ToInt32(e.CommandArgument);
+            deleteCurrencyDetails(Convert.ToInt32(Id));
             BindCurrencyDetails();
         }
     }

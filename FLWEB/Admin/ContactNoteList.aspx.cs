@@ -31,7 +31,7 @@ public partial class Admin_ContactNoteList : System.Web.UI.Page
         string NoteId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Note")
         {
-            Response.Redirect("ContactNote.aspx?NotePadId=" + NoteId);
+            Response.Redirect("ContactNote.aspx?NotePadId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(NoteId,true)));
         }
         if (e.CommandName == "Delete Note")
         {

@@ -503,10 +503,24 @@ public partial class Admin_Invoice : System.Web.UI.Page
         //invoice Loading
         AirTicketType();
         BindInvoiceDropDown();
+
         //edit for Invoice
+
+        var qs = "0";
+        if (Request.QueryString["InvId"] == null)
+        {
+            qs = "0";
+        }
+        else
+        {
+            string getId = Convert.ToString(Request.QueryString["InvId"]);
+            qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+        }
         if (!string.IsNullOrEmpty(Request.QueryString["InvId"]))
         {
-            int InvId = Convert.ToInt32(Request.QueryString["InvId"]);
+
+            int InvId = Convert.ToInt32(qs);
             btnInvSave.Text = "Update";
             Button1.Style.Add("display", "none");
             InvListGrid.Columns[6].Visible = false;

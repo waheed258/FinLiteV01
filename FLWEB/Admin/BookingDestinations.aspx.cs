@@ -18,9 +18,20 @@ public partial class Admin_BookingDestinations : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["BookDestId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["BookDestId"]);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["BookDestId"]))
             {
-                int DestId = Convert.ToInt32(Request.QueryString["BookDestId"]);
+                int DestId = Convert.ToInt32(qs);
                 GetDestinationsDetails(DestId);
                 cmdSubmit.Text = "Update";
             }

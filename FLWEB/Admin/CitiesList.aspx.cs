@@ -30,7 +30,7 @@ public partial class Admin_CitiesList : System.Web.UI.Page
         string CityId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit City")
         {
-            Response.Redirect("CitiesMaster.aspx?Id=" + CityId);
+            Response.Redirect("CitiesMaster.aspx?Id=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(CityId,true)));
         }
         if(e.CommandName == "Delete City")
         {

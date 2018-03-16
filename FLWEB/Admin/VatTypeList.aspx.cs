@@ -32,7 +32,7 @@ public partial class Admin_VatTypeList : System.Web.UI.Page
         if (e.CommandName == "Edit Vat Details")
         {
            // int VatId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("VatType.aspx?VatId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypt(id)));
+            Response.Redirect("VatType.aspx?VatId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(id,true)));
         }
         if (e.CommandName == "Delete Vat Details")
         {
@@ -167,4 +167,6 @@ public partial class Admin_VatTypeList : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+
+    
 }

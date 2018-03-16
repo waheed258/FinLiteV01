@@ -41,7 +41,7 @@ public partial class Admin_ClientsList : System.Web.UI.Page
         if (e.CommandName == "Edit Client Details")
         {
 
-            Response.Redirect("Clients.aspx?ClientId=" + ClientId);
+            Response.Redirect("Clients.aspx?ClientId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(ClientId,true)));
 
         }
         else if (e.CommandName == "Delete Client Details")

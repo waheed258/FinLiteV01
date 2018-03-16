@@ -18,9 +18,20 @@ public partial class Admin_TemplateCategory : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["Id"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["Id"]);
+                qs = _objBOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
             {
-                int Id = Convert.ToInt32(Request.QueryString["Id"]);
+                int Id = Convert.ToInt32(qs);
                 btnSubmit.Text = "Update";
                 GetTemplateCategory(Id);
             }

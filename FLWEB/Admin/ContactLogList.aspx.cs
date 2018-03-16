@@ -31,7 +31,7 @@ public partial class Admin_ContactLogList : System.Web.UI.Page
         string logId = e.CommandArgument.ToString();
         if(e.CommandName == "Edit Log")
         {
-            Response.Redirect("ContactLog.aspx?LogId=" + logId);
+            Response.Redirect("ContactLog.aspx?LogId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(logId,true)));
         }
         if(e.CommandName == "Delete Log")
         {

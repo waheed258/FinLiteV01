@@ -23,9 +23,21 @@ public partial class Admin_Consultant : System.Web.UI.Page
             BindClientType();
             BindGroup();
             BindGroupMaster();
+            var qs = "0";
+            if (Request.QueryString["ConsultantId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["ConsultantId"]);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
+ 
             if (!string.IsNullOrEmpty(Request.QueryString["ConsultantId"]))
             {
-                int ConsultId = Convert.ToInt32(Request.QueryString["ConsultantId"]);
+                int ConsultId = Convert.ToInt32(qs);
 
                 cmdSubmit.Text = "Update";
                 GetConsultantDetails(ConsultId);

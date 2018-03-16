@@ -28,15 +28,16 @@ public partial class Admin_CommissionTypeList : System.Web.UI.Page
     }
     protected void gvCommTypeList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string commId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Commission Type Details")
         {
-            int commId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("CommissionType.aspx?ComId=" + commId);
+           // int commId = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("CommissionType.aspx?ComId=" + HttpUtility.UrlEncode(_objBOUtiltiy.Encrypts(commId,true)));
         }
         if (e.CommandName == "Delete Commission Type Details")
         {
-            int commId = Convert.ToInt32(e.CommandArgument);
-            DeleteCommissionTypeDetails(commId);
+           // int commId = Convert.ToInt32(e.CommandArgument);
+            DeleteCommissionTypeDetails(Convert.ToInt32(commId));
             BindCommissionTypeDetails();
         }
     }

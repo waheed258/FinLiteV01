@@ -16,13 +16,24 @@ public partial class Admin_CashBookType : System.Web.UI.Page
     BOUtiltiy _BOUtility = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             BindTansactionAction();
-            if(!string.IsNullOrEmpty(Request.QueryString["CashBookId"]))
+            var qs = "0";
+            if (Request.QueryString["CashBookId"] == null)
             {
-                int cashBookId = Convert.ToInt32(Request.QueryString["CashBookId"].ToString());
-                GetCashBook(cashBookId);
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["CashBookId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
+            if (!string.IsNullOrEmpty(Request.QueryString["CashBookId"]))
+            {
+                //  int cashBookId = Convert.ToInt32(Request.QueryString["CashBookId"].ToString());
+                GetCashBook(Convert.ToInt32(qs));
                 cmdSubmit.Text = "Update";
             }
         }
@@ -47,20 +58,20 @@ public partial class Admin_CashBookType : System.Web.UI.Page
             objEMCash.CreatedBy = 0;
 
             int Result = objBACash.InsUpdCashBook(objEMCash);
-            if(Result > 0)
+            if (Result > 0)
             {
-               lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "CashBook Types Created Successfully");
-               ClearControls();
-               Response.Redirect("CashBookList.aspx");
-               
+                lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "CashBook Types Created Successfully");
+                ClearControls();
+                Response.Redirect("CashBookList.aspx");
+
             }
-            
+
             else
             {
                 lblMsg.Text = _BOUtility.ShowMessage("info", "Info", "CashBook Types  was not created please try again");
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
@@ -72,7 +83,7 @@ public partial class Admin_CashBookType : System.Web.UI.Page
         try
         {
             DataSet ds = objBACash.GetCashBook(CashBookId);
-            if(ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[0].Rows.Count > 0)
             {
                 hf_CashBookId.Value = ds.Tables[0].Rows[0]["CashBookId"].ToString();
                 txtCashKey.Text = ds.Tables[0].Rows[0]["CashBookKey"].ToString();
@@ -85,7 +96,7 @@ public partial class Admin_CashBookType : System.Web.UI.Page
                 txtVatCodes.Text = ds.Tables[0].Rows[0]["VatCodes"].ToString();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ExceptionLogging.SendExcepToDB(ex);
         }
@@ -102,7 +113,7 @@ public partial class Admin_CashBookType : System.Web.UI.Page
     private void BindTansactionAction()
     {
         DataSet ds = _BOUtility.GetTransactionAction();
-        if(ds.Tables[0].Rows.Count > 0)
+        if (ds.Tables[0].Rows.Count > 0)
         {
             dropDefaultAction.DataSource = ds.Tables[0];
             dropDefaultAction.DataTextField = "TransName";

@@ -18,10 +18,20 @@ public partial class Admin_Branch : System.Web.UI.Page
         if (!IsPostBack)
         {
             getStates();
+            var qs = "0";
+            if (Request.QueryString["BranchId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["BranchId"]);
+                qs = _objBOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
 
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["BranchId"]))
             {
-                int branchid = Convert.ToInt32(Request.QueryString["BranchId"]);
+                int branchid = Convert.ToInt32(qs);
                 cmdSubmit.Text = "Update";
                 getBranchDetails(branchid);
             }

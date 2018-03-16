@@ -18,9 +18,20 @@ public partial class Admin_SupplierChoice : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
+            var qs = "0";
+            if (Request.QueryString["SupplierChoiceId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["SupplierChoiceId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if(!string.IsNullOrEmpty(Request.QueryString["SupplierChoiceId"]))
             {
-                int ChoiceId = Convert.ToInt32(Request.QueryString["SupplierChoiceId"].ToString());
+                int ChoiceId = Convert.ToInt32(qs);
                 GetSupplierChoice(ChoiceId);
                 cmdSubmit.Text = "Update";
             }

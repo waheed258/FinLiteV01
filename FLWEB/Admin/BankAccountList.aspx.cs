@@ -27,15 +27,16 @@ public partial class Admin_BankAccountList : System.Web.UI.Page
     }
     protected void gvBankAccountList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string BankAccId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit Bank Details")
         {
-            int BankAccId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("BankAccount.aspx?BankAcId=" + BankAccId);
+            //int BankAccId = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("BankAccount.aspx?BankAcId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(BankAccId,true)));
         }
         if (e.CommandName == "Delete Bank Details")
         {
-            int BankAccId = Convert.ToInt32(e.CommandArgument);
-            deleteBankAccDetails(BankAccId);
+            //int BankAccId = Convert.ToInt32(e.CommandArgument);
+            deleteBankAccDetails( Convert.ToInt32( BankAccId));
             BindBankAccDetails();
         }
     }

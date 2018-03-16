@@ -23,10 +23,21 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
             BindCreditType();
             BindBankAccount();
             BindDepListMethod();
+            var qs = "0";
+            if (Request.QueryString["ReceiptId"] == null)
+            {
+                qs = "0";
+            }
+            else
+            {
+                string getId = Convert.ToString(Request.QueryString["ReceiptId"]);
+                qs = _BOUtility.Decrypts(HttpUtility.UrlDecode(getId),true);
+
+            }
             if (!string.IsNullOrEmpty(Request.QueryString["ReceiptId"]))
             {
-                string receiptid = Request.QueryString["ReceiptId"].ToString();
-                GetReceiptTypes(Convert.ToInt32(receiptid));
+              //  string receiptid = Request.QueryString["ReceiptId"].ToString();
+                GetReceiptTypes(Convert.ToInt32(qs));
                 cmdSubmit.Text = "Update";
             }
         }
