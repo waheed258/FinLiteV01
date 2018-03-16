@@ -65,7 +65,7 @@
                                     <%#Eval("GRPaymentDate")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Main Account">
+                            <asp:TemplateField HeaderText="Suppl.Main Account">
                                 <ItemTemplate>
                                     <%#Eval("GRSupplierMainAccCode")%>
                                 </ItemTemplate>
@@ -75,7 +75,7 @@
                                     <%#Eval("GRSupplierFromAccCode")%>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="Bank">
+                             <asp:TemplateField HeaderText="To Account">
                                 <ItemTemplate>
                                     <%#Eval("BankName")%>
                                 </ItemTemplate>
