@@ -25,7 +25,7 @@ public partial class Admin_ReceiptsList : System.Web.UI.Page
         try
         {
             gvReceiptList.PageSize = int.Parse(ViewState["ps"].ToString());
-           
+
             DataSet ds = objBalTransaction.GetRecipts();
             Session["dt"] = ds.Tables[0];
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -54,7 +54,7 @@ public partial class Admin_ReceiptsList : System.Web.UI.Page
 
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = "";
             ExceptionLogging.SendExcepToDB(ex);
@@ -74,7 +74,7 @@ public partial class Admin_ReceiptsList : System.Web.UI.Page
     {
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
         SearchItemFromList(txtSearch.Text.Trim());
-       // ReceiptGridBnd();
+        // ReceiptGridBnd();
     }
     protected void imgsearch_Click(object sender, ImageClickEventArgs e)
     {
@@ -89,12 +89,19 @@ public partial class Admin_ReceiptsList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                    "RecieptType='" + SearchText +
-                    "' OR ClientType LIKE '%" + SearchText +
-                    "%' OR clientName LIKE '%" + SearchText +                   
-                    "%' OR Convert(ReceiptAmount, 'System.String') LIKE '%" + SearchText +
-                    "%' OR Convert(InvoiceTotalAmount, 'System.String') LIKE '%" + SearchText +
-                    "%' OR Convert(AllocatedAmount, 'System.String') LIKE '%" + SearchText + "%'");
+                        "InvDocumentNo='" + SearchText +
+                        "' OR RecieptType  LIKE '%" + SearchText +
+                        "%' OR clientName LIKE '%" + SearchText +
+                        "%' OR receiptStatus LIKE '%" + SearchText +
+                    //"%' OR InvDocumentNo  LIKE '%" + SearchText +
+                        "%' OR ClientType LIKE '%" + SearchText +
+                        "%' OR Convert(TransactionDate, 'System.String') LIKE '%" + SearchText +
+                        "%' OR Convert(AllocatedAmount , 'System.String') LIKE '%" + SearchText +
+                        "%' OR Convert(ReceiptAmount, 'System.String') LIKE '%" + SearchText +
+                        "%' OR Convert(ReceiptBalanceAmount, 'System.String') LIKE '%" + SearchText +
+                        "%' OR Convert(InvoiceBalanceAmount, 'System.String') LIKE '%" + SearchText +
+                        "%' OR Convert(ClientBalanceAmount, 'System.String') LIKE '%" + SearchText +
+                        "%' OR Convert(InvoiceTotalAmount, 'System.String') LIKE '%" + SearchText + "%'");
 
                 if (dr.Count() > 0)
                 {
