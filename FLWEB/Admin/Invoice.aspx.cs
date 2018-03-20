@@ -96,7 +96,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
     }
 
     #endregion
- 
+
 
     #region InvoicePrivateMethod
 
@@ -330,7 +330,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             // _objEmInvoice.invDocumentNo = Guid;
 
             int Result = _objBalInvoice.InsertInvoice(_objEmInvoice);
-           
+
             if (Result > 0)
             {
                 btnInvSave.Enabled = false;
@@ -514,7 +514,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         else
         {
             string getId = Convert.ToString(Request.QueryString["InvId"]);
-            qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+            qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId), true);
 
         }
         if (!string.IsNullOrEmpty(Request.QueryString["InvId"]))
@@ -678,7 +678,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
     }
 
     #endregion
-   
+
 
     #region AirTicketPrivateMethods
     protected void cmdClose_Click(object sender, ImageClickEventArgs e)
@@ -702,7 +702,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         }
     }
 
-     private void routingLablesShow()
+    private void routingLablesShow()
     {
         try
         {
@@ -773,264 +773,264 @@ public partial class Admin_Invoice : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
-     private void AllCommissionTypes_GetComPercentage()
-     {
-         DataSet ds_AllCommissionTypes_GetComPercentage = _objBALAirTicket.AllCommissionTypes_GetComPercentage();
-         ViewState["AllCommissionTypes_GetComPercentage"] = ds_AllCommissionTypes_GetComPercentage.Tables[0];
-     }
-     private void AirticketRouting_Disabled()
-     {
+    private void AllCommissionTypes_GetComPercentage()
+    {
+        DataSet ds_AllCommissionTypes_GetComPercentage = _objBALAirTicket.AllCommissionTypes_GetComPercentage();
+        ViewState["AllCommissionTypes_GetComPercentage"] = ds_AllCommissionTypes_GetComPercentage.Tables[0];
+    }
+    private void AirticketRouting_Disabled()
+    {
 
-         try
-         {
-             lblRoutes1.Text = "";
-             lblRoutes2.Text = "";
-             lblRoutes3.Text = "";
-             lblRoutes4.Text = "";
-             txtDate1.Enabled = false;
-             txtDate2.Enabled = false;
-             txtDate3.Enabled = false;
-             txtDate4.Enabled = false;
-             txtFlightNo1.Enabled = false;
-             txtFlightNo2.Enabled = false;
-             txtFlightNo3.Enabled = false;
-             txtFlightNo4.Enabled = false;
-             txtClass1.Enabled = false;
-             txtClass2.Enabled = false;
-             txtClass3.Enabled = false;
-             txtClass4.Enabled = false;
+        try
+        {
+            lblRoutes1.Text = "";
+            lblRoutes2.Text = "";
+            lblRoutes3.Text = "";
+            lblRoutes4.Text = "";
+            txtDate1.Enabled = false;
+            txtDate2.Enabled = false;
+            txtDate3.Enabled = false;
+            txtDate4.Enabled = false;
+            txtFlightNo1.Enabled = false;
+            txtFlightNo2.Enabled = false;
+            txtFlightNo3.Enabled = false;
+            txtFlightNo4.Enabled = false;
+            txtClass1.Enabled = false;
+            txtClass2.Enabled = false;
+            txtClass3.Enabled = false;
+            txtClass4.Enabled = false;
 
-             rfvtxtFlightNo1.Enabled = false;
-             rfvtxtClass1.Enabled = false;
-             rfvtxtDate1.Enabled = false;
+            rfvtxtFlightNo1.Enabled = false;
+            rfvtxtClass1.Enabled = false;
+            rfvtxtDate1.Enabled = false;
 
-             rfvtxtFlightNo2.Enabled = false;
-             rfvtxtClass2.Enabled = false;
-             rfvtxtDate2.Enabled = false;
+            rfvtxtFlightNo2.Enabled = false;
+            rfvtxtClass2.Enabled = false;
+            rfvtxtDate2.Enabled = false;
 
-             rfvtxtFlightNo3.Enabled = false;
-             rfvtxtClass3.Enabled = false;
-             rfvtxtDate3.Enabled = false;
+            rfvtxtFlightNo3.Enabled = false;
+            rfvtxtClass3.Enabled = false;
+            rfvtxtDate3.Enabled = false;
 
-             rfvtxtFlightNo4.Enabled = false;
-             rfvtxtClass4.Enabled = false;
-             rfvtxtDate4.Enabled = false;
-         }
+            rfvtxtFlightNo4.Enabled = false;
+            rfvtxtClass4.Enabled = false;
+            rfvtxtDate4.Enabled = false;
+        }
 
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-     }
-     private void BindAirServiceTypes()
-     {
-         try
-         {
-             string Type = "Air";
-             DataSet ds = new DataSet();
-             ds = _doUtilities.GetServiceTypeByType(Type);
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void BindAirServiceTypes()
+    {
+        try
+        {
+            string Type = "Air";
+            DataSet ds = new DataSet();
+            ds = _doUtilities.GetServiceTypeByType(Type);
 
-             ViewState["ddlAirService"] = ds.Tables[0];
+            ViewState["ddlAirService"] = ds.Tables[0];
 
-             if (ds.Tables[0].Rows.Count > 0)
-             {
+            if (ds.Tables[0].Rows.Count > 0)
+            {
 
-                 ddlAirService.DataSource = ds.Tables[0];
-                 ddlAirService.DataTextField = "ComDesc";
-                 ddlAirService.DataValueField = "ComId";
-                 ddlAirService.DataBind();
-                 ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
+                ddlAirService.DataSource = ds.Tables[0];
+                ddlAirService.DataTextField = "ComDesc";
+                ddlAirService.DataValueField = "ComId";
+                ddlAirService.DataBind();
+                ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
 
-             }
-             else
-             {
-                 ddlAirService.DataSource = null;
-                 ddlAirService.DataBind();
-             }
-         }
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-     }
-     private void BindAirLine()
-     {
-         try
-         {
-            
-             BAAirSuppliers _boAirSupplier = new BAAirSuppliers();
-             DataSet ds = new DataSet();
-             int supplId = 0;
-             ds = _boAirSupplier.GetAirSuppliers(supplId);
-             ViewState["CommissionBasedonAirline"] = ds.Tables[2];
+            }
+            else
+            {
+                ddlAirService.DataSource = null;
+                ddlAirService.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void BindAirLine()
+    {
+        try
+        {
 
-             if (ds.Tables[0].Rows.Count > 0)
-             {
+            BAAirSuppliers _boAirSupplier = new BAAirSuppliers();
+            DataSet ds = new DataSet();
+            int supplId = 0;
+            ds = _boAirSupplier.GetAirSuppliers(supplId);
+            ViewState["CommissionBasedonAirline"] = ds.Tables[2];
 
-                 ddlAirLine.DataSource = ds.Tables[0];
-                 ddlAirLine.DataTextField = "SupplierName";
-                 ddlAirLine.DataValueField = "SupplierId";
-                 ddlAirLine.DataBind();
-                 ddlAirLine.Items.Insert(0, new ListItem("--Select AirLine--", "0"));
+            if (ds.Tables[0].Rows.Count > 0)
+            {
 
-             }
-             else
-             {
-                 ddlAirLine.DataSource = null;
-                 ddlAirLine.DataBind();
-             }
+                ddlAirLine.DataSource = ds.Tables[0];
+                ddlAirLine.DataTextField = "SupplierName";
+                ddlAirLine.DataValueField = "SupplierId";
+                ddlAirLine.DataBind();
+                ddlAirLine.Items.Insert(0, new ListItem("--Select AirLine--", "0"));
 
-             DataSet dsvat = _doUtilities.getVatByType();
+            }
+            else
+            {
+                ddlAirLine.DataSource = null;
+                ddlAirLine.DataBind();
+            }
 
-             if (dsvat.Tables[0].Rows.Count > 0)
-             {
-                 ViewState["get_VatRateByType"] = dsvat.Tables[0];
-             }
+            DataSet dsvat = _doUtilities.getVatByType();
 
-
-
-         }
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-     }
-     private void exclVatCal()
-     {
-         try
-         {
-
-             decimal clientmount;
-
-             if (txtAirExcluisvefare.Text != "")
-             {
-                 decimal exclusiveFare = Convert.ToDecimal(txtAirExcluisvefare.Text);
-                 txtAirExcluisvefare.Text = _objBOUtiltiy.FormatTwoDecimal(txtAirExcluisvefare.Text);
-                 if (txtAirportTax.Text != "")
-                 {
-                     clientmount = Convert.ToDecimal(txtAirExcluisvefare.Text) + Convert.ToDecimal(txtAirportTax.Text);
-                     txtAirClientTot.Text = _objBOUtiltiy.FormatTwoDecimal(clientmount.ToString());
-                 }
-                 else
-                 {
-                     txtAirClientTot.Text = txtAirExcluisvefare.Text;
-                 }
-             }
-
-             if (txtVatPer.Text != "" && txtAirExcluisvefare.Text != "")
-             {
-                 decimal inclusiveAmount = Convert.ToDecimal(GlobalClass.exclVatSum(txtAirExcluisvefare.Text, txtVatPer.Text));
-                 // decimal inclusiveAmount = (exclusiveFare * Convert.ToDecimal(txtVatPer.Text)) / 100;
-                 txtAirVatOnFare.Text = inclusiveAmount.ToString();
-                 if (txtAirportTax.Text != "")
-                 {
-
-                     txtAirClientTot.Text = (inclusiveAmount + Convert.ToDecimal(txtAirExcluisvefare.Text) + Convert.ToDecimal(txtAirportTax.Text)).ToString();
-                 }
-                 else
-                 {
-                     txtAirClientTot.Text = (inclusiveAmount + Convert.ToDecimal(txtAirExcluisvefare.Text)).ToString();
-                 }
-
-             }
-         }
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-
-     }
-     private void BindTypes()
-     {
-         try
-         {
-             DataSet ds = new DataSet();
-             ds = _doUtilities.get_Type();
-
-             if (ds.Tables[0].Rows.Count > 0)
-             {
-
-                 ddlType.DataSource = ds.Tables[0];
-                 ddlType.DataTextField = "TypeName";
-                 ddlType.DataValueField = "TypeId";
-                 ddlType.DataBind();
-                 ddlType.Items.Insert(0, new ListItem("--Select Type--", "0"));
-             }
-             else
-             {
-                 ddlType.DataSource = null;
-                 ddlType.DataBind();
-             }
-         }
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-     }
-
-     private void BindVatByType()
-     {
-         try
-         {
-             if (ViewState["get_VatRateByType"].ToString() != null)
-             {
-                 DataTable dt = (DataTable)ViewState["get_VatRateByType"];
-                 //string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlType.SelectedValue)));
-                 string vatRate = (dt.AsEnumerable()
-                     .Where(p => p["TypeId"].ToString() == Convert.ToInt32(ddlType.SelectedValue).ToString())
-                     .Select(p => p["VatRate"].ToString())).FirstOrDefault();
-
-                 txtAirCommVat.Text = vatRate;
-                 txtVatPer.Text = vatRate;
-             }
+            if (dsvat.Tables[0].Rows.Count > 0)
+            {
+                ViewState["get_VatRateByType"] = dsvat.Tables[0];
+            }
 
 
 
-         }
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-     }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void exclVatCal()
+    {
+        try
+        {
 
-     private void commExcAmount()
-     {
-         try
-         {
+            decimal clientmount;
+
+            if (txtAirExcluisvefare.Text != "")
+            {
+                decimal exclusiveFare = Convert.ToDecimal(txtAirExcluisvefare.Text);
+                txtAirExcluisvefare.Text = _objBOUtiltiy.FormatTwoDecimal(txtAirExcluisvefare.Text);
+                if (txtAirportTax.Text != "")
+                {
+                    clientmount = Convert.ToDecimal(txtAirExcluisvefare.Text) + Convert.ToDecimal(txtAirportTax.Text);
+                    txtAirClientTot.Text = _objBOUtiltiy.FormatTwoDecimal(clientmount.ToString());
+                }
+                else
+                {
+                    txtAirClientTot.Text = txtAirExcluisvefare.Text;
+                }
+            }
+
+            if (txtVatPer.Text != "" && txtAirExcluisvefare.Text != "")
+            {
+                decimal inclusiveAmount = Convert.ToDecimal(GlobalClass.exclVatSum(txtAirExcluisvefare.Text, txtVatPer.Text));
+                // decimal inclusiveAmount = (exclusiveFare * Convert.ToDecimal(txtVatPer.Text)) / 100;
+                txtAirVatOnFare.Text = inclusiveAmount.ToString();
+                if (txtAirportTax.Text != "")
+                {
+
+                    txtAirClientTot.Text = (inclusiveAmount + Convert.ToDecimal(txtAirExcluisvefare.Text) + Convert.ToDecimal(txtAirportTax.Text)).ToString();
+                }
+                else
+                {
+                    txtAirClientTot.Text = (inclusiveAmount + Convert.ToDecimal(txtAirExcluisvefare.Text)).ToString();
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+
+    }
+    private void BindTypes()
+    {
+        try
+        {
+            DataSet ds = new DataSet();
+            ds = _doUtilities.get_Type();
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+
+                ddlType.DataSource = ds.Tables[0];
+                ddlType.DataTextField = "TypeName";
+                ddlType.DataValueField = "TypeId";
+                ddlType.DataBind();
+                ddlType.Items.Insert(0, new ListItem("--Select Type--", "0"));
+            }
+            else
+            {
+                ddlType.DataSource = null;
+                ddlType.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+
+    private void BindVatByType()
+    {
+        try
+        {
+            if (ViewState["get_VatRateByType"].ToString() != null)
+            {
+                DataTable dt = (DataTable)ViewState["get_VatRateByType"];
+                //string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlType.SelectedValue)));
+                string vatRate = (dt.AsEnumerable()
+                    .Where(p => p["TypeId"].ToString() == Convert.ToInt32(ddlType.SelectedValue).ToString())
+                    .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+
+                txtAirCommVat.Text = vatRate;
+                txtVatPer.Text = vatRate;
+            }
 
 
-             if (txtAirExcluisvefare.Text != "" && txtAirCommisionper.Text != "")
-             {
-                 decimal exclusiveFare = Convert.ToDecimal(txtAirExcluisvefare.Text);
-                 string AirCommExclu = ((Convert.ToDecimal(txtAirCommisionper.Text) * exclusiveFare) / 100).ToString();
-                 txtAirCommExclu.Text = _objBOUtiltiy.FormatTwoDecimal(AirCommExclu.ToString());
+
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+
+    private void commExcAmount()
+    {
+        try
+        {
+
+
+            if (txtAirExcluisvefare.Text != "" && txtAirCommisionper.Text != "")
+            {
+                decimal exclusiveFare = Convert.ToDecimal(txtAirExcluisvefare.Text);
+                string AirCommExclu = ((Convert.ToDecimal(txtAirCommisionper.Text) * exclusiveFare) / 100).ToString();
+                txtAirCommExclu.Text = _objBOUtiltiy.FormatTwoDecimal(AirCommExclu.ToString());
 
 
 
-             }
+            }
 
-             if (txtAirCommExclu.Text != "" && txtAirCommVat.Text != "")
-             {
-                 decimal commisionInclAmount = Convert.ToDecimal(GlobalClass.exclVatSum(txtAirCommExclu.Text, txtAirCommVat.Text));
-                 // decimal inclusiveAmount = (exclusiveFare * Convert.ToDecimal(txtVatPer.Text)) / 100;
-                 txtAirAgentVat.Text = commisionInclAmount.ToString();
-                 txtAirCommInclu.Text = (commisionInclAmount + Convert.ToDecimal(txtAirCommExclu.Text)).ToString();
-                 txtAirDueToBsp.Text = (Convert.ToDecimal(txtAirClientTot.Text) - Convert.ToDecimal(txtAirCommInclu.Text)).ToString();
-             }
+            if (txtAirCommExclu.Text != "" && txtAirCommVat.Text != "")
+            {
+                decimal commisionInclAmount = Convert.ToDecimal(GlobalClass.exclVatSum(txtAirCommExclu.Text, txtAirCommVat.Text));
+                // decimal inclusiveAmount = (exclusiveFare * Convert.ToDecimal(txtVatPer.Text)) / 100;
+                txtAirAgentVat.Text = commisionInclAmount.ToString();
+                txtAirCommInclu.Text = (commisionInclAmount + Convert.ToDecimal(txtAirCommExclu.Text)).ToString();
+                txtAirDueToBsp.Text = (Convert.ToDecimal(txtAirClientTot.Text) - Convert.ToDecimal(txtAirCommInclu.Text)).ToString();
+            }
 
-         }
-         catch (Exception ex)
-         {
-             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-             ExceptionLogging.SendExcepToDB(ex);
-         }
-     }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
     private void InsertAirTicket()
     {
         //hf_Air_TicketNo
@@ -1236,7 +1236,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
         //  }
     }
-    
+
     #endregion
 
 
@@ -1411,18 +1411,18 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 }
                 else
                 {
-                  //  if (ViewState["ddlAirService"].ToString() != null)
-                 //   {
-                        //DataTable dtair = (DataTable)ViewState["ddlAirService"];
+                    //  if (ViewState["ddlAirService"].ToString() != null)
+                    //   {
+                    //DataTable dtair = (DataTable)ViewState["ddlAirService"];
 
-                        //ddlAirService.DataSource = dtair;
-                        //ddlAirService.DataTextField = "ComDesc";
-                        //ddlAirService.DataValueField = "ComId";
-                        //ddlAirService.DataBind();
-                        //ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
+                    //ddlAirService.DataSource = dtair;
+                    //ddlAirService.DataTextField = "ComDesc";
+                    //ddlAirService.DataValueField = "ComId";
+                    //ddlAirService.DataBind();
+                    //ddlAirService.Items.Insert(0, new ListItem("--Select Service--", "0"));
                     //    ddlAirService.SelectedValue = "0";
-                      
-                //    }
+
+                    //    }
                     txtAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
                     ddlAirService.SelectedValue = "0";
                     //  VASPopupExtender.Show();
@@ -1433,14 +1433,14 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
 
 
-            
+
             int commId = Convert.ToInt32(ddlAirService.SelectedValue);
 
 
             DataTable commdt = (DataTable)ViewState["CommissionType"];
-        string  comm = (commdt.AsEnumerable()
-                .Where(p => p["ComId"].ToString() == commId.ToString())
-                .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
+            string comm = (commdt.AsEnumerable()
+                    .Where(p => p["ComId"].ToString() == commId.ToString())
+                    .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
             commperc = string.IsNullOrEmpty(comm.ToString()) ? 0 : Convert.ToDecimal(comm.ToString());
             txtAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
@@ -1644,7 +1644,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
-    
+
     #endregion
 
     #region GenChargeEvents
@@ -1747,14 +1747,14 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
-    } 
+    }
 
     #endregion
 
     //------------Service Fee--------//
 
 
-  
+
     #region ServiceFeeMethods
     private void InsertUpdateServiceFee()
     {
@@ -2146,7 +2146,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
-    } 
+    }
     #endregion
 
 
@@ -2340,7 +2340,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
     }
 
-    
+
     // Payment Menthod Select Payment Bind Credit card
     protected void DDlandPayment_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -2354,11 +2354,11 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
         int commId = Convert.ToInt32(DDlandService.SelectedItem.Value);
         DataTable commdt = (DataTable)ViewState["CommissionType"];
-      string  commper =(commdt.AsEnumerable()
-            .Where(p => p["ComId"].ToString() == commId.ToString())
-            .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
+        string commper = (commdt.AsEnumerable()
+              .Where(p => p["ComId"].ToString() == commId.ToString())
+              .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
-      commperc = string.IsNullOrEmpty(commper.ToString()) ? 0 : Convert.ToDecimal(commper.ToString());
+        commperc = string.IsNullOrEmpty(commper.ToString()) ? 0 : Convert.ToDecimal(commper.ToString());
 
         txtlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
@@ -2519,14 +2519,14 @@ public partial class Admin_Invoice : System.Web.UI.Page
             }
 
 
-         
+
             int commId = Convert.ToInt32(DDlandService.SelectedItem.Value);
             DataTable commdt = (DataTable)ViewState["CommissionType"];
-          string  commper = (commdt.AsEnumerable()
-                .Where(p => p["ComId"].ToString() == commId.ToString())
-                .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
+            string commper = (commdt.AsEnumerable()
+                  .Where(p => p["ComId"].ToString() == commId.ToString())
+                  .Select(p => p["ComDComm"].ToString())).FirstOrDefault();
 
-          commperc = string.IsNullOrEmpty(commper.ToString()) ? 0 : Convert.ToDecimal(commper.ToString());
+            commperc = string.IsNullOrEmpty(commper.ToString()) ? 0 : Convert.ToDecimal(commper.ToString());
 
             txtlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
@@ -2750,7 +2750,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
-  
+
     public void BindType()
     {
         try
@@ -2849,10 +2849,10 @@ public partial class Admin_Invoice : System.Web.UI.Page
     }
 
 
- 
-    
+
+
     #endregion
-  
+
 
     #region PrivateMethodforMultipleLanaguage
     private void CleanForm()
@@ -2872,7 +2872,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
-    } 
+    }
     #endregion
 
     #region ClearMethods
@@ -3079,7 +3079,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         }
         //   TicketType == "Air" ? VASPopupExtender.Show() : VASPopupExtender.Show();
 
-    } 
+    }
 
     protected void GenCancel_Click(object sender, EventArgs e)
     {
@@ -3522,8 +3522,34 @@ public partial class Admin_Invoice : System.Web.UI.Page
     }
 
     #endregion
-  
 
+
+    protected void txtAirTicketNo_TextChanged(object sender, EventArgs e)
+    {  
+        // based on Airticket No first 3 Degits Binding Airline .
+        string Ticket_no = txtAirTicketNo.Text;
+        string str = Ticket_no.Substring(0, 3);
+        BAAirSuppliers _boAirSupplier = new BAAirSuppliers();
+        DataSet ds = new DataSet();
+        int supplId = 0;
+        ds = _boAirSupplier.GetAirSuppliers(supplId);
+        ViewState["AirlineGet"] = ds.Tables[0];
+
+        if (ViewState["AirlineGet"].ToString() != null)
+        {   
+            DataTable dt = (DataTable)ViewState["AirlineGet"];
+            string Airline_Id = (dt.AsEnumerable()
+                .Where(p => p["QuickGIAccount"].ToString() == str.ToString())
+                .Select(p => p["SupplierId"].ToString())).FirstOrDefault();
+
+            if (Airline_Id.ToString() != "0")
+            {
+                ddlAirLine.SelectedValue = Airline_Id;
+                ddlAirLine_SelectedIndexChanged(null, null);
+            }
+            VASPopupExtender.Show();
+        }
+    }
 }
 
 

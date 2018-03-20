@@ -469,7 +469,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtAirTicketNo" runat="server" CssClass="form-control" />
+                                                <asp:TextBox ID="txtAirTicketNo" runat="server" CssClass="form-control" OnTextChanged="txtAirTicketNo_TextChanged" AutoPostBack="true" />
                                                 <asp:RequiredFieldValidator ControlToValidate="txtAirTicketNo" runat="server" ID="rfvtxtAirTicketNo" ValidationGroup="airticket"
                                                     ErrorMessage="Enter Ticket Number" Text="Enter Ticket Number" class="validationred" Display="Dynamic" ForeColor="Red" />
 
