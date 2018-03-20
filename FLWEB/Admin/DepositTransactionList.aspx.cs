@@ -64,9 +64,9 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
     }
     #endregion
 
-    #region Change Events 
+    #region Change Events
 
-  
+
     protected void gvDepositTransactionList_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvDepositTransactionList.PageIndex = e.NewPageIndex;
@@ -92,7 +92,7 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
     }
     protected void gvDepositTransactionList_Sorting(object sender, GridViewSortEventArgs e)
     {
-         try
+        try
         {
             ViewState["se"] = e.SortExpression;
             if (ViewState["so"] == null)
@@ -121,12 +121,12 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                    "DepositSourceRef='" + SearchText +
-                    "' OR RecDescription LIKE '%" + SearchText +                   
-                    "%' OR Convert(DepositDate, 'System.String') LIKE '%" + SearchText +
-                    "%' OR Name LIKE '%" + SearchText +
-                    "%' OR DepositConsultant LIKE '%" + SearchText +
-                    "%' OR Convert(TotalDepositAmount, 'System.String') LIKE '%" + SearchText + "%'");
+                        "DepositTransId='" + SearchText +
+                        "' OR Convert(DepositDate, 'System.String') LIKE '%" + SearchText +
+                        "%' OR DepositSourceRef LIKE '%" + SearchText +
+                        "%' OR RecDescription LIKE '%" + SearchText +
+                        "%' OR Name LIKE '%" + SearchText +
+                        "%' OR Convert(TotaldepositAmount,'System.String') LIKE '%" + SearchText + "%'");
 
                 if (dr.Count() > 0)
                 {
