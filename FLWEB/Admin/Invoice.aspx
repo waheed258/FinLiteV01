@@ -523,7 +523,7 @@
 
                                             <div class="col-sm-2">
                                                 <label class="control-label">
-                                                    Passenger<span class="style1">*</span>
+                                                    Passenger Name<span class="style1">*</span>
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">

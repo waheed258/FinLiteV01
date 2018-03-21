@@ -603,7 +603,7 @@
 
 
                                     <div class="col-sm-10">
-                                        Less charged to credit card
+                                        Less charged to credit card/Cash
                                     </div>
 
                                     <div class="col-sm-2">
