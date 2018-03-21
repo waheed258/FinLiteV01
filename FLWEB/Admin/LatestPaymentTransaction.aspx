@@ -119,6 +119,9 @@
             padding: 0px 0px 0px 5px;
             /*border: solid 1px Black;*/
         }
+         .decimalRight {
+            text-align: right;
+        }
 
 
         #loadingDiv {
@@ -311,7 +314,7 @@
                         </div>
                         <div class="col-sm-2">
 
-                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control" OnTextChanged="txtAmount_TextChanged" AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
+                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control decimalRight" OnTextChanged="txtAmount_TextChanged" AutoPostBack="true" placeholder="0.00"  ValidationGroup="gvvalida"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtAmount" runat="server" ID="rfvtxtAmount" ValidationGroup="rct"
                                 ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
                             <asp:RegularExpressionValidator ControlToValidate="txtAmount" runat="server" ID="rextxtAmount" ValidationGroup="gvvalida"
