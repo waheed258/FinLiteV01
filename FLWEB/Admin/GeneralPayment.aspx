@@ -58,7 +58,7 @@
                                 Date</label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" ></asp:TextBox>
+                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" BackColor="White" ></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtDate" runat="server" ID="rfvtxtDate" ValidationGroup="rct"
                                 ErrorMessage="Enter Date" Text="SelectEnter Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                         </div>

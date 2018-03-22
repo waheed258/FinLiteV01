@@ -32,6 +32,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             gvReciptData.DataBind();
             BindSecondRecieptsGrid();
             BindBankAccounts();
+            
 
         }
     }

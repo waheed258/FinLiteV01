@@ -85,11 +85,11 @@
              
              <div class="row">
                  <div class="col-sm-3">
-                     <asp:TextBox ID="txtLandFromDate" runat="server" CssClass="form-control" Placeholder="yyyy-mm-dd" ></asp:TextBox>
+                     <asp:TextBox ID="txtLandFromDate" runat="server" CssClass="form-control" Placeholder="yyyy-mm-dd" BackColor="White" ></asp:TextBox>
 
                   </div>
                  <div class="col-sm-3">
-                     <asp:TextBox ID="txtLandToDate" runat="server" CssClass="form-control" Placeholder="yyyy-mm-dd" ></asp:TextBox>
+                     <asp:TextBox ID="txtLandToDate" runat="server" CssClass="form-control" Placeholder="yyyy-mm-dd" BackColor="White" ></asp:TextBox>
 
                   </div>
                   <div class="col-sm-3">

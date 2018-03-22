@@ -31,6 +31,7 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
             BindPaymentTypes();
             BindDivision();
             BindAccountTypes();
+             
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)

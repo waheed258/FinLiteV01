@@ -35,6 +35,9 @@ public partial class Admin_ClientLevelReport : System.Web.UI.Page
     {
         try
         {
+
+
+
          //   DateTime? FromDate = (txtFromDate.Text != null) ? Convert.ToDateTime(txtFromDate.Text) : (DateTime?)null;
          //   DateTime? ToDate = (txtToDate.Text != null) ? Convert.ToDateTime(txtToDate.Text) : (DateTime?)null;
             DataSet ds = objBaReport.getClientLevelReport(FromDate, ToDate);

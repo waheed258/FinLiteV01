@@ -721,6 +721,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                         txtFlightNo1.Enabled = true;
                         txtDate1.Enabled = true;
                         txtClass1.Enabled = true;
+                        txtDate1.BackColor = System.Drawing.Color.White;
 
                         rfvtxtFlightNo1.Enabled = true;
                         rfvtxtClass1.Enabled = true;
@@ -733,6 +734,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                         txtDate2.Enabled = true;
                         txtFlightNo2.Enabled = true;
                         txtClass2.Enabled = true;
+                        txtDate2.BackColor = System.Drawing.Color.White;
 
                         rfvtxtFlightNo2.Enabled = true;
                         rfvtxtClass2.Enabled = true;
@@ -746,6 +748,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                         txtDate3.Enabled = true;
                         txtFlightNo3.Enabled = true;
                         txtClass3.Enabled = true;
+                        txtDate3.BackColor = System.Drawing.Color.White;
 
                         rfvtxtFlightNo3.Enabled = true;
                         rfvtxtClass3.Enabled = true;
@@ -759,6 +762,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                         txtDate4.Enabled = true;
                         txtFlightNo4.Enabled = true;
                         txtClass4.Enabled = true;
+                        txtDate4.BackColor = System.Drawing.Color.White;
 
                         rfvtxtFlightNo4.Enabled = true;
                         rfvtxtClass4.Enabled = true;

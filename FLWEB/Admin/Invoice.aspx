@@ -309,7 +309,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-2">
-                                <asp:TextBox ID="txtInvDate" runat="server" CssClass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtInvDate" runat="server" CssClass="form-control" MaxLength="50" BackColor="White" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtInvDate" runat="server" ID="rfvtxtInvDate" ValidationGroup="invoice"
                                     ErrorMessage="Select Date" Text="Select Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                             </div>
@@ -414,13 +414,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-5">
 
-                                        <button runat="server" id="btnOpenFP" class="btn btn-mini">
+                                        <button runat="server" id="btnOpenFP" class="btn btn-mini" title="AirTicket"> 
                                             <i class="fa fa-plane"></i>
                                         </button>
                                         <asp:Button ID="bntCancelFP" runat="server" Text="Cancel" Style="display: none;" />
                                         <%--<asp:Button ID="btnOpenFP" runat="server" Text="Open"  />--%>
                         &nbsp;&nbsp;&nbsp;
-                         <button runat="server" id="btnLand" class="btn btn-mini">
+                         <button runat="server" id="btnLand" class="btn btn-mini" title="Land Arrangement">
                              <i class="fa  fa-university"></i>
                          </button>
                                         &nbsp;&nbsp;
@@ -429,7 +429,7 @@
                          </button>
                                         &nbsp;&nbsp;
                          <button runat="server" id="btnGencharge" onserverclick="btnGencharge_ServerClick" class="btn btn-mini" title="General Charge">
-                             <i class="fa fa-cloud data-unicode"></i>
+                             <i class="fa fa-line-chart"></i>
                          </button>
                                         &nbsp;&nbsp;
                                     </div>
@@ -649,7 +649,7 @@
 
                                             <div class="col-sm-2" runat="server" id="divtxtClass">
 
-                                                <asp:TextBox ID="txtClass1" runat="server" CssClass="form-control uppercase" MaxLength="2" />
+                                                <asp:TextBox ID="txtClass1" runat="server" CssClass="form-control uppercase" MaxLength="2"   />
                                                 <asp:RequiredFieldValidator ControlToValidate="txtClass1" runat="server" ID="rfvtxtClass1"
                                                     ValidationGroup="airticket" ErrorMessage="Enter Class" Text="Enter Class" ForeColor="red" Display="Dynamic" />
 
@@ -767,7 +767,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtAirTravelDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
+                                                <asp:TextBox ID="txtAirTravelDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD"  BackColor="White"/>
                                                 <asp:RequiredFieldValidator ControlToValidate="txtAirTravelDate" runat="server" ID="rfvtxtAirTravelDate" ValidationGroup="airticket"
                                                     ErrorMessage="Select Travel Date" Text="Select Travel Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                                             </div>
@@ -778,7 +778,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtAirReturnDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
+                                                <asp:TextBox ID="txtAirReturnDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD"   BackColor="White"/>
                                             </div>
 
                                         </div>
@@ -1064,7 +1064,7 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <%--<asp:TextBox ID="txtlandTravelFrom" runat="server" CssClass="form-control" placeholder="mm/dd/yy" MaxLength="50" />--%>
-                                            <asp:TextBox ID="txtlandTravelFrom" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD"/>
+                                            <asp:TextBox ID="txtlandTravelFrom" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" BackColor="White"/>
                                             <asp:RequiredFieldValidator ControlToValidate="txtlandTravelFrom" runat="server" ID="rfvtxtlandTravelFrom" ValidationGroup="landsupplier"
                                                 ErrorMessage="Select Travel Date" Text="Select Travel Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                                         </div>
@@ -1075,7 +1075,7 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <%--<asp:TextBox ID="txtlandTravelto" runat="server" CssClass="form-control" placeholder="mm/dd/yy" MaxLength="50" />--%>
-                                            <asp:TextBox ID="txtlandTravelto" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
+                                            <asp:TextBox ID="txtlandTravelto" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" BackColor="White" />
                                         </div>
                                     </div>
                                 </div>
@@ -1484,7 +1484,7 @@
                                                     Travel Date<span class="style1">*</span></label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtSerTravelDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" />
+                                                <asp:TextBox ID="txtSerTravelDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" BackColor="White" />
                                                 <%--<asp:TextBox ID="txtSerTravelDate" runat="server" CssClass="form-control" />--%>
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtSerTravelDate" runat="server" ID="rfvtxtSerTravelDate"
@@ -1499,7 +1499,7 @@
                                                     Passenger Name<span class="style1">*</span>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
 
                                                 <asp:DropDownList ID="ddlPassengerName" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select PaasengerName--" Value="-1" Selected="True"></asp:ListItem>--%>
@@ -1536,7 +1536,7 @@
                                                     Details
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtserDetails" runat="server" class="form-control" MaxLength="20" />
 
                                             </div>
@@ -1564,7 +1564,7 @@
                                                     Payment Method<span class="style1">*</span>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <%--<asp:DropDownList ID="ddlPaymentMethod" runat="server" CssClass="form-control" AppendDataBoundItems="true"  OnSelectedIndexChanged="ddlPaymentMethod_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Text="--Select  --" Value="-1" ></asp:ListItem>
                      </asp:DropDownList>--%>
@@ -1598,7 +1598,7 @@
                                                     CreditCard Type
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:DropDownList ID="ddlCreditCardType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select Type--" Value="-1"></asp:ListItem>--%>
                                                 </asp:DropDownList>
@@ -1697,7 +1697,7 @@
                                                 <label class="control-label">
                                                     Type<span class="style1">*</span></label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
 
                                                 <asp:DropDownList ID="ddlGenchrgType" runat="server" Class="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGenchrgType_SelectedIndexChanged">
                                                     <%--<asp:ListItem Text="--Select Type--" Value="-1" Selected="True"></asp:ListItem>--%>
@@ -1716,7 +1716,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
 
                                                 <asp:DropDownList ID="ddlPassengerNames" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select Passenger Name--" Value="-1" Selected="True"></asp:ListItem>--%>
@@ -1733,7 +1733,7 @@
                                                 <label class="control-label">
                                                     Details</label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtDetails" runat="server" class="form-control" />
 
                                             </div>
@@ -1744,7 +1744,7 @@
                                                     CreditCard Type <span class="style1">*</span>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:DropDownList ID="ddlCrdCardType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select CreditCard--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>
@@ -1761,7 +1761,7 @@
                                                 <label class="control-label">
                                                     Units<span class="style1">*</span></label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtUnits" runat="server" class="form-control" placeholder="0" Style="text-align: right;" OnTextChanged="txtUnits_TextChanged" AutoPostBack="true" />
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtUnits" runat="server" ID="rfvtxtUnits" ValidationGroup="generalcharge"
@@ -1780,7 +1780,7 @@
                                                     Rate Net<span class="style1">*</span>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtRateNet" runat="server" class="form-control" placeholder="0" Style="text-align: right;" OnTextChanged="txtRateNet_TextChanged" AutoPostBack="true" />
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtRateNet" runat="server" ID="rfvtxtRateNet" ValidationGroup="generalcharge"
@@ -1800,7 +1800,7 @@
                                                 <label class="control-label">
                                                     VAT(%)</label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtgenvat" runat="server" class="form-control" ReadOnly="true" Style="text-align: right;" />
 
                                             </div>
@@ -1812,7 +1812,7 @@
                                                     VAT Amount
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtVatAmount" runat="server" class="form-control" placeholder="0.00" Style="text-align: right;" />
                                             </div>
                                         </div>
@@ -1824,7 +1824,7 @@
                                                 <label class="control-label">
                                                     Exclusive Amount</label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtExcluAmount" runat="server" class="form-control" placeholder="0.00" Style="text-align: right;" />
 
                                             </div>
@@ -1835,7 +1835,7 @@
                                                     Client Total
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <asp:TextBox ID="txtClientTotal" runat="server" class="form-control" placeholder="0.00" Style="text-align: right;" />
                                             </div>
                                         </div>

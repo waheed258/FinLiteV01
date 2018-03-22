@@ -58,7 +58,7 @@
                                 Date<span class="Error">*</span></label>
                         </div>
                         <div class="col-sm-3">
-                            <asp:TextBox ID="txtDpstDate" runat="server" CssClass="form-control" ></asp:TextBox>
+                            <asp:TextBox ID="txtDpstDate" runat="server" CssClass="form-control" BackColor="White" ></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtDpstDate" runat="server" ID="rfvtxtDpstDate" ValidationGroup="deposit"
                                 ErrorMessage="Enter Date" Text="Enter Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                         </div>
@@ -159,7 +159,7 @@
 
                                     <asp:TemplateField>
                                 <ItemTemplate>
-                                <asp:CheckBox ID="chkSelect1" runat="server" AutoPostBack="true"  OnCheckedChanged="chkSelect1_CheckedChanged"/>
+                                <asp:CheckBox ID="chkRightSelect" runat="server" AutoPostBack="true"  OnCheckedChanged="chkRightSelect_CheckedChanged"/>
                                 </ItemTemplate>
                                    </asp:TemplateField>
                                    <asp:BoundField DataField="ReceivedTransactionId" HeaderText="SN">

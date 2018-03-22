@@ -32,6 +32,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
             txtPreparedBy.Text = Session["UserFullName"].ToString();
             gvData.DataSource = null;
             gvData.DataBind();
+            
         }
     }
      protected void btnSave_Click(object sender, EventArgs e)

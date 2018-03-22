@@ -135,17 +135,23 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
             _objEMGeneralReceipts.GRFromAccount = Convert.ToInt32(ddlGRFmAccCode.SelectedValue);
             _objEMGeneralReceipts.ToAccountID = Convert.ToInt32(ddlGRToAccCode.SelectedValue);
             _objEMGeneralReceipts.GRPaymentAmount = string.IsNullOrEmpty(txtGRPaymentAmount.Text) ? (0.0M) : Convert.ToDecimal(txtGRPaymentAmount.Text);
-            string category = ddlGRCategory.SelectedItem.Text;
 
-            DataSet ds = _objBALGR.Get_MainAccCode(Convert.ToInt32(ddlGRFmAccCode.SelectedValue), category);
+
+            DataSet ds = _objBALGR.Get_GRMainAccCode(Convert.ToInt32(ddlGRFmAccCode.SelectedValue));
 
 
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 _objEMGeneralReceipts.GRSupplierMainAccCode = ds.Tables[0].Rows[0]["MainAcName"].ToString();
-                _objEMGeneralReceipts.GRSupplierFromAccCode = ds.Tables[0].Rows[0]["ChartedAccName"].ToString();
+
+
             }
-        
+
+            if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                _objEMGeneralReceipts.GRSupplierFromAccCode = ds.Tables[1].Rows[0]["ChartedAccName"].ToString();
+            }
+
             _objEMGeneralReceipts.CreatedBy = 0;
 
 
@@ -157,9 +163,9 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
 
                 objTransaction.FmAccountNoId = Convert.ToInt32(ddlGRFmAccCode.SelectedValue);
                 objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlGRToAccCode.SelectedValue);
+                string category = ddlGRCategory.SelectedItem.Text;
                 DataSet Dsaccount = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlGRFmAccCode.SelectedValue), Convert.ToInt32(ddlGRToAccCode.SelectedValue), "GRT", category);
-             
-               string FmAcccode = "";
+                string FmAcccode = "";
                 string FmMainAccCode = "";
                 string RefMainAcc = "";
                 string RefAccCode = "";

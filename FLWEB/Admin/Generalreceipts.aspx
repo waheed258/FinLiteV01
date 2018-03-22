@@ -56,7 +56,7 @@
                                 Date</label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:TextBox ID="txtGRDate" runat="server" CssClass="form-control" ></asp:TextBox>
+                            <asp:TextBox ID="txtGRDate" runat="server" CssClass="form-control" BackColor="White" ></asp:TextBox>
                         </div>
 
                         <div class="col-sm-2">
