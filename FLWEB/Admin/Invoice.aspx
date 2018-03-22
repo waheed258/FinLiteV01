@@ -1436,7 +1436,9 @@
                                                     Type<span class="style1">*</span></label>
                                             </div>
                                             <div class="col-sm-2">
-
+                                                <asp:DropDownList ID="ddlservatType" runat="server" Class="form-control" AppendDataBoundItems="true" AutoPostBack="true" >
+                                                 
+                                                </asp:DropDownList>
                                                 <asp:DropDownList ID="ddlServiceType" runat="server" Class="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlServiceType_SelectedIndexChanged">
                                                     <%--<asp:ListItem Text="--Select Type--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>

@@ -44,7 +44,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         {
 
             BindPageLoadData();
-
+            ddlservatType.Enabled = false;
         }
     }
 
@@ -452,9 +452,10 @@ public partial class Admin_Invoice : System.Web.UI.Page
         txtAirCommVat.Enabled = false;
         txtAirAgentVat.Enabled = false;
         ddlInvMesg.Enabled = false;
+       
+        BindAirLine();
         BindTypes();
         BindAirServiceTypes();
-        BindAirLine();
         //general Charge
         DataSet objDs = null; // Single sp
         BindGenServiceTypes();
@@ -948,6 +949,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
     {
         try
         {
+            ddlservatType.Visible = false;
             DataSet ds = new DataSet();
             ds = _doUtilities.get_Type();
 
@@ -959,12 +961,44 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 ddlType.DataValueField = "TypeId";
                 ddlType.DataBind();
                 ddlType.Items.Insert(0, new ListItem("--Select Type--", "0"));
+
+                ddlservatType.DataSource = ds.Tables[0];
+                ddlservatType.DataTextField = "TypeName";
+                ddlservatType.DataValueField = "TypeId";
+                ddlservatType.DataBind();
+                ddlservatType.SelectedItem.Value = "2";
+                BindSerVatType();
             }
             else
             {
                 ddlType.DataSource = null;
                 ddlType.DataBind();
             }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+
+    private void BindSerVatType()
+    {
+        try
+        {
+            if (ViewState["get_VatRateByType"].ToString() != null)
+            {
+                DataTable dt = (DataTable)ViewState["get_VatRateByType"];
+                //string vatRate = Convert.ToString(_doUtilities.getVatByType(Convert.ToInt32(ddlType.SelectedValue)));
+                string vatRate = (dt.AsEnumerable()
+                    .Where(p => p["TypeId"].ToString() == Convert.ToInt32(ddlservatType.SelectedValue).ToString())
+                    .Select(p => p["VatRate"].ToString())).FirstOrDefault();
+
+                txtSerVatPer.Text = vatRate;
+            }
+
+
+
         }
         catch (Exception ex)
         {
@@ -2056,7 +2090,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
                 if (PassengerList.ToString() != null)
                 {
-                    BindVatBasedOnTicket(Convert.ToInt32(type));
+                   // BindVatBasedOnTicket(Convert.ToInt32(type));
                     ddlPassengerName.DataSource = PassengerList;
                     ddlPassengerName.DataTextField = "PaxName";
                     ddlPassengerName.DataValueField = "TicketId";
@@ -2239,12 +2273,12 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
             if (VatPer != null)
             {
-                txtSerVatPer.Text = VatPer;
+               // txtSerVatPer.Text = VatPer;
             }
             else
             {
-                txtSerVatPer.Text = "0.00";
-                txtSerVatAmount.Text = "0.00";
+            //    txtSerVatPer.Text = "0.00";
+               // txtSerVatAmount.Text = "0.00";
                 txtDetails.Text = "";
                 txtExclusAmount.Text = txtSerClientTotal.Text;
 
@@ -2996,7 +3030,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             ddlPassengerName.Items.Clear();
             txtExclusAmount.Text = "";
             txtserDetails.Text = "";
-            txtSerVatPer.Text = "";
+           // txtSerVatPer.Text = "";
             txtSerVatAmount.Text = "";
             ddlPaymentMethod.SelectedIndex = -1;
             chkMerge.Checked = false;
@@ -3525,10 +3559,17 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
 
     protected void txtAirTicketNo_TextChanged(object sender, EventArgs e)
-    {  
+    {
         // based on Airticket No first 3 Degits Binding Airline .
+        string str = "";
         string Ticket_no = txtAirTicketNo.Text;
-        string str = Ticket_no.Substring(0, 3);
+
+        if (!string.IsNullOrWhiteSpace(Ticket_no))
+        {
+
+            str = Ticket_no.Substring(0, 3);
+        }
+
         BAAirSuppliers _boAirSupplier = new BAAirSuppliers();
         DataSet ds = new DataSet();
         int supplId = 0;
@@ -3536,16 +3577,23 @@ public partial class Admin_Invoice : System.Web.UI.Page
         ViewState["AirlineGet"] = ds.Tables[0];
 
         if (ViewState["AirlineGet"].ToString() != null)
-        {   
+        {
             DataTable dt = (DataTable)ViewState["AirlineGet"];
             string Airline_Id = (dt.AsEnumerable()
                 .Where(p => p["QuickGIAccount"].ToString() == str.ToString())
                 .Select(p => p["SupplierId"].ToString())).FirstOrDefault();
 
-            if (Airline_Id.ToString() != "0")
+
+
+            if (!string.IsNullOrEmpty(Airline_Id))
             {
                 ddlAirLine.SelectedValue = Airline_Id;
                 ddlAirLine_SelectedIndexChanged(null, null);
+            }
+            else
+            {
+                ddlAirLine.SelectedIndex = -1;
+                ddlAirService.SelectedIndex = -1;
             }
             VASPopupExtender.Show();
         }
