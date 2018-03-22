@@ -14,7 +14,7 @@
             <div class="panel-actions">
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
             </div>
-            <h2 class="panel-title">New State</h2>
+            <h2 class="panel-title">New Province</h2>
         </header>
         <asp:HiddenField ID="hf_StateId" runat="server" Value="0" />
         <div class="panel-body">

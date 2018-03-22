@@ -97,7 +97,7 @@
                        <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">State (<span class="style1">*</span>)</label>
+                                <label class="control-label">Province (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" 

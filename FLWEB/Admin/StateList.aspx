@@ -11,7 +11,7 @@
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
             </div>
 
-            <h2 class="panel-title">States</h2>
+            <h2 class="panel-title">Provinces</h2>
         </header>
        <div class="panel-body">
             <div class="row">
