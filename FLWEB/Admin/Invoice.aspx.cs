@@ -1603,6 +1603,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             {
 
                 ddlGenchrgType.DataSource = ds.Tables[0];
+                ViewState["genchargeservicetypes"] = ds.Tables[0];
                 ddlGenchrgType.DataTextField = "ComDesc";
                 ddlGenchrgType.DataValueField = "ComId";
                 ddlGenchrgType.DataBind();
@@ -1695,12 +1696,12 @@ public partial class Admin_Invoice : System.Web.UI.Page
             int ddlValue = Convert.ToInt32(ddlGenchrgType.SelectedItem.Value);
             txtDetails.Text = ddlText;
 
-            DataTable dt = (DataTable)ViewState["ServiceType_GetDataByTYpe"];
+            DataTable dt = (DataTable)ViewState["genchargeservicetypes"];
             string VatPer = (dt.AsEnumerable()
                 .Where(p => p["ComId"].ToString() == ddlValue.ToString())
                 .Where(p => p["ComDesc"].ToString() == ddlText.ToString())
                 .Select(p => p["VatRate"].ToString())).FirstOrDefault();
-
+            VatPer = string.IsNullOrEmpty(VatPer.ToString().Trim()) ? "0" : VatPer.ToString().Trim();
 
             if (VatPer != "" && VatPer != null)
             {

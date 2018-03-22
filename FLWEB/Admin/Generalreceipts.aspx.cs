@@ -139,7 +139,6 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
 
             DataSet ds = _objBALGR.Get_GRMainAccCode(Convert.ToInt32(ddlGRFmAccCode.SelectedValue));
 
-
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 _objEMGeneralReceipts.GRSupplierMainAccCode = ds.Tables[0].Rows[0]["MainAcName"].ToString();
