@@ -86,6 +86,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 readFile = readFile.Replace("{Country}", dtlRow["CountryName"].ToString() + " .");
                                 readFile = readFile.Replace("{State}", dtlRow["StateName"].ToString() + " ,");
                                 readFile = readFile.Replace("{City}", dtlRow["CityName"].ToString() + " ,");
+                            
                                 readFile = readFile.Replace("{currency}", dtlRow["currency"].ToString() + " ");
                                 string strImagPath = Server.MapPath("../images/" + dtlRow["comapnylogo"].ToString());
                                 readFile = readFile.Replace("{Image}", "<img style='height:40px;width:250px;'  src='" + "http://flv.swdtcpl.com/Logos/" + dtlRow["comapnylogo"].ToString() + "'></img>");
@@ -121,8 +122,18 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 readFile = readFile.Replace("{Invoice_No}", dtlRow["InvId"].ToString());
                                 readFile = readFile.Replace("{Date}", dtlRow["InvDate"].ToString());
                                 readFile = readFile.Replace("{Consultant}", dtlRow["ConsultantName"].ToString());
+                                if (dtlRow["ClientPostalAddress"].ToString() != "")
+                                {
+                                    readFile = readFile.Replace("{clientAddress}", "Address :" + dtlRow["ClientPostalAddress"].ToString());
+                                }
+                                else
+                                {
+                                    readFile = readFile.Replace("{clientAddress}", " ");
+                                }
+                               
                                 readFile = readFile.Replace("{Client1}", dtlRow["ClientName"].ToString());
                                 readFile = readFile.Replace("{Client}", dtlRow["ClientName"].ToString());
+                              
                                 readFile = readFile.Replace("{OrderNo}", dtlRow["OrderNo"].ToString());
                             }
                             DocuHeader = 1;
@@ -134,6 +145,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                         readFile = readFile.Replace("{Document_No}", "123456546256");
                         readFile = readFile.Replace("{Date}", " ");
                         readFile = readFile.Replace("{Consultant}", " ");
+                        readFile = readFile.Replace("{clientAddress}", " ");
                         readFile = readFile.Replace("{Client}", " ");
                         readFile = readFile.Replace("{OrderNo}", " ");
                     }
