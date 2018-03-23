@@ -97,7 +97,8 @@ namespace EntityManager
         public string CreditCardType { get; set; }
         public string CreditCardAccNo { get; set; }
         public string CreditCardAccHolder { get; set; }
-        public string CreditCardExpires { get; set; }
+        public string CreditCardExpireMonth { get; set; }
+        public string CreditCardExpireYear { get; set; }
         //public int ClientId { get; set; }
 
         #endregion CreditCard

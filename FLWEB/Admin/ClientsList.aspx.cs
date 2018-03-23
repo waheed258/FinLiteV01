@@ -13,6 +13,7 @@ public partial class Admin_ClientsList : System.Web.UI.Page
     BAClients objBAClients = new BAClients();
     EMClients objClients = new EMClients();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
+    BACreditCard objBACredit = new BACreditCard();
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -134,6 +135,7 @@ public partial class Admin_ClientsList : System.Web.UI.Page
     protected void cmdSubmit_Click(object sender, EventArgs e)
     {
         InsertUpdateCreditCard();
+      
     }
     private void BindCreditCardDetails()
     {
@@ -146,35 +148,40 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             dtContact.Columns.Add("CreditCardType");
             dtContact.Columns.Add("CreditCardAccNo");
             dtContact.Columns.Add("CreditCardAccHolder");
-            dtContact.Columns.Add("CreditCardExpires");
+            dtContact.Columns.Add("CreditCardExpireMonth");
+            dtContact.Columns.Add("CreditCardExpireYear");
 
             int count = rpCreditCard.Items.Count;
             foreach (RepeaterItem row in rpCreditCard.Items)
             {
                 TextBox txtCreditCardCode = (TextBox)row.FindControl("txtCreditCardCode");
-                TextBox txtCreditCardType = (TextBox)row.FindControl("txtCreditCardType");
+                DropDownList ddlCreditCardType = (DropDownList)row.FindControl("ddlCreditCardType");
                 TextBox txtCreditCardAccNo = (TextBox)row.FindControl("txtCreditCardAccNo");
                 TextBox txtCreditCardAccHolder = (TextBox)row.FindControl("txtCreditCardAccHolder");
-                TextBox txtDateExpires = (TextBox)row.FindControl("txtDateExpires");
+                TextBox txtMonthExpire = (TextBox)row.FindControl("txtMonthExpire");
+                TextBox txtYearExpire = (TextBox)row.FindControl("txtYearExpire");
                 HiddenField hf_CreditCardId = (HiddenField)row.FindControl("hf_CreditCardId");
 
                 DataRow drexist = dtContact.NewRow();
                 drexist["CreditCardId"] = hf_CreditCardId.Value;
                 drexist["CreditCardCode"] = txtCreditCardCode.Text;
-                drexist["CreditCardType"] = txtCreditCardType.Text;
+                drexist["CreditCardType"] = ddlCreditCardType.SelectedItem.Text;
                 drexist["CreditCardAccNo"] = txtCreditCardAccNo.Text;
                 drexist["CreditCardAccHolder"] = txtCreditCardAccHolder.Text;
-                drexist["CreditCardExpires"] = txtDateExpires.Text;
+                drexist["CreditCardExpireMonth"] = txtMonthExpire.Text;
+                drexist["CreditCardExpireYear"] = txtYearExpire.Text;
                 dtContact.Rows.Add(drexist);
 
             }
             dr = dtContact.NewRow();
             dr["CreditCardId"] = "0";
             dr["CreditCardCode"] = "";
-            dr["CreditCardType"] = "";
+          //  dr["CreditCardType"] = "";
+            //ddlSoureceref.SelectedIndex = -1;
             dr["CreditCardAccNo"] = "";
             dr["CreditCardAccHolder"] = "";
-            dr["CreditCardExpires"] = "";
+            dr["CreditCardExpireMonth"] = "";
+            dr["CreditCardExpireYear"] = "";
             dtContact.Rows.Add(dr);
             rpCreditCard.DataSource = dtContact;
             rpCreditCard.DataBind();
@@ -201,18 +208,21 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             {
 
                 TextBox rtxtCreditCardCode = row.FindControl("txtCreditCardCode") as TextBox;
-                TextBox rtxtCreditCardType = row.FindControl("txtCreditCardType") as TextBox;
+                //TextBox rtxtCreditCardType = row.FindControl("txtCreditCardType") as TextBox;
+                DropDownList ddlCreditCardType = (DropDownList)row.FindControl("ddlCreditCardType");
                 TextBox rtxtCreditCardAccNo = row.FindControl("txtCreditCardAccNo") as TextBox;
                 TextBox rtxtCreditCardAccHolder = row.FindControl("txtCreditCardAccHolder") as TextBox;
-                TextBox rtxtDateExpires = row.FindControl("txtDateExpires") as TextBox;
+                TextBox txtMonthExpire = (TextBox)row.FindControl("txtMonthExpire");
+                TextBox txtYearExpire = (TextBox)row.FindControl("txtYearExpire");
 
                 HiddenField rhf_CreditCardId = (HiddenField)row.FindControl("hf_CreditCardId");
 
                 objClients.CreditCardCode = rtxtCreditCardCode.Text;
-                objClients.CreditCardType = rtxtCreditCardType.Text;
+                objClients.CreditCardType = ddlCreditCardType.SelectedItem.Text;
                 objClients.CreditCardAccNo = rtxtCreditCardAccNo.Text;
                 objClients.CreditCardAccHolder = rtxtCreditCardAccHolder.Text;
-                objClients.CreditCardExpires = rtxtDateExpires.Text;
+                objClients.CreditCardExpireMonth = txtMonthExpire.Text;
+                objClients.CreditCardExpireYear = txtYearExpire.Text;
                 objClients.ClientId = Convert.ToInt32(hf_ClientId.Value);
                 objClients.CreditCardId = Convert.ToInt32(rhf_CreditCardId.Value);
 
@@ -294,25 +304,29 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             dtContent.Columns.Add("CreditCardType");
             dtContent.Columns.Add("CreditCardAccNo");
             dtContent.Columns.Add("CreditCardAccHolder");
-            dtContent.Columns.Add("CreditCardExpires");
+            dtContent.Columns.Add("CreditCardExpireMonth");
+            dtContent.Columns.Add("CreditCardExpireYear");
 
 
             foreach (RepeaterItem row in rpCreditCard.Items)
             {
                 TextBox txtCreditCardCode = (TextBox)row.FindControl("txtCreditCardCode");
-                TextBox txtCreditCardType = (TextBox)row.FindControl("txtCreditCardType");
+                DropDownList ddlCreditCardType = (DropDownList)row.FindControl("ddlCreditCardType");
+               // TextBox txtCreditCardType = (TextBox)row.FindControl("txtCreditCardType");
                 TextBox txtCreditCardAccNo = (TextBox)row.FindControl("txtCreditCardAccNo");
                 TextBox txtCreditCardAccHolder = (TextBox)row.FindControl("txtCreditCardAccHolder");
-                TextBox txtDateExpires = (TextBox)row.FindControl("txtDateExpires");
+                TextBox txtMonthExpire = (TextBox)row.FindControl("txtMonthExpire");
+                TextBox txtYearExpire = (TextBox)row.FindControl("txtYearExpire");
                 HiddenField hf_CreditCardId = (HiddenField)row.FindControl("hf_CreditCardId");
 
                 DataRow drexist = dtContent.NewRow();
                 drexist["CreditCardId"] = hf_CreditCardId.Value;
                 drexist["CreditCardCode"] = txtCreditCardCode.Text;
-                drexist["CreditCardType"] = txtCreditCardType.Text;
+                drexist["CreditCardType"] = ddlCreditCardType.SelectedItem.Text;
                 drexist["CreditCardAccNo"] = txtCreditCardAccNo.Text;
                 drexist["CreditCardAccHolder"] = txtCreditCardAccHolder.Text;
-                drexist["CreditCardExpires"] = txtDateExpires.Text;
+                drexist["CreditCardExpireMonth"] = txtMonthExpire.Text;
+                drexist["CreditCardExpireYear"] = txtYearExpire.Text;
                 dtContent.Rows.Add(drexist);
             }
             dtContent.Rows.RemoveAt(nRowIndex);
@@ -427,4 +441,25 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+
+    
+    protected void rpCreditCard_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        int CreditCardId = 0;
+        DataSet ds = objBACredit.GetCreditCard(CreditCardId);
+        DropDownList selectList = e.Item.FindControl("ddlCreditCardType") as DropDownList;
+        if (selectList != null)
+        {
+            selectList.DataSource = ds; //your datasource
+            selectList.DataTextField = "CreditDescription";
+            selectList.DataValueField = "CreditCardId";
+            //  selectList.Items.Insert(0, new ListItem("--Select Credit Card Type--", "0"));
+            selectList.DataBind();
+
+        }
+    }
+
+   
+
+
 }

@@ -15,13 +15,14 @@
             opacity: 0.70;
             -moz-opacity: 0.70;
         }
-        .scrool{
-            overflow:scroll;
-            height:500px;
+
+        .scrool {
+            overflow: scroll;
+            height: 500px;
         }
     </style>
 
-     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 
 
     <script src="js/wickedpicker.js"></script>
@@ -47,7 +48,7 @@
 
 
         }
-     </script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:Label ID="lblMsg" runat="server"></asp:Label>
@@ -88,7 +89,7 @@
                             </div>
                             <div class="col-sm-4">
                             </div>
-                             <div class="col-sm-1">
+                            <div class="col-sm-1">
                                 <label class="control-label">Search</label>
                             </div>
 
@@ -107,7 +108,7 @@
             </div>
 
             <div class="row">&nbsp;</div>
-           
+
             <asp:HiddenField ID="hf_ClientId" runat="server" Value="0" />
             <asp:GridView ID="gvClientsList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
                 AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
@@ -170,25 +171,26 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                 <EmptyDataTemplate>
-                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
-                            </EmptyDataTemplate>
+                <EmptyDataTemplate>
+                    <h4>
+                        <asp:Label ID="lblEmptyMessage" Text="" runat="server" /></h4>
+                </EmptyDataTemplate>
             </asp:GridView>
 
-            <asp:Panel ID="pnlCreditCard" runat="server" CssClass="WhiteBG" Style="width: 70%; padding: 5px; min-height: 96px; position: fixed; z-index: 100001; left: 16%; top: 5px; display: none; overflow:scroll; height:400px;">
+            <asp:Panel ID="pnlCreditCard" runat="server" CssClass="WhiteBG" Style="width: 70%; padding: 5px; min-height: 96px; position: fixed; z-index: 100001; left: 16%; top: 5px; display: none; overflow: scroll; height: 400px;">
                 <%--     Your Modal Popup Message
             <br />
             <asp:Button ID="btnCancel" Text="Cancel" runat="server" />--%>
                 <div class="panel-body">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
-                            <asp:Repeater ID="rpCreditCard" runat="server" OnItemCommand="rpCreditCard_ItemCommand">
+                            <asp:Repeater ID="rpCreditCard" runat="server" OnItemCommand="rpCreditCard_ItemCommand" OnItemDataBound="rpCreditCard_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="col-sm-12 marginbtm" style="border: 1px solid #08376a; background: #D4E4EF; margin-top: 10px;">
                                         <br />
-                                       <%-- <asp:HiddenField ID="hf_CreditCaredId" runat="server" Value='<%# Eval("CreditCardId")%>' />--%>
+                                        <%-- <asp:HiddenField ID="hf_CreditCaredId" runat="server" Value='<%# Eval("CreditCardId")%>' />--%>
                                         <div class="col-sm-12 marginbtm">
-                                             <asp:HiddenField ID="hf_CreditCardId" runat="server" Value='<%# Eval("CreditCardId") %>' />
+                                            <asp:HiddenField ID="hf_CreditCardId" runat="server" Value='<%# Eval("CreditCardId") %>' />
                                             <asp:ImageButton ID="imageCreditCard" runat="server" CommandName="Delete" CommandArgument='<%# Eval("CreditCardId") %>' ImageUrl="../images/close.png"
                                                 OnClientClick="javascript:return confirm('Are You Sure To Delete CreditCard Details')" />
                                         </div>
@@ -205,17 +207,22 @@
                                                     <label class="control-label">Type</label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txtCreditCardType" runat="server" CssClass="form-control" MaxLength="50" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardType") %>'></asp:TextBox>
+                                                    <asp:DropDownList ID="ddlCreditCardType" runat="server" CssClass="form-control"  >
+                                                       
+                                                    </asp:DropDownList>
+
+                                                    <%--<asp:TextBox ID="txtCreditCardType" runat="server" CssClass="form-control" MaxLength="50" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardType") %>'></asp:TextBox>--%>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
                                                 <div class="col-sm-2">
-                                                    <label class="control-label">Account Number</label>
+                                                    <label class="control-label">Debit/Credit Card Number</label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txtCreditCardAccNo" runat="server" CssClass="form-control" MaxLength="50" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardAccNo") %>'></asp:TextBox>
+                                                    <asp:TextBox ID="txtCreditCardAccNo" runat="server"  CssClass="form-control" MinLength="16" MaxLength="16" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardAccNo") %>' ></asp:TextBox>
+                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Display="Dynamic" runat="server" ForeColor="Red" ControlToValidate="txtCreditCardAccNo" ValidationGroup="CC" ErrorMessage="Enter Number Only" SetFocusOnError="true" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
                                                 </div>
                                                 <div class="col-sm-1"></div>
                                                 <div class="col-sm-2">
@@ -229,14 +236,30 @@
                                         <div class="form-group">
                                             <div class="col-sm-12">
                                                 <label class="col-sm-2">Expires</label>
+                                                <div class="col-sm-1">
+
+
+                                                    <asp:TextBox ID="txtMonthExpire"  runat="server" CssClass="form-control" MaxLength="2" placeholder="MM" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardExpireMonth") %>'></asp:TextBox>
+
+                                                   
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <asp:TextBox ID="txtYearExpire" runat="server" CssClass="form-control" MaxLength="2" placeholder="YY" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardExpireYear") %>'></asp:TextBox>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <label class="col-sm-2"></label>
                                                 <div class="col-sm-3">
-
-
-                                                    <asp:TextBox ID="txtDateExpires" runat="server" CssClass="form-control" MaxLength="50" TextMode="Date" Text='<%#DataBinder.Eval(Container.DataItem,"CreditCardExpires") %>'></asp:TextBox>
+                                                     <asp:RegularExpressionValidator ID="rev" runat="server" Display="Dynamic" ControlToValidate="txtMonthExpire" ValidationGroup="CC" ForeColor="Red" ErrorMessage="Enter Number(01-12) Only" SetFocusOnError="true" ValidationExpression="(0[1-9]|1[012])"></asp:RegularExpressionValidator>
+                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic" runat="server" ForeColor="Red" ValidationGroup="CC" ControlToValidate="txtYearExpire" ErrorMessage="Enter Number Only" SetFocusOnError="true" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
 
                                                 </div>
-                                                <div class="col-sm-1"></div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +281,7 @@
                         <div class="col-sm-5">
                         </div>
                         <div class="col-sm-3">
-                            <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success"
+                            <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="CC"
                                 Text="Submit" OnClick="cmdSubmit_Click" />&nbsp;
                     <asp:Button runat="server" ID="btnCancel"
                         class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;
