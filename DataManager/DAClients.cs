@@ -145,7 +145,8 @@ namespace DataManager
                                                {"@CreditCardType",objClients.CreditCardType},
                                                {"@CreditCardAccNo",objClients.CreditCardAccNo},
                                                {"@CreditCardAccHolder",objClients.CreditCardAccHolder},
-                                               {"@CreditCardExpires",objClients.CreditCardExpires},
+                                               {"@CreditCardExpireMonth",objClients.CreditCardExpireMonth},
+                                               {"@CreditCardExpireYear",objClients.CreditCardExpireYear},
                                                {"@ClientId",objClients.ClientId}
                                          };
             int IsSuccess = ExecuteNonQuery("CreditCardDetails_InsUpdate", htparams);
