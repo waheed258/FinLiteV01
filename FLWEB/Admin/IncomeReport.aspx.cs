@@ -77,7 +77,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                         htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Income</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalIncome) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalIncome.ToString()) + "</td>");
                         htmlTable.Append("</tr>");
                     }
 
@@ -88,7 +88,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
 
                         htmlTable.Append("<tr>");
                         htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:0px;width:80%'>" + dtlRow["MainAccount"] + "</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;'>" + _BOUtilities.FormateNumberWithComma(Convert.ToInt32(dtlRow["Amount"].ToString())) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;'>" +_BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
 
 
 
@@ -102,7 +102,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             {
                 htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                 htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Income</td>");
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalIncome) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalIncome.ToString()) + "</td>");
                 htmlTable.Append("</tr>");
             }
             if (objds.Tables[2].Rows.Count > 0)
@@ -126,13 +126,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                         htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Expenses</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalExpenses) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalExpenses.ToString()) + "</td>");
                         htmlTable.Append("</tr>");
                     }
 
                     htmlTable.Append("<tr >");
                     htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:1px;width:80%'>" + dtlRow["MainAcName"] + "</td>");
-                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormateNumberWithComma(Convert.ToInt32(dtlRow["Amount"].ToString())) + "</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
 
 
 
@@ -143,7 +143,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             {
                 htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                 htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Expenses</td>");
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalExpenses) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalExpenses.ToString()) + "</td>");
                 htmlTable.Append("</tr>");
             }
 
@@ -172,11 +172,11 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             htmlTable.Append("<td colspan='6' style='border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Net income before tax for the period</td>");
             if (NetIncpositive == true)
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(Math.Abs(NetIncome)) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(NetIncome.ToString()) + "</td>");
             }
             else
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormateNumberWithComma(Math.Abs(NetIncome)) + ")</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormatTwoDecimal(Math.Abs(NetIncome).ToString()) + ")</td>");
 
             }
             htmlTable.Append("</tr>");
@@ -211,13 +211,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                         htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Income tax</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalIncomeTaxes) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalIncomeTaxes.ToString()) + "</td>");
                         htmlTable.Append("</tr>");
                     }
 
                     htmlTable.Append("<tr >");
                     htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:1px;width:80%'>" + dtlRow["MainAcName"] + "</td>");
-                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormateNumberWithComma(Convert.ToInt32(dtlRow["Amount"].ToString())) + "</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
 
 
 
@@ -238,12 +238,12 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
 
             if (positive == true)
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(Nettincomelossafter) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(Nettincomelossafter.ToString()) + "</td>");
 
             }
             else
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormateNumberWithComma(Nettincomelossafter) + ") </td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormatTwoDecimal(Nettincomelossafter.ToString()) + ") </td>");
             }
             htmlTable.Append("</tr>");
 
@@ -266,11 +266,11 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
 
             if (endofperiodpostive == true)
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(endofperiod) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(endofperiod.ToString()) + "</td>");
             }
             else
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormateNumberWithComma(endofperiod) + ")</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormatTwoDecimal(endofperiod.ToString()) + ")</td>");
             }
             htmlTable.Append("</tr>");
 
@@ -393,7 +393,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                         htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Income</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalIncome) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalIncome.ToString()) + "</td>");
                         htmlTable.Append("</tr>");
                     }
 
@@ -404,7 +404,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
 
                         htmlTable.Append("<tr>");
                         htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:0px;width:80%'>" + dtlRow["MainAccount"] + "</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;'>" + _BOUtilities.FormateNumberWithComma(Convert.ToInt32(dtlRow["Amount"].ToString())) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
 
 
 
@@ -435,13 +435,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                         htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Expenses</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalExpenses) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalExpenses.ToString()) + "</td>");
                         htmlTable.Append("</tr>");
                     }
 
                     htmlTable.Append("<tr >");
                     htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:1px;width:80%'>" + dtlRow["MainAcName"] + "</td>");
-                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormateNumberWithComma(Convert.ToInt32(dtlRow["Amount"].ToString())) + "</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
 
 
 
@@ -452,7 +452,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             {
                 htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                 htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Expenses</td>");
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalExpenses) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalExpenses.ToString()) + "</td>");
                 htmlTable.Append("</tr>");
             }
 
@@ -481,11 +481,11 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             htmlTable.Append("<td colspan='6' style='border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Net income before tax for the period</td>");
             if (NetIncpositive == true)
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(Math.Abs(NetIncome)) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(NetIncome.ToString()) + "</td>");
             }
             else
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormateNumberWithComma(Math.Abs(NetIncome)) + ")</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormatTwoDecimal(Math.Abs(NetIncome).ToString()) + ")</td>");
 
             }
             htmlTable.Append("</tr>");
@@ -520,13 +520,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
                         htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Income tax</td>");
-                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(TotalIncomeTaxes) + "</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalIncomeTaxes.ToString()) + "</td>");
                         htmlTable.Append("</tr>");
                     }
 
                     htmlTable.Append("<tr >");
                     htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:1px;width:80%'>" + dtlRow["MainAcName"] + "</td>");
-                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormateNumberWithComma(Convert.ToInt32(dtlRow["Amount"].ToString())) + "</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
 
 
 
@@ -547,12 +547,12 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
 
             if (positive == true)
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(Nettincomelossafter) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(Nettincomelossafter.ToString()) + "</td>");
 
             }
             else
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormateNumberWithComma(Nettincomelossafter) + ") </td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormatTwoDecimal(Nettincomelossafter.ToString()) + ") </td>");
             }
             htmlTable.Append("</tr>");
 
@@ -575,11 +575,11 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
 
             if (endofperiodpostive == true)
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormateNumberWithComma(endofperiod) + "</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(endofperiod.ToString()) + "</td>");
             }
             else
             {
-                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormateNumberWithComma(endofperiod) + ")</td>");
+                htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>(" + _BOUtilities.FormatTwoDecimal(endofperiod.ToString()) + ")</td>");
             }
             htmlTable.Append("</tr>");
 
