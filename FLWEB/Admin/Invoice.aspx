@@ -365,7 +365,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-2">
-                                <asp:TextBox ID="txtInvOrder" runat="server" CssClass="form-control" MaxLength="5" />
+                                <asp:TextBox ID="txtInvOrder" runat="server" CssClass="form-control" MaxLength="30" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtInvOrder" runat="server" ID="rfvtxtInvOrder" ValidationGroup="invoice"
                                     ErrorMessage="Enter Order Number" Text="Enter Order Number" class="validationred" Display="Dynamic" ForeColor="Red" />
                             </div>
