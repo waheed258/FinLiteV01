@@ -850,6 +850,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         {
             ImageButton ibtnTop = (ImageButton)e.Row.FindControl("imgDelete");
             ibtnTop.Enabled = false;
+            ibtnTop.ToolTip = "Can't Delete Invoice";
             DataSet dss = objBALInvoice.Check_Payment_Deposit();
 
             if (dss.Tables[0].Rows.Count > 0)
@@ -860,6 +861,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                     {
                         ibtnTop.Enabled = true;
                         ibtnTop.ImageUrl = "~/images/icon-delete.png";
+                        ibtnTop.ToolTip = "Delete";
                     }
                 }
             }
