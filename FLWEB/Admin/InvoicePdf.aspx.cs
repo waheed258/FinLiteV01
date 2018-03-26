@@ -1,6 +1,7 @@
 ﻿using BusinessManager;
 using iTextSharp.text;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -68,6 +69,10 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
 
                 int SF = 0;
                 int GC = 0;
+                string currency = "";
+                string companyname = "";
+                string address = "";
+                string country = ""; string state = ""; string city = "";
                 int PrintStyleId = 0;
 
                 if (objDs.Tables.Count > 0)
@@ -86,12 +91,18 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 readFile = readFile.Replace("{Country}", dtlRow["CountryName"].ToString() + " .");
                                 readFile = readFile.Replace("{State}", dtlRow["StateName"].ToString() + " ,");
                                 readFile = readFile.Replace("{City}", dtlRow["CityName"].ToString() + " ,");
-                            
+                                
                                 readFile = readFile.Replace("{currency}", dtlRow["currency"].ToString() + " ");
                                 string strImagPath = Server.MapPath("../images/" + dtlRow["comapnylogo"].ToString());
                                 readFile = readFile.Replace("{Image}", "<img style='height:40px;width:250px;'  src='" + "http://flv.swdtcpl.com/Logos/" + dtlRow["comapnylogo"].ToString() + "'></img>");
                                 //readFile = readFile.Replace("{Image3}", "<img style='height:50px;width:70px;margin-left:100px;'  src='" + "http://demofin.swdtcpl.com/img/" + dtlRow["comapnylogo"].ToString() + "'></img>");
 
+
+                                companyname = dtlRow["CompanyName"].ToString();
+                                address = dtlRow["CompanyAddress"].ToString();
+                                country = dtlRow["CountryName"].ToString();
+                                state = dtlRow["StateName"].ToString();
+                                city = dtlRow["CityName"].ToString();
 
                                 //string strUrl = _objBOUtiltiy.LogoUrl();
                                 //readFile = readFile.Replace("{Image}", "<img   src='" + strUrl + "Logos/" + dtlRow["comapnylogo"].ToString() + "'></img>");
@@ -130,7 +141,14 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 {
                                     readFile = readFile.Replace("{clientAddress}", " ");
                                 }
-                               
+                                if (dtlRow["ClientVatRegNo"].ToString() != "")
+                                {
+                                    readFile = readFile.Replace("{clientvatNo}", dtlRow["ClientVatRegNo"].ToString());
+                                }
+                                else
+                                {
+                                    readFile = readFile.Replace("{clientvatNo}", " ");
+                                }
                                 readFile = readFile.Replace("{Client1}", dtlRow["ClientName"].ToString());
                                 readFile = readFile.Replace("{Client}", dtlRow["ClientName"].ToString());
                               
@@ -148,6 +166,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                         readFile = readFile.Replace("{clientAddress}", " ");
                         readFile = readFile.Replace("{Client}", " ");
                         readFile = readFile.Replace("{OrderNo}", " ");
+                        readFile = readFile.Replace("{clientvatNo}", " ");
                     }
 
                     #endregion
@@ -176,12 +195,169 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
 
 
                     #region LandArrangement
-                    if (objDs.Tables[2].Rows.Count > 0)
+
+                    ArrayList list = new ArrayList();
+                   int supplcount=1;
+
+                    foreach (DataRow dtlRow in objDs.Tables[2].Rows)
                     {
-                        foreach (DataRow dtlRow in objDs.Tables[2].Rows)
+                        string supplName = dtlRow["LSupplierName"].ToString();
+
+                   
+                        
+                        if (!list.Contains(supplName))
                         {
+                            list.Add(supplName);
+
+                             sbLandrow.Append("<div style='page-break-before:always; text-align: center;'>");
+                             sbLandrow.Append("<br/>");
+
+                             sbLandrow.Append("<div class='row'>");
+                             sbLandrow.Append("<div class='col-xs-12'>");
+
+                             sbLandrow.Append("<div class='text-center'>");
+                             sbLandrow.Append("<i class='fa fa-search-plus pull-left icon'></i>");
+                             sbLandrow.Append("<h2>TAX INVOICE (COMPUTERIZED) REMITTANCE ADVICE</h2>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("<hr/>");
+
+                             sbLandrow.Append("<div class='row'>");
+
+                             sbLandrow.Append("<div class='col-xs-12 col-md-3 col-lg-3 pull-left'>");
+                             sbLandrow.Append("<div class='panel panel-default height'>");
+                             sbLandrow.Append("<div class='panel-heading' style='text-align:center; font-weight:bold;'>Billing Details</div>");
+                             sbLandrow.Append("<div class='panel-body'>");
+                             sbLandrow.Append("<span style='padding-right:5px;'>" + dtlRow["LSupplierName"].ToString() + "</span><br/>");
+
+                             sbLandrow.Append("<h5 style='padding-right:5px;'>" + dtlRow["LPostalAddress"].ToString() + "</h5>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+
+                             sbLandrow.Append("<div class='col-xs-12 col-md-5 col-lg-5'>");
+                             sbLandrow.Append("<div class='panel panel-default height'>");
+                             sbLandrow.Append("<div class='panel-heading' style='text-align:center; font-weight:bold;'>Company Information</div>");
+                             sbLandrow.Append("<div class='panel-body'>");
+                             sbLandrow.Append("<h5 style='margin-top: 0px;margin-bottom: 0px;'>" + companyname + "</h5>");
+
+                            
+                             sbLandrow.Append("<h5>" + address + "</h5>");
+                             sbLandrow.Append("<h5>" + city +','+state+','+country+"."+ "</h5>");
+                            
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+
+
+                             sbLandrow.Append("<div class='col-xs-12 col-md-4 col-lg-4 pull-right'>");
+                             sbLandrow.Append("<div class='panel panel-default height'>");
+                             sbLandrow.Append("<div class='panel-heading' style='text-align:center; font-weight:bold;'>Invoice Details</div>");
+                             sbLandrow.Append("<div class='panel-body'>");
+
+                             sbLandrow.Append("<h5 style='text-align:left;'><b>Document No </b>:<span align='left' style='padding-left:3px;'>" + dtlRow["InvId"].ToString() + "</span>" + "</h5>");
+                            sbLandrow.Append("<h5 style='text-align:left;'><b>Date</b> <span align='left' style='padding-left:62px;'>" +":" +" "+dtlRow["InvDate"].ToString() + "</span>" + "</h5>");
+                             sbLandrow.Append("<h5 style='text-align:left;'><b>Consultant</b> <span align='left' style='padding-left:18px;'>"+":" +" " + dtlRow["ConsultantName"].ToString() + "</span>" + "</h5>");
+                             sbLandrow.Append("<h5 style='text-align:left;'><b>Order No</b> <span align='left' style='padding-left:29px;'>" + ":" + " " + dtlRow["OrderNo"].ToString() + "</span>" + "</h5>");
+                             sbLandrow.Append("<h5 style='text-align:left;'><b>Currency</b> <span align='left' style='padding-left:30px;'>" +":" +" " + currency + "</span>" + "</h5>");
+                           
+                    
+
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+
+
+
+
+                             //sbLandrow.Append("</div>");
+                             //sbLandrow.Append("</div>");
+                             //sbLandrow.Append("</div>");
+
+                            // headers
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+                             sbLandrow.Append("</div>");
+                            
+
+                                sbLandrow.Append("<table style='width:99%' class='table table-condensed'>");
+
+                                if (PrintStyleId == 0)
+                                {
+                                    // sbLandrow.Append("<table style='width:99%' class='table table-condensed'>");
+                                    //sbLandrow.Append("<tr>");
+                                  //  if (LandOnly == 0)
+                                 //   {
+                                        //sbLandrow.Append("<h3 class='text-center'><strong>Land Invoice Summary</strong></h3>");
+
+                                        sbLandrow.Append("<tr>");
+                                        sbLandrow.Append("<td colspan='7' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Land Invoice Summary</td>");
+                                        sbLandrow.Append("</tr>");
+
+
+                                        sbLandrow.Append("<tr>");
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Type</td>");
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Ser RefNo</td>");
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Details</td>");
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Excl Amt</td>");
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Taxes</td>");
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>VAT</td>");
+
+                                        sbLandrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Incl Amt</td>");
+                                        sbLandrow.Append("</tr>");
+
+
+                                  //  }
+                                }
+
+                               
+                                SepLandClientTotal =  Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["ClientTotal"].ToString().Trim()) ? ".00" : dtlRow["ClientTotal"].ToString().Trim());
+                                SepLandExclAmt = SepLandExclAmt + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["Excl Amt"].ToString().Trim()) ? ".00" : dtlRow["Excl Amt"].ToString().Trim());
+                                SepLandVat = SepLandVat + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["VAT"].ToString().Trim()) ? ".00" : dtlRow["VAT"].ToString().Trim());
+
+                                //sbLandrow.Append("</tr>");
+
+
+                                if (PrintStyleId == 0)
+                                {
+                                    sbLandrow.Append("<tr>");
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'>" + dtlRow["LandArrId"] + "</td>");
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'>" + dtlRow["BookRefNo"] + "</td>");
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'>" + dtlRow["Details"] + "</td>");
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + dtlRow["Excl Amt"] + "</td>");
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>0.00</td>");
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + dtlRow["VAT"] + "</td>");
+
+                                    sbLandrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + dtlRow["ClientTotal"] + "</td>");
+                                    sbLandrow.Append("</tr>");
+                                    LandOnly = 1;
+                                }
+
+                                if (PrintStyleId == 0)
+                                {
+
+
+                                  
+                                    if (dtlRow["cnt"].ToString() == "1")
+                                    {
+                                        sbLandrow.Append("<tr id='trland'>");
+                                        sbLandrow.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:3px;'>Land Total</td>");
+                                        sbLandrow.Append("<td colspan='7' style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + SepLandClientTotal + "</td></tr>");
+
+                                        sbLandrow.Append("</table>");
+                                        SepLandClientTotal = 0;
+                                    }
+                                }
+
+                            
+                        }
+                        else
+                        {
+
                             if (PrintStyleId == 0)
                             {
+                                // sbLandrow.Append("<table style='width:99%' class='table table-condensed'>");
+                                sbLandrow.Append("<table style='width:99%' class='table table-condensed'>");
                                 if (LandOnly == 0)
                                 {
                                     //sbLandrow.Append("<h3 class='text-center'><strong>Land Invoice Summary</strong></h3>");
@@ -206,18 +382,20 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 }
                             }
 
-
-                            SepLandClientTotal = SepLandClientTotal + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["ClientTotal"].ToString().Trim()) ? ".00" : dtlRow["ClientTotal"].ToString().Trim());
+                            if (Convert.ToInt32(dtlRow["cnt"].ToString()) > supplcount)
+                            {
+                                SepLandClientTotal = SepLandClientTotal + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["ClientTotal"].ToString().Trim()) ? ".00" : dtlRow["ClientTotal"].ToString().Trim());
+                                supplcount++;
+                            }
+                            else
+                            {
+                                SepLandClientTotal = SepLandClientTotal + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["ClientTotal"].ToString().Trim()) ? ".00" : dtlRow["ClientTotal"].ToString().Trim());
+                            }
+                           
                             SepLandExclAmt = SepLandExclAmt + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["Excl Amt"].ToString().Trim()) ? ".00" : dtlRow["Excl Amt"].ToString().Trim());
                             SepLandVat = SepLandVat + Convert.ToDecimal(string.IsNullOrEmpty(dtlRow["VAT"].ToString().Trim()) ? ".00" : dtlRow["VAT"].ToString().Trim());
 
-
-                            readFile = readFile.Replace("{SupplName}", dtlRow["LSupplierName"].ToString());
-
-
-                            //LandClientTotal = LandClientTotal + LandClientTotal;
-                            //LandExclAmt = LandExclAmt + LandExclAmt;
-                            //LandVat = LandVat + LandVat;
+                            //sbLandrow.Append("</tr>");
 
 
                             if (PrintStyleId == 0)
@@ -234,29 +412,21 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                                 sbLandrow.Append("</tr>");
                                 LandOnly = 1;
                             }
-                        }
-                        //sbMainrow.Append("<tr>");
-                        //sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'>Land Total</td>");
-                        //sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'></td>");
-                        //sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'></td>");
-                        //sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'></td>");
-                        //sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'></td>");
-                        //sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'></td>");
-                        //sbMainrow.Append("<td  style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + LandClientTotal + "</td></tr>");
-                        if (PrintStyleId == 0)
-                        {
 
-                            sbLandrow.Append("<tr>");
-                            sbLandrow.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:3px;'>Land Total</td>");
-                            sbLandrow.Append("<td colspan='7' style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + SepLandClientTotal + "</td></tr>");
-                        }
+                            if (PrintStyleId == 0)
+                            {
 
+                                sbLandrow.Append("<tr>");
+                                sbLandrow.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:3px;'>Land Total</td>");
+                                sbLandrow.Append("<td colspan='7' style='border: 1px ridge black; font-weight:bold;padding:3px;text-align:right'>" + SepLandClientTotal + "</td></tr>");
+                            }
+                            sbLandrow.Append("<table>");
+                        }
                     }
-
 
                     readFile = readFile.Replace("{LandData}", sbLandrow.ToString());
 
-                    #endregion LandArrangement
+                    #endregion
 
 
                     #region AirTicket

@@ -79,13 +79,19 @@
                                         <tr>
                                             <td style="font-weight: bold; text-align: left;">Order No </td>
                                             <td>:</td>
-                                            <td align="left">{OrderNo}</td>
+                                            <td align="left" width="5px;">{OrderNo}</td>
                                         </tr>
 
                                         <tr>
                                             <td style="font-weight: bold; text-align: left;">Currency</td>
                                             <td>:</td>
                                             <td align="left">{currency}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight: bold; text-align: left;">VAT Reg No</td>
+                                            <td>:</td>
+                                            <td align="left">{clientvatNo}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -134,6 +140,7 @@
         <style>
             .height {
                 min-height: 200px;
+                
             }
 
             .pageheight {
@@ -167,10 +174,10 @@
 
 
 
-    <div style="page-break-before:always; text-align: center; ">
-        <br />
-        <div class="container">
-            <div class="row">
+    <!--<div style="page-break-before:always; text-align: center; ">
+        <br />-->
+        <div class="container"  id="landdiv">
+            <!--<div class="row">
                 <div class="col-xs-12">
                     <div class="text-center">
 
@@ -184,6 +191,8 @@
                                 <div class="panel-heading" style="text-align:center; font-weight:bold;">Billing Details</div>
                                 <div class="panel-body">
                                     {SupplName}
+                                    <br/>
+                                    {SupplierAddress}
                                 </div>
                             </div>
                         </div>
@@ -245,18 +254,19 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="panel-body">
                 <div class="table-responsive">
 
-                    <table style="width:99%" class="table table-condensed">
+                    <table  class="table table-condensed">
                         {LandData}
                     </table>
                 </div>
             </div>
+
         </div>
-            </div>
+           <!-- </div>-->
        
 </body>
 </html>
