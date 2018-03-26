@@ -28,8 +28,6 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             txtBody.Enabled = false;
             fuattachment.Enabled = false;
 
-            //ImageButton b = (ImageButton)gvInvoiceList.FindControl("imgSendMail");
-            //b.Visible = false;
         }
     }
 
@@ -42,11 +40,14 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
         try
         {
+ 
             //int InvId = 0;
             gvInvoiceList.PageSize = int.Parse(ViewState["ps"].ToString());
 
             DataSet ds = objBALInvoice.GetInvoiceList();
+
             Session["dt"] = ds.Tables[0];
+ 
 
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -576,7 +577,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             //int invid = Convert.ToInt32(gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString());
             string invid = gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString();
             //Response.Redirect("InvoicePdf.aspx?id=" + invid);
-            string url = "InvoicePdf.aspx?id=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(invid,true));
+            string url = "InvoicePdf.aspx?id=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(invid, true));
             string fullURL = "window.open('" + url + "', '_blank');";
             ScriptManager.RegisterStartupScript(this, typeof(string), "_blank", fullURL, true);
 
@@ -585,7 +586,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-           ExceptionLogging.SendExcepToDB(ex);
+            ExceptionLogging.SendExcepToDB(ex);
         }
 
     }
@@ -614,8 +615,14 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
         if (e.CommandName == "Edit Invoice")
         {
-          //  int InvId = Convert.ToInt32(e.CommandArgument);
-            Response.Redirect("Invoice.aspx?InvId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(id,true)));
+            //  int InvId = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect("Invoice.aspx?InvId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(id, true)));
+        }
+        if (e.CommandName == "Delete Invoice")
+        {
+            int InvoiceId = Convert.ToInt32(e.CommandArgument);
+            deleteInvoice(InvoiceId);
+            BindInvoiceList();
         }
 
 
@@ -642,7 +649,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-             ExceptionLogging.SendExcepToDB(ex);
+            ExceptionLogging.SendExcepToDB(ex);
         }
     }
 
@@ -709,8 +716,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            
-              ExceptionLogging.SendExcepToDB(ex);
+
+            ExceptionLogging.SendExcepToDB(ex);
         }
     }
 
@@ -729,7 +736,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-             ExceptionLogging.SendExcepToDB(ex);
+            ExceptionLogging.SendExcepToDB(ex);
         }
 
     }
@@ -751,7 +758,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     {
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
         SearchItemFromList(txtSearch.Text.Trim());
-      //  BindInvoiceList();
+        //  BindInvoiceList();
 
     }
     protected void imgsearch_Click(object sender, ImageClickEventArgs e)
@@ -824,6 +831,40 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     protected void txtSearch_TextChanged(object sender, EventArgs e)
     {
         SearchItemFromList(txtSearch.Text.Trim());
+    }
+
+    private void deleteInvoice(int InvoiceId)
+    {
+        try
+        {
+            int result = objBALInvoice.DeleteInvoice(InvoiceId);
+        }
+        catch (Exception ex)
+        {
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void gvInvoiceList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            ImageButton ibtnTop = (ImageButton)e.Row.FindControl("imgDelete");
+            ibtnTop.Enabled = false;
+            DataSet dss = objBALInvoice.Check_Payment_Deposit();
+
+            if (dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dtlRow in dss.Tables[0].Rows)
+                {
+                    if (ibtnTop.CommandArgument == dtlRow["InvId"].ToString())
+                    {
+                        ibtnTop.Enabled = true;
+                        ibtnTop.ImageUrl = "~/images/icon-delete.png";
+                    }
+                }
+            }
+
+        }
     }
 }
 

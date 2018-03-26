@@ -137,5 +137,16 @@ namespace BusinessManager
         {
             return _objDALInvoice.CreditNote_Insert(Invid, TicketId, Type, RefundAmt);
         }
+
+
+        public DataSet Check_Payment_Deposit()
+        {
+            return _objDALInvoice.Check_Payment_Deposit();
+        }
+
+        public int DeleteInvoice(int InvoiceId)
+        {
+            return _objDALInvoice.DeleteInvoice(InvoiceId);
+        }
     }
 }

@@ -321,6 +321,21 @@ namespace DataManager
             return ExecuteNonQuery("CreditNote_Insert", htparams);
 
         }
+        public DataSet Check_Payment_Deposit()
+        {
+
+            return ExecuteDataSet("Check_Payment_Deposit");
+        }
+        public int DeleteInvoice(int InvoiceId)
+        {
+            Hashtable htparams = new Hashtable
+           {
+             {"@InvoiceId",InvoiceId}
+           };
+
+            return ExecuteNonQuery("Delete_Invoice", htparams);
+
+        }
 
     }
 }

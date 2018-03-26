@@ -193,7 +193,7 @@
                
 
                
-                    <asp:GridView runat="server" EmptyDataText="No Data Found" ID="gvInvoiceList" OnPageIndexChanging="gvInvoiceList_PageIndexChanging"
+                    <asp:GridView runat="server" EmptyDataText="No Data Found" OnRowDataBound="gvInvoiceList_RowDataBound" ID="gvInvoiceList" OnPageIndexChanging="gvInvoiceList_PageIndexChanging"
                         AllowPaging="true"
                         PageSize="10" OnRowCommand="gvInvoiceList_RowCommand" DataKeyNames="InvId,clientemail"
                         AutoGenerateColumns="false" Width="100%" Height="50%"
@@ -223,8 +223,12 @@
                                     <asp:ImageButton ID="imgPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20" OnClick="imgPdf_Click" title="Pdf" />
                                     <asp:ImageButton ID="imgAccounting" ImageUrl="~/images/Money.png" runat="server" Width="30" Height="20" OnClick="imgAccounting_Click" title="Account Analysis" />
 
+
                                     <asp:ImageButton ID="imgEditInvoice" ToolTip="Edit" runat="server" ImageUrl="~/images/icon-edit.png" Height="20" Width="20"
                                         CommandName="Edit Invoice" CommandArgument='<%#Eval("InvId")%>' title="Edit" />
+                                    <asp:ImageButton ID="imgDelete" ToolTip="Delete" runat="server" ImageUrl="~/images/icon_imageDelete.png" Height="20" Width="20"
+                                                        CommandName="Delete Invoice" CommandArgument='<%#Eval("InvId") %>' OnClientClick="javascript:return confirm('Are You Sure You Want To Delete Invoice')" />
+                                               
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
