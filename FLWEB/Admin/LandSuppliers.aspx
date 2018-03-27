@@ -69,10 +69,10 @@
                                 <asp:TextBox ID="txtSupplierName" runat="server" CssClass="form-control" MaxLength="50" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtSupplierName" runat="server" ID="rfvtxtSupplierName" ValidationGroup="landsupplier"
                                     ErrorMessage="Enter Supplier Name" Text="Enter Supplier Name" class="validationred" Display="Dynamic" ForeColor="Red" />
-                                <asp:RegularExpressionValidator ControlToValidate="txtSupplierName" runat="server" ForeColor="Red"
+                                <%--<asp:RegularExpressionValidator ControlToValidate="txtSupplierName" runat="server" ForeColor="Red"
                                     ID="revtxtSupplierName" ValidationGroup="landsupplier" ErrorMessage="Enter Only Characters."
                                     Text="Enter Only Characters." ValidationExpression="[a-zA-Z][a-zA-Z ]+"
-                                    Display="Dynamic"></asp:RegularExpressionValidator>
+                                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
                             </div>
 
                             <div class="col-sm-2">
@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
-                                <label class="control-label">Province (<span class="style1">*</span>)</label>
+                                <label class="control-label">State (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">

@@ -198,10 +198,10 @@
                         <asp:TextBox ID="txtTelephoneNo" runat="server" CssClass="form-control" MaxLength="15" />
                         <asp:RequiredFieldValidator ControlToValidate="txtTelephoneNo" runat="server" ID="rfvtxtTelephoneNo"
                             Display="Dynamic" Text="Enter Telephone No." ErrorMessage="Enter Telephone No." ValidationGroup="client" ForeColor="Red" />
-                        <asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
+                        <%--<asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
                             ID="revtxtTelephoneNo" ValidationGroup="client" ErrorMessage="Enter Valid Telephone No."
                             Text="Enter Valid Telephone No." ValidationExpression="^[0-9]{10,15}$"
-                            Display="Dynamic"></asp:RegularExpressionValidator>
+                            Display="Dynamic"></asp:RegularExpressionValidator>--%>
                     </div>
 
                     <div class="col-sm-1"></div>
@@ -212,10 +212,10 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:TextBox ID="txtFaxNo" runat="server" CssClass="form-control" MaxLength="20" />
-                        <asp:RegularExpressionValidator ControlToValidate="txtFaxNo" runat="server" ForeColor="Red"
+                        <%--<asp:RegularExpressionValidator ControlToValidate="txtFaxNo" runat="server" ForeColor="Red"
                             ID="revtxtFaxNo" ValidationGroup="client" ErrorMessage="Enter Valid FaxNo."
                             Text="Enter Valid FaxNo." ValidationExpression="^[0-9]{10,20}$"
-                            Display="Dynamic"></asp:RegularExpressionValidator>
+                            Display="Dynamic"></asp:RegularExpressionValidator>--%>
                     </div>
                 </div>
             </div>
@@ -228,10 +228,10 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" MaxLength="15" />
-                        <asp:RegularExpressionValidator ControlToValidate="txtContactNo" runat="server" ForeColor="Red"
+                        <%--<asp:RegularExpressionValidator ControlToValidate="txtContactNo" runat="server" ForeColor="Red"
                             ID="revtxtContactNo" ValidationGroup="client" ErrorMessage="Enter Valid ContactNo."
                             Text="Enter Valid ContactNo." ValidationExpression="^[0-9]{10,15}$"
-                            Display="Dynamic"></asp:RegularExpressionValidator>
+                            Display="Dynamic"></asp:RegularExpressionValidator>--%>
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">

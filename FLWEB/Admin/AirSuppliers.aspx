@@ -69,10 +69,10 @@
                                 <asp:TextBox ID="txtSupplierName" runat="server" CssClass="form-control" MaxLength="50" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtSupplierName" runat="server" ID="rfvtxtSupplierName" ValidationGroup="airsupplier"
                                     ErrorMessage="Enter Supplier Name" Text="Enter Supplier Name" class="validationred" Display="Dynamic" ForeColor="Red" />
-                                <asp:RegularExpressionValidator ControlToValidate="txtSupplierName" runat="server" ForeColor="Red"
+                                <%--<asp:RegularExpressionValidator ControlToValidate="txtSupplierName" runat="server" ForeColor="Red"
                                     ID="revtxtSupplierName" ValidationGroup="airsupplier" ErrorMessage="Enter Only Characters."
                                     Text="Enter Only Characters." ValidationExpression="[a-zA-Z][a-zA-Z ]+"
-                                    Display="Dynamic"></asp:RegularExpressionValidator>
+                                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
                             </div>
 
                             <div class="col-sm-2">
@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
-                                <label class="control-label">Province (<span class="style1">*</span>)</label>
+                                <label class="control-label">State (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">
@@ -201,10 +201,10 @@
                                 <asp:TextBox ID="txtTelephoneNo" runat="server" CssClass="form-control" MaxLength="15" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtTelephoneNo" runat="server" ID="rfvtxtTelephoneNo" ValidationGroup="airsupplier"
                                     ErrorMessage="Enter Telephone No" Text="Enter Telephone No" class="validationred" Display="Dynamic" ForeColor="Red" />
-                                <asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
+                                <%--<asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
                                     ID="revtxtTelephoneNo" ValidationGroup="airsupplier" ErrorMessage="Enter Valid Telephone No."
                                     Text="Enter Valid Telephone No." ValidationExpression="^[0-9]{10,15}$"
-                                    Display="Dynamic"></asp:RegularExpressionValidator>
+                                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
@@ -212,10 +212,10 @@
                             </div>
                             <div class="col-sm-3">
                                 <asp:TextBox ID="txtFax" runat="server" CssClass="form-control" MaxLength="15" />
-                                <asp:RegularExpressionValidator ControlToValidate="txtFax" runat="server" ForeColor="Red"
+                                <%--<asp:RegularExpressionValidator ControlToValidate="txtFax" runat="server" ForeColor="Red"
                                     ID="revtxtFax" ValidationGroup="airsupplier" ErrorMessage="Enter Valid Fax No."
                                     Text="Enter Valid Fax No." ValidationExpression="^[0-9]{10,15}$"
-                                    Display="Dynamic"></asp:RegularExpressionValidator>
+                                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
                             </div>
                         </div>
                     </div>
