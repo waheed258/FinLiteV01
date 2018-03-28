@@ -207,6 +207,7 @@
                                                     <label class="control-label">Type</label>
                                                 </div>
                                                 <div class="col-sm-3">
+                                                     <asp:HiddenField ID="Hf_ddlCrediCardId" runat="server" Value='<%# Eval("CreditCardType") %>' />
                                                     <asp:DropDownList ID="ddlCreditCardType" runat="server" CssClass="form-control"  >
                                                        
                                                     </asp:DropDownList>
