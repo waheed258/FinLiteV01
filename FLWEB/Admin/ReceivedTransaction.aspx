@@ -135,32 +135,18 @@
 
                         <div class="col-sm-2">
                             <label class="control-label">
-                                Amount<span class="style1">*</span>
-
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-
-                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control decimalRight" PlaceHolder="0.00" OnTextChanged="txtAmount_TextChanged" AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="txtAmount" runat="server" ID="rfvtxtAmount" ValidationGroup="rct"
-                                ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
-                            <asp:RegularExpressionValidator ControlToValidate="txtAmount" runat="server" ID="rextxtAmount" ValidationGroup="gvvalida"
-                                ErrorMessage="Enter  number only." Text="Enter  number only."
-                                ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-
-
-                        <div class="col-sm-2">
-                            <label class="control-label">
                                 Prepared By</label>
                         </div>
                         <div class="col-sm-2">
                             <asp:TextBox ID="txtPreparedBy" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
 
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                         
+
+                       
                         <div class="col-sm-2">
                             <label class="control-label">
                                 Division<span class="style1">*</span></label>
@@ -185,6 +171,19 @@
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlReceiptType" runat="server" ID="rfvddlReceiptType" ValidationGroup="rct"
                                 ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+
+                        </div>
+                           <div class="col-sm-2">
+
+                            <label class="control-label">
+                                Auto Deposite to</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
+                                
+                            </asp:DropDownList>
+                            <%--<asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
+                                ErrorMessage="Select Auto Deposite" Text="Select Auto Deposite" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />--%>
 
                         </div>
 
@@ -219,20 +218,23 @@
                             <asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
                                 ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
                         </div>
-
                         <div class="col-sm-2">
-
                             <label class="control-label">
-                                Auto Deposite to</label>
+                                Amount<span class="style1">*</span>
+
+                            </label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
-                                
-                            </asp:DropDownList>
-                            <%--<asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
-                                ErrorMessage="Select Auto Deposite" Text="Select Auto Deposite" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />--%>
 
+                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control decimalRight" PlaceHolder="0.00" OnTextChanged="txtAmount_TextChanged" AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="txtAmount" runat="server" ID="rfvtxtAmount" ValidationGroup="rct"
+                                ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
+                            <asp:RegularExpressionValidator ControlToValidate="txtAmount" runat="server" ID="rextxtAmount" ValidationGroup="gvvalida"
+                                ErrorMessage="Enter  number only." Text="Enter  number only."
+                                ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                         </div>
+
+                     
 
                     </div>
                     <div class="form-group">
