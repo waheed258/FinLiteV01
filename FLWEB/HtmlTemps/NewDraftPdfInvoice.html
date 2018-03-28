@@ -4,7 +4,30 @@
 
     <title>Invoice</title>
     <link rel="stylesheet" type="text/css" href="http://finlite.dinoosys.in/HtmlTemps/bootstrap.min.css" />
+    <style>
+        #background {
+            position: absolute;
+            z-index: 0;
+            /*background: white;*/
+            display: block;
+            /*min-height: 50%;
+            min-width: 50%;*/
+            /*color: yellow;*/
+        }
 
+        #content {
+            position: absolute;
+            z-index: 1;
+        }
+
+        #bg-text {
+            color: lightgrey;
+            font-size: 80px;
+            transform: rotate(300deg);
+            -webkit-transform: rotate(300deg);
+        }
+
+    </style>
 
 </head>
 <body>
@@ -16,6 +39,7 @@
         </div>
         <!-- Simple Invoice - START -->
         <div class="container">
+         
 
             <div class="row">
                 <div class="col-xs-12">
@@ -54,18 +78,34 @@
                         </div>
                 </div>
             </div>
+            
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="text-center"><strong>Invoice Summary</strong></h3>
                         </div>
+
+                        <div id="background">
+                            <p id="bg-text">Draft PDF.......</p>
+                        </div>
+
                         <div class="panel-body">
+
+                         
+
                             <div class="table-responsive">
                                 <table style="width:99%" class="table table-condensed">
                                     {MainRows}
                                 </table>
+                                
+                               
                             </div>
+
+                        
+
+
                         </div>
                     </div>
                 </div>
