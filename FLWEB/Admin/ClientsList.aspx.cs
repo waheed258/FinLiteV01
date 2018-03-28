@@ -446,17 +446,32 @@ public partial class Admin_ClientsList : System.Web.UI.Page
     protected void rpCreditCard_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         int CreditCardId = 0;
+        RepeaterItem ri = e.Item;
+        var hfCreditCardId = ri.FindControl("Hf_ddlCrediCardId") as HiddenField;
         DataSet ds = objBACredit.GetCreditCard(CreditCardId);
-        DropDownList selectList = e.Item.FindControl("ddlCreditCardType") as DropDownList;
-        if (selectList != null)
+        DropDownList ddlCreditCardTypeList = e.Item.FindControl("ddlCreditCardType") as DropDownList;
+        if (ds.Tables[0].Rows.Count > 0)
         {
-            selectList.DataSource = ds; //your datasource
-            selectList.DataTextField = "CreditDescription";
-            selectList.DataValueField = "CreditCardId";
-            //  selectList.Items.Insert(0, new ListItem("--Select Credit Card Type--", "0"));
-            selectList.DataBind();
-
+            ddlCreditCardTypeList.Items.Clear();
+            ddlCreditCardTypeList.Items.Add(new ListItem("-Select-", "-1"));
+            ddlCreditCardTypeList.DataSource = ds.Tables[0];
+            ddlCreditCardTypeList.DataTextField = "CreditDescription";
+            ddlCreditCardTypeList.DataValueField = "CreditCardId";
+            ddlCreditCardTypeList.DataBind();
         }
+        ddlCreditCardTypeList.SelectedItem.Text = string.IsNullOrEmpty( hfCreditCardId.Value.ToString()) ? "0" : hfCreditCardId.Value.ToString() ;
+
+        
+       
+        //if (selectList != null)
+        //{
+        //    selectList.DataSource = ds; //your datasource
+        //    selectList.DataTextField = "CreditDescription";
+        //    selectList.DataValueField = "CreditCardId";
+        //    //  selectList.Items.Insert(0, new ListItem("--Select Credit Card Type--", "0"));
+        //    selectList.DataBind();
+
+        //}
     }
 
    
