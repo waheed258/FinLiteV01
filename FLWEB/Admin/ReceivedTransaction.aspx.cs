@@ -37,252 +37,265 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
     }
      protected void btnSave_Click(object sender, EventArgs e)
     {
-        try
+
+        if (ChkAllocate.Checked == false)
         {
-            int Allocatedcount = 0;
-              int result =0;
-              decimal ReceiptAmountAfterpaid = 0.0M;
-              decimal PreviousAmountAfterpaid = 0.0M;
-            foreach (GridViewRow row in gvData.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
 
-         
-
-                    TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
-                    HiddenField hfInvId = row.FindControl("hfInvId") as HiddenField;
-
-                    if (!_objBOUtiltiy.TryParseCheckValue(txtThisEntry.Text, "Decimal"))
-                    {
-                        txtThisEntry.Text = "0";
-
-                    }
-
-                    if (txtThisEntry.Text != "" && txtThisEntry.Text != "0" && txtThisEntry.Text != "0.00")
-                    {
-                        Allocatedcount = Allocatedcount + 1;
-                        TransactionMaster objTransactionMaster = new TransactionMaster();
-                        objTransactionMaster.InvoiceId = Convert.ToInt32(hfInvId.Value);
-                        objTransactionMaster.Divission = ddlDivision.SelectedValue;
-                        objTransactionMaster.ReceiptType = ddlReceiptType.SelectedValue;
-                        objTransactionMaster.AutoDepositeId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value);
-                        objTransactionMaster.AutoDepositeAccountNo = ddlAutoDepositeAccount.SelectedItem.Text;
-                        objTransactionMaster.ClientTypeId = Convert.ToInt32(ddlClientType.SelectedValue);
-                        objTransactionMaster.ClientAccountNo = ddlAccountNo.SelectedItem.Text;
-                        objTransactionMaster.ClientAccountNoID = Convert.ToInt32(ddlAccountNo.SelectedValue);
-                        objTransactionMaster.PayeeDetails = txtPayeeDetails.Text;
-                       
-                     
-                        objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
-
-                       
-
-                        objTransactionMaster.AllocatedAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0;
-                        objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[7].Text);
-                        objTransactionMaster.Details = txtDetails.Text;
-                        objTransactionMaster.Messages = txtMessage.Text;
-                        objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
-                        objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
-                       
-
-                        if (  txtThisEntry.Text != "" || txtThisEntry.Text != "0" || txtThisEntry.Text != "0.00")
-                        {
-                            if (ReceiptAmountAfterpaid != 0 || ReceiptAmountAfterpaid != 0.0M)
-                            objTransactionMaster.ReceiptAmount = ReceiptAmountAfterpaid;
-                            else
-                            objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                            if (PreviousAmountAfterpaid != 0 || PreviousAmountAfterpaid != 0.0M)
-                                objTransactionMaster.PrvClientOpenAmount = PreviousAmountAfterpaid;
-                            else
-                                objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
-                            if (objTransactionMaster.PrvClientOpenAmount > objTransactionMaster.AllocatedAmount)
-                            {
-                                objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount;
-                                PreviousAmountAfterpaid = Math.Abs(objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount);
-                           
-                            }
-                            else
-                            {
-                                objTransactionMaster.ReceiptAmountAfterPaid = Math.Abs(objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount) ;
-                                PreviousAmountAfterpaid = 0.0M;
-                            }
-                          
-                                ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
-                                objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid + PreviousAmountAfterpaid;
-                        }
-                        else
-                        {
-                           
-                            //objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                            ////if (objTransactionMaster.PrvClientOpenAmount != 0 || objTransactionMaster.PrvClientOpenAmount != 0.0M)
-                            ////{
-                            ////    objTransactionMaster.ReceiptAmount = objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount;
-                            ////}
-                            
-                            //objTransactionMaster.ReceiptAmountAfterPaid =Math.Abs( objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount);
-                            ////objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmountAfterPaid + objTransactionMaster.PrvClientOpenAmount != 0.0M ? Convert.ToDecimal(objTransactionMaster.PrvClientOpenAmount) : 0;
-                            //ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
-                            //objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
-                        }
-
-                        result = _objBALTransactions.ReceivedTransactionInsert(objTransactionMaster);
-
-                       
-
-
-                    }
-                }
-            }
-
-            if (Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue) != 0)
-            {
-
-                Transaction objTransaction = new Transaction();
-
-                objTransaction.FmAccountNoId = Convert.ToInt32(ddlAccountNo.SelectedValue);
-                objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
-                string category = "";
-                DataSet ds = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlAccountNo.SelectedValue), Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue), "RT", category);
-                string FmAcccode = "";
-                string FmMainAccCode = "";
-               
-                string RefMainAcc = "";
-                string RefAccCode = "";
-
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    FmAcccode = ds.Tables[0].Rows[0]["AccCode"].ToString();
-                    FmMainAccCode = ds.Tables[0].Rows[0]["MainAccCode"].ToString();
-                }
-
-                if (ds.Tables[1].Rows.Count > 0)
-                {
-                    RefAccCode = ds.Tables[1].Rows[0]["BankGiAccount"].ToString();
-                    RefMainAcc = ds.Tables[1].Rows[0]["MainAccCode"].ToString();
-
-                }
-
-
-                objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                objTransaction.FmAccountNO = FmAcccode;
-                objTransaction.FmMainAccount = FmMainAccCode;
-                objTransaction.ReferenceAccountNO = RefAccCode;
-                objTransaction.CreditAmount = 0;
-                objTransaction.ReferenceNo = txtSourceRef.Text;
-                objTransaction.ToMainAccount = RefMainAcc;
-                // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
-                // objTransaction.InvoiceNo = "";
-
-                objTransaction.ReferenceType = "RT";
-                objTransaction.CreatedBy = 0;
-
-                objTransaction.BalanceAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
-                _objBALTransactions.TransactionInsert(objTransaction);
-            }
-
-            //objTransaction.CreditAmount = lblAllocatedAmount.Text != "" ? Convert.ToDecimal(lblAllocatedAmount.Text) : 0;
-            //objTransaction.FmAccountNO = RefAccCode;
-            //objTransaction.MainAccount = RefMainAcc;
-            //objTransaction.ReferenceAccountNO = FmAcccode;
-            //objTransaction.DebitAmount = 0;
-            //objTransaction.ReferenceNo = txtSourceRef.Text;   
-
-            //objTransaction.ReferenceType = "RT";
-            //objTransaction.CreatedBy = 0;
-
-            //objTransaction.BalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
-            //_objBALTransactions.TransactionInsert(objTransaction);
-
-
-
-            if (ddlAutoDepositeAccount.SelectedValue != "0")
-            {
-                EmDepositMaster objEmDepositMaster = new EmDepositMaster();
-                objEmDepositMaster.DepositDate = Convert.ToDateTime(txtDate.Text);
-                objEmDepositMaster.DepositClientPrefix = Convert.ToInt32(ddlClientType.SelectedValue);
-                objEmDepositMaster.DepositComments = "";
-                objEmDepositMaster.DepositConsultant = Session["UserLoginId"].ToString();
-                objEmDepositMaster.DepositRecieptType = Convert.ToInt32(ddlReceiptType.SelectedValue);
-                objEmDepositMaster.DepositSourceRef = txtSourceRef.Text;
-                objEmDepositMaster.TotalRecieptsDeposited = Convert.ToInt32(Allocatedcount);
-                objEmDepositMaster.TotalDepositAmount = Convert.ToDecimal(lblAllocatedAmount.Text);
-                objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
-
-                BADepositTransaction objBADepositTransaction = new BADepositTransaction();
-                int DepositInsert = objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
-
-                if (DepositInsert > 0)
-                {
-                    lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
-                    // clearcontrols();
-                    foreach (GridViewRow Row in gvData.Rows)
-                    {
-                        if (Row.RowType == DataControlRowType.DataRow)
-                        {
-                            TextBox txtThisEntry = Row.FindControl("txtThisEntry") as TextBox;
-                            HiddenField hfInvId = Row.FindControl("hfInvId") as HiddenField;
-
-                            EMDepositChild objEMDepositChild = new EMDepositChild();
-                            objEMDepositChild.ReceiptId = Convert.ToInt32(result);
-                            objEMDepositChild.RecieptDate = Convert.ToDateTime(txtDate.Text);
-                            objEMDepositChild.ReceiptType = ddlReceiptType.SelectedItem.Text;
-                            objEMDepositChild.ReciptClient = (ddlClientType.SelectedItem.Text);
-                            objEMDepositChild.ReceiptAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0; ;
-                            objEMDepositChild.InvoiceId = Convert.ToInt32(hfInvId.Value);
-                            objEMDepositChild.DepositAcId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
-                            objEMDepositChild.DepositTransMasterId = DepositInsert;
-                            int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
-                            if (childResult > 0)
-                            {
-                                lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
-                               
-                            }
-                            else
-                            {
-                                lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
-                            }
-
-                        }
-                        //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                        //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                    }
-
-                }
-            }
-            else
-            {
-
-            }
-
-
-          
-           
-
-
-            OpenAmountDetails objOpenAmountDetails = new OpenAmountDetails();
-            objOpenAmountDetails.ClientTypeId = Convert.ToInt32(ddlClientType.SelectedValue);
-            objOpenAmountDetails.ClientNameId = Convert.ToInt32(ddlAccountNo.SelectedValue);
-            objOpenAmountDetails.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0; ;
-            objOpenAmountDetails.PrvOpenAmount = lblPrvClientOpenAmount.Text != "" ? Convert.ToDecimal(lblPrvClientOpenAmount.Text) : 0;
-            objOpenAmountDetails.AlocatedAmount = lblAllocatedAmount.Text != "" ? Convert.ToDecimal(lblAllocatedAmount.Text) : 0;
-            objOpenAmountDetails.ReceiptOpenAmount = lblReceiptOpenAmount.Text != "" ? Convert.ToDecimal(lblReceiptOpenAmount.Text) : 0;
-            objOpenAmountDetails.SourceRef = txtSourceRef.Text;
-            objOpenAmountDetails.ReceiptType = ddlReceiptType.SelectedValue;
-            objOpenAmountDetails.FromAccount = ddlAccountNo.SelectedValue;
-            objOpenAmountDetails.ToAccount = ddlAccountNo.SelectedValue;
-            objOpenAmountDetails.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
-            int ChildResult = _objBALTransactions.OpenAmountDetailsInsertUpdateMaster(objOpenAmountDetails);
-            if(ChildResult > 0)
-            {
-                Response.Redirect("ReceiptsList.aspx");
-            }
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(),
+     "Msg", "alert('Please Allocate Current Amount');", true);
 
         }
-        catch (Exception ex)
+        else
         {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "error", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
+
+
+            try
+            {
+                int Allocatedcount = 0;
+                int result = 0;
+                decimal ReceiptAmountAfterpaid = 0.0M;
+                decimal PreviousAmountAfterpaid = 0.0M;
+                foreach (GridViewRow row in gvData.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+
+
+
+                        TextBox txtThisEntry = row.FindControl("txtThisEntry") as TextBox;
+                        HiddenField hfInvId = row.FindControl("hfInvId") as HiddenField;
+
+                        if (!_objBOUtiltiy.TryParseCheckValue(txtThisEntry.Text, "Decimal"))
+                        {
+                            txtThisEntry.Text = "0";
+
+                        }
+
+                        if (txtThisEntry.Text != "" && txtThisEntry.Text != "0" && txtThisEntry.Text != "0.00")
+                        {
+                            Allocatedcount = Allocatedcount + 1;
+                            TransactionMaster objTransactionMaster = new TransactionMaster();
+                            objTransactionMaster.InvoiceId = Convert.ToInt32(hfInvId.Value);
+                            objTransactionMaster.Divission = ddlDivision.SelectedValue;
+                            objTransactionMaster.ReceiptType = ddlReceiptType.SelectedValue;
+                            objTransactionMaster.AutoDepositeId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value);
+                            objTransactionMaster.AutoDepositeAccountNo = ddlAutoDepositeAccount.SelectedItem.Text;
+                            objTransactionMaster.ClientTypeId = Convert.ToInt32(ddlClientType.SelectedValue);
+                            objTransactionMaster.ClientAccountNo = ddlAccountNo.SelectedItem.Text;
+                            objTransactionMaster.ClientAccountNoID = Convert.ToInt32(ddlAccountNo.SelectedValue);
+                            objTransactionMaster.PayeeDetails = txtPayeeDetails.Text;
+
+
+                            objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
+
+
+
+                            objTransactionMaster.AllocatedAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0;
+                            objTransactionMaster.InvoiceBalanceAmount = Convert.ToDecimal(row.Cells[7].Text);
+                            objTransactionMaster.Details = txtDetails.Text;
+                            objTransactionMaster.Messages = txtMessage.Text;
+                            objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
+                            objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
+
+
+                            if (txtThisEntry.Text != "" || txtThisEntry.Text != "0" || txtThisEntry.Text != "0.00")
+                            {
+                                if (ReceiptAmountAfterpaid != 0 || ReceiptAmountAfterpaid != 0.0M)
+                                    objTransactionMaster.ReceiptAmount = ReceiptAmountAfterpaid;
+                                else
+                                    objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                                if (PreviousAmountAfterpaid != 0 || PreviousAmountAfterpaid != 0.0M)
+                                    objTransactionMaster.PrvClientOpenAmount = PreviousAmountAfterpaid;
+                                else
+                                    objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(lblPrvClientOpenAmount.Text);
+                                if (objTransactionMaster.PrvClientOpenAmount > objTransactionMaster.AllocatedAmount)
+                                {
+                                    objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount;
+                                    PreviousAmountAfterpaid = Math.Abs(objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount);
+
+                                }
+                                else
+                                {
+                                    objTransactionMaster.ReceiptAmountAfterPaid = Math.Abs(objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount);
+                                    PreviousAmountAfterpaid = 0.0M;
+                                }
+
+                                ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                                objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid + PreviousAmountAfterpaid;
+                            }
+                            else
+                            {
+
+                                //objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                                ////if (objTransactionMaster.PrvClientOpenAmount != 0 || objTransactionMaster.PrvClientOpenAmount != 0.0M)
+                                ////{
+                                ////    objTransactionMaster.ReceiptAmount = objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount;
+                                ////}
+
+                                //objTransactionMaster.ReceiptAmountAfterPaid =Math.Abs( objTransactionMaster.ReceiptAmount - objTransactionMaster.AllocatedAmount);
+                                ////objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmountAfterPaid + objTransactionMaster.PrvClientOpenAmount != 0.0M ? Convert.ToDecimal(objTransactionMaster.PrvClientOpenAmount) : 0;
+                                //ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+                                //objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid;
+                            }
+
+                            result = _objBALTransactions.ReceivedTransactionInsert(objTransactionMaster);
+
+
+
+
+                        }
+                    }
+                }
+
+                if (Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue) != 0)
+                {
+
+                    Transaction objTransaction = new Transaction();
+
+                    objTransaction.FmAccountNoId = Convert.ToInt32(ddlAccountNo.SelectedValue);
+                    objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+                    string category = "";
+                    DataSet ds = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlAccountNo.SelectedValue), Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue), "RT", category);
+                    string FmAcccode = "";
+                    string FmMainAccCode = "";
+
+                    string RefMainAcc = "";
+                    string RefAccCode = "";
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        FmAcccode = ds.Tables[0].Rows[0]["AccCode"].ToString();
+                        FmMainAccCode = ds.Tables[0].Rows[0]["MainAccCode"].ToString();
+                    }
+
+                    if (ds.Tables[1].Rows.Count > 0)
+                    {
+                        RefAccCode = ds.Tables[1].Rows[0]["BankGiAccount"].ToString();
+                        RefMainAcc = ds.Tables[1].Rows[0]["MainAccCode"].ToString();
+
+                    }
+
+
+                    objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                    objTransaction.FmAccountNO = FmAcccode;
+                    objTransaction.FmMainAccount = FmMainAccCode;
+                    objTransaction.ReferenceAccountNO = RefAccCode;
+                    objTransaction.CreditAmount = 0;
+                    objTransaction.ReferenceNo = txtSourceRef.Text;
+                    objTransaction.ToMainAccount = RefMainAcc;
+                    // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
+                    // objTransaction.InvoiceNo = "";
+
+                    objTransaction.ReferenceType = "RT";
+                    objTransaction.CreatedBy = 0;
+
+                    objTransaction.BalanceAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                    _objBALTransactions.TransactionInsert(objTransaction);
+                }
+
+                //objTransaction.CreditAmount = lblAllocatedAmount.Text != "" ? Convert.ToDecimal(lblAllocatedAmount.Text) : 0;
+                //objTransaction.FmAccountNO = RefAccCode;
+                //objTransaction.MainAccount = RefMainAcc;
+                //objTransaction.ReferenceAccountNO = FmAcccode;
+                //objTransaction.DebitAmount = 0;
+                //objTransaction.ReferenceNo = txtSourceRef.Text;   
+
+                //objTransaction.ReferenceType = "RT";
+                //objTransaction.CreatedBy = 0;
+
+                //objTransaction.BalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
+                //_objBALTransactions.TransactionInsert(objTransaction);
+
+
+
+                if (ddlAutoDepositeAccount.SelectedValue != "0")
+                {
+                    EmDepositMaster objEmDepositMaster = new EmDepositMaster();
+                    objEmDepositMaster.DepositDate = Convert.ToDateTime(txtDate.Text);
+                    objEmDepositMaster.DepositClientPrefix = Convert.ToInt32(ddlClientType.SelectedValue);
+                    objEmDepositMaster.DepositComments = "";
+                    objEmDepositMaster.DepositConsultant = Session["UserLoginId"].ToString();
+                    objEmDepositMaster.DepositRecieptType = Convert.ToInt32(ddlReceiptType.SelectedValue);
+                    objEmDepositMaster.DepositSourceRef = txtSourceRef.Text;
+                    objEmDepositMaster.TotalRecieptsDeposited = Convert.ToInt32(Allocatedcount);
+                    objEmDepositMaster.TotalDepositAmount = Convert.ToDecimal(lblAllocatedAmount.Text);
+                    objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+
+                    BADepositTransaction objBADepositTransaction = new BADepositTransaction();
+                    int DepositInsert = objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
+
+                    if (DepositInsert > 0)
+                    {
+                        lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
+                        // clearcontrols();
+                        foreach (GridViewRow Row in gvData.Rows)
+                        {
+                            if (Row.RowType == DataControlRowType.DataRow)
+                            {
+                                TextBox txtThisEntry = Row.FindControl("txtThisEntry") as TextBox;
+                                HiddenField hfInvId = Row.FindControl("hfInvId") as HiddenField;
+
+                                EMDepositChild objEMDepositChild = new EMDepositChild();
+                                objEMDepositChild.ReceiptId = Convert.ToInt32(result);
+                                objEMDepositChild.RecieptDate = Convert.ToDateTime(txtDate.Text);
+                                objEMDepositChild.ReceiptType = ddlReceiptType.SelectedItem.Text;
+                                objEMDepositChild.ReciptClient = (ddlClientType.SelectedItem.Text);
+                                objEMDepositChild.ReceiptAmount = txtThisEntry.Text != "" ? Convert.ToDecimal(txtThisEntry.Text) : 0; ;
+                                objEMDepositChild.InvoiceId = Convert.ToInt32(hfInvId.Value);
+                                objEMDepositChild.DepositAcId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+                                objEMDepositChild.DepositTransMasterId = DepositInsert;
+                                int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
+                                if (childResult > 0)
+                                {
+                                    lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
+
+                                }
+                                else
+                                {
+                                    lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
+                                }
+
+                            }
+                            //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                            //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                        }
+
+                    }
+                }
+                else
+                {
+
+                }
+
+
+
+
+
+
+                OpenAmountDetails objOpenAmountDetails = new OpenAmountDetails();
+                objOpenAmountDetails.ClientTypeId = Convert.ToInt32(ddlClientType.SelectedValue);
+                objOpenAmountDetails.ClientNameId = Convert.ToInt32(ddlAccountNo.SelectedValue);
+                objOpenAmountDetails.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0; ;
+                objOpenAmountDetails.PrvOpenAmount = lblPrvClientOpenAmount.Text != "" ? Convert.ToDecimal(lblPrvClientOpenAmount.Text) : 0;
+                objOpenAmountDetails.AlocatedAmount = lblAllocatedAmount.Text != "" ? Convert.ToDecimal(lblAllocatedAmount.Text) : 0;
+                objOpenAmountDetails.ReceiptOpenAmount = lblReceiptOpenAmount.Text != "" ? Convert.ToDecimal(lblReceiptOpenAmount.Text) : 0;
+                objOpenAmountDetails.SourceRef = txtSourceRef.Text;
+                objOpenAmountDetails.ReceiptType = ddlReceiptType.SelectedValue;
+                objOpenAmountDetails.FromAccount = ddlAccountNo.SelectedValue;
+                objOpenAmountDetails.ToAccount = ddlAccountNo.SelectedValue;
+                objOpenAmountDetails.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
+                int ChildResult = _objBALTransactions.OpenAmountDetailsInsertUpdateMaster(objOpenAmountDetails);
+                if (ChildResult > 0)
+                {
+                    Response.Redirect("ReceiptsList.aspx");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "error", ex.Message);
+                ExceptionLogging.SendExcepToDB(ex);
+            }
         }
     }
     protected void btnClear_Click(object sender, EventArgs e)
