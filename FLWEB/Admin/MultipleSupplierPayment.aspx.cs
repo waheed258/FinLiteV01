@@ -133,7 +133,7 @@ public partial class Admin_MultipleSupplierPayment : System.Web.UI.Page
             {
                 objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
                 objTransaction.FmAccountNO = FmAcccode[i].ToString();
-                objTransaction.MainAccount = FmMainAccCode[i].ToString();
+                //objTransaction.MainAccount = FmMainAccCode[i].ToString();
                 objTransaction.ReferenceAccountNO = RefAccCode[i].ToString();
                 objTransaction.CreditAmount = 0;
                 objTransaction.ReferenceNo = txtSourceRef.Text;
@@ -150,7 +150,7 @@ public partial class Admin_MultipleSupplierPayment : System.Web.UI.Page
 
                 objTransaction.CreditAmount = Convert.ToDecimal(AllocateAmt[i].ToString());
                 objTransaction.FmAccountNO = RefAccCode[i].ToString();
-                objTransaction.MainAccount = RefMainAcc[i].ToString();
+               // objTransaction.MainAccount = RefMainAcc[i].ToString();
                 objTransaction.ReferenceAccountNO = FmAcccode[i].ToString();
                 objTransaction.DebitAmount = 0;
                 objTransaction.ReferenceNo = txtSourceRef.Text;
