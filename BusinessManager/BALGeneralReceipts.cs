@@ -20,9 +20,9 @@ namespace BusinessManager
            return _objDAGenReceipts.InsertGeneralReceipt(objEmGeneralReceipts);
 
        }
-       public DataSet Get_MainAccCode(int chartedAccId)
+       public DataSet Get_MainAccCode(int supplierId, string category)
        {
-           return _objDAGenReceipts.Get_MainAccCode(chartedAccId);
+           return _objDAGenReceipts.Get_MainAccCode(supplierId, category);
        }
        public DataSet GetRecipts()
        {
@@ -30,9 +30,9 @@ namespace BusinessManager
        }
 
       //   To Accounts Bind
-       public DataSet Get_GRMainAccCode(int chartedAccId)
+       public DataSet Get_GRMainAccCode(int supplierId,string category)
        {
-           return _objDAGenReceipts.Get_MainAccCode(chartedAccId);
+           return _objDAGenReceipts.Get_MainAccCode(supplierId, category);
 
        }
     }
