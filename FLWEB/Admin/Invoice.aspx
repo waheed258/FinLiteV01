@@ -361,7 +361,7 @@
 
                             <div class="col-sm-2">
                                 <label class="control-label">
-                                    Order<span class="style1">*</span>
+                                    Order No<span class="style1">*</span>
                                 </label>
                             </div>
                             <div class="col-sm-2">

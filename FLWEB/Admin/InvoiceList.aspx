@@ -214,7 +214,7 @@
                             <asp:BoundField DataField="clientemail" HeaderText="Client Email" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
                             <asp:BoundField DataField="clientname" HeaderText="Client Name" />
                             <asp:BoundField DataField="consultantName" HeaderText="Consultant Name" />
-                            <asp:BoundField DataField="InvOrder" HeaderText="Invoice Order" />
+                            <asp:BoundField DataField="InvOrder" HeaderText="Order No" />
                             <asp:BoundField DataField="InvoiceTotal" HeaderText="Invoice Total" ItemStyle-HorizontalAlign="Right" />
 
                             <asp:TemplateField HeaderText="Sending Options">

@@ -693,8 +693,17 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                     lblAcAnaliability.Text = tolvatamount.ToString();
                     lblAccVatAmount.Text = (tolcommiexclu + tolvatamount).ToString();
                     decimal accPayable = Convert.ToDecimal(lblincrordecreAccRceivable.Text) - (tolcommiexclu + tolvatamount);
+                    if (accPayable > 0)
+                    {
+                        lblAcAnalPayable.Text = accPayable.ToString();
+                    }
+                    else
+                    {
+                        accPayable = Math.Abs(accPayable);
 
-                    lblAcAnalPayable.Text = accPayable.ToString();
+                        lblAcAnalPayable.Text = '('+accPayable.ToString()+')';
+                    }
+                  
 
 
                 }

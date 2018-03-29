@@ -1897,7 +1897,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         decimal vatamount = (ClientTotal - exclAmount);
 
         txtExclusAmount.Text = _objBOUtiltiy.FormatTwoDecimal(exclAmount.ToString());
-        txtSerVatAmount.Text = vatamount.ToString();
+        txtSerVatAmount.Text = _objBOUtiltiy.FormatTwoDecimal(vatamount.ToString());
         SerPopupExtender.Show();
     }
     protected void getClientTotal()
