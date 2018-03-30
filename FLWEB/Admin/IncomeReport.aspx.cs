@@ -32,15 +32,15 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
         {
             StringBuilder htmlTable = new StringBuilder();
             int Income = 0; int Expenses = 0;
-            int TotalIncome = 0;
-            int TotalExpenses = 0;
-            int NetIncome = 0;
-            int IncomeTax = 0;
-            int IncAfterTax = 0;
-            int beginperiod = 0;
-            int endofperiod = 0;
-            int getTotalincome = 0;
-            int getTotalExpe = 0;
+            decimal TotalIncome = 0;
+            decimal TotalExpenses = 0;
+            decimal NetIncome = 0;
+            decimal IncomeTax = 0;
+            decimal IncAfterTax = 0;
+
+            decimal endofperiod = 0;
+            decimal getTotalincome = 0;
+            decimal getTotalExpe = 0;
 
             int comapnyId = 0;
 
@@ -66,7 +66,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                         foreach (DataRow dtlRrow in objds.Tables[1].Rows)
                         {
 
-                            TotalIncome = Convert.ToInt32(dtlRrow["Amount"].ToString()) + TotalIncome;
+                            TotalIncome = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalIncome;
 
                         }
 
@@ -114,7 +114,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                         foreach (DataRow dtlRrow in objds.Tables[2].Rows)
                         {
 
-                            TotalExpenses = Convert.ToInt32(dtlRrow["Amount"].ToString()) + TotalExpenses;
+                            TotalExpenses = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalExpenses;
                         }
                         getTotalExpe = 1;
 
@@ -147,7 +147,44 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                 htmlTable.Append("</tr>");
             }
 
+            int getTotalSusepenseamount = 0;
+            decimal TotalSusAmount = 0;
 
+            if (objds.Tables[4].Rows.Count > 0)
+            {
+                foreach (DataRow dtlRow in objds.Tables[4].Rows)
+                {
+                    if (getTotalSusepenseamount == 0)
+                    {
+                        foreach (DataRow dtlRrow in objds.Tables[4].Rows)
+                        {
+
+                            TotalSusAmount = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalSusAmount;
+                        }
+                        getTotalSusepenseamount = 1;
+
+                    }
+
+
+
+                    //if (Expenses == 0)
+                    //{
+                        htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
+                        htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Others</td>");
+                        htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalSusAmount.ToString()) + "</td>");
+                        htmlTable.Append("</tr>");
+                   // }
+
+                    htmlTable.Append("<tr >");
+                    htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:1px;width:80%'>" + dtlRow["MainAcName"] + "</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
+
+
+
+                  //  Expenses = 1;
+                }
+            }
+            
 
 
             NetIncome = TotalIncome - TotalExpenses;
@@ -187,7 +224,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             //htmlTable.Append("</tr>");
 
             int incomedata = 0;
-            int TotalIncomeTaxes = 0;
+            decimal TotalIncomeTaxes = 0;
             int incomes = 0;
 
             if (objds.Tables[3].Rows.Count > 0)
@@ -225,13 +262,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                 }
             }
 
-            int Nettincomeloss = NetIncome - TotalIncomeTaxes;
+            decimal Nettincomeloss = NetIncome - TotalIncomeTaxes;
 
             bool Nettincomelosspostive = Nettincomeloss >= 0;
             bool Nettincomelossnegative = Nettincomeloss <= 0;
 
 
-            int Nettincomelossafter = Math.Abs(Nettincomeloss);
+            decimal Nettincomelossafter = Math.Abs(Nettincomeloss);
 
             htmlTable.Append("<tr>");
             htmlTable.Append("<td colspan='6' style='border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Nett income (loss) after tax</td>");
@@ -334,17 +371,18 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             reader.Close();
 
             StringBuilder htmlTable = new StringBuilder();
-            int Income = 0;
-            int TotalIncome = 0;
-            int TotalExpenses = 0;
-            int NetIncome = 0;
-            int IncomeTax = 0;
-            int IncAfterTax = 0;
-            int beginperiod = 0;
-            int endofperiod = 0;
-            int getTotalincome = 0;
-            int getTotalExpe = 0;
+            int Income = 0;         
             int ComapanyAddress = 0;
+
+            decimal TotalIncome = 0;
+            decimal TotalExpenses = 0;
+            decimal NetIncome = 0;
+            decimal IncomeTax = 0;
+            decimal IncAfterTax = 0;
+
+            decimal endofperiod = 0;
+            decimal getTotalincome = 0;
+            decimal getTotalExpe = 0;
 
 
             int comapnyId = 0;
@@ -423,7 +461,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                         foreach (DataRow dtlRrow in objds.Tables[2].Rows)
                         {
 
-                            TotalExpenses = Convert.ToInt32(dtlRrow["Amount"].ToString()) + TotalExpenses;
+                            TotalExpenses = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalExpenses;
                         }
                         getTotalExpe = 1;
 
@@ -456,7 +494,44 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                 htmlTable.Append("</tr>");
             }
 
+            int getTotalSusepenseamount = 0;
+            decimal TotalSusAmount = 0;
 
+            if (objds.Tables[4].Rows.Count > 0)
+            {
+                foreach (DataRow dtlRow in objds.Tables[4].Rows)
+                {
+                    if (getTotalSusepenseamount == 0)
+                    {
+                        foreach (DataRow dtlRrow in objds.Tables[4].Rows)
+                        {
+
+                            TotalSusAmount = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalSusAmount;
+                        }
+                        getTotalSusepenseamount = 1;
+
+                    }
+
+
+
+                    //if (Expenses == 0)
+                    //{
+                    htmlTable.Append("<tr style='background-color:#f5f5f5;'>");
+                    htmlTable.Append("<td colspan='6' style='background-color:#f5f5f5;border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Others</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right;color:blue;'>" + _BOUtilities.FormatTwoDecimal(TotalSusAmount.ToString()) + "</td>");
+                    htmlTable.Append("</tr>");
+                    // }
+
+                    htmlTable.Append("<tr >");
+                    htmlTable.Append("<td colspan='6' style='border: 1px ridge black; font-weight:bold;padding:1px;width:80%'>" + dtlRow["MainAcName"] + "</td>");
+                    htmlTable.Append("<td style='border: 1px ridge black; font-weight:bold;padding:1px;text-align:right'>" + _BOUtilities.FormatTwoDecimal(dtlRow["Amount"].ToString()) + "</td>");
+
+
+
+                    //  Expenses = 1;
+                }
+            }
+            
 
 
             NetIncome = TotalIncome - TotalExpenses;
@@ -496,7 +571,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
             //htmlTable.Append("</tr>");
 
             int incomedata = 0;
-            int TotalIncomeTaxes = 0;
+            decimal TotalIncomeTaxes = 0;
             int incomes = 0;
 
             if (objds.Tables[3].Rows.Count > 0)
@@ -508,7 +583,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                         foreach (DataRow dtlRrow in objds.Tables[3].Rows)
                         {
 
-                            TotalIncomeTaxes = Convert.ToInt32(dtlRrow["Amount"].ToString()) + TotalIncomeTaxes;
+                            TotalIncomeTaxes = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalIncomeTaxes;
                         }
                         incomedata = 1;
 
@@ -534,13 +609,13 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                 }
             }
 
-            int Nettincomeloss = NetIncome - TotalIncomeTaxes;
+            decimal Nettincomeloss = NetIncome - TotalIncomeTaxes;
 
             bool Nettincomelosspostive = Nettincomeloss >= 0;
             bool Nettincomelossnegative = Nettincomeloss <= 0;
 
 
-            int Nettincomelossafter = Math.Abs(Nettincomeloss);
+            decimal Nettincomelossafter = Math.Abs(Nettincomeloss);
 
             htmlTable.Append("<tr>");
             htmlTable.Append("<td colspan='6' style='border: 1px ridge black;font-weight:bold;padding:3px;color:blue;'>Nett income (loss) after tax</td>");

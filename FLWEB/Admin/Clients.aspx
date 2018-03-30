@@ -989,26 +989,26 @@
                 <div class="col-sm-12">
                     <div class="col-sm-2">
 
-                        <label class="control-label">Note Type(<span class="style1">*</span>)</label>
+                        <label class="control-label">Note Type</label>
                     </div>
                     <div class="col-sm-3">
                         <asp:DropDownList ID="ddlNoteType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                             <asp:ListItem Text="--Select Note Type--" Value="0"> </asp:ListItem>
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator ControlToValidate="ddlNoteType" runat="server" ID="rfvNoteType"
-                        Display="Dynamic" Text="Select Note Type." ErrorMessage="Select Note Type." ValidationGroup="client" ForeColor="Red" InitialValue="0" />
+                        <%--<asp:RequiredFieldValidator ControlToValidate="ddlNoteType" runat="server" ID="rfvNoteType"
+                        Display="Dynamic" Text="Select Note Type." ErrorMessage="Select Note Type." ValidationGroup="client" ForeColor="Red" InitialValue="0" />--%>
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
                         <label class="control-label">
-                            Notes(<span class="style1">*</span>)
+                            Notes
                         </label>
                     </div>
                     <div class="col-sm-3">
                         <asp:TextBox ID="txtNotes" runat="server" CssClass="form-control multipleLine" MaxLength="200" TextMode="MultiLine" />
-                        <asp:RequiredFieldValidator ControlToValidate="txtNotes" runat="server"
+                        <%--<asp:RequiredFieldValidator ControlToValidate="txtNotes" runat="server"
                             ID="rfvtxtNotes" ValidationGroup="client" ErrorMessage="Enter Notes."
-                            Text="Enter Notes." ForeColor="Red" Display="Dynamic" />
+                            Text="Enter Notes." ForeColor="Red" Display="Dynamic" />--%>
                         <asp:RegularExpressionValidator ID="revtxtNotes" runat="server" ErrorMessage="Notes accept 200 character."
                             ControlToValidate="txtNotes" ValidationExpression="^[\s\S]{0,200}$"
                             ValidationGroup="client" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>

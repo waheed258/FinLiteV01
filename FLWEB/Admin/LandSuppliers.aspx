@@ -133,14 +133,14 @@
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
-                                <label class="control-label">State (<span class="style1">*</span>)</label>
+                                <label class="control-label">State </label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">
                                     <asp:ListItem Text="-Select State-" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ControlToValidate="dropState" runat="server" ID="rfvdropState" ValidationGroup="landsupplier"
-                                    ErrorMessage="Select State" Text="Select State" class="validationred" Display="Dynamic" InitialValue="0" ForeColor="Red" />
+                                <%--<asp:RequiredFieldValidator ControlToValidate="dropState" runat="server" ID="rfvdropState" ValidationGroup="landsupplier"
+                                    ErrorMessage="Select State" Text="Select State" class="validationred" Display="Dynamic" InitialValue="0" ForeColor="Red" />--%>
                             </div>
                         </div>
                     </div>
@@ -158,14 +158,14 @@
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
-                                <label class="control-label">City (<span class="style1">*</span>)</label>
+                                <label class="control-label">City </label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropCity" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                                     <asp:ListItem Text="-Select City-" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ControlToValidate="dropCity" runat="server" ID="rfvdropCity" ValidationGroup="landsupplier"
-                                    ErrorMessage="Select City" Text="Select City" class="validationred" Display="Dynamic" InitialValue="0" ForeColor="Red" />
+                                <%--<asp:RequiredFieldValidator ControlToValidate="dropCity" runat="server" ID="rfvdropCity" ValidationGroup="landsupplier"
+                                    ErrorMessage="Select City" Text="Select City" class="validationred" Display="Dynamic" InitialValue="0" ForeColor="Red" />--%>
                             </div>
                         </div>
                     </div>
@@ -217,16 +217,16 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">Telephone (<span class="style1">*</span>)</label>
+                                <label class="control-label">Telephone </label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:TextBox ID="txtTelephoneNo" runat="server" CssClass="form-control" MaxLength="15" />
-                                <asp:RequiredFieldValidator ControlToValidate="txtTelephoneNo" runat="server" ID="rfvtxtTelephoneNo" ValidationGroup="landsupplier"
-                                    ErrorMessage="Enter Telephone No" Text="Enter Telephone No" class="validationred" Display="Dynamic" ForeColor="Red" />
-                                <asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
+                                <%--<asp:RequiredFieldValidator ControlToValidate="txtTelephoneNo" runat="server" ID="rfvtxtTelephoneNo" ValidationGroup="landsupplier"
+                                    ErrorMessage="Enter Telephone No" Text="Enter Telephone No" class="validationred" Display="Dynamic" ForeColor="Red" />--%>
+                                <%--<asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
                                     ID="revtxtTelephoneNo" ValidationGroup="landsupplier" ErrorMessage="Enter Valid Telephone No."
                                     Text="Enter Valid Telephone No." ValidationExpression="^[0-9]{10,15}$"
-                                    Display="Dynamic"></asp:RegularExpressionValidator>
+                                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
@@ -273,12 +273,12 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
-                                <label class="control-label">Email (<span class="style1">*</span>)</label>
+                                <label class="control-label">Email </label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="75" />
-                                <asp:RequiredFieldValidator ControlToValidate="txtEmail" runat="server" ID="rfvtxtEmail" ValidationGroup="landsupplier"
-                                    ErrorMessage="Enter Email" Text="Enter Email" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                <%--<asp:RequiredFieldValidator ControlToValidate="txtEmail" runat="server" ID="rfvtxtEmail" ValidationGroup="landsupplier"
+                                    ErrorMessage="Enter Email" Text="Enter Email" class="validationred" Display="Dynamic" ForeColor="Red" />--%>
                                 <asp:RegularExpressionValidator ControlToValidate="txtEmail" runat="server" ForeColor="Red"
                                     ID="revtxtEmail" ValidationGroup="landsupplier" ErrorMessage="Enter Valid Email."
                                     Text="Enter Valid Email." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
