@@ -27,6 +27,7 @@ namespace EntityManager
         public int CreatedBy { get; set; }
         public string PaymentSourceRef { get; set; }
         public decimal ReceiptAmountAfterPaid { get; set; }
+        public int SuspenseAccId { get; set; }
 
     }
     public class OpenAmountDetails
@@ -65,4 +66,6 @@ namespace EntityManager
         public string ToMainAccount { get; set; }
     }
 
+
+  
 }

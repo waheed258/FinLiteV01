@@ -34,6 +34,7 @@ namespace DataManager
                 {"@CreatedBy",objTransactionMaster.CreatedBy},
                 {"@PaymentSourceRef",objTransactionMaster.PaymentSourceRef},
                  {"@ReceiptAfterPaid",objTransactionMaster.ReceiptAmountAfterPaid},
+                 {"@SuspenseAccId",objTransactionMaster.SuspenseAccId}
               
             };
             return ExecuteNonQuery("ReceivedTransaction_insert_update", htparams,"@return");
@@ -177,5 +178,8 @@ namespace DataManager
 
             return ExecuteDataSet("Transaction_GetAccount", htparams);
         }
+
+      
+
     }
 }

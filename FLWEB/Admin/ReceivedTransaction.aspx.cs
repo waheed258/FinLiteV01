@@ -96,7 +96,7 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                             objTransactionMaster.Messages = txtMessage.Text;
                             objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
                             objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
-
+                            objTransactionMaster.SuspenseAccId = 83;
 
                             if (txtThisEntry.Text != "" || txtThisEntry.Text != "0" || txtThisEntry.Text != "0.00")
                             {
@@ -261,6 +261,10 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
                         }
 
                     }
+
+                   
+
+                    
                 }
                 else
                 {
