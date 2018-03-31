@@ -83,6 +83,16 @@ namespace DataManager
       }
 
 
+      public DataSet GetTicketsAmount(string FromDate, string ToDate)
+      {
+          Hashtable htparams = new Hashtable
+           {
+             {"@fromdate",FromDate},
+             {"@todate",ToDate}
+           };
+
+          return ExecuteDataSet("Dashboard_TicketAmounts", htparams);
+      }
         // Commission Report
       public DataSet GetInvoiceData()
       {

@@ -65,5 +65,10 @@ namespace BusinessManager
            return _objDAReport.GetCompanyDetails(CompanyId);
 
        }
+
+       public DataSet GetTicketsAmount(string FromDate, string ToDate)
+       {
+           return _objDAReport.GetTicketsAmount(FromDate, ToDate);
+       }
     }
 }
