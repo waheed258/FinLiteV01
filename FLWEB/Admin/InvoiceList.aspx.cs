@@ -47,14 +47,14 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
         try
         {
- 
+
             //int InvId = 0;
             gvInvoiceList.PageSize = int.Parse(ViewState["ps"].ToString());
 
             DataSet ds = objBALInvoice.GetInvoiceList();
 
             Session["dt"] = ds.Tables[0];
- 
+
 
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -708,9 +708,9 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                     {
                         accPayable = Math.Abs(accPayable);
 
-                        lblAcAnalPayable.Text = '('+accPayable.ToString()+')';
+                        lblAcAnalPayable.Text = '(' + accPayable.ToString() + ')';
                     }
-                  
+
 
 
                 }
@@ -907,10 +907,10 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            
-           ExceptionLogging.SendExcepToDB(ex);
-        }  
-       
+
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+
     }
     protected void imgInvReceipt_Click(object sender, ImageClickEventArgs e)
     {
@@ -1320,7 +1320,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                 {
                     //ImageButton btndetails = sender as ImageButton;
 
-                 
+
                     //GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
                     //ImageButton ImgeReceiptBtn = (ImageButton)gvrow.FindControl("imgInvReceipt");
 
@@ -1343,7 +1343,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
                     //}
                     Response.Redirect("InvoiceList.aspx");
-                   
+
                 }
 
             }
@@ -1354,5 +1354,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+
+
+   
 }
 

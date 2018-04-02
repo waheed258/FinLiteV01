@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
-                                <label class="control-label">State </label>
+                                <label class="control-label">Province</label>
                             </div>
                             <div class="col-sm-3">
                                 <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">
