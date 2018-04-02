@@ -89,6 +89,9 @@
             border-bottom-right-radius:5px;
             
         }*/
+        .style1 {
+            color: #FF0000;
+        }
     </style>
     <script type="text/javascript">
         function showProgress() {
@@ -124,7 +127,30 @@
                 minLength: 2 //This is the Char length of inputTextBox  
             });
         });
+        $(document).ready(function () {
+            DatePickerSet();
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(function () {
 
+                DatePickerSet();
+
+            });
+
+        });
+        function DatePickerSet() {
+            $('#ContentPlaceHolder1_txtDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
+            $("#ContentPlaceHolder1_txtDate").datepicker({
+                format: 'yyyy-mm-dd',
+                startDate: '0d',
+                autoclose: true
+            }).attr('readonly', 'false');;
+           <%--  $('#<%= ddlDivision.ClientID %>').select2();
+             $('#<%= ddlReceiptType.ClientID %>').select2();
+             $('#<%= ddlClientType.ClientID %>').select2();
+             $('#<%= ddlAccountNo.ClientID %>').select2();
+             $('#<%= ddlAutoDepositeAccount.ClientID %>').select2();--%>
+
+        }
     </script>
 
 </asp:Content>
@@ -228,7 +254,8 @@
                                         CommandName="Edit Invoice" CommandArgument='<%#Eval("InvId")%>' title="Edit" />
                                     <asp:ImageButton ID="imgDelete" ToolTip="Delete" runat="server" ImageUrl="~/images/icon_imageDelete.png" Height="20" Width="20"
                                                         CommandName="Delete Invoice" CommandArgument='<%#Eval("InvId") %>' OnClientClick="javascript:return confirm('Are You Sure You Want To Delete Invoice')" />
-                                               
+                                     <asp:ImageButton ID="imgInvReceipt" ToolTip="Receipt" runat="server" ImageUrl="~/images/receipt.png" Height="20" Width="20" OnClick="imgInvReceipt_Click"
+                                       title="Receipt" />           
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -726,11 +753,236 @@
                         </div>
                              </div>
                     </asp:Panel>
+            
+                    <%-- Receipt Model Popup Page --%>
+                      <asp:Button ID="btnReciptPage" runat="server" Style="display: none" />
+                  
+             <asp:ModalPopupExtender ID="ReceiptPopupExtender" runat="server" PopupControlID="ReceiptPanel"
+                TargetControlID="btnReciptPage" BackgroundCssClass="modalBackground1" BehaviorID="ReceiptPopupExtender"
+                CancelControlID="BtnReceiptCancel">
+            </asp:ModalPopupExtender>
+
+                     <asp:Panel ID="ReceiptPanel" runat="server" CssClass="modalPopup" Style="width: 700px; padding: 5px; min-height: 80px; display: none;">
+                        <%--<header class="panel-heading">
+                            <div style="padding-top: 3px; padding-right: 3px;">
+                                <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
+                                <h4 class="panel-title">Accounting Analysis</h4>
+                            </div>
+                        </header>--%>
+
+                        <div class="panel-header">
+                           Receipt
+                        </div>
+                          <div class="panel-body">
+                    <div class="col-sm-12">
+                        <asp:Label ID="Label1" class="message" ForeColor="Red" runat="server" Text=""
+                            EnableViewState="false"></asp:Label>
+                    </div>
+                                <div class="form-group">
+
+
+                        <div class="col-sm-2">
+
+                            <label class="control-label">
+                                Client Type</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:DropDownList ID="ddlClientType" runat="server" CssClass="form-control"  AutoPostBack="true" OnSelectedIndexChanged="ddlClientType_SelectedIndexChanged" >
+                           <asp:ListItem Value="0" Text="Select" Selected="True">Select</asp:ListItem>
+                                 </asp:DropDownList>
+                            <asp:RequiredFieldValidator ControlToValidate="ddlClientType" runat="server" ID="rfvddlClientType" ValidationGroup="rct"
+                                ErrorMessage="Client Type" Text="Client Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+
+                        </div>
+
+
+                        <div class="col-sm-2">
+
+                            <label class="control-label">
+                                Account No</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:DropDownList ID="ddlAccountNo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAccountNo_SelectedIndexChanged" >
+                           <asp:ListItem Value="0" Text="Select">Select</asp:ListItem>
+                                 </asp:DropDownList>
+                            <asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
+                                ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Amount
+
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+
+                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control decimalRight" PlaceHolder="0.00"  AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="txtAmount" runat="server" ID="rfvtxtAmount" ValidationGroup="rct"
+                                ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
+                            <asp:RegularExpressionValidator ControlToValidate="txtAmount" runat="server" ID="rextxtAmount" ValidationGroup="gvvalida"
+                                ErrorMessage="Enter  number only." Text="Enter  number only."
+                                ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
+                        </div>
+
+                     
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Date</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control"  BackColor="White" ></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="txtDate" runat="server" ID="rfvtxtDate" ValidationGroup="rct"
+                                ErrorMessage="Enter Date" Text="SelectEnter Date" class="validationred" Display="Dynamic" ForeColor="Red" />
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                SourceRef<span class="style1">*</span>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="txtSourceRef" runat="server" ID="rfvtxtSourceRef" ValidationGroup="rct"
+                                ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Prepared By</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:TextBox ID="txtPreparedBy" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                         
+
+                       
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Division<span class="style1">*</span></label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                              
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDevission" ValidationGroup="rct"
+                                ErrorMessage="Select Division" Text="Select Division" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                        </div>
+
+
+                        <div class="col-sm-2">
+
+                            <label class="control-label">
+                                Receipt Type<span class="style1">*</span></label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control">
+                               
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ControlToValidate="ddlReceiptType" runat="server" ID="rfvddlReceiptType" ValidationGroup="rct"
+                                ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+
+                        </div>
+                           <div class="col-sm-2">
+
+                            <label class="control-label">
+                                Auto Deposite to</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
+                                
+                            </asp:DropDownList>
+                           <%-- <asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
+                                ErrorMessage="Select Auto Deposite" Text="Select Auto Deposite" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />--%>
+
+                        </div>
+
+
+                    </div>
+                  
+                    <div class="form-group">
+
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Ageing</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:TextBox ID="txtAgeing" runat="server" CssClass="form-control"></asp:TextBox>
+
+                        </div>
+                        <div class="col-sm-2">
+
+                            <label class="control-label">
+                                Payee Details</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:TextBox ID="txtPayeeDetails" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                details</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:TextBox ID="txtDetails" runat="server" CssClass="form-control" Text="Payment- thank you" ReadOnly="true"></asp:TextBox>
+
+                        </div>
+                    </div>
+
+                   
+                
+
+                  
+
+                   
+
+                  
+
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+                            <asp:Button runat="server" ID="btnReciptSave" class="btn btn-primary green" ValidationGroup="rct"
+                                Text="Save" OnClick="btnReciptSave_Click"  />
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:Button runat="server" ID="btnReceiptClear" class="btn btn-primary green" ValidationGroup="rct"
+                                Text="Clear"  />
+                        </div>
+                        <div class="col-sm-2">
+                            <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green" ValidationGroup="rct"
+                                Text="Print" />
+                        </div>
+                        <div class="col-sm-2">
+                           <asp:Button ID="BtnReceiptCancel" runat="server" Text="Cancel" class="btn btn-danger"  />
+                        </div>
+                          
+                    </div>
+                </div>
+                            
+                         
+                          </asp:Panel>
+
             </section>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="SendMail" />
         </Triggers>
+
+       
+
+
     </asp:UpdatePanel>
+    
 </asp:Content>
+
+
 

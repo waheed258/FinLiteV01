@@ -15,6 +15,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     EmInvoice objEmInvoice = new EmInvoice();
     BALInvoice objBALInvoice = new BALInvoice();
     BOUtiltiy _BOUtility = new BOUtiltiy();
+    BALTransactions _objBALTransactions = new BALTransactions();
 
     string readFile;
 
@@ -25,8 +26,14 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         {
             ViewState["ps"] = 10;
             BindInvoiceList();
+            BindClienttypes();
+            BindReceiptTypes();
+            BindDivision();
+            BindAutoDepositAccount();
+            txtPreparedBy.Text = Session["UserFullName"].ToString();
             txtBody.Enabled = false;
             fuattachment.Enabled = false;
+
 
         }
     }
@@ -855,26 +862,496 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     }
     protected void gvInvoiceList_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        if (e.Row.RowType == DataControlRowType.DataRow)
+        try
         {
-            ImageButton ibtnTop = (ImageButton)e.Row.FindControl("imgDelete");
-            ibtnTop.Enabled = false;
-            ibtnTop.ToolTip = "Can't Delete Invoice";
-            DataSet dss = objBALInvoice.Check_Payment_Deposit();
-
-            if (dss.Tables[0].Rows.Count > 0)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                foreach (DataRow dtlRow in dss.Tables[0].Rows)
+                ImageButton ibtnTop = (ImageButton)e.Row.FindControl("imgDelete");
+                ibtnTop.Enabled = false;
+                ibtnTop.ToolTip = "Can't Delete Invoice";
+                DataSet dss = objBALInvoice.Check_Payment_Deposit();
+
+                if (dss.Tables[0].Rows.Count > 0)
                 {
-                    if (ibtnTop.CommandArgument == dtlRow["InvId"].ToString())
+                    foreach (DataRow dtlRow in dss.Tables[0].Rows)
                     {
-                        ibtnTop.Enabled = true;
-                        ibtnTop.ImageUrl = "~/images/icon-delete.png";
-                        ibtnTop.ToolTip = "Delete";
+                        if (ibtnTop.CommandArgument == dtlRow["InvId"].ToString())
+                        {
+                            ibtnTop.Enabled = true;
+                            ibtnTop.ImageUrl = "~/images/icon-delete.png";
+                            ibtnTop.ToolTip = "Delete";
+                        }
                     }
                 }
+
+                ImageButton ImgeReceiptBtn = (ImageButton)e.Row.FindControl("imgInvReceipt");
+                lblID.Text = gvInvoiceList.DataKeys[e.Row.RowIndex].Value.ToString();
+                int Invid = Convert.ToInt32(lblID.Text);
+                DataSet invoiceData = objBALInvoice.GetInvoice(Invid);
+                if (invoiceData.Tables[0].Rows.Count >= 1)
+                {
+                    if (invoiceData.Tables[0].Rows[0]["PaymentStatus"].ToString() == "1")
+                    {
+                        ImgeReceiptBtn.Visible = false;
+                    }
+                    else
+                    {
+                        ImgeReceiptBtn.Visible = true;
+                    }
+                }
+                else
+                {
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            
+           ExceptionLogging.SendExcepToDB(ex);
+        }  
+       
+    }
+    protected void imgInvReceipt_Click(object sender, ImageClickEventArgs e)
+    {
+        try
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+
+            var closeLink = (Control)sender;
+            GridViewRow row = (GridViewRow)closeLink.NamingContainer;
+            //   txtTo.Text = row.Cells[2].Text; // here we are
+
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            lblID.Text = gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString();
+            int Invid = Convert.ToInt32(lblID.Text);
+            DataSet invoiceData = objBALInvoice.GetInvoice(Invid);
+            if (invoiceData.Tables[0].Rows.Count >= 1)
+            {
+                //ddlAccountNo.SelectedValue = invoiceData.Tables[0].Rows[0]["ClientNameId"].ToString();
+                ///  string ss =   ddlAccountNo.Items.FindByValue(invoiceData.Tables[0].Rows[0]["ClientTypeId"].ToString()).Text;
+                ddlClientType.SelectedIndex = ddlClientType.Items.IndexOf(ddlClientType.Items.FindByValue(invoiceData.Tables[0].Rows[0]["ClientTypeId"].ToString()));
+                BindClientAccount(ddlClientType.SelectedItem.Value.ToString());
+                ddlAccountNo.SelectedIndex = ddlAccountNo.Items.IndexOf(ddlAccountNo.Items.FindByValue(invoiceData.Tables[0].Rows[0]["ClientNameId"].ToString()));
+                txtAmount.Text = invoiceData.Tables[0].Rows[0]["InvoiceOpenAmount"].ToString();
+                ddlClientType.Enabled = false;
+                ddlAccountNo.Enabled = false;
+                txtAmount.Enabled = false;
+            }
+            else
+            {
+
+            }
+            ReceiptPopupExtender.Show();
+        }
+        catch (Exception ex)
+        {
+
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+
+    }
+    protected void ddlClientType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlClientType.SelectedIndex > 0)
+        {
+            BindClientAccount(ddlClientType.SelectedValue);
+        }
+        else
+        {
+            BindClientAccount("");
+        }
+    }
+
+
+    protected void ddlAccountNo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int Clienttype = Convert.ToInt32(ddlClientType.SelectedValue);
+        int ClientId = Convert.ToInt32(ddlAccountNo.SelectedValue);
+        txtPayeeDetails.Text = ddlAccountNo.SelectedItem.Text;
+        int Status = 0;
+        //  lblAllocatedAmount.Text = "0.00";
+        // BindInvoiceDetailsByClientAndStatus(Clienttype, ClientId, Status);
+        ReceiptPopupExtender.Show();
+    }
+    private void BindClienttypes()
+    {
+        try
+        {
+            ddlClientType.Items.Clear();
+            DataSet ObjDsClients = _BOUtility.GetClienttype();
+            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            {
+                ddlClientType.DataSource = ObjDsClients;
+                ddlClientType.DataValueField = "Id";
+                ddlClientType.DataTextField = "Name";
+
+                ddlClientType.DataBind();
+                ddlClientType.Items.Insert(0, new ListItem("Select Account", "0"));
+
+            }
+            else
+            {
+
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void BindClientAccount(string ClientType)
+    {
+        try
+        {
+            if (ClientType == "")
+            {
+                ddlAccountNo.Items.Clear();
+                // ddlAccountNo.Items.Insert(0, new ListItem("Select Account", "0"));
+                return;
+            }
+            ddlAccountNo.Items.Clear();
+            BAClients objBAClients = new BAClients();
+            DataSet ObjDsClients = objBAClients.GetClientByClientType(ClientType);
+            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            {
+                ddlAccountNo.DataSource = ObjDsClients;
+                ddlAccountNo.DataValueField = "ClientId";
+                ddlAccountNo.DataTextField = "ClientAccount";
+                ddlAccountNo.DataBind();
+                ReceiptPopupExtender.Show();
+                ddlAccountNo.Items.Insert(0, new ListItem("Select Account", "0"));
+            }
+            else
+            {
+                ReceiptPopupExtender.Show();
+                ddlAccountNo.Items.Insert(0, new ListItem("Select Account", "0"));
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void BindDivision()
+    {
+        try
+        {
+            ddlDivision.Items.Clear();
+            DataSet ObjDsClients = _BOUtility.GetDivisions();
+            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            {
+                ddlDivision.DataSource = ObjDsClients;
+                ddlDivision.DataValueField = "DivisionId";
+                ddlDivision.DataTextField = "DivName";
+                ddlDivision.DataBind();
+                ddlDivision.Items.Insert(0, new ListItem("Select Division", "0"));
+
+            }
+            else
+            {
+                ddlDivision.Items.Insert(0, new ListItem("Select Division", "0"));
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+
+    private void BindReceiptTypes()
+    {
+        try
+        {
+            ddlReceiptType.Items.Clear();
+            int ReceiptId = 0;
+            DataSet ObjDsClients = _BOUtility.GetReceiptTypes(ReceiptId);
+            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            {
+                ddlReceiptType.DataSource = ObjDsClients;
+                ddlReceiptType.DataValueField = "ReceiptId";
+                ddlReceiptType.DataTextField = "RecDescription";
+                ddlReceiptType.DataBind();
+                ddlReceiptType.Items.Insert(0, new ListItem("Select ReceiptType", "0"));
+            }
+            else
+            {
+                ddlReceiptType.Items.Insert(0, new ListItem("Select ReceiptType", "0"));
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    private void BindAutoDepositAccount()
+    {
+        try
+        {
+            ddlAutoDepositeAccount.Items.Clear();
+            int BankId = 0;
+            DataSet ObjDsClients = _BOUtility.GetBankAccounts(BankId);
+            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            {
+                ddlAutoDepositeAccount.DataSource = ObjDsClients;
+                ddlAutoDepositeAccount.DataValueField = "BankAcId";
+                ddlAutoDepositeAccount.DataTextField = "BankName";
+                ddlAutoDepositeAccount.DataBind();
+                ddlAutoDepositeAccount.Items.Insert(0, new ListItem("Select Account", "0"));
+            }
+            else
+            {
+                ddlAutoDepositeAccount.Items.Insert(0, new ListItem("Select Account", "0"));
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+
+    protected void btnReciptSave_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int Allocatedcount = 0;
+            int result = 0;
+            decimal ReceiptAmountAfterpaid = 0.0M;
+            decimal PreviousAmountAfterpaid = 0.0M;
+
+            DataSet objDsInvLst = objBALInvoice.GetInvoiceDetailsByClientAndStatus(Convert.ToInt32(ddlClientType.SelectedValue), Convert.ToInt32(ddlAccountNo.SelectedValue), 0);
+            TransactionMaster objTransactionMaster = new TransactionMaster();
+            objTransactionMaster.InvoiceId = Convert.ToInt32(Convert.ToInt32(lblID.Text));
+            objTransactionMaster.Divission = ddlDivision.SelectedValue;
+            objTransactionMaster.ReceiptType = ddlReceiptType.SelectedValue;
+            objTransactionMaster.AutoDepositeId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedItem.Value);
+            objTransactionMaster.AutoDepositeAccountNo = ddlAutoDepositeAccount.SelectedItem.Text;
+            objTransactionMaster.ClientTypeId = Convert.ToInt32(ddlClientType.SelectedValue);
+            objTransactionMaster.ClientAccountNo = ddlAccountNo.SelectedItem.Text;
+            objTransactionMaster.ClientAccountNoID = Convert.ToInt32(ddlAccountNo.SelectedValue);
+            objTransactionMaster.PayeeDetails = txtPayeeDetails.Text;
+
+            if (objDsInvLst.Tables[1].Rows.Count > 0)
+            {
+
+                objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(objDsInvLst.Tables[1].Rows[0]["OpenAmount"].ToString());
             }
 
+
+
+
+            objTransactionMaster.AllocatedAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+            objTransactionMaster.InvoiceBalanceAmount = 0.0M;
+            objTransactionMaster.Details = txtDetails.Text;
+            objTransactionMaster.Messages = "";
+            objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
+            objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
+
+
+            if (ReceiptAmountAfterpaid != 0 || ReceiptAmountAfterpaid != 0.0M)
+                objTransactionMaster.ReceiptAmount = ReceiptAmountAfterpaid;
+            else
+                objTransactionMaster.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+            if (PreviousAmountAfterpaid != 0 || PreviousAmountAfterpaid != 0.0M)
+                objTransactionMaster.PrvClientOpenAmount = PreviousAmountAfterpaid;
+            else
+                objTransactionMaster.PrvClientOpenAmount = Convert.ToDecimal(objTransactionMaster.PrvClientOpenAmount);
+            if (objTransactionMaster.PrvClientOpenAmount > objTransactionMaster.AllocatedAmount)
+            {
+                objTransactionMaster.ReceiptAmountAfterPaid = objTransactionMaster.ReceiptAmount;
+                PreviousAmountAfterpaid = Math.Abs(objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount);
+
+            }
+            else
+            {
+                objTransactionMaster.ReceiptAmountAfterPaid = Math.Abs(objTransactionMaster.ReceiptAmount + objTransactionMaster.PrvClientOpenAmount - objTransactionMaster.AllocatedAmount);
+                PreviousAmountAfterpaid = 0.0M;
+            }
+
+            ReceiptAmountAfterpaid = objTransactionMaster.ReceiptAmountAfterPaid;
+            objTransactionMaster.ReceiptBalanceAmount = ReceiptAmountAfterpaid + PreviousAmountAfterpaid;
+
+
+
+            result = _objBALTransactions.ReceivedTransactionInsert(objTransactionMaster);
+
+
+
+
+
+
+            if (Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue) != 0)
+            {
+
+                Transaction objTransaction = new Transaction();
+
+                objTransaction.FmAccountNoId = Convert.ToInt32(ddlAccountNo.SelectedValue);
+                objTransaction.ReferenceAccountNoId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+                string category = "";
+                DataSet ds = _objBALTransactions.Transaction_GetAccountsData(Convert.ToInt32(ddlAccountNo.SelectedValue), Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue), "RT", category);
+                string FmAcccode = "";
+                string FmMainAccCode = "";
+
+                string RefMainAcc = "";
+                string RefAccCode = "";
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    FmAcccode = ds.Tables[0].Rows[0]["AccCode"].ToString();
+                    FmMainAccCode = ds.Tables[0].Rows[0]["MainAccCode"].ToString();
+                }
+
+                if (ds.Tables[1].Rows.Count > 0)
+                {
+                    RefAccCode = ds.Tables[1].Rows[0]["BankGiAccount"].ToString();
+                    RefMainAcc = ds.Tables[1].Rows[0]["MainAccCode"].ToString();
+
+                }
+
+
+                objTransaction.DebitAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                objTransaction.FmAccountNO = FmAcccode;
+                objTransaction.FmMainAccount = FmMainAccCode;
+                objTransaction.ReferenceAccountNO = RefAccCode;
+                objTransaction.CreditAmount = 0;
+                objTransaction.ReferenceNo = txtSourceRef.Text;
+                objTransaction.ToMainAccount = RefMainAcc;
+                // objTransaction.InvoiceId = Convert.ToInt32(hfInvId.Value);
+                // objTransaction.InvoiceNo = "";
+
+                objTransaction.ReferenceType = "RT";
+                objTransaction.CreatedBy = 0;
+
+                objTransaction.BalanceAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                _objBALTransactions.TransactionInsert(objTransaction);
+            }
+
+            //objTransaction.CreditAmount = lblAllocatedAmount.Text != "" ? Convert.ToDecimal(lblAllocatedAmount.Text) : 0;
+            //objTransaction.FmAccountNO = RefAccCode;
+            //objTransaction.MainAccount = RefMainAcc;
+            //objTransaction.ReferenceAccountNO = FmAcccode;
+            //objTransaction.DebitAmount = 0;
+            //objTransaction.ReferenceNo = txtSourceRef.Text;   
+
+            //objTransaction.ReferenceType = "RT";
+            //objTransaction.CreatedBy = 0;
+
+            //objTransaction.BalanceAmount = Convert.ToDecimal(lblReceiptOpenAmount.Text);
+            //_objBALTransactions.TransactionInsert(objTransaction);
+
+
+
+            if (ddlAutoDepositeAccount.SelectedValue != "0")
+            {
+                EmDepositMaster objEmDepositMaster = new EmDepositMaster();
+                objEmDepositMaster.DepositDate = Convert.ToDateTime(txtDate.Text);
+                objEmDepositMaster.DepositClientPrefix = Convert.ToInt32(ddlClientType.SelectedValue);
+                objEmDepositMaster.DepositComments = "";
+                objEmDepositMaster.DepositConsultant = Session["UserLoginId"].ToString();
+                objEmDepositMaster.DepositRecieptType = Convert.ToInt32(ddlReceiptType.SelectedValue);
+                objEmDepositMaster.DepositSourceRef = txtSourceRef.Text;
+                objEmDepositMaster.TotalRecieptsDeposited = Convert.ToInt32(Allocatedcount);
+                objEmDepositMaster.TotalDepositAmount = Convert.ToDecimal(txtAmount.Text);
+                objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+
+                BADepositTransaction objBADepositTransaction = new BADepositTransaction();
+                int DepositInsert = objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
+
+                if (DepositInsert > 0)
+                {
+                    lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Deposit Added Successfully");
+                    // clearcontrols();
+
+
+
+                    EMDepositChild objEMDepositChild = new EMDepositChild();
+                    objEMDepositChild.ReceiptId = Convert.ToInt32(result);
+                    objEMDepositChild.RecieptDate = Convert.ToDateTime(txtDate.Text);
+                    objEMDepositChild.ReceiptType = ddlReceiptType.SelectedItem.Text;
+                    objEMDepositChild.ReciptClient = (ddlClientType.SelectedItem.Text);
+                    objEMDepositChild.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0; ;
+                    objEMDepositChild.InvoiceId = Convert.ToInt32(lblID.Text);
+                    objEMDepositChild.DepositAcId = Convert.ToInt32(ddlAutoDepositeAccount.SelectedValue);
+                    objEMDepositChild.DepositTransMasterId = DepositInsert;
+                    int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
+                    if (childResult > 0)
+                    {
+                        lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Deposit Added Successfully");
+
+                    }
+                    else
+                    {
+                        lblMsg.Text = _BOUtility.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
+                    }
+
+
+                }
+                else
+                {
+
+                }
+
+
+
+
+
+
+                OpenAmountDetails objOpenAmountDetails = new OpenAmountDetails();
+                objOpenAmountDetails.ClientTypeId = Convert.ToInt32(ddlClientType.SelectedValue);
+                objOpenAmountDetails.ClientNameId = Convert.ToInt32(ddlAccountNo.SelectedValue);
+                objOpenAmountDetails.ReceiptAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0; ;
+                objOpenAmountDetails.PrvOpenAmount = objTransactionMaster.PrvClientOpenAmount.ToString() != "" ? objTransactionMaster.PrvClientOpenAmount : 0;
+                objOpenAmountDetails.AlocatedAmount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : 0;
+                objOpenAmountDetails.ReceiptOpenAmount = objTransactionMaster.PrvClientOpenAmount.ToString() != "" ? objTransactionMaster.PrvClientOpenAmount : 0;
+                objOpenAmountDetails.SourceRef = txtSourceRef.Text;
+                objOpenAmountDetails.ReceiptType = ddlReceiptType.SelectedValue;
+                objOpenAmountDetails.FromAccount = ddlAccountNo.SelectedValue;
+                objOpenAmountDetails.ToAccount = ddlAccountNo.SelectedValue;
+                objOpenAmountDetails.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
+                int ChildResult = _objBALTransactions.OpenAmountDetailsInsertUpdateMaster(objOpenAmountDetails);
+                if (ChildResult > 0)
+                {
+                    //ImageButton btndetails = sender as ImageButton;
+
+                 
+                    //GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+                    //ImageButton ImgeReceiptBtn = (ImageButton)gvrow.FindControl("imgInvReceipt");
+
+                    //lblID.Text = gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString();
+                    //int Invid = Convert.ToInt32(lblID.Text);
+                    //DataSet invoiceData = objBALInvoice.GetInvoice(Invid);
+                    //if (invoiceData.Tables[0].Rows.Count >= 1)
+                    //{
+                    //    if (invoiceData.Tables[0].Rows[0]["PaymentStatus"].ToString() == "1")
+                    //    {
+                    //        ImgeReceiptBtn.Visible = false;
+                    //    }
+                    //    else
+                    //    {
+                    //        ImgeReceiptBtn.Visible = true;
+                    //    }
+                    //}
+                    //else
+                    //{
+
+                    //}
+                    Response.Redirect("InvoiceList.aspx");
+                   
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
+            ExceptionLogging.SendExcepToDB(ex);
         }
     }
 }
