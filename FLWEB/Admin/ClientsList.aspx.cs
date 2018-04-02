@@ -459,7 +459,8 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             ddlCreditCardTypeList.DataValueField = "CreditCardId";
             ddlCreditCardTypeList.DataBind();
         }
-        ddlCreditCardTypeList.SelectedItem.Text = string.IsNullOrEmpty( hfCreditCardId.Value.ToString()) ? "0" : hfCreditCardId.Value.ToString() ;
+
+        ddlCreditCardTypeList.SelectedIndex = ddlCreditCardTypeList.Items.IndexOf(ddlCreditCardTypeList.Items.FindByValue(hfCreditCardId.Value));
 
         
        
