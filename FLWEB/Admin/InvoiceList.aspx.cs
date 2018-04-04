@@ -1119,6 +1119,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
     protected void btnReciptSave_Click(object sender, EventArgs e)
     {
+
         try
         {
             int Allocatedcount = 0;
@@ -1342,8 +1343,6 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                     //{
 
                     //}
-                    Response.Redirect("InvoiceList.aspx");
-
                 }
 
             }
@@ -1353,9 +1352,25 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+        finally
+        {
+            Response.Redirect("InvoiceList.aspx", true);
+        }
+
+
     }
 
 
-   
+
+    protected void btnReceiptClear_Click(object sender, EventArgs e)
+    {
+        txtSourceRef.Text = "";
+        ddlDivision.SelectedIndex = 0;
+        ddlReceiptType.SelectedIndex = 0;
+        ddlAutoDepositeAccount.SelectedIndex = 0;
+        txtAgeing.Text = "";
+        ReceiptPopupExtender.Show();
+    }
 }
 

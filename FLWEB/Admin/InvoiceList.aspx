@@ -951,13 +951,13 @@
                                             Text="Save" OnClick="btnReciptSave_Click" />
                                     </div>
                                     <div class="col-sm-2">
-                                        <asp:Button runat="server" ID="btnReceiptClear" class="btn btn-primary green" ValidationGroup="rct"
+                                        <asp:Button runat="server" ID="btnReceiptClear" class="btn btn-primary green" OnClick="btnReceiptClear_Click"
                                             Text="Clear" />
                                     </div>
-                                    <div class="col-sm-2">
+                                    <%--<div class="col-sm-2">
                                         <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green" ValidationGroup="rct"
                                             Text="Print" />
-                                    </div>
+                                    </div>--%>
                                     <div class="col-sm-2">
                                         <asp:Button ID="BtnReceiptCancel" runat="server" Text="Cancel" class="btn btn-danger" />
                                     </div>
