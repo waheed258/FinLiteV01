@@ -5,7 +5,6 @@
     <link href="css/pagging.css" rel="stylesheet" />
 
     <style type="text/css">
-
         .modalBackground {
             /*filter: alpha(opacity=90);
             opacity: 0.8;*/
@@ -13,7 +12,7 @@
             background: #eee;
             padding: 2px;
             color: black;
-        } 
+        }
 
         .modalBackground1 {
             background-color: Black;
@@ -154,58 +153,59 @@
     </script>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"   runat="Server">
-    <asp:UpdatePanel ID="updatepanel1" runat="server">
-        <ContentTemplate>
-            <asp:Label runat="server" ID="lblMsg"></asp:Label>
-            <section class="panel">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:Panel ID="PanelSearch" runat="server" DefaultButton="imgsearch">
+        <asp:UpdatePanel ID="updatepanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:Label runat="server" ID="lblMsg"></asp:Label>
+                <section class="panel">
 
-                <header class="panel-heading">
-                    <div class="panel-actions">
-                        <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
-                    </div>
-                    <h2 class="panel-title">Invoices</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-md">
-                                <asp:Button ID="btnAdd" runat="server" Class="btn btn-primary" Text="Add" OnClick="btnAdd_Click" />
-                            </div>
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">&nbsp</div>
-                        <div class="col-sm-12">
-                            <div class="col-sm-2">
-                                <asp:DropDownList ID="DropPage" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropPage_SelectedIndexChanged"
-                                    AutoPostBack="true">
-                                    <asp:ListItem Value="10" Selected="True">10</asp:ListItem>
-                                    <asp:ListItem Value="25">25</asp:ListItem>
-                                    <asp:ListItem Value="50">50</asp:ListItem>
-                                    <asp:ListItem Value="100">100</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="control-label">
-                                    Records per page</label>
-                            </div>
-                            <div class="col-sm-4">
-                            </div>
-                            <div class="col-sm-1">
-                                <label class="control-label">Search</label>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <asp:TextBox ID="txtSearch" runat="server" placeholder="Search" CssClass="form-control" OnTextChanged="txtSearch_TextChanged" > </asp:TextBox>
-                                    <span class="input-group-btn">&nbsp; &nbsp;
-                                <asp:ImageButton ID="imgsearch" runat="server" ImageUrl="../images/icon-search.png" Height="25" Width="25" OnClick="imgsearch_Click" />
-                                    </span>
+                        <h2 class="panel-title">Invoices</h2>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-md">
+                                    <asp:Button ID="btnAdd" runat="server" Class="btn btn-primary" Text="Add" OnClick="btnAdd_Click" />
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">&nbsp</div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-2">
+                                    <asp:DropDownList ID="DropPage" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropPage_SelectedIndexChanged"
+                                        AutoPostBack="true">
+                                        <asp:ListItem Value="10" Selected="True">10</asp:ListItem>
+                                        <asp:ListItem Value="25">25</asp:ListItem>
+                                        <asp:ListItem Value="50">50</asp:ListItem>
+                                        <asp:ListItem Value="100">100</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Records per page</label>
+                                </div>
+                                <div class="col-sm-4">
+                                </div>
+                                <div class="col-sm-1">
+                                    <label class="control-label">Search</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <asp:TextBox ID="txtSearch" runat="server" placeholder="Search" CssClass="form-control" OnTextChanged="txtSearch_TextChanged"> </asp:TextBox>
+                                        <span class="input-group-btn">&nbsp; &nbsp;
+                                <asp:ImageButton ID="imgsearch" runat="server" ImageUrl="../images/icon-search.png" Height="25" Width="25" OnClick="imgsearch_Click" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        &nbsp;
+                            &nbsp;
 
                  <asp:UpdatePanel ID="updatepanelContacts" runat="server">
                      <ContentTemplate>
@@ -215,73 +215,74 @@
                      </ContentTemplate>
                  </asp:UpdatePanel>
 
-                    </div>
-               
+                        </div>
 
-               
-                    <asp:GridView runat="server" EmptyDataText="No Data Found" OnRowDataBound="gvInvoiceList_RowDataBound" ID="gvInvoiceList" OnPageIndexChanging="gvInvoiceList_PageIndexChanging"
-                        AllowPaging="true"
-                        PageSize="10" OnRowCommand="gvInvoiceList_RowCommand" DataKeyNames="InvId,clientemail"
-                        AutoGenerateColumns="false" Width="100%" Height="50%"
-                        CssClass="table table-striped table-bordered" OnSorting="gvInvoiceList_Sorting">
-                        <RowStyle />
-                        <FooterStyle Font-Bold="True" />
-                        <PagerStyle ForeColor="White" HorizontalAlign="Center" />
-                        <HeaderStyle Font-Bold="True" />
-                        <AlternatingRowStyle BackColor="White" />
-                        <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
-                        <%--<PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
+
+
+                        <asp:GridView runat="server" EmptyDataText="No Data Found" OnRowDataBound="gvInvoiceList_RowDataBound" ID="gvInvoiceList" OnPageIndexChanging="gvInvoiceList_PageIndexChanging"
+                            AllowPaging="true"
+                            PageSize="10" OnRowCommand="gvInvoiceList_RowCommand" DataKeyNames="InvId,clientemail"
+                            AutoGenerateColumns="false" Width="100%" Height="50%"
+                            CssClass="table table-striped table-bordered" OnSorting="gvInvoiceList_Sorting">
+                            <RowStyle />
+                            <FooterStyle Font-Bold="True" />
+                            <PagerStyle ForeColor="White" HorizontalAlign="Center" />
+                            <HeaderStyle Font-Bold="True" />
+                            <AlternatingRowStyle BackColor="White" />
+                            <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
+                            <%--<PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
 
                     <RowStyle CssClass="gradeA odd" />
                     <AlternatingRowStyle CssClass="gradeA even" />--%>
-                        <Columns>
-                            <asp:BoundField DataField="InvId" HeaderText="InvId" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
-                            <asp:BoundField DataField="InvDate" HeaderText="Invoice Date" />
-                            <asp:BoundField DataField="clientemail" HeaderText="Client Email" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
-                            <asp:BoundField DataField="clientname" HeaderText="Client Name" />
-                            <asp:BoundField DataField="consultantName" HeaderText="Consultant Name" />
-                            <asp:BoundField DataField="InvOrder" HeaderText="Order No" />
-                            <asp:BoundField DataField="InvoiceTotal" HeaderText="Invoice Total" ItemStyle-HorizontalAlign="Right" />
+                            <Columns>
+                                <asp:BoundField DataField="InvId" HeaderText="InvId" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
+                                <asp:BoundField DataField="InvDate" HeaderText="Invoice Date" />
+                                <asp:BoundField DataField="clientemail" HeaderText="Client Email" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
+                                <asp:BoundField DataField="clientname" HeaderText="Client Name" />
+                                <asp:BoundField DataField="consultantName" HeaderText="Consultant Name" />
+                                <asp:BoundField DataField="InvOrder" HeaderText="Order No" />
+                                <asp:BoundField DataField="InvoiceTotal" HeaderText="Invoice Total" ItemStyle-HorizontalAlign="Right" />
 
-                            <asp:TemplateField HeaderText="Sending Options">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click" title="Mail" />
-                                    <asp:ImageButton ID="imgPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20" OnClick="imgPdf_Click" title="Pdf" />
-                                    <asp:ImageButton ID="imgAccounting" ImageUrl="~/images/Money.png" runat="server" Width="30" Height="20" OnClick="imgAccounting_Click" title="Account Analysis" />
+                                <asp:TemplateField HeaderText="Sending Options">
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click" title="Mail" />
+                                        <asp:ImageButton ID="imgPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20" OnClick="imgPdf_Click" title="Pdf" />
+                                        <asp:ImageButton ID="imgAccounting" ImageUrl="~/images/Money.png" runat="server" Width="30" Height="20" OnClick="imgAccounting_Click" title="Account Analysis" />
 
 
-                                    <asp:ImageButton ID="imgEditInvoice" ToolTip="Edit" runat="server" ImageUrl="~/images/icon-edit.png" Height="20" Width="20"
-                                        CommandName="Edit Invoice" CommandArgument='<%#Eval("InvId")%>' title="Edit" />
-                                    <asp:ImageButton ID="imgDelete" ToolTip="Delete" runat="server" ImageUrl="~/images/icon_imageDelete.png" Height="20" Width="20"
-                                                        CommandName="Delete Invoice" CommandArgument='<%#Eval("InvId") %>' OnClientClick="javascript:return confirm('Are You Sure You Want To Delete Invoice')" />
-                                     <asp:ImageButton ID="imgInvReceipt" ToolTip="Receipt" runat="server" ImageUrl="~/images/receipt.png" Height="20" Width="20" OnClick="imgInvReceipt_Click"
-                                       title="Receipt" />           
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                          <EmptyDataTemplate>
-                          <h4><asp:Label ID = "lblEmptyMessage" Text="" runat="server" /></h4>  
+                                        <asp:ImageButton ID="imgEditInvoice" ToolTip="Edit" runat="server" ImageUrl="~/images/icon-edit.png" Height="20" Width="20"
+                                            CommandName="Edit Invoice" CommandArgument='<%#Eval("InvId")%>' title="Edit" />
+                                        <asp:ImageButton ID="imgDelete" ToolTip="Delete" runat="server" ImageUrl="~/images/icon_imageDelete.png" Height="20" Width="20"
+                                            CommandName="Delete Invoice" CommandArgument='<%#Eval("InvId") %>' OnClientClick="javascript:return confirm('Are You Sure You Want To Delete Invoice')" />
+                                        <asp:ImageButton ID="imgInvReceipt" ToolTip="Receipt" runat="server" ImageUrl="~/images/receipt.png" Height="20" Width="20" OnClick="imgInvReceipt_Click"
+                                            title="Receipt" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <EmptyDataTemplate>
+                                <h4>
+                                    <asp:Label ID="lblEmptyMessage" Text="" runat="server" /></h4>
                             </EmptyDataTemplate>
-                    </asp:GridView>
+                        </asp:GridView>
 
 
 
 
-                    <asp:Label ID="lblresult" runat="server" />
-                    <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
-                  <%--  <asp:ModalPopupExtender ID="SendMailPopupExtender" runat="server" TargetControlID="btnShowPopup"
+                        <asp:Label ID="lblresult" runat="server" />
+                        <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
+                        <%--  <asp:ModalPopupExtender ID="SendMailPopupExtender" runat="server" TargetControlID="btnShowPopup"
                         PopupControlID="pnlpopup"
                         CancelControlID="btnCancel" BackgroundCssClass="popupextndrBg">
                     </asp:ModalPopupExtender>--%>
 
-                      <asp:ModalPopupExtender ID="SendMailPopupExtender" runat="server" PopupControlID="pnlpopup"
-                TargetControlID="btnShowPopup" BackgroundCssClass="modalBackground1" BehaviorID="SendMailPopupExtender"
-                CancelControlID="btnCancel">
-            </asp:ModalPopupExtender>
+                        <asp:ModalPopupExtender ID="SendMailPopupExtender" runat="server" PopupControlID="pnlpopup"
+                            TargetControlID="btnShowPopup" BackgroundCssClass="modalBackground1" BehaviorID="SendMailPopupExtender"
+                            CancelControlID="btnCancel">
+                        </asp:ModalPopupExtender>
 
-                    <asp:Panel ID="pnlpopup" runat="server" CssClass="modalPopup" Style="width: 600px; padding: 5px; min-height: 80px; display: none;">
-                   <%-- <asp:Panel ID="pnlpopup" runat="server" BorderColor="#003300" BorderWidth="1" CssClass="modalBackground" Height="50%" Width="30%" Style="display: none">--%>
-                        <%--<table width="100%" style="border: Solid 3px #D55500; width: 100%; height: 100%" cellpadding="0" cellspacing="0">
+                        <asp:Panel ID="pnlpopup" runat="server" CssClass="modalPopup" Style="width: 600px; padding: 5px; min-height: 80px; display: none;">
+                            <%-- <asp:Panel ID="pnlpopup" runat="server" BorderColor="#003300" BorderWidth="1" CssClass="modalBackground" Height="50%" Width="30%" Style="display: none">--%>
+                            <%--<table width="100%" style="border: Solid 3px #D55500; width: 100%; height: 100%" cellpadding="0" cellspacing="0">
                             <tr style="background-color: #D55500">
                                 <td colspan="2" style="height: 10%; color: White; font-weight: bold; font-size: larger" align="center">User Details</td>
                             </tr>
@@ -300,134 +301,134 @@
                                 </td>
                             </tr>
                         </table>--%>
-                        <br />
-                         <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="col-sm-2">
-                                    <label class="control-label">
-                                        <%--Invoice No--%>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lblID" runat="server" CssClass="form-control" Style="display: none"></asp:Label>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-2">
-                                    <label class="control-label">
-                                        From
-                                    </label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtFrom" runat="server" CssClass="form-control"></asp:TextBox>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-2">
-                                    <label class="control-label">
-                                        Subject 
-                                    </label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtSubject" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-2">
-                                    <label class="control-label">
-                                        To
-                                    </label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtTo" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="rfvmail" runat="server" ValidationGroup="emailGrp" ControlToValidate="txtTo" ErrorMessage="Please Enter Email ID" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="revmail" runat="server" ForeColor="Red" ValidationGroup="emailGrp" ControlToValidate="txtTo" ErrorMessage="Please Enter Email ID" ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" Display="Dynamic"></asp:RegularExpressionValidator>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-2">
-                                    <label class="control-label">
-                                        Body
-                                    </label>
-                                </div>
-
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtBody" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-2">
-                                    <label class="control-label">
-                                        Attach file
-                                    </label>
-                                </div>
-
-                                <div class="col-sm-10">
-                                    <asp:FileUpload ID="fuattachment" runat="server" />
-                                </div>
-
-                            </div>
                             <br />
-                            <br />
-                            <div class="col-sm-12">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-2">
-                                    <asp:Button ID="SendMail" CommandName="Send" ValidationGroup="emailGrp" OnClientClick="showProgress()" CssClass="btn btn-info" runat="server" Text="Send" OnClick="btnSendmailSubmit_Click" />
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">
+                                                <%--Invoice No--%>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <asp:Label ID="lblID" runat="server" CssClass="form-control" Style="display: none"></asp:Label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">
+                                                From
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox ID="txtFrom" runat="server" CssClass="form-control"></asp:TextBox>
 
-                                </div>
-                                <div class="col-sm-2">
-                                    <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-info" Text="Cancel" />
-                                </div>
-                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">
+                                                Subject 
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox ID="txtSubject" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">
+                                                To
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox ID="txtTo" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="rfvmail" runat="server" ValidationGroup="emailGrp" ControlToValidate="txtTo" ErrorMessage="Please Enter Email ID" Display="Dynamic"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ID="revmail" runat="server" ForeColor="Red" ValidationGroup="emailGrp" ControlToValidate="txtTo" ErrorMessage="Please Enter Email ID" ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" Display="Dynamic"></asp:RegularExpressionValidator>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">
+                                                Body
+                                            </label>
+                                        </div>
 
-                        </div>
+                                        <div class="col-sm-10">
+                                            <asp:TextBox ID="txtBody" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">
+                                                Attach file
+                                            </label>
+                                        </div>
 
-                        <div class="overlay">
-                            <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="updatepanel1">
-                                <ProgressTemplate>
-                                    <img src="../images/loading.gif" alt="" height="40" width="40" />
+                                        <div class="col-sm-10">
+                                            <asp:FileUpload ID="fuattachment" runat="server" />
+                                        </div>
+
+                                    </div>
                                     <br />
-                                    <h4>Please wait....</h4>
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
-                        </div>
+                                    <br />
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-2">
+                                            <asp:Button ID="SendMail" CommandName="Send" ValidationGroup="emailGrp" OnClientClick="showProgress()" CssClass="btn btn-info" runat="server" Text="Send" OnClick="btnSendmailSubmit_Click" />
+
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-info" Text="Cancel" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="overlay">
+                                    <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="updatepanel1">
+                                        <ProgressTemplate>
+                                            <img src="../images/loading.gif" alt="" height="40" width="40" />
+                                            <br />
+                                            <h4>Please wait....</h4>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
 
 
 
-                             </div>
+                            </div>
 
-                    </asp:Panel>
+                        </asp:Panel>
 
 
-                    <%-- Accounting Analaysis --%>
+                        <%-- Accounting Analaysis --%>
 
-                    <asp:Button ID="btnShowAc" runat="server" Style="display: none" />
-                   <%-- <asp:ModalPopupExtender ID="AccountAnalysisPopupExtender" runat="server" TargetControlID="btnShowAc"
+                        <asp:Button ID="btnShowAc" runat="server" Style="display: none" />
+                        <%-- <asp:ModalPopupExtender ID="AccountAnalysisPopupExtender" runat="server" TargetControlID="btnShowAc"
                         PopupControlID="AcAnalysisPanel"
                         CancelControlID="btnCancel" BackgroundCssClass="popupextndrBg">
                     </asp:ModalPopupExtender>--%>
 
-             <asp:ModalPopupExtender ID="AccountAnalysisPopupExtender" runat="server" PopupControlID="AcAnalysisPanel"
-                TargetControlID="btnShowAc" BackgroundCssClass="modalBackground1" BehaviorID="AccountAnalysisPopupExtender"
-                CancelControlID="btnCancel">
-            </asp:ModalPopupExtender>
+                        <asp:ModalPopupExtender ID="AccountAnalysisPopupExtender" runat="server" PopupControlID="AcAnalysisPanel"
+                            TargetControlID="btnShowAc" BackgroundCssClass="modalBackground1" BehaviorID="AccountAnalysisPopupExtender"
+                            CancelControlID="btnCancel">
+                        </asp:ModalPopupExtender>
 
-                    <%-- <asp:Panel ID="AcAnalysisPanel" runat="server" BorderColor="#003300" BorderWidth="1" CssClass="modalBackground" Height="70%" Width="50%" Style="display: none">--%>
-                    <asp:Panel ID="AcAnalysisPanel" runat="server" CssClass="modalPopup" Style="width: 600px; padding: 5px; min-height: 80px; display: none;">
-                        <%--<header class="panel-heading">
+                        <%-- <asp:Panel ID="AcAnalysisPanel" runat="server" BorderColor="#003300" BorderWidth="1" CssClass="modalBackground" Height="70%" Width="50%" Style="display: none">--%>
+                        <asp:Panel ID="AcAnalysisPanel" runat="server" CssClass="modalPopup" Style="width: 600px; padding: 5px; min-height: 80px; display: none;">
+                            <%--<header class="panel-heading">
                             <div style="padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                 <h4 class="panel-title">Accounting Analysis</h4>
                             </div>
                         </header>--%>
 
-                        <div class="panel-header">
-                            Accounting Analysis
-                        </div>
-                         <div class="panel-body">
-                        <%--<div style="width: 100%; height: 100px;">
+                            <div class="panel-header">
+                                Accounting Analysis
+                            </div>
+                            <div class="panel-body">
+                                <%--<div style="width: 100%; height: 100px;">
                             <div style="width: 40%; height: 100px">
 
                                 <div class="col-sm-12">
@@ -598,84 +599,84 @@
 
 
                         </div>--%>
-                        <div class="col-md-12" style="width:111% !important">
-                            <div class="col-md-12" >
-                                <asp:Label ID="lblAcanlysisclientname" runat="server"></asp:Label>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-4" style="border-style: groove">
-                                    <div style="height: 130px; overflow: auto;">
-                                        <asp:GridView runat="server" ID="gvAccountanalysis" AutoGenerateColumns="false"
-                                            CssClass="table table-striped table-bordered">
-                                            <RowStyle />
-                                            <FooterStyle Font-Bold="false" />
-                                            <PagerStyle ForeColor="White" HorizontalAlign="Center" />
-                                            <HeaderStyle Font-Bold="True" />
-                                            <AlternatingRowStyle BackColor="White" />
-                                            <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
-
-                                            <Columns>
-                                                <asp:BoundField DataField="AirPassenger" HeaderText="Passengers" />
-                                            </Columns>
-                                        </asp:GridView>
+                                <div class="col-md-12" style="width: 111% !important">
+                                    <div class="col-md-12">
+                                        <asp:Label ID="lblAcanlysisclientname" runat="server"></asp:Label>
                                     </div>
-                                </div>
-                               <%-- <div class="col-md-1">
+                                    <div class="col-md-12">
+                                        <div class="col-md-4" style="border-style: groove">
+                                            <div style="height: 130px; overflow: auto;">
+                                                <asp:GridView runat="server" ID="gvAccountanalysis" AutoGenerateColumns="false"
+                                                    CssClass="table table-striped table-bordered">
+                                                    <RowStyle />
+                                                    <FooterStyle Font-Bold="false" />
+                                                    <PagerStyle ForeColor="White" HorizontalAlign="Center" />
+                                                    <HeaderStyle Font-Bold="True" />
+                                                    <AlternatingRowStyle BackColor="White" />
+                                                    <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
+
+                                                    <Columns>
+                                                        <asp:BoundField DataField="AirPassenger" HeaderText="Passengers" />
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
+                                        </div>
+                                        <%-- <div class="col-md-1">
                                 </div>--%>
 
-                                <div class="col-md-8" >
-                                    <div class="col-sm-10">
-                                        Total Fare
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <asp:Label ID="lblAcanAlysisTotalfare" runat="server" ReadOnly="true" CssClass="AmtRgt" />
+                                        <div class="col-md-8">
+                                            <div class="col-sm-10">
+                                                Total Fare
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <asp:Label ID="lblAcanAlysisTotalfare" runat="server" ReadOnly="true" CssClass="AmtRgt" />
 
-                                    </div>
+                                            </div>
 
 
-                                    <div class="col-sm-10">
-                                        Less charged to credit card/Cash
-                                    </div>
+                                            <div class="col-sm-10">
+                                                Less charged to credit card/Cash
+                                            </div>
 
-                                    <div class="col-sm-2">
-                                        <div class="wrapper">
-                                            <div class="line"></div>
-                                            <asp:Label ID="lblAcAnalysisCC" runat="server" ReadOnly="true" CssClass="AmtRgt" />
-                                        </div>
-
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <asp:Label Text="Credit/Decrease A/C Receivable" runat="server" ID="lblacReceivable"></asp:Label>
-                                    </div>
-
-                                    <div class="col-sm-2">
-                                        <asp:Label ID="lblincrordecreAccRceivable" runat="server" ReadOnly="true" CssClass="AmtRgt" />
-                                    </div>
-
-                                    <div class="col-sm-10">
-                                        <p style="color: red">Credit/Increase Comm. Income</p>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <asp:Label ID="lblAcAnalcommincome" runat="server" ReadOnly="true" Style="text-align: right; color: red" CssClass="AmtRgt" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        Vat Liability
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="wrapper">
-                                            <div class="line"></div>
-                                               <div class="col-sm-6">
-                                            <asp:Label ID="lblAcAnaliability" runat="server" ReadOnly="true" CssClass="AmtRgt" />
-                                                   </div>
-                                          <%--  <div class="col-sm-1" ></div>--%>
-                                            <div class="col-sm-5" <%--style="padding-right:10px;"--%> >
-                                                <asp:Label ID="lblAccVatAmount" runat="server" ReadOnly="true"  />
+                                            <div class="col-sm-2">
+                                                <div class="wrapper">
+                                                    <div class="line"></div>
+                                                    <asp:Label ID="lblAcAnalysisCC" runat="server" ReadOnly="true" CssClass="AmtRgt" />
                                                 </div>
-                                        </div>
-                                    </div>
 
-                                    
-                                    <%--  <div class="col-sm-10">
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <asp:Label Text="Credit/Decrease A/C Receivable" runat="server" ID="lblacReceivable"></asp:Label>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <asp:Label ID="lblincrordecreAccRceivable" runat="server" ReadOnly="true" CssClass="AmtRgt" />
+                                            </div>
+
+                                            <div class="col-sm-10">
+                                                <p style="color: red">Credit/Increase Comm. Income</p>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <asp:Label ID="lblAcAnalcommincome" runat="server" ReadOnly="true" Style="text-align: right; color: red" CssClass="AmtRgt" />
+                                            </div>
+                                            <div class="col-sm-6">
+                                                Vat Liability
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="wrapper">
+                                                    <div class="line"></div>
+                                                    <div class="col-sm-6">
+                                                        <asp:Label ID="lblAcAnaliability" runat="server" ReadOnly="true" CssClass="AmtRgt" />
+                                                    </div>
+                                                    <%--  <div class="col-sm-1" ></div>--%>
+                                                    <div class="col-sm-5" <%--style="padding-right:10px;"--%>>
+                                                        <asp:Label ID="lblAccVatAmount" runat="server" ReadOnly="true" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <%--  <div class="col-sm-10">
                                         Vat Amount
                                     </div>
                                     <div class="col-sm-2">
@@ -688,300 +689,295 @@
                                         </div>
                                     </div>--%>
 
-                                    <div class="col-sm-10">
-                                        Debit/Decrease A/C Payable
-                                    </div>
-                                    <div class="col-sm-2">
+                                            <div class="col-sm-10">
+                                                Debit/Decrease A/C Payable
+                                            </div>
+                                            <div class="col-sm-2">
 
-                                        <asp:Label ID="lblAcAnalPayable" runat="server" ReadOnly="true" CssClass="AmtRgt" />
-                                    </div>
+                                                <asp:Label ID="lblAcAnalPayable" runat="server" ReadOnly="true" CssClass="AmtRgt" />
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+                                <div class="col-md-12">
+                                    <div style="height: 130px; overflow: auto;">
+                                        <asp:GridView ID="gvAccAnalysisDetails" runat="server"
+                                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                                            ShowHeaderWhenEmpty="true">
+                                            <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
+                                            <Columns>
+
+                                                <asp:TemplateField HeaderText="Principals">
+                                                    <ItemTemplate>
+                                                        <%#Eval("Name")%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Client Amount" ItemStyle-HorizontalAlign="Right">
+                                                    <ItemTemplate>
+                                                        <%#Eval("ClientTot")%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Comm" ItemStyle-HorizontalAlign="Right">
+                                                    <ItemTemplate>
+                                                        <%#Eval("CommExclu")%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="CommVat" ItemStyle-HorizontalAlign="Right">
+                                                    <ItemTemplate>
+                                                        <%#Eval("Commivatamt")%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+
+                                            </Columns>
+                                            <EmptyDataTemplate>No Record Available</EmptyDataTemplate>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-10">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <asp:Button runat="server" ID="btnCancleACAnalysis"
+                                            ValidationGroup="" CssClass="btn btn-primary" Text="Close" OnClick="btnCancleACAnalysis_Click" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </asp:Panel>
 
+                        <%-- Receipt Model Popup Page --%>
+                        <asp:Button ID="btnReciptPage" runat="server" Style="display: none" />
 
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                        <div class="col-md-12">
-                            <div style="height: 130px; overflow: auto;">
-                                <asp:GridView ID="gvAccAnalysisDetails" runat="server" 
-                                    AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
-                                     ShowHeaderWhenEmpty="true">
-                                    <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
-                                    <Columns>
+                        <asp:ModalPopupExtender ID="ReceiptPopupExtender" runat="server" PopupControlID="ReceiptPanel"
+                            TargetControlID="btnReciptPage" BackgroundCssClass="modalBackground1" BehaviorID="ReceiptPopupExtender"
+                            CancelControlID="BtnReceiptCancel">
+                        </asp:ModalPopupExtender>
 
-                                        <asp:TemplateField HeaderText="Principals">
-                                            <ItemTemplate>
-                                                <%#Eval("Name")%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Client Amount" ItemStyle-HorizontalAlign="Right">
-                                            <ItemTemplate>
-                                                <%#Eval("ClientTot")%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Comm" ItemStyle-HorizontalAlign="Right">
-                                            <ItemTemplate>
-                                                <%#Eval("CommExclu")%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="CommVat" ItemStyle-HorizontalAlign="Right">
-                                            <ItemTemplate>
-                                                <%#Eval("Commivatamt")%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-
-                                    </Columns>
-                                    <EmptyDataTemplate>No Record Available</EmptyDataTemplate>
-                                </asp:GridView>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-10">
-                            </div>
-                            <div class="col-md-2">
-                                <asp:Button runat="server" ID="btnCancleACAnalysis"
-                                    ValidationGroup="" CssClass="btn btn-primary" Text="Close" OnClick="btnCancleACAnalysis_Click" />
-                            </div>
-                        </div>
-                             </div>
-                    </asp:Panel>
-            
-                    <%-- Receipt Model Popup Page --%>
-                      <asp:Button ID="btnReciptPage" runat="server" Style="display: none" />
-                  
-             <asp:ModalPopupExtender ID="ReceiptPopupExtender" runat="server" PopupControlID="ReceiptPanel"
-                TargetControlID="btnReciptPage" BackgroundCssClass="modalBackground1" BehaviorID="ReceiptPopupExtender"
-                CancelControlID="BtnReceiptCancel">
-            </asp:ModalPopupExtender>
-
-                     <asp:Panel ID="ReceiptPanel" runat="server" CssClass="modalPopup" Style="width: 700px; padding: 5px; min-height: 80px; display: none;">
-                        <%--<header class="panel-heading">
+                        <asp:Panel ID="ReceiptPanel" runat="server" CssClass="modalPopup" Style="width: 1050px; padding: 5px; min-height: 80px; display: none;">
+                            <%--<header class="panel-heading">
                             <div style="padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                 <h4 class="panel-title">Accounting Analysis</h4>
                             </div>
                         </header>--%>
 
-                        <div class="panel-header">
-                           Receipt
-                        </div>
-                          <div class="panel-body">
-                    <div class="col-sm-12">
-                        <asp:Label ID="Label1" class="message" ForeColor="Red" runat="server" Text=""
-                            EnableViewState="false"></asp:Label>
-                    </div>
+                            <div class="panel-header">
+                                Receipt
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <asp:Label ID="Label1" class="message" ForeColor="Red" runat="server" Text=""
+                                        EnableViewState="false"></asp:Label>
+                                </div>
                                 <div class="form-group">
 
 
-                        <div class="col-sm-2">
+                                    <div class="col-sm-2">
 
-                            <label class="control-label">
-                                Client Type</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlClientType" runat="server" CssClass="form-control"  AutoPostBack="true" OnSelectedIndexChanged="ddlClientType_SelectedIndexChanged" >
-                           <asp:ListItem Value="0" Text="Select" Selected="True">Select</asp:ListItem>
-                                 </asp:DropDownList>
-                            <asp:RequiredFieldValidator ControlToValidate="ddlClientType" runat="server" ID="rfvddlClientType" ValidationGroup="rct"
-                                ErrorMessage="Client Type" Text="Client Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                        <label class="control-label">
+                                            Client Type</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:DropDownList ID="ddlClientType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlClientType_SelectedIndexChanged">
+                                            <asp:ListItem Value="0" Text="Select" Selected="True">Select</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ControlToValidate="ddlClientType" runat="server" ID="rfvddlClientType" ValidationGroup="rct"
+                                            ErrorMessage="Client Type" Text="Client Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
-                        </div>
-
-
-                        <div class="col-sm-2">
-
-                            <label class="control-label">
-                                Account No</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlAccountNo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAccountNo_SelectedIndexChanged" >
-                           <asp:ListItem Value="0" Text="Select">Select</asp:ListItem>
-                                 </asp:DropDownList>
-                            <asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
-                                ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
-                        </div>
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                Amount
-
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-
-                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control decimalRight" PlaceHolder="0.00"  AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="txtAmount" runat="server" ID="rfvtxtAmount" ValidationGroup="rct"
-                                ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
-                            <asp:RegularExpressionValidator ControlToValidate="txtAmount" runat="server" ID="rextxtAmount" ValidationGroup="gvvalida"
-                                ErrorMessage="Enter  number only." Text="Enter  number only."
-                                ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
-                        </div>
-
-                     
-
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                Date</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control"  BackColor="White" ></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="txtDate" runat="server" ID="rfvtxtDate" ValidationGroup="rct"
-                                ErrorMessage="Enter Date" Text="SelectEnter Date" class="validationred" Display="Dynamic" ForeColor="Red" />
-                        </div>
-
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                SourceRef<span class="style1">*</span>
-                            </label>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="txtSourceRef" runat="server" ID="rfvtxtSourceRef" ValidationGroup="rct"
-                                ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
-                        </div>
-
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                Prepared By</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:TextBox ID="txtPreparedBy" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                         
-
-                       
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                Division<span class="style1">*</span></label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true">
-                              
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDevission" ValidationGroup="rct"
-                                ErrorMessage="Select Division" Text="Select Division" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
-                        </div>
+                                    </div>
 
 
-                        <div class="col-sm-2">
+                                    <div class="col-sm-2">
 
-                            <label class="control-label">
-                                Receipt Type<span class="style1">*</span></label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control">
-                               
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ControlToValidate="ddlReceiptType" runat="server" ID="rfvddlReceiptType" ValidationGroup="rct"
-                                ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                        <label class="control-label">
+                                            Account No</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:DropDownList ID="ddlAccountNo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAccountNo_SelectedIndexChanged">
+                                            <asp:ListItem Value="0" Text="Select">Select</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
+                                            ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Amount
 
-                        </div>
-                           <div class="col-sm-2">
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2">
 
-                            <label class="control-label">
-                                Auto Deposite to</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
-                                
-                            </asp:DropDownList>
-                           <%-- <asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
+                                        <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control decimalRight" PlaceHolder="0.00" AutoPostBack="true" ValidationGroup="gvvalida"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtAmount" runat="server" ID="rfvtxtAmount" ValidationGroup="rct"
+                                            ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                        <asp:RegularExpressionValidator ControlToValidate="txtAmount" runat="server" ID="rextxtAmount" ValidationGroup="gvvalida"
+                                            ErrorMessage="Enter  number only." Text="Enter  number only."
+                                            ValidationExpression="^\-?[0-9]+(?:\.[0-9]+)?" class="validationred" Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Date</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" BackColor="White"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtDate" runat="server" ID="rfvtxtDate" ValidationGroup="rct"
+                                            ErrorMessage="Enter Date" Text="SelectEnter Date" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            SourceRef<span class="style1">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtSourceRef" runat="server" ID="rfvtxtSourceRef" ValidationGroup="rct"
+                                            ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Prepared By</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtPreparedBy" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Division<span class="style1">*</span></label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDevission" ValidationGroup="rct"
+                                            ErrorMessage="Select Division" Text="Select Division" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                    </div>
+
+
+                                    <div class="col-sm-2">
+
+                                        <label class="control-label">
+                                            Receipt Type<span class="style1">*</span></label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control">
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ControlToValidate="ddlReceiptType" runat="server" ID="rfvddlReceiptType" ValidationGroup="rct"
+                                            ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <label class="control-label">
+                                            Auto Deposite to</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
+                                        </asp:DropDownList>
+                                        <%-- <asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
                                 ErrorMessage="Select Auto Deposite" Text="Select Auto Deposite" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />--%>
-
-                        </div>
-
-
-                    </div>
-                  
-                    <div class="form-group">
+                                    </div>
 
 
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                Ageing</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:TextBox ID="txtAgeing" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
 
-                        </div>
-                        <div class="col-sm-2">
-
-                            <label class="control-label">
-                                Payee Details</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:TextBox ID="txtPayeeDetails" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
-
-                        </div>
-                        <div class="col-sm-2">
-                            <label class="control-label">
-                                details</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:TextBox ID="txtDetails" runat="server" CssClass="form-control" Text="Payment- thank you" ReadOnly="true"></asp:TextBox>
-
-                        </div>
-                    </div>
-
-                   
-                
-
-                  
-
-                   
-
-                  
-
-                    <div class="form-group">
-
-                        <div class="col-sm-2">
-                            <asp:Button runat="server" ID="btnReciptSave" class="btn btn-primary green" ValidationGroup="rct"
-                                Text="Save" OnClick="btnReciptSave_Click"  />
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:Button runat="server" ID="btnReceiptClear" class="btn btn-primary green" ValidationGroup="rct"
-                                Text="Clear"  />
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green" ValidationGroup="rct"
-                                Text="Print" />
-                        </div>
-                        <div class="col-sm-2">
-                           <asp:Button ID="BtnReceiptCancel" runat="server" Text="Cancel" class="btn btn-danger"  />
-                        </div>
-                          
-                    </div>
-                </div>
-                            
-                         
-                          </asp:Panel>
-
-            </section>
-        </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="SendMail" />
-        </Triggers>
-
-       
+                                <div class="form-group">
 
 
-    </asp:UpdatePanel>
-    
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Ageing</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtAgeing" runat="server" CssClass="form-control"></asp:TextBox>
+
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <label class="control-label">
+                                            Payee Details</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtPayeeDetails" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox>
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            details</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtDetails" runat="server" CssClass="form-control" Text="Payment- thank you" ReadOnly="true"></asp:TextBox>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                <div class="form-group">
+
+                                    <div class="col-sm-2">
+                                        <asp:Button runat="server" ID="btnReciptSave" class="btn btn-primary green" ValidationGroup="rct"
+                                            Text="Save" OnClick="btnReciptSave_Click" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:Button runat="server" ID="btnReceiptClear" class="btn btn-primary green" ValidationGroup="rct"
+                                            Text="Clear" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green" ValidationGroup="rct"
+                                            Text="Print" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:Button ID="BtnReceiptCancel" runat="server" Text="Cancel" class="btn btn-danger" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </asp:Panel>
+                </section>
+            </ContentTemplate>
+            <Triggers>
+                <asp:PostBackTrigger ControlID="SendMail" />
+            </Triggers>
+
+
+
+
+        </asp:UpdatePanel>
+    </asp:Panel>
 </asp:Content>
 
 
