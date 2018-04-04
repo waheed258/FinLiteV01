@@ -8,7 +8,7 @@
         .modalBackground {
             /*filter: alpha(opacity=90);
             opacity: 0.8;*/
-            border: 1px solid;
+            /*border: 1px solid;*/
             background: #eee;
             padding: 2px;
             color: black;
@@ -66,14 +66,61 @@
             position: fixed;
             z-index: 999;
             top: 300px;
-            left: 750px;
+            left: 550px;
             filter: alpha(opacity=60);
             opacity: 0.6;
             -moz-opacity: 0.8;
         }
+
+            .modalBackground1 {
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
+
+        .modalPopup {
+            background-color: #FFFFFF;
+            /*width: 300px;*/
+            border: 3px solid #0DA9D0;
+            border-radius: 12px;
+            padding: 0;
+        }
+
+            .modalPopup .panel-header {
+                background-color: #2FBDF1;
+                height: 30px;
+                color: White;
+                line-height: 30px;
+                text-align: center;
+                font-weight: bold;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+            }
+
+            .modalPopup .panel-body {
+                min-height: 50px;
+                line-height: 30px;
+                text-align: left;
+                font-weight: normal;
+            }
+
+            .modalPopup .footer {
+                padding: 6px;
+            }
     </style>
 
      <script type="text/javascript">
+
+         function checkForm(form) // Submit button clicked
+         {
+             //
+             // check form input values
+             //
+
+             form.myButton.disabled = true;
+             form.myButton.value = "Please wait...";
+             return true;
+         }
 
 
          $(document).ready(function () {
@@ -439,23 +486,25 @@
                             <%-- AirTicket --%>
 
                             <cc1:ModalPopupExtender ID="VASPopupExtender" runat="server" TargetControlID="btnOpenFP"
-                                BackgroundCssClass="popupextndrBg" BehaviorID="btnOpenFP" CancelControlID="bntCancelFP"
+                                BackgroundCssClass="modalBackground1" BehaviorID="btnOpenFP" CancelControlID="bntCancelFP"
                                 PopupControlID="pnlFlight">
                             </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlFlight" runat="server" CssClass="panelpopup " Width="1000px" Height="550px" Style="display: none;" BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlFlight" runat="server" CssClass="modalPopup " Width="1050px" Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="cmdClose" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
-                                </div>
-
-                                <div id="popupdiv" class="modalBackground">
-                                    <header class="panel-heading">
+                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton5" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                                             <h4 class="panel-title">AirTicket</h4>
                                         </div>
                                     </header>
+                                </div>
+
+                                <div id="popupdiv" class="modalBackground" style="max-height: 500px; overflow: auto;">
+                                   
+                                    <br />
                                     <asp:HiddenField ID="hf_Air_TicketNo" runat="server" Value="0" />
                                     <asp:HiddenField ID="HiddenField1" runat="server" Value="0" />
                                     <asp:HiddenField ID="HiddenField2" runat="server" Value="0" />
@@ -967,18 +1016,18 @@
                             <%-- Land Arrangemnts --%>
 
                             <cc1:ModalPopupExtender ID="landPopExtender" runat="server" TargetControlID="btnLand"
-                                BackgroundCssClass="popupextndrBg" BehaviorID="btnLand" CancelControlID="bntCancelFP"
+                                BackgroundCssClass="modalBackground1" BehaviorID="btnLand" CancelControlID="bntCancelFP"
                                 PopupControlID="landPanel">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="landPanel" runat="server" CssClass="panelpopup modalBackground " Width="80%" Height="95%" Style="display: none;">
+                            <asp:Panel ID="landPanel" runat="server" CssClass="modalPopup" Width="80%" style="max-height: 94%; overflow: auto; display: none;"   >
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton3" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
                             </div>--%>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <header class="panel-heading">
                                         <div style="padding-top: 3px; padding-right: 3px;">
                                             <asp:ImageButton ID="ImageButton3" CssClass="btncancle" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -1410,11 +1459,11 @@
                             <%-- Service Fee --%>
 
                             <cc1:ModalPopupExtender ID="SerPopupExtender" runat="server" TargetControlID="btnserFee"
-                                BackgroundCssClass="popupextndrBg" BehaviorID="btnserFee" CancelControlID="bntCancelFP"
+                                BackgroundCssClass="modalBackground1" BehaviorID="btnserFee" CancelControlID="bntCancelFP"
                                 PopupControlID="pnlServiceFee">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="pnlServiceFee" runat="server" CssClass="panelpopup" Width="800px" Height="400px" Style="display: none;" BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlServiceFee" runat="server" CssClass="modalPopup" Width="800px"   Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -1672,11 +1721,11 @@
                             <%-- General Charge --%>
 
                             <cc1:ModalPopupExtender ID="GenPopupExtender" runat="server" TargetControlID="btnGencharge"
-                                BackgroundCssClass="popupextndrBg" BehaviorID="btnGencharge" CancelControlID="bntCancelFP"
+                                BackgroundCssClass="modalBackground1" BehaviorID="btnGencharge" CancelControlID="bntCancelFP"
                                 PopupControlID="pnlGeneralCharge">
                             </cc1:ModalPopupExtender>
 
-                            <asp:Panel ID="pnlGeneralCharge" runat="server" CssClass="panelpopup" Width="900px" Height="550px" Style="display: none;" BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlGeneralCharge" runat="server" CssClass="modalPopup" Width="900px"  Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="ImageButton1" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />
@@ -1691,6 +1740,7 @@
                                                 <h4 class="panel-title">General Charge</h4>
                                             </div>
                                         </header>
+                                        <br />
                                         <asp:HiddenField ID="hf_GC_TicketNo" runat="server" Value="0" />
                                         <div class="col-sm-12">
                                             <div class="col-sm-2">
@@ -1699,8 +1749,8 @@
                                             </div>
                                             <div class="col-sm-3">
 
-                                                <asp:DropDownList ID="ddlGenchrgType" runat="server" Class="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGenchrgType_SelectedIndexChanged">
-                                                    <%--<asp:ListItem Text="--Select Type--" Value="-1" Selected="True"></asp:ListItem>--%>
+                                                <asp:DropDownList ID="ddlGenchrgType" runat="server" Class="form-control"    AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGenchrgType_SelectedIndexChanged">
+                                                    <%--<asp:ListItem Text="--Select Service Type--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>
 
                                                 <asp:RequiredFieldValidator ControlToValidate="ddlGenchrgType" runat="server" ID="rfvddlGenchrgType" ValidationGroup="generalcharge"

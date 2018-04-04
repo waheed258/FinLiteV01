@@ -1608,6 +1608,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 ddlGenchrgType.DataValueField = "ComId";
                 ddlGenchrgType.DataBind();
                 ddlGenchrgType.Items.Insert(0, new ListItem("--Select Service Type--", "0"));
+                
 
             }
             else
@@ -3185,6 +3186,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 string script = string.Format("alert('Please Book Air Ticket. ');");
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(System.Web.UI.Page), "redirect", script, true);
                 GenPopupExtender.Hide();
+                
             }
         }
         else
@@ -3192,6 +3194,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             string script1 = string.Format("alert('Please Book Air Ticket. ');");
             ScriptManager.RegisterClientScriptBlock(Page, typeof(System.Web.UI.Page), "redirect", script1, true);
             GenPopupExtender.Hide();
+            
         }
     }
 

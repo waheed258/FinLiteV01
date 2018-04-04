@@ -321,10 +321,10 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
         lblTotalAvailable.Text = "0.00";
        
     }
-    protected void btnPrint_Click(object sender, EventArgs e)
-    {
+    //protected void btnPrint_Click(object sender, EventArgs e)
+    //{
 
-    }
+    //}
     protected void ddlClientType_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (ddlClientType.SelectedIndex > 0)

@@ -492,5 +492,14 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         gvReciptData.DataSource = dt;
         gvReciptData.DataBind();
     }
-  
+
+    protected void btnDpstClear_Click(object sender, EventArgs e)
+    {
+        ddldpstReceiptType.SelectedIndex = 0;
+        ddlDepstClientPredfix.SelectedIndex = 0;
+        ddlDepositAcoount.SelectedIndex = 0;
+        txtDpstSourceRef.Text = "";
+        txtDpstComments.Text = "";
+        Response.Redirect("DepositTransaction.aspx");
+    }
 }

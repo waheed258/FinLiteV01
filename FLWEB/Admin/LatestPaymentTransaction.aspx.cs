@@ -295,10 +295,10 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
     {
         PaymentTransactionClear();
     }
-    protected void btnPrint_Click(object sender, EventArgs e)
-    {
+    //protected void btnPrint_Click(object sender, EventArgs e)
+    //{
 
-    }
+    //}
 
     
     protected void txtAmount_TextChanged(object sender, EventArgs e)
@@ -504,11 +504,11 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
             txtDate.Text = "";
             txtSourceRef.Text = "";
             txtAmount.Text = "";
-            ddlDivision.Items.Clear();
-            ddlPaymentType.Items.Clear();
-            ddlAccType.Items.Clear();
-            ddlAccountNo.Items.Clear();
-            ddlAutoDepositeAccount.Items.Clear();
+            ddlDivision.SelectedIndex = 0;
+            ddlPaymentType.SelectedIndex = 0;
+            ddlAccType.SelectedIndex = 0;
+            ddlAccountNo.SelectedIndex = 0;
+            ddlAutoDepositeAccount.SelectedIndex = 0;
             txtAgeing.Text = "";
             txtPayeeDetails.Text = "";
             txtDetails.Text = "";
@@ -517,6 +517,7 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
             //  lblPrvClientOpenAmount.Text = "";
             lblTotalAvailable.Text = "";
             lblOpenItemAmounFromclient.Text = "";
+            Response.Redirect("LatestPaymentTransaction.aspx");
         }
         catch (Exception ex)
         {

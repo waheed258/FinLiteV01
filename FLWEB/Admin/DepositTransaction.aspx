@@ -65,7 +65,7 @@
 
                         <div class="col-sm-3">
                             <label class="control-label">
-                                Receipt Type</label>
+                                Receipt Type<span class="Error">*</span></label>
                         </div>
 
                         <div class="col-sm-3">
@@ -282,7 +282,7 @@
                             class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;
 
                         <div class="col-sm-3">
-                            <asp:Button runat="server" ID="btnDpstClear" class="btn btn-primary green" ValidationGroup="deposit"
+                            <asp:Button runat="server" ID="btnDpstClear" OnClick="btnDpstClear_Click" class="btn btn-primary green"  
                                 Text="Clear"  />
                         </div>
                        

@@ -426,13 +426,13 @@
                                 Text="Save" OnClick="btnSave_Click"  />
                         </div>
                         <div class="col-sm-2">
-                            <asp:Button runat="server" ID="btnClear" class="btn btn-primary green" ValidationGroup="rct"
+                            <asp:Button runat="server" ID="btnClear" class="btn btn-primary green"  
                                 Text="Clear" OnClick="btnClear_Click" />
                         </div>
-                        <div class="col-sm-2">
-                            <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green" ValidationGroup="rct"
+                       <%-- <div class="col-sm-2">
+                            <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green"  
                                 Text="Print" OnClick="btnPrint_Click" />
-                        </div>
+                        </div>--%>
                         <div class="col-sm-2">
                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" class="btn btn-danger"  OnClick="btnCancel_Click" />
                         </div>
