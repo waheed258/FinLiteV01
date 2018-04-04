@@ -71,7 +71,7 @@
                         <div class="col-sm-3">
                              <asp:DropDownList ID="ddldpstReceiptType" runat="server"  CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddldpstReceiptType_SelectedIndexChanged"></asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddldpstReceiptType" runat="server" ID="rfvtxtDpstReciptType" ValidationGroup="deposit"
-                                ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
                         </div>
 
                       
