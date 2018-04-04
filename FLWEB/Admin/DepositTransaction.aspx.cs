@@ -32,7 +32,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             gvReciptData.DataBind();
             BindSecondRecieptsGrid();
             BindBankAccounts();
-            
+
 
         }
     }
@@ -149,7 +149,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             ThisDepositReciptsCount();
             lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Invoice records not found for this client.");
         }
-       
+
     }
 
     protected void BindSecondRecieptsGrid()
@@ -190,7 +190,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         dt.Columns.Add("RecieptType");
         dt.Columns.Add("ClientType");
         dt.Columns.Add("ClientAcNo");
-        dt.Columns.Add("AllocatedAmount",typeof(decimal));
+        dt.Columns.Add("AllocatedAmount", typeof(decimal));
         dt.Columns.Add("invoiceId");
         dt.AcceptChanges();
         return dt;
@@ -207,7 +207,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             dt.Rows[rowscount]["RecieptType"] = gvRow.Cells[3].Text;
             dt.Rows[rowscount]["ClientType"] = gvRow.Cells[4].Text;
             dt.Rows[rowscount]["ClientAcNo"] = gvRow.Cells[5].Text;
-            dt.Rows[rowscount]["AllocatedAmount"] = Convert.ToDecimal( gvRow.Cells[6].Text);
+            dt.Rows[rowscount]["AllocatedAmount"] = Convert.ToDecimal(gvRow.Cells[6].Text);
             dt.Rows[rowscount]["invoiceId"] = Convert.ToInt32(gvRow.Cells[7].Text);
             dt.AcceptChanges();
         }
@@ -233,7 +233,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         {
             sum = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllocatedAmount"));
             unBankAmount.InnerText = _objBOUtiltiy.FormatTwoDecimal(sum.ToString());
-            unBankCount.InnerText =  dt.Rows.Count.ToString();
+            unBankCount.InnerText = dt.Rows.Count.ToString();
         }
         else
         {
@@ -268,13 +268,13 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             {
                 int Rtype = 0;
                 BindUnbankedReceipts(Rtype, Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
-               
+
 
             }
             else if (ddldpstReceiptType.SelectedIndex > 0 && ddlDepstClientPredfix.SelectedIndex > 0)
             {
                 BindUnbankedReceipts(Convert.ToInt32(ddldpstReceiptType.SelectedValue), Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
-               
+
             }
             else
             {
@@ -309,13 +309,13 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
             {
                 int CType = 0;
                 BindUnbankedReceipts(Convert.ToInt32(ddldpstReceiptType.SelectedValue), CType);
-                
+
 
             }
             else if (ddldpstReceiptType.SelectedIndex > 0 && ddlDepstClientPredfix.SelectedIndex > 0)
             {
                 BindUnbankedReceipts(Convert.ToInt32(ddldpstReceiptType.SelectedValue), Convert.ToInt32(ddlDepstClientPredfix.SelectedValue));
-               
+
             }
             else
             {
@@ -331,119 +331,133 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     }
     protected void btnDepositSave_Click(object sender, EventArgs e)
     {
-        try
+
+
+        DataTable leftGirdRecords = (DataTable)ViewState["getLeftGirdRecords"];
+        // int rows = leftGirdRecords.Rows.Count;
+        if (leftGirdRecords != null)
         {
-
-            EmDepositMaster objEmDepositMaster = new EmDepositMaster();
-            objEmDepositMaster.DepositDate = Convert.ToDateTime(txtDpstDate.Text);
-            objEmDepositMaster.DepositClientPrefix = Convert.ToInt32(ddlDepstClientPredfix.SelectedValue);
-            objEmDepositMaster.DepositComments = txtDpstComments.Text;
-            objEmDepositMaster.DepositConsultant = txtDepstConsultant.Text;
-            objEmDepositMaster.DepositRecieptType = Convert.ToInt32(ddldpstReceiptType.SelectedValue);
-            objEmDepositMaster.DepositSourceRef = txtDpstSourceRef.Text;
-            objEmDepositMaster.TotalRecieptsDeposited = Convert.ToInt32(spnCurDpstCount.InnerText);
-            objEmDepositMaster.TotalDepositAmount = Convert.ToDecimal(spnThisDepositAmnt.InnerText);
-            objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
-            BADepositTransaction objBADepositTransaction = new BADepositTransaction();
-            int result = objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
-            if (result > 0)
+            try
             {
-                lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
-               
-              
 
-                DataTable leftGirdRecords = (DataTable)ViewState["getLeftGirdRecords"];
-
-
-                DataColumn dtc = new DataColumn("DepositTransMasterId", typeof(System.Int32));
-                dtc.DefaultValue = result;
-                leftGirdRecords.Columns.Add(dtc);
-                DataColumn depositAcId = new DataColumn("DepositAccountId", typeof(System.Int32));
-                depositAcId.DefaultValue = ddlDepositAcoount.SelectedValue;
-                leftGirdRecords.Columns.Add(depositAcId);
-
-               
-
-
-                //string xmlString = string.Empty;
-                //using (TextWriter writer = new StringWriter())
-                //{
-                //    leftGirdRecords.WriteXml(writer);
-                //    xmlString = writer.ToString();
-                //}
-                //SqlConnection objMySqlConn = _doUtility.GetSqlConnection();
-                //objMySqlConn.Open();
-                //using (SqlBulkCopy SBC = new SqlBulkCopy(objMySqlConn))
-                //{
-
-
-
-                //    SBC.ColumnMappings.Add("ReceivedTransactionId", "ReceiptId");
-                //    SBC.ColumnMappings.Add("TransactionDate", "RecieptDate");
-                //    SBC.ColumnMappings.Add("RecieptType", "ReceiptType");
-                //    // SBC.ColumnMappings.Add("ClientType", "ClientType");
-                //    SBC.ColumnMappings.Add("ClientAcNo", "ReciptClient");
-                //    SBC.ColumnMappings.Add("AllocatedAmount", "ReceiptAmount");
-                //    SBC.ColumnMappings.Add("invoiceId", "InvoiceId");
-                //    SBC.ColumnMappings.Add("DepositTransMasterId", "DepositTransMasterId");
-                //    SBC.ColumnMappings.Add("DepositAccountId", "DepositAcId");
-                //    SBC.DestinationTableName = "DepositTranasctionsChild";
-                //    SBC.WriteToServer(leftGirdRecords);
-                //}
-                //Response.Redirect("DepositTransactionList");
-
-
-
-
-
-                for (int i = 0; i < leftGirdRecords.Rows.Count; i++)
+                EmDepositMaster objEmDepositMaster = new EmDepositMaster();
+                objEmDepositMaster.DepositDate = Convert.ToDateTime(txtDpstDate.Text);
+                objEmDepositMaster.DepositClientPrefix = Convert.ToInt32(ddlDepstClientPredfix.SelectedValue);
+                objEmDepositMaster.DepositComments = txtDpstComments.Text;
+                objEmDepositMaster.DepositConsultant = txtDepstConsultant.Text;
+                objEmDepositMaster.DepositRecieptType = Convert.ToInt32(ddldpstReceiptType.SelectedValue);
+                objEmDepositMaster.DepositSourceRef = txtDpstSourceRef.Text;
+                objEmDepositMaster.TotalRecieptsDeposited = Convert.ToInt32(spnCurDpstCount.InnerText);
+                objEmDepositMaster.TotalDepositAmount = Convert.ToDecimal(spnThisDepositAmnt.InnerText);
+                objEmDepositMaster.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
+                BADepositTransaction objBADepositTransaction = new BADepositTransaction();
+                int result = objBADepositTransaction.insertDepositMaster(objEmDepositMaster);
+                if (result > 0)
                 {
-                    //CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
-                    //if (chk.Checked)
+                    lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
+
+
+
+                    // DataTable leftGirdRecords = (DataTable)ViewState["getLeftGirdRecords"];
+
+
+                    DataColumn dtc = new DataColumn("DepositTransMasterId", typeof(System.Int32));
+                    dtc.DefaultValue = result;
+                    leftGirdRecords.Columns.Add(dtc);
+                    DataColumn depositAcId = new DataColumn("DepositAccountId", typeof(System.Int32));
+                    depositAcId.DefaultValue = ddlDepositAcoount.SelectedValue;
+                    leftGirdRecords.Columns.Add(depositAcId);
+
+
+
+
+                    //string xmlString = string.Empty;
+                    //using (TextWriter writer = new StringWriter())
                     //{
-                    EMDepositChild objEMDepositChild = new EMDepositChild();
-                    objEMDepositChild.ReceiptId = Convert.ToInt32(leftGirdRecords.Rows[i]["ReceivedTransactionId"].ToString());
-                    objEMDepositChild.RecieptDate = Convert.ToDateTime(leftGirdRecords.Rows[i]["TransactionDate"].ToString());
-                    objEMDepositChild.ReceiptType = leftGirdRecords.Rows[i]["RecieptType"].ToString();
-                    objEMDepositChild.ReciptClient = leftGirdRecords.Rows[i]["ClientAcNo"].ToString();
-                    objEMDepositChild.ReceiptAmount = Convert.ToDecimal(leftGirdRecords.Rows[i]["AllocatedAmount"].ToString());
-                    objEMDepositChild.InvoiceId = Convert.ToInt32(leftGirdRecords.Rows[i]["invoiceId"].ToString());
-                    objEMDepositChild.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
-                    objEMDepositChild.DepositTransMasterId = result;
-                    int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
-                    if (childResult > 0)
-                    {
-                        lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
-                        // Response.Redirect("DepositTransactionList.aspx");
-                    }
-                    else
-                    {
-                        lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
-                    }
-
-
-                    //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
-                    //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                    //    leftGirdRecords.WriteXml(writer);
+                    //    xmlString = writer.ToString();
                     //}
-                    //else
+                    //SqlConnection objMySqlConn = _doUtility.GetSqlConnection();
+                    //objMySqlConn.Open();
+                    //using (SqlBulkCopy SBC = new SqlBulkCopy(objMySqlConn))
                     //{
 
+
+
+                    //    SBC.ColumnMappings.Add("ReceivedTransactionId", "ReceiptId");
+                    //    SBC.ColumnMappings.Add("TransactionDate", "RecieptDate");
+                    //    SBC.ColumnMappings.Add("RecieptType", "ReceiptType");
+                    //    // SBC.ColumnMappings.Add("ClientType", "ClientType");
+                    //    SBC.ColumnMappings.Add("ClientAcNo", "ReciptClient");
+                    //    SBC.ColumnMappings.Add("AllocatedAmount", "ReceiptAmount");
+                    //    SBC.ColumnMappings.Add("invoiceId", "InvoiceId");
+                    //    SBC.ColumnMappings.Add("DepositTransMasterId", "DepositTransMasterId");
+                    //    SBC.ColumnMappings.Add("DepositAccountId", "DepositAcId");
+                    //    SBC.DestinationTableName = "DepositTranasctionsChild";
+                    //    SBC.WriteToServer(leftGirdRecords);
                     //}
+                    //Response.Redirect("DepositTransactionList");
+
+
+
+
+
+                    for (int i = 0; i < leftGirdRecords.Rows.Count; i++)
+                    {
+                        //CheckBox chk = (CheckBox)gvReciptData.Rows[i].Cells[0].FindControl("chkSelect");
+                        //if (chk.Checked)
+                        //{
+                        EMDepositChild objEMDepositChild = new EMDepositChild();
+                        objEMDepositChild.ReceiptId = Convert.ToInt32(leftGirdRecords.Rows[i]["ReceivedTransactionId"].ToString());
+                        objEMDepositChild.RecieptDate = Convert.ToDateTime(leftGirdRecords.Rows[i]["TransactionDate"].ToString());
+                        objEMDepositChild.ReceiptType = leftGirdRecords.Rows[i]["RecieptType"].ToString();
+                        objEMDepositChild.ReciptClient = leftGirdRecords.Rows[i]["ClientAcNo"].ToString();
+                        objEMDepositChild.ReceiptAmount = Convert.ToDecimal(leftGirdRecords.Rows[i]["AllocatedAmount"].ToString());
+                        objEMDepositChild.InvoiceId = Convert.ToInt32(leftGirdRecords.Rows[i]["invoiceId"].ToString());
+                        objEMDepositChild.DepositAcId = Convert.ToInt32(ddlDepositAcoount.SelectedValue);
+                        objEMDepositChild.DepositTransMasterId = result;
+                        int childResult = objBADepositTransaction.insertDepositChild(objEMDepositChild);
+                        if (childResult > 0)
+                        {
+                            lblMsg.Text = _objBOUtiltiy.ShowMessage("success", "Success", "Deposit Added Successfully");
+                            // Response.Redirect("DepositTransactionList.aspx");
+                        }
+                        else
+                        {
+                            lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
+                        }
+
+
+                        //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                        //objEMDepositChild.RecieptDate = Convert.ToDateTime(gvReciptData.Rows[i].Cells[2].Text);
+                        //}
+                        //else
+                        //{
+
+                        //}
+                    }
+                    Response.Redirect("DepositTransactionList.aspx");
+
+
                 }
-                Response.Redirect("DepositTransactionList.aspx");
-
-
+                else
+                {
+                    lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Deposit  was not Added plase try again");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Deposit  was not Added plase try again");
+                lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
+                ExceptionLogging.SendExcepToDB(ex);
             }
         }
-        catch (Exception ex)
+        else
         {
-            lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
-            ExceptionLogging.SendExcepToDB(ex);
+            string script = string.Format("alert('Please Select any Unbanked Receipt. ');");
+            ScriptManager.RegisterClientScriptBlock(Page, typeof(System.Web.UI.Page), "redirect", script, true);
+
         }
+
     }
 
 
@@ -455,7 +469,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     {
         GetLeftSelectedRows();
         BindfirstRecieptsGrid();
-        
+
         ThisDepositReciptsCount();
         UnBankedReciptsCount();
         gvSeocondRecipts.DataSource = ViewState["getLeftGirdRecords"];
