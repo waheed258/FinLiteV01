@@ -261,13 +261,30 @@
             $('#<%= ddlAutoDepositeAccount.ClientID %>').select2();
 
         }
+        
+      <%--  function PrintPanel() {
+            var panel = document.getElementById("<%=pnlContents.ClientID %>");
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(panel.innerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            setTimeout(function () {
+                printWindow.print();
+            }, 500);
+            return false;
+        }--%>
+  
+
+
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-
+            <asp:Panel id="pnlContents" runat = "server">
 
             <section class="panel">
                 <header class="panel-heading">
@@ -676,8 +693,8 @@
                             <asp:Button runat="server" ID="btnClear" class="btn btn-primary green"  
                                 Text="Clear" OnClick="btnClear_Click" />
                         </div>
-                   <%--     <div class="col-sm-2">
-                            <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green" ValidationGroup="rct"
+                       <%-- <div class="col-sm-2">
+                            <asp:Button runat="server" ID="btnPrint" class="btn btn-primary green"   OnClientClick = "return PrintPanel();"
                                 Text="Print" OnClick="btnPrint_Click" />
                         </div>--%>
                         <div class="col-sm-2">
@@ -688,7 +705,7 @@
                     </div>
                 </div>
             </section>
-
+                </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

@@ -391,6 +391,8 @@
                             </div>
                         </div>
                     </div>
+
+                    
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
@@ -427,6 +429,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-2">
@@ -489,7 +493,7 @@
                                 BackgroundCssClass="modalBackground1" BehaviorID="btnOpenFP" CancelControlID="bntCancelFP"
                                 PopupControlID="pnlFlight">
                             </cc1:ModalPopupExtender>
-                            <asp:Panel ID="pnlFlight" runat="server" CssClass="modalPopup " Width="1050px" Style="display: none;" BackgroundCssClass="modalBackground">
+                            <asp:Panel ID="pnlFlight" runat="server"  CssClass="modalPopup " Width="1050px" Style="display: none;" BackgroundCssClass="modalBackground">
                                 <div class="panelpopupheaderbox">
                                     <%--<div style="float: right; padding-top: 3px; padding-right: 3px;">
                                 <asp:ImageButton ID="cmdClose" runat="server" Height="20" Width="25" ImageUrl="~/images/close.png" OnClick="cmdClose_Click" />

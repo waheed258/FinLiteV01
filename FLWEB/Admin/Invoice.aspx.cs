@@ -1372,6 +1372,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
         try
         {
+            
             InsertAirTicket();
         }
         catch (Exception ex)

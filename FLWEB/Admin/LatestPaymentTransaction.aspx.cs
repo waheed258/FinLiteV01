@@ -299,21 +299,21 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
     }
     //protected void btnPrint_Click(object sender, EventArgs e)
     //{
-    //    StringWriter sw = new StringWriter();
-    //    HtmlTextWriter hw = new HtmlTextWriter(sw);
-    //    StringBuilder sb = new StringBuilder();
-    //    sb.Append("<script type = 'text/javascript'>");
-    //    sb.Append("window.onload = new function(){");
-    //    sb.Append("var divToPrint=document.getElementById('print');");
-    //    sb.Append("var printWin = window.open('', '', 'left=0");
-    //    sb.Append(",top=0,width=800,height=600,status=0');");
-       
-    //    sb.Append("printWin.document.write(divToPrint.outerHTML);");
-    //    sb.Append("printWin.document.close();");
-    //    sb.Append("printWin.focus();");
-    //    sb.Append("printWin.print();}");
-    //    sb.Append("</script>");
-    //    ClientScript.RegisterStartupScript(this.GetType(), "GridPrint", sb.ToString());
+    //    //StringWriter sw = new StringWriter();
+    //    //HtmlTextWriter hw = new HtmlTextWriter(sw);
+    //    //StringBuilder sb = new StringBuilder();
+    //    //sb.Append("<script type = 'text/javascript'>");
+    //    //sb.Append("window.onload = new function(){");
+    //    //sb.Append("var divToPrint=document.getElementById('print');");
+    //    //sb.Append("var printWin = window.open('', '', 'left=0");
+    //    //sb.Append(",top=0,width=800,height=600,status=0');");
+
+    //    //sb.Append("printWin.document.write(divToPrint.outerHTML);");
+    //    //sb.Append("printWin.document.close();");
+    //    //sb.Append("printWin.focus();");
+    //    //sb.Append("printWin.print();}");
+    //    //sb.Append("</script>");
+    //    //ClientScript.RegisterStartupScript(this.GetType(), "GridPrint", sb.ToString());
     //}
 
     

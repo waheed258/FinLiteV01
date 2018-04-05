@@ -121,9 +121,9 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                        "DepositTransId='" + SearchText +
+                        "DepositSourceRef='" + SearchText +
                         "' OR Convert(DepositDate, 'System.String') LIKE '%" + SearchText +
-                        "%' OR DepositSourceRef LIKE '%" + SearchText +
+                    //  "%' OR DepositSourceRef LIKE '%" + SearchText +
                         "%' OR RecDescription LIKE '%" + SearchText +
                         "%' OR Name LIKE '%" + SearchText +
                         "%' OR Convert(TotaldepositAmount,'System.String') LIKE '%" + SearchText + "%'");
@@ -134,7 +134,16 @@ public partial class Admin_DepositTransactionList : System.Web.UI.Page
                     gvDepositTransactionList.DataSource = dr.CopyToDataTable();
                     gvDepositTransactionList.DataBind();
                 }
+                else
+                {
+                    gvDepositTransactionList.DataSource = null;
+                    gvDepositTransactionList.DataBind();
+
+                    Label lblEmptyMessage = gvDepositTransactionList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
+                    lblEmptyMessage.Text = "Currently there are no records in" + "  '" + SearchText + "'";
+                }
             }
+
         }
         catch (Exception ex)
         {
