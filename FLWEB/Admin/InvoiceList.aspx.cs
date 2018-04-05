@@ -1154,7 +1154,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             objTransactionMaster.Messages = "";
             objTransactionMaster.CreatedBy = Convert.ToInt32(Session["UserLoginId"]);
             objTransactionMaster.PaymentSourceRef = txtSourceRef.Text;
-
+            objTransactionMaster.SuspenseAccId = 83;
 
             if (ReceiptAmountAfterpaid != 0 || ReceiptAmountAfterpaid != 0.0M)
                 objTransactionMaster.ReceiptAmount = ReceiptAmountAfterpaid;
@@ -1292,7 +1292,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                         lblMsg.Text = _BOUtility.ShowMessage("info", "Info", " Child Deposit Was not Added Successfully");
                     }
 
-
+                }
                 }
                 else
                 {
@@ -1346,7 +1346,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                 }
 
             }
-        }
+        
         catch (Exception ex)
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "error", ex.Message);
