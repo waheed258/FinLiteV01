@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="IncomeReport.aspx.cs" Inherits="Admin_IncomeReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+      <style>
+        .imgright {
+            Width: 50px;
+            Height: 30px;
+            margin-left: 95%;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             DatePickerSet();
@@ -35,7 +42,7 @@
          </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
+    
       <asp:Label ID="lblMsg" runat="server"></asp:Label>
     <section class="panel">
           <header class="panel-heading">
@@ -62,9 +69,9 @@
                   </div>
 
              </div>--%>
-                 <asp:ImageButton ID="imgPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20" OnClick="imgPdf_Click"
-                      title="Pdf" OnClientClick = "SetTarget();" />
-                                
+                
+                     <asp:ImageButton ID="imgPdf" ToolTip="Pdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="50" Height="30" OnClick="imgPdf_Click" CssClass="imgright"
+                      title="Pdf" OnClientClick = "SetTarget();" />            
              <br />
              <asp:Literal id="ltrlctrl1" runat="server" />
 

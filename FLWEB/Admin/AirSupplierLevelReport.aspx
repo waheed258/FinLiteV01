@@ -5,7 +5,8 @@
         .imgright {
             Width: 50px;
             Height: 30px;
-            margin-left: 1100px;
+            margin-left: 95%;
+             margin-top:-50px;
         }
     </style>
     <%-- <script type="text/javascript">
@@ -74,7 +75,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <%--  <asp:Button ID="btnPdf" runat="server" OnClick="btnPdf_Click" Text="PDF" OnClientClick="SetTarget(); " />--%>
      
-        <asp:ImageButton ID="btnPdf" runat="server" OnClientClick="SetTarget();" OnClick="btnPdf_Click" ImageUrl="~/images/PdfIcon.png"  CssClass="imgright"  />
+      
     
 
     <%--<asp:ImageButton ID="imgPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20" OnClick="imgPdf_Click" title="Pdf" />--%>
@@ -105,6 +106,7 @@
                 </div>
 
             </div>
+              <asp:ImageButton ID="btnPdf" runat="server" OnClientClick="SetTarget();" ToolTip="Pdf" OnClick="btnPdf_Click" ImageUrl="~/images/PdfIcon.png"  CssClass="imgright"  />
             <br />
 
             <asp:GridView ID="gvAirSupplLevelReport" runat="server" AllowPaging="true" Width="100%" PageSize="10"

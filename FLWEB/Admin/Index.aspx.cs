@@ -9,6 +9,7 @@ using System.Web.UI.DataVisualization.Charting;
 using System.Text;
 using System.Data;
 using BusinessManager;
+using System.Drawing;
 
 public partial class Admin_Index : System.Web.UI.Page
 {
@@ -143,6 +144,9 @@ public partial class Admin_Index : System.Web.UI.Page
             //setting Chart type   
             MontlyChartAmt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
+            MontlyChartAmt.Series[0].Points[0].Color = Color.Coral;
+            MontlyChartAmt.Series[0].Points[1].Color = Color.LightSeaGreen;
+            MontlyChartAmt.Series[0].Points[2].Color = Color.SlateBlue;
 
             //Hide or show chart back GridLines  
             MontlyChartAmt.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
@@ -184,7 +188,8 @@ public partial class Admin_Index : System.Web.UI.Page
             //setting Chart type   
             MontlyChartCnt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
-
+            MontlyChartCnt.Series[0].Points[0].Color = Color.Coral;
+            MontlyChartCnt.Series[0].Points[1].Color = Color.LightSeaGreen;
             //Hide or show chart back GridLines  
             MontlyChartCnt.ChartAreas["ChartArea2"].AxisX.MajorGrid.Enabled = false;
             MontlyChartCnt.ChartAreas["ChartArea2"].AxisY.MajorGrid.Enabled = false;
@@ -246,6 +251,10 @@ public partial class Admin_Index : System.Web.UI.Page
             DailyChartAmt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
 
+            DailyChartAmt.Series[0].Points[0].Color = Color.Coral;
+            DailyChartAmt.Series[0].Points[1].Color = Color.LightSeaGreen;
+            DailyChartAmt.Series[0].Points[2].Color = Color.SlateBlue;
+
             //Hide or show chart back GridLines  
             DailyChartAmt.ChartAreas["ChartArea3"].AxisX.MajorGrid.Enabled = false;
             DailyChartAmt.ChartAreas["ChartArea3"].AxisY.MajorGrid.Enabled = false;
@@ -287,7 +296,8 @@ public partial class Admin_Index : System.Web.UI.Page
             //setting Chart type   
             DailyChartCnt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
-
+            DailyChartCnt.Series[0].Points[0].Color = Color.Coral;
+            DailyChartCnt.Series[0].Points[1].Color = Color.LightSeaGreen;
             //Hide or show chart back GridLines  
             DailyChartCnt.ChartAreas["ChartArea4"].AxisX.MajorGrid.Enabled = false;
             DailyChartCnt.ChartAreas["ChartArea4"].AxisY.MajorGrid.Enabled = false;

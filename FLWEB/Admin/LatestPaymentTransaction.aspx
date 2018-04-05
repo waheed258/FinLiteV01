@@ -358,7 +358,7 @@
                             <asp:DropDownList ID="ddlPaymentType" runat="server" CssClass="form-control">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlPaymentType" runat="server" ID="rfvddlPaymentType" ValidationGroup="rct"
-                                ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select Payment Type" Text="Select Payment Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                         </div>
                           <div class="col-sm-2">
