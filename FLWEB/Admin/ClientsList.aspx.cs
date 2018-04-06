@@ -460,7 +460,8 @@ public partial class Admin_ClientsList : System.Web.UI.Page
             ddlCreditCardTypeList.DataBind();
         }
 
-        ddlCreditCardTypeList.SelectedIndex = ddlCreditCardTypeList.Items.IndexOf(ddlCreditCardTypeList.Items.FindByValue(hfCreditCardId.Value));
+        
+        ddlCreditCardTypeList.SelectedIndex = ddlCreditCardTypeList.Items.IndexOf(ddlCreditCardTypeList.Items.FindByText(hfCreditCardId.Value));
 
         
        
