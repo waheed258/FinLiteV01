@@ -174,7 +174,10 @@
                 <div class="col-sm-3">
 
                     <asp:Button runat="server" ID="btnMainAccount" class="btn btn-success" ValidationGroup="mainAccount"
-                        Text="Submit" OnClick="btnMainAccount_Click" />&nbsp;
+                        Text="Submit"
+                            UseSubmitBehavior="false" 
+                             OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                         OnClick="btnMainAccount_Click" />&nbsp;
                     <asp:Button runat="server" ID="btnMainAccountCancel"
                         class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnMainAccountCancel_Click" />
 

@@ -871,7 +871,7 @@
                                             Division<span class="style1">*</span></label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                        <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlDivision_SelectedIndexChanged" AutoPostBack="true">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDevission" ValidationGroup="rct"
                                             ErrorMessage="Select Division" Text="Select Division" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
@@ -948,7 +948,10 @@
 
                                     <div class="col-sm-2">
                                         <asp:Button runat="server" ID="btnReciptSave" class="btn btn-primary green" ValidationGroup="rct"
-                                            Text="Save" OnClick="btnReciptSave_Click" />
+                                            Text="Save" 
+                                             UseSubmitBehavior="false" 
+                           OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                            OnClick="btnReciptSave_Click" />
                                     </div>
                                     <div class="col-sm-2">
                                         <asp:Button runat="server" ID="btnReceiptClear" class="btn btn-primary green" OnClick="btnReceiptClear_Click"

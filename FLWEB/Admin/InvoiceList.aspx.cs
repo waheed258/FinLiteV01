@@ -1119,7 +1119,7 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
     protected void btnReciptSave_Click(object sender, EventArgs e)
     {
-
+        System.Threading.Thread.Sleep(2000);
         try
         {
             int Allocatedcount = 0;
@@ -1370,6 +1370,10 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
         ddlReceiptType.SelectedIndex = 0;
         ddlAutoDepositeAccount.SelectedIndex = 0;
         txtAgeing.Text = "";
+        ReceiptPopupExtender.Show();
+    }
+    protected void ddlDivision_SelectedIndexChanged(object sender, EventArgs e)
+    {
         ReceiptPopupExtender.Show();
     }
 }

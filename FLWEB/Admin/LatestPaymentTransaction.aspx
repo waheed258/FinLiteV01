@@ -687,7 +687,10 @@
 
                         <div class="col-sm-2">
                             <asp:Button runat="server" ID="btnSave" class="btn btn-primary green" ValidationGroup="rct"
-                                Text="Save" OnClick="btnSave_Click" />
+                                Text="Save"                                
+                                    UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                OnClick="btnSave_Click" />
                         </div>
                         <div class="col-sm-2">
                             <asp:Button runat="server" ID="btnClear" class="btn btn-primary green"  

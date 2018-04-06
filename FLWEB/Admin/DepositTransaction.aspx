@@ -276,7 +276,10 @@
                              </div>
                         <div class="col-sm-3">
                             <asp:Button runat="server" ID="btnDepositSave" class="btn btn-primary green" ValidationGroup="deposit"
-                                Text="Save"  OnClick="btnDepositSave_Click" />
+                                Text="Save" 
+                                    UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                 OnClick="btnDepositSave_Click" />
                         </div>
                              <asp:Button runat="server" ID="btnCancel"
                             class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;

@@ -17,6 +17,17 @@
               });
 
           });
+       <%--   var count=0;
+          function DisableSubmitButton() {
+              count++;
+              var btn = document.getElementById('<%=btnSave.ClientID%>');
+              alert(count);
+              //make sure submit button was found (it may be in a panel that has Visible set to false). If found, disable it
+              if (btn) {
+                  btn.disabled = true;
+              }
+
+          }--%>
 
           function DatePickerSet() {
               $('#ContentPlaceHolder1_txtDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
@@ -142,7 +153,9 @@
                 </div>
                 <div class="col-sm-3">
                     <asp:Button runat="server" ID="btnSave" class="btn btn-success" ValidationGroup="rct"
-                        Text="Submit" OnClick="btnSave_Click"/>&nbsp;
+                        Text="Submit"
+                        UseSubmitBehavior="false"
+                         OnClick="btnSave_Click" OnClientClick="this.disabled='true';this.value='Please Wait...' "/>&nbsp;
                     <asp:Button runat="server" ID="btnCancel"
                             class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;
                   <%--  <asp:Button runat="server" ID="btnClear"

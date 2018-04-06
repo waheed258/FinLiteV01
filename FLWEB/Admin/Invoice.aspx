@@ -994,7 +994,11 @@
                                         <div class="col-sm-5">
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:Button runat="server" ID="btnAirSubmit"  OnClick="btnAirSubmit_Click1" class="btn btn-primary" ValidationGroup="airticket"
+                                            <asp:Button runat="server" ID="btnAirSubmit"  
+                                                 UseSubmitBehavior="false"
+                                                OnClick="btnAirSubmit_Click1" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                                class="btn btn-primary" ValidationGroup="airticket"
                                                 Text="Submit" />&nbsp;
                     <asp:Button runat="server" ID="btnCancel"
                         class="btn btn-danger" ValidationGroup="" OnClick="btnCancel_Click" Text="Cancel" />
@@ -1437,7 +1441,10 @@
                                         <div class="col-sm-5">
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:Button ID="LandArrSubmit" runat="server" class="btn btn-primary" OnClick="LandArrSubmit_Click"  Text="Submit" ValidationGroup="landsupplier" />&nbsp;&nbsp;
+                                            <asp:Button ID="LandArrSubmit" runat="server" class="btn btn-primary" 
+                                                UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                                OnClick="LandArrSubmit_Click"  Text="Submit" ValidationGroup="landsupplier" />&nbsp;&nbsp;
                                     <asp:Button ID="Cancle" runat="server" class="btn btn-danger" OnClick="Cancel_Click" Text="Cancel" />
                                         </div>
                                         <%--<div class="col-sm-4">
@@ -1707,7 +1714,10 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <asp:Button runat="server" ID="SerSubmit" class="btn btn-primary"  ValidationGroup="servicefee"
-                                                Text="Submit" OnClick="ServFee_click" />&nbsp;
+                                                Text="Submit" 
+                                                    UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                                OnClick="ServFee_click" />&nbsp;
                     <asp:Button runat="server" ID="SerCancel"
                         class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnSerCancel_Click" />
 
@@ -1909,7 +1919,10 @@
                                         <div class="col-sm-3">
 
                                             <asp:Button runat="server" ID="GenSubmit" class="btn btn-primary"  ValidationGroup="generalcharge"
-                                                Text="Submit" OnClick="btnGencharge_click" />&nbsp;
+                                                Text="Submit" 
+                                                    UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                                OnClick="btnGencharge_click" />&nbsp;
                     <asp:Button runat="server" ID="GenCancel"
                         class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="GenCancel_Click" />
 
@@ -2282,7 +2295,10 @@
                                 </div>
                                 <div class="col-sm-5">
                                     <asp:Button runat="server" ID="btnInvSave" class="btn btn-primary green" ValidationGroup="invoice"
-                                        Text="Submit" OnClick="btnInvSave_Click" />&nbsp;
+                                        Text="Submit" 
+                                            UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                                        OnClick="btnInvSave_Click" />&nbsp;
                               <%--<asp:Button ID="btnACAnalysis" runat="server" CssClass=" btn btn-info" ValidationGroup="analysis" Text="A/C Analysis" />--%>
                                     <asp:Button runat="server" ID="btnInvCancel"
                                         class="btn btn-primary red" ValidationGroup="" Text="Cancel" OnClick="btnInvCancel_Click" />
