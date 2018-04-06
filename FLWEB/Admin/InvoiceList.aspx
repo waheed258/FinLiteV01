@@ -242,7 +242,7 @@
                                 <asp:BoundField DataField="consultantName" HeaderText="Consultant Name" />
                                 <asp:BoundField DataField="InvOrder" HeaderText="Order No" />
                                 <asp:BoundField DataField="InvoiceTotal" HeaderText="Invoice Total" ItemStyle-HorizontalAlign="Right" />
-
+                                 <asp:BoundField DataField="receiptStatus" HeaderText="Receipt Status"  />
                                 <asp:TemplateField HeaderText="Sending Options">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click" title="Mail" />
