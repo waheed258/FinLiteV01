@@ -54,7 +54,7 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
 
 
 
-    private void BindAutoDepositeAccount(int ClientType)
+    private void BindAutoDepositeAccount(int ClientType,string categoryName)
     {
         try
         {
@@ -66,14 +66,17 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
             }
             ddlGRFmAccCode.Items.Clear();
             BAClients objBAClients = new BAClients();
-            DataSet ObjDsClients = _objBOUtiltiy.GetAccNoofClientandSuppl(ClientType);
-            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            DataSet ObjDsClients = _objBOUtiltiy.GetAccNoofClientandSuppl(ClientType, categoryName);
+            if (ObjDsClients.Tables.Count > 0)
             {
-                ddlGRFmAccCode.DataSource = ObjDsClients;
-                ddlGRFmAccCode.DataValueField = "id";
-                ddlGRFmAccCode.DataTextField = "accountcodde";
-                ddlGRFmAccCode.DataBind();
-                ddlGRFmAccCode.Items.Insert(0, new ListItem("Select Account Code", "0"));
+                if (ObjDsClients.Tables[0].Rows.Count > 0)
+                {
+                    ddlGRFmAccCode.DataSource = ObjDsClients;
+                    ddlGRFmAccCode.DataValueField = "id";
+                    ddlGRFmAccCode.DataTextField = "accountcode";
+                    ddlGRFmAccCode.DataBind();
+                    ddlGRFmAccCode.Items.Insert(0, new ListItem("Select Account Code", "0"));
+                }
             }
             else
             {
@@ -90,11 +93,11 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
     {
         if (Convert.ToInt32(ddlGRCategory.SelectedValue) > 0)
         {
-            BindAutoDepositeAccount(Convert.ToInt32(ddlGRCategory.SelectedValue));
+            BindAutoDepositeAccount(Convert.ToInt32(ddlGRCategory.SelectedValue), ddlGRCategory.SelectedItem.Text);
         }
         else
         {
-            BindAutoDepositeAccount(0);
+            BindAutoDepositeAccount(0,null);
         }
     }
     private void BindAccountTypes()

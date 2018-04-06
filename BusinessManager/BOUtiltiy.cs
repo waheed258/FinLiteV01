@@ -394,9 +394,9 @@ namespace BusinessManager
         }
 
 
-        public DataSet GetAccNoofClientandSuppl(int AccType)
+        public DataSet GetAccNoofClientandSuppl(int AccType,string categoryName)
         {
-            return _objDOUtility.GetAccNoofClientandSuppl(AccType);
+            return _objDOUtility.GetAccNoofClientandSuppl(AccType, categoryName);
         }
 
         public DataSet BindAirServiceTypes()

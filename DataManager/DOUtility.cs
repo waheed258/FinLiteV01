@@ -201,11 +201,12 @@ namespace DataManager
             return ExecuteDataSet("Get_PaymentUserType");
         }
 
-        public DataSet GetAccNoofClientandSuppl(int AccType)
+        public DataSet GetAccNoofClientandSuppl(int AccType,string categoryName)
         {
             Hashtable htparams = new Hashtable
                                    {
-                                       {"@CategoryId",AccType}
+                                       {"@CategoryId",AccType},
+                                       {"@categoryName",categoryName}
                                    };
             return ExecuteDataSet("Supplier_PaymentUserAccName", htparams);
         }

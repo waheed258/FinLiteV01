@@ -313,12 +313,12 @@ public partial class Admin_PaymentTransaction : System.Web.UI.Page
             }
             ddlAccountNo.Items.Clear();
             BAClients objBAClients = new BAClients();
-            DataSet ObjDsClients = _objBOUtiltiy.GetAccNoofClientandSuppl(ClientType);
+            DataSet ObjDsClients = _objBOUtiltiy.GetAccNoofClientandSuppl(ClientType, ddlAccType.SelectedItem.Text);
             if (ObjDsClients.Tables[0].Rows.Count > 0)
             {
                 ddlAccountNo.DataSource = ObjDsClients;
                 ddlAccountNo.DataValueField = "id";
-                ddlAccountNo.DataTextField = "accountcodde";
+                ddlAccountNo.DataTextField = "accountcode";
                
                 ddlAccountNo.DataBind();
                 ddlAccountNo.Items.Insert(0, new ListItem("Select Account Code", "0"));

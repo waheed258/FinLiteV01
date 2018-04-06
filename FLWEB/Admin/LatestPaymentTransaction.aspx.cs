@@ -419,11 +419,11 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
         {
             if (ddlAccType.SelectedIndex > 0)
             {
-                BindAutoDepositeAccount(Convert.ToInt32(ddlAccType.SelectedValue.ToString()));
+                BindAutoDepositeAccount(Convert.ToInt32(ddlAccType.SelectedValue.ToString()), ddlAccType.SelectedItem.Text);
             }
             else
             {
-                BindAutoDepositeAccount(0);
+                BindAutoDepositeAccount(0,null);
             }
         }
         catch (Exception ex)
@@ -672,7 +672,7 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
         }
     }
 
-    private void BindAutoDepositeAccount(int ClientType)
+    private void BindAutoDepositeAccount(int ClientType,string categoryName)
     {
         try
         {
@@ -684,15 +684,18 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
             }
             ddlAccountNo.Items.Clear();
             BAClients objBAClients = new BAClients();
-            DataSet ObjDsClients = _objBOUtiltiy.GetAccNoofClientandSuppl(ClientType);
-            if (ObjDsClients.Tables[0].Rows.Count > 0)
+            DataSet ObjDsClients = _objBOUtiltiy.GetAccNoofClientandSuppl(ClientType, categoryName);
+            if (ObjDsClients.Tables.Count > 0)
             {
-                ddlAccountNo.DataSource = ObjDsClients;
-                ddlAccountNo.DataValueField = "id";
-                ddlAccountNo.DataTextField = "accountcodde";
-                lblMainAcc.Text = ObjDsClients.Tables[0].Rows[0]["MainAcc"].ToString();
-                ddlAccountNo.DataBind();
-                ddlAccountNo.Items.Insert(0, new ListItem("Select Account Code", "0"));
+                if (ObjDsClients.Tables[0].Rows.Count > 0)
+                {
+                    ddlAccountNo.DataSource = ObjDsClients;
+                    ddlAccountNo.DataValueField = "id";
+                    ddlAccountNo.DataTextField = "accountcode";
+                    lblMainAcc.Text = ObjDsClients.Tables[0].Rows[0]["MainAcc"].ToString();
+                    ddlAccountNo.DataBind();
+                    ddlAccountNo.Items.Insert(0, new ListItem("Select Account Code", "0"));
+                }
             }
             else
             {
