@@ -285,7 +285,11 @@
                 <div class="col-sm-12">
                     <div class="col-sm-3">
 
-                        <asp:Button ID="GenReceptSubmit" runat="server" OnClick="GenReceptSubmit_Click" class="btn btn-success" Text="Submit" />
+                        <asp:Button ID="GenReceptSubmit" runat="server" 
+                              UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+												
+                            OnClick="GenReceptSubmit_Click" class="btn btn-success" Text="Submit" />
                     </div>
                     <div class="col-sm-3">
 

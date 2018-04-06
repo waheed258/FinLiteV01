@@ -641,7 +641,10 @@
                 </div>
                 <div class="col-sm-3">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="airsupplier"
-                        Text="Submit" OnClick="cmdSubmit_Click" />&nbsp;
+                        Text="Submit" 
+                            UseSubmitBehavior="false" 
+                           OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                        OnClick="cmdSubmit_Click" />&nbsp;
                     <asp:Button runat="server" ID="btnCancel"
                         class="btn btn-danger" ValidationGroup="" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;
                     <asp:Button runat="server" ID="btnReset"

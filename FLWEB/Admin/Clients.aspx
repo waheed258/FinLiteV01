@@ -1021,7 +1021,10 @@
                 </div>
                 <div class="col-sm-3">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="client"
-                        Text="Submit" OnClick="cmdSubmit_Click" />&nbsp;<asp:Button runat="server" ID="btnCancel"
+                        Text="Submit"
+                            UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                         OnClick="cmdSubmit_Click" />&nbsp;<asp:Button runat="server" ID="btnCancel"
                             class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;<asp:Button ID="btnreset" runat="server" CssClass="btn btn-primary blue" Text="Reset" OnClick="btnreset_Click" />
 
                 </div>

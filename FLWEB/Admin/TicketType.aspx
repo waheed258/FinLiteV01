@@ -49,7 +49,10 @@
             </div>
             <div class="col-sm-3">
                 <asp:Button runat="server" ID="btnSubmit" class="btn btn-success" ValidationGroup="Ticket"
-                    Text="Submit" OnClick="btnSubmit_Click"/>&nbsp;<asp:Button runat="server" ID="btnCancel"
+                    Text="Submit"
+                        UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                     OnClick="btnSubmit_Click"/>&nbsp;<asp:Button runat="server" ID="btnCancel"
                         class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click"/>&nbsp;<asp:Button runat="server" ID="btnReset"
                             class="btn btn-primary green" Text="Reset" OnClick="btnReset_Click"/>
 

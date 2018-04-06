@@ -8,25 +8,25 @@
         rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
-        function popup() {
-            debugger;
-            $("#dialog:ui-dialog").dialog("destroy");
-            $(".ui-dialog-titlebar").hide();
+        //function popup() {
+        //    debugger;
+        //    $("#dialog:ui-dialog").dialog("destroy");
+        //    $(".ui-dialog-titlebar").hide();
 
-            $("#dialog").dialog({
-                // title: "jQuery Dialog Popup",
-                //buttons: {
-                //    Close: function () {
-                //        $(this).dialog('close');
-                //    }
-                //}
+        //    $("#dialog").dialog({
+        //        // title: "jQuery Dialog Popup",
+        //        //buttons: {
+        //        //    Close: function () {
+        //        //        $(this).dialog('close');
+        //        //    }
+        //        //}
 
-                height: 200,
-                width: 200,
-                modal: true
-            });
-            return false;
-        };
+        //        height: 200,
+        //        width: 200,
+        //        modal: true
+        //    });
+        //    return false;
+        //};
     </script>
 
 </asp:Content>
@@ -88,7 +88,10 @@
                 </div>
                 <div class="col-sm-3">
                     <asp:Button runat="server" ID="btnSubmit" class="btn btn-success" ValidationGroup="BookSource"
-                        Text="Submit" OnClientClick="popup()" OnClick="btnSubmit_Click" />&nbsp;<asp:Button runat="server" ID="btnCancel"
+                        Text="Submit"
+                            UseSubmitBehavior="false" 
+                                                OnClientClick="this.disabled='true';this.value='Please Wait...' "
+                         OnClick="btnSubmit_Click" />&nbsp;<asp:Button runat="server" ID="btnCancel"
                             class="btn btn-danger" Text="Cancel" OnClick="btnCancel_Click" />&nbsp;<asp:Button runat="server" ID="btnReset"
                                 class="btn btn-primary green" Text="Reset" OnClick="btnReset_Click" />
 
