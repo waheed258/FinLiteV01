@@ -1099,9 +1099,9 @@
                                         </div>
                                         <div class="col-sm-2">
 
-                                            <asp:TextBox ID="txtlandPassName" runat="server" CssClass="form-control" placeholder="Passenge Name" MaxLength="50" />
+                                            <asp:TextBox ID="txtlandPassName" runat="server" CssClass="form-control" placeholder="Passenger Name" MaxLength="50" />
                                             <asp:RequiredFieldValidator ControlToValidate="txtlandPassName" runat="server" ID="rfvtxtlandPassName" ValidationGroup="landsupplier"
-                                                ErrorMessage="Select Passenger" Text="Enter Passenger" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                                ErrorMessage="Enter Passenger Name" Text="Enter Passenger Name" class="validationred" Display="Dynamic" ForeColor="Red" />
 
                                             <asp:RegularExpressionValidator ControlToValidate="txtlandPassName" runat="server" ForeColor="Red"
                                                 ID="revtxtlandPassName" ValidationGroup="airticket" ErrorMessage="Enter Only Characters."
@@ -1637,11 +1637,17 @@
                                         <div class="col-sm-12">
                                             <div class="col-sm-2">
                                                 <label class="control-label">
-                                                    Client Total</label>
+                                                    Client Total<span class="style1">*</span></label>
                                             </div>
                                             <div class="col-sm-2">
 
                                                 <asp:TextBox ID="txtSerClientTotal" runat="server" class="form-control" placeholder="0.00" Style="text-align: right;" OnTextChanged="txtSerClientTotal_TextChanged" AutoPostBack="true" />
+
+                                                  <asp:RequiredFieldValidator ControlToValidate="txtSerClientTotal" runat="server" ID="rfvSerClientTotal" ValidationGroup="servicefee"
+                                                    ErrorMessage="Enter Total Amount" Text="Enter Total Amount" class="validationred" Display="Dynamic" ForeColor="Red" />
+
+                                                <asp:RegularExpressionValidator ID="revSerClientTotal" ControlToValidate="txtSerClientTotal" runat="server" ForeColor="Red"
+                                                    ErrorMessage="Enter only Numbers" Display="Dynamic" ValidationExpression="[0-9]*\.?[0-9]*"></asp:RegularExpressionValidator>
 
                                             </div>
                                             <div class="col-sm-1">

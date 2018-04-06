@@ -201,7 +201,7 @@
                             <asp:DropDownList ID="ddlClientType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlClientType_SelectedIndexChanged">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlClientType" runat="server" ID="rfvddlClientType" ValidationGroup="rct"
-                                ErrorMessage="Client Type" Text="Client Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select Client Type" Text="Select Client Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                         </div>
 
@@ -213,7 +213,7 @@
                         </div>
                         <div class="col-sm-2">
                             <asp:DropDownList ID="ddlAccountNo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAccountNo_SelectedIndexChanged">
-                           <asp:ListItem Value="0" Text="Select">Select</asp:ListItem>
+                           <asp:ListItem Value="0" Text="Select">Select Account</asp:ListItem>
                                  </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
                                 ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />

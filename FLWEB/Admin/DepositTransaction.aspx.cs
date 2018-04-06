@@ -76,11 +76,11 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
                 ddlDepositAcoount.DataValueField = "BankAcId";
                 ddlDepositAcoount.DataTextField = "BankName";
                 ddlDepositAcoount.DataBind();
-                ddlDepositAcoount.Items.Insert(0, new ListItem("Select Account", "0"));
+                ddlDepositAcoount.Items.Insert(0, new ListItem("Select Deposit  Account", "0"));
             }
             else
             {
-                ddlDepositAcoount.Items.Insert(0, new ListItem("Select Account", "0"));
+                ddlDepositAcoount.Items.Insert(0, new ListItem("Select Deposit  Account", "0"));
             }
         }
         catch (Exception ex)

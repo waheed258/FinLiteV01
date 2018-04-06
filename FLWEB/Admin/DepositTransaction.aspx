@@ -71,7 +71,7 @@
                         <div class="col-sm-3">
                              <asp:DropDownList ID="ddldpstReceiptType" runat="server"  CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddldpstReceiptType_SelectedIndexChanged"></asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddldpstReceiptType" runat="server" ID="rfvtxtDpstReciptType" ValidationGroup="deposit"
-                                ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
                         </div>
 
                       
@@ -84,7 +84,7 @@
                         <div class="col-sm-3">
                             <asp:TextBox ID="txtDpstSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtDpstSourceRef" runat="server" ID="rfvtxtDpstSourceRef" ValidationGroup="deposit"
-                                ErrorMessage="Enter Refernece No" Text= "Enter Refernece No" class="validationred" Display="Dynamic" ForeColor="Red" />
+                                ErrorMessage="Enter Source Ref No" Text= "Enter Source Ref No" class="validationred" Display="Dynamic" ForeColor="Red" />
                         </div>
 
                         <div class="col-sm-3">
@@ -116,7 +116,7 @@
                              <asp:DropDownList ID="ddlDepositAcoount" runat="server"  CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
                          
                                       <asp:RequiredFieldValidator ControlToValidate="ddlDepositAcoount" runat="server" ID="rfvddlDepositAcoount" ValidationGroup="deposit"
-                                ErrorMessage="Select Account" Text="Select Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0"/>
+                                ErrorMessage="Select Deposit Account" Text="Select Deposit Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0"/>
                   
                             
                                </div>

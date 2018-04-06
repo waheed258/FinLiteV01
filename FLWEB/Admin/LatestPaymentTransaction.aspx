@@ -345,7 +345,7 @@
                             <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDivision" ValidationGroup="rct"
-                                ErrorMessage="Select Devission" Text="Select Devission" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select Division" Text="Select Division" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
                         </div>
 
 
@@ -370,7 +370,7 @@
                             <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
-                                ErrorMessage="Select Auto Deposite" Text="Select Auto Deposite" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select From Account" Text="Select From Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                         </div>
 
@@ -387,7 +387,7 @@
                             <asp:DropDownList ID="ddlAccType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAccType_SelectedIndexChanged">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlAccType" runat="server" ID="rfvddlAccType" ValidationGroup="rct"
-                                ErrorMessage="Account Type" Text="Account Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select Account Type" Text="Select Account Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                         </div>
 

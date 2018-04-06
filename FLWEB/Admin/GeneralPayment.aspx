@@ -82,7 +82,7 @@
                                
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlCategory" runat="server" ID="rfvddlCategory" ValidationGroup="rct"
-                                ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select Category" Text="Select Category" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 
                          
                         </div>
@@ -100,7 +100,7 @@
                             <asp:DropDownList ID="ddlFmAccCode" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlFmAccCode_SelectedIndexChanged">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlFmAccCode" runat="server" ID="rfvddlFmAccCode" ValidationGroup="rct"
-                                ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select From Account" Text="Select From Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
                  
                         </div>
                         <div class="col-sm-2">
@@ -113,7 +113,7 @@
                             </asp:DropDownList>
 
                             <asp:RequiredFieldValidator ControlToValidate="ddlToAccCode" runat="server" ID="rfvddlToAccCode" ValidationGroup="rct"
-                                ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
+                                ErrorMessage="Select To Account" Text="Select To Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
 			  
                         </div>
 
