@@ -14,6 +14,8 @@ public partial class Admin_SupplierChoice : System.Web.UI.Page
     EMSupplierChoice objEMSupChoice = new EMSupplierChoice();
     BALSupplierChoice objBASupChoice = new BALSupplierChoice();
     BOUtiltiy _BOUtility = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if(!IsPostBack)
@@ -42,6 +44,17 @@ public partial class Admin_SupplierChoice : System.Web.UI.Page
     {
         InsertUpdateSupChoice();
     }
+
+    protected void txtChoiceKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtChoiceDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+#endregion
     private void InsertUpdateSupChoice()
     {
         try
@@ -109,4 +122,5 @@ public partial class Admin_SupplierChoice : System.Web.UI.Page
         chkDeactivate.Checked = false;
 
     }
+
 }

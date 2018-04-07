@@ -27,7 +27,7 @@
                         <label class="control-label">Key(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtChoiceKey" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtChoiceKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtChoiceKey_TextChanged" AutoPostBack="true"/>
                        
                         <asp:RequiredFieldValidator ControlToValidate="txtChoiceKey" runat="server" ID="rfvtxtChoiceKey" ValidationGroup="choice"
                             ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
@@ -47,7 +47,7 @@
                         <label class="control-label">Description(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtChoiceDescription" runat="server" CssClass="form-control" MaxLength="50" />
+                        <asp:TextBox ID="txtChoiceDescription" runat="server" CssClass="form-control" MaxLength="50" AutoPostBack="true" OnTextChanged="txtChoiceDescription_TextChanged"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtChoiceDescription" runat="server" ID="rfvtxtChoiceDescription" ValidationGroup="choice"
                             ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtChoiceDescription" runat="server" ForeColor="Red"
@@ -64,7 +64,7 @@
             <div class="form-group">
                 <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="choice"
                         Text="Submit"
                             UseSubmitBehavior="false" 

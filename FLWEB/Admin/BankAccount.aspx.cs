@@ -15,6 +15,8 @@ public partial class Admin_BankAccount : System.Web.UI.Page
     BABankAccount objBABankAc = new BABankAccount();
     BOUtiltiy _objBOUtility = new BOUtiltiy();
     BAAirSuppliers objAirSupplier = new BAAirSuppliers();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -74,6 +76,23 @@ public partial class Admin_BankAccount : System.Web.UI.Page
         }
     }
 
+    protected void txtBankName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlAccountType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtBranchName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtAccountHolder_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+#endregion
 
     #region PrivateMethods
 
@@ -301,5 +320,6 @@ public partial class Admin_BankAccount : System.Web.UI.Page
 
            }
        }
-   
+
+       
 }

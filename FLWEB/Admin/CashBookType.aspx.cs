@@ -14,6 +14,8 @@ public partial class Admin_CashBookType : System.Web.UI.Page
     EMCashBook objEMCash = new EMCashBook();
     BACashBook objBACash = new BACashBook();
     BOUtiltiy _BOUtility = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -109,7 +111,19 @@ public partial class Admin_CashBookType : System.Web.UI.Page
     {
         Response.Redirect("CashBookType.aspx");
     }
+    protected void txtCashKey_TextChanged(object sender, EventArgs e)
+    {
 
+    }
+    protected void txtCashDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtGICode_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+#endregion
     private void BindTansactionAction()
     {
         DataSet ds = _BOUtility.GetTransactionAction();
@@ -138,4 +152,5 @@ public partial class Admin_CashBookType : System.Web.UI.Page
         chkDeactivate.Checked = false;
         dropDefaultAction.SelectedValue = "-1";
     }
+  
 }

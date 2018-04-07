@@ -14,6 +14,8 @@ public partial class Admin_BookingDestinations : System.Web.UI.Page
     EMBookDestinations objDestinations = new EMBookDestinations();
     BABookDestinations objBADestinations = new BABookDestinations();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if(!IsPostBack)
@@ -49,6 +51,16 @@ public partial class Admin_BookingDestinations : System.Web.UI.Page
     {
         Response.Redirect("BookingDestinations.aspx");
     }
+
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+#endregion
 
     #region PrivateMethods
     private void InsUpdDestinations()
@@ -116,4 +128,5 @@ public partial class Admin_BookingDestinations : System.Web.UI.Page
         txtDescription.Text = "";
         chkDeActivate.Checked = false;
     }
+   
 }

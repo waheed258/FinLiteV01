@@ -14,6 +14,8 @@ public partial class Admin_ContactLog : System.Web.UI.Page
     EMContactLog objContactLog = new EMContactLog();
     BAContactLog objBALog = new BAContactLog();
     BOUtiltiy _BOUtility = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if(!IsPostBack)
@@ -41,7 +43,16 @@ public partial class Admin_ContactLog : System.Web.UI.Page
     {
         InsertUpdateConLog();
     }
+    protected void txtLogKey_TextChanged(object sender, EventArgs e)
+    {
 
+    }
+    protected void txtLogDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+#endregion
     private void InsertUpdateConLog()
     {
         try
@@ -105,4 +116,5 @@ public partial class Admin_ContactLog : System.Web.UI.Page
         txtLogDescription.Text = "";
 
     }
+    
 }

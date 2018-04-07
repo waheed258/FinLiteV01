@@ -15,6 +15,7 @@ public partial class Admin_Consultant : System.Web.UI.Page
     BAConsultant objBAConsultant = new BAConsultant();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
 
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -57,6 +58,22 @@ public partial class Admin_Consultant : System.Web.UI.Page
     {
         Response.Redirect("Consultant.aspx");
     }
+
+    protected void txtName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtEmail_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtTelephoneNo_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+#endregion
+
     #region PrivateMethods
     private void InsertUpdateConsultant()
     {
@@ -370,5 +387,6 @@ public partial class Admin_Consultant : System.Web.UI.Page
 
         }
     }
+    
 }
 

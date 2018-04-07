@@ -14,7 +14,9 @@ public partial class Admin_TemplateCategory : System.Web.UI.Page
      BOUtiltiy _objBOUtility = new BOUtiltiy();
      BATemplateCategory objBATemplateCategory=new BATemplateCategory();
      EMTemplateCategory objEMTemplatecategory=new EMTemplateCategory();
-    protected void Page_Load(object sender, EventArgs e)
+
+     #region Events
+     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
@@ -49,6 +51,18 @@ public partial class Admin_TemplateCategory : System.Web.UI.Page
     {
         Response.Redirect("TemplateCategory.aspx");
     }
+
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+#endregion
+
     #region PrivateMethods
        private void InsertUpdateTemplateCategory()
        {
@@ -102,4 +116,5 @@ public partial class Admin_TemplateCategory : System.Web.UI.Page
            txtDescription.Text = "";
        }
     #endregion
+       
 }

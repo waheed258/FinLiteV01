@@ -14,6 +14,8 @@ public partial class Admin_BookingSource : System.Web.UI.Page
     EMBookingSource objEMBookSource = new EMBookingSource();
     BABookingSource objBABookSource = new BABookingSource();
     BOUtiltiy objBOUtilty = new BOUtiltiy();
+
+    #region Event
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -37,6 +39,15 @@ public partial class Admin_BookingSource : System.Web.UI.Page
             }
         }
     }
+
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         BookSourceInsertUpdate();
@@ -50,8 +61,10 @@ public partial class Admin_BookingSource : System.Web.UI.Page
     {
         Response.Redirect("BookingSource.aspx");
     }
+
+    #endregion
     #region PrivateMethods
-        private void BookSourceInsertUpdate()
+    private void BookSourceInsertUpdate()
          {
              try
              {
@@ -109,4 +122,5 @@ public partial class Admin_BookingSource : System.Web.UI.Page
               ChkDeactivate.Checked = false;
           }
     #endregion
+      
 }

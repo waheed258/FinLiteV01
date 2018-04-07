@@ -13,6 +13,8 @@ public partial class Admin_ContactNote : System.Web.UI.Page
     EMContactNote objemNote = new EMContactNote();
     BAContactNote objBANote = new BAContactNote();
     BOUtiltiy _BOUtility = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -111,6 +113,13 @@ public partial class Admin_ContactNote : System.Web.UI.Page
     {
         Response.Redirect("ContactNote.aspx");
     }
+
+    protected void txtNoteDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+#endregion
     void ClearControls()
     {
         hf_ContactNoteId.Value = "0";
@@ -142,4 +151,5 @@ public partial class Admin_ContactNote : System.Web.UI.Page
 
         }
     }
+   
 }

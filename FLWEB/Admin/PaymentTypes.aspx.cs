@@ -14,6 +14,8 @@ public partial class Admin_PaymentTypes : System.Web.UI.Page
     EMPaymentTypes objPaymentTypes = new EMPaymentTypes();
     BAPaymentTypes objBAPaymentTypes = new BAPaymentTypes();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -38,6 +40,12 @@ public partial class Admin_PaymentTypes : System.Web.UI.Page
     {
         Response.Redirect("PaymentTypes.aspx");
     }
+
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+#endregion
 
     #region PrivateMethods
 
@@ -131,4 +139,5 @@ public partial class Admin_PaymentTypes : System.Web.UI.Page
 
         }
     }
+   
 }

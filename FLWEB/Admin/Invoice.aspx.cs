@@ -3607,6 +3607,10 @@ public partial class Admin_Invoice : System.Web.UI.Page
             VASPopupExtender.Show();
         }
     }
+    protected void txtInvOrder_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }
 
 

@@ -27,7 +27,7 @@
                         <label class="control-label">Key(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtCashKey" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtCashKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtCashKey_TextChanged" AutoPostBack="true"/>
                        
                         <asp:RequiredFieldValidator ControlToValidate="txtCashKey" runat="server" ID="rfvtxtCashKey" ValidationGroup="cash"
                             ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
@@ -47,7 +47,7 @@
                         <label class="control-label">Description(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtCashDescription" runat="server" CssClass="form-control" MaxLength="50" />
+                        <asp:TextBox ID="txtCashDescription" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtCashDescription_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtCashDescription" runat="server" ID="rfvtxtCashDescription" ValidationGroup="cash"
                             ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtCashDescription" runat="server" ForeColor="Red"
@@ -74,7 +74,7 @@
                         <label class="control-label">Default GI Code(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtGICode" runat="server" CssClass="form-control" MaxLength="50" />
+                        <asp:TextBox ID="txtGICode" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtGICode_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtGICode" runat="server" ID="rfvtxtGICode" ValidationGroup="cash"
                             ErrorMessage="Enter Default GI Code" Text="Enter Default GI Code" class="validationred" Display="Dynamic" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtGICode" runat="server" ForeColor="Red"
@@ -110,7 +110,7 @@
             <div class="form-group">
                 <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="cash"
                         Text="Submit"
                             UseSubmitBehavior="false" 

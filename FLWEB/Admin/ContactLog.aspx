@@ -28,7 +28,7 @@
                                 <label class="control-label">Key(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtLogKey" runat="server" Cssclass="form-control" MaxLength="3" />
+                                <asp:TextBox ID="txtLogKey" runat="server" Cssclass="form-control" MaxLength="3" OnTextChanged="txtLogKey_TextChanged" AutoPostBack="true"/>
                                  <asp:RequiredFieldValidator ControlToValidate="txtLogKey" runat="server" ID="rfvtxtLogKey" ValidationGroup="log"
                                     ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -38,7 +38,7 @@
                                 <label class="control-label">Description(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtLogDescription" runat="server" Cssclass="form-control" MaxLength="80" />
+                                <asp:TextBox ID="txtLogDescription" runat="server" Cssclass="form-control" MaxLength="80" OnTextChanged="txtLogDescription_TextChanged" AutoPostBack="true"/>
                                  <asp:RequiredFieldValidator ControlToValidate="txtLogDescription" runat="server" ID="rfvtxtLogDescription" ValidationGroup="log"
                                     ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                                  <asp:RegularExpressionValidator ControlToValidate="txtLogDescription" runat="server" ForeColor="Red"
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="log"
                         Text="Submit" 
                             UseSubmitBehavior="false" 

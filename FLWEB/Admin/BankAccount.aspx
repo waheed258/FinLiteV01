@@ -71,7 +71,7 @@
                         <label class="control-label">Bank Name(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtBankName" runat="server" CssClass="form-control" />
+                        <asp:TextBox ID="txtBankName" runat="server" CssClass="form-control" OnTextChanged="txtBankName_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtBankName" runat="server" ID="rfvtxtBankName" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Bank Name" Text="Enter Bank Name" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -80,7 +80,7 @@
                         <label class="control-label">Account Type(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlAccountType" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlAccountType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlAccountType_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="-Please Select-" Value="-1" />
                             <asp:ListItem Text="Savings" Value="Savings" />
                             <asp:ListItem Text="Current" Value="Current" />
@@ -123,7 +123,7 @@
                         <label class="control-label">Branch Name(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtBranchName" runat="server" CssClass="form-control" />
+                        <asp:TextBox ID="txtBranchName" runat="server" CssClass="form-control" OnTextChanged="txtBranchName_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtBranchName" runat="server" ID="rfvtxtBranchName" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Branch Name" Text="Enter Branch Name" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -132,7 +132,7 @@
                         <label class="control-label">Account Holder(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtAccountHolder" runat="server" CssClass="form-control" />
+                        <asp:TextBox ID="txtAccountHolder" runat="server" CssClass="form-control"  OnTextChanged="txtAccountHolder_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtAccountHolder" runat="server" ID="rfvtxtAccountHolder" ValidationGroup="BankAcc"
                             ErrorMessage="Enter Account Holder" Text="Enter Account Holder" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -205,9 +205,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="btnSubmit" class="btn btn-success" ValidationGroup="BankAcc"
                         Text="Submit"
                             UseSubmitBehavior="false" 

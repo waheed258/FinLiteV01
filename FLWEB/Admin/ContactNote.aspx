@@ -47,7 +47,7 @@
                                 <label class="control-label">Description(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtNoteDescription" runat="server" Cssclass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtNoteDescription" runat="server" Cssclass="form-control" MaxLength="50" OnTextChanged="txtNoteDescription_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtNoteDescription" runat="server" ID="rfvtxtNoteDescription" ValidationGroup="notes"
                                     ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                                   <asp:RegularExpressionValidator ControlToValidate="txtNoteDescription" runat="server" ForeColor="Red"
@@ -85,9 +85,9 @@
                     
 
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="notes"
                         Text="Submit"
                             UseSubmitBehavior="false" 
