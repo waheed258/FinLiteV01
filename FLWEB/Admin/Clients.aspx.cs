@@ -15,6 +15,8 @@ public partial class Admin_Clients : System.Web.UI.Page
     BAClients objBAClients = new BAClients();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
     public string FileLogo = string.Empty;
+
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -45,10 +47,10 @@ public partial class Admin_Clients : System.Web.UI.Page
             else
             {
                 string getId = Convert.ToString(Request.QueryString["ClientId"]);
-                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId), true);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
 
             }
-
+ 
             if (!string.IsNullOrEmpty(Request.QueryString["ClientId"]))
             {
                 int ClientId = Convert.ToInt32(qs);
@@ -69,6 +71,20 @@ public partial class Admin_Clients : System.Web.UI.Page
     {
         Response.Redirect("Clients.aspx");
     }
+
+    protected void txtClientName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtTelephoneNo_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtEmail_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    #endregion Events
 
     #region PrivateMethods
     private void InsertUpdateClients()
@@ -1260,9 +1276,9 @@ public partial class Admin_Clients : System.Web.UI.Page
         ds = _objBOUtiltiy.CheckAccCodeExitorNot(AccCode, "Client");
 
         ds.Tables.Add(dt);
+
         if (txtAccountNo.Text != "" && ddlClientType.SelectedIndex != 0)
         {
-
             if (ds.Tables[0].Rows.Count != 0 || ds.Tables[0].Rows.Count > 0)
             {
                 lblaccnoerr.Text = "Already Exist";
@@ -1281,4 +1297,5 @@ public partial class Admin_Clients : System.Web.UI.Page
             lblaccnoerr.Text = "";
         }
     }
+    
 }
