@@ -115,4 +115,16 @@ public partial class Admin_ForeignCurrency : System.Web.UI.Page
             chkDeactivate.Checked = false;
         }
     #endregion
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlAction_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

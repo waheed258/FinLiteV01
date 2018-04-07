@@ -76,7 +76,7 @@
                         <label class="control-label">Description(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="40" />
+                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="40" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true" />
                         <asp:RequiredFieldValidator ControlToValidate="txtDescription" runat="server" ID="rfvtxtDescription" ValidationGroup="Vat"
                             ErrorMessage="Enter Description" Text="Enter Description" Display="Dynamic" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtDescription" runat="server" ForeColor="Red"
@@ -92,7 +92,7 @@
                         <label class="control-label">VAT Rate(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtVatRate" runat="server" CssClass="form-control" MaxLength="10" />
+                        <asp:TextBox ID="txtVatRate" runat="server" CssClass="form-control" MaxLength="10"  OnTextChanged="txtVatRate_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtVatRate" runat="server" ID="rfvtxtVatRate" ValidationGroup="Vat"
                             ErrorMessage="Enter Vat Rate" Text="Enter Vat Rate" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -101,7 +101,7 @@
                         <label class="control-label">Applicable To(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlApplicableTo" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlApplicableTo" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlApplicableTo_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="-Select-" Value="-1" />
                             <asp:ListItem Text="Purchases" Value="Purchases" />
                             <asp:ListItem Text="Sales" Value="Sales" />
@@ -131,9 +131,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="btnSubmit" class="btn btn-success" ValidationGroup="Vat"
                         Text="Submit"
                             UseSubmitBehavior="false" 

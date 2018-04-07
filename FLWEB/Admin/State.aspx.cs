@@ -132,4 +132,16 @@ public partial class State : System.Web.UI.Page
           }
        }
     #endregion
+      protected void txtKey_TextChanged(object sender, System.EventArgs e)
+      {
+
+      }
+      protected void txtDescription_TextChanged(object sender, System.EventArgs e)
+      {
+
+      }
+      protected void ddlCountry_SelectedIndexChanged(object sender, System.EventArgs e)
+      {
+
+      }
 }

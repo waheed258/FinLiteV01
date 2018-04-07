@@ -26,7 +26,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtKey_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtKey" runat="server" ID="rfvtxtKey"
                             Display="Dynamic" Text="Enter Key." ErrorMessage="Enter Key." ValidationGroup="continents" ForeColor="Red" />
                     </div>
@@ -39,7 +39,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="50" />
+                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtDescription" runat="server" ID="rfvtxtDescription"
                             Display="Dynamic" Text="Enter Description." ErrorMessage="Enter Description." ValidationGroup="continents" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtDescription" runat="server"
@@ -51,9 +51,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="continents"
                         Text="Submit"
                             UseSubmitBehavior="false" 

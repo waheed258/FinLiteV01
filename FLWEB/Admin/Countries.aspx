@@ -26,7 +26,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtKey" runat="server" CssClass="form-control" MaxLength="3"  OnTextChanged="txtKey_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtKey" runat="server" ID="rfvtxtKey"
                             Display="Dynamic" Text="Enter Key." ErrorMessage="Enter Key." ValidationGroup="countries" ForeColor="Red" />
                     </div>
@@ -39,7 +39,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="150" />
+                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="150" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true" />
                         <asp:RequiredFieldValidator ControlToValidate="txtDescription" runat="server" ID="rfvtxtDescription"
                             Display="Dynamic" Text="Enter Description." ErrorMessage="Enter Description." ValidationGroup="countries" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtDescription" runat="server"
@@ -58,7 +58,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                       <asp:DropDownList ID="ddlContinent" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                       <asp:DropDownList ID="ddlContinent" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlContinent_SelectedIndexChanged" AutoPostBack="true">
                            <asp:ListItem Text="--Select--" Value="-1"></asp:ListItem>
                            </asp:DropDownList>
                   
@@ -124,9 +124,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="countries"
                         Text="Submit"
                             UseSubmitBehavior="false" 

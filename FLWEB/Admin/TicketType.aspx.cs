@@ -110,5 +110,13 @@ public partial class Admin_TicketType : System.Web.UI.Page
        }
     #endregion
 
-     
+
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

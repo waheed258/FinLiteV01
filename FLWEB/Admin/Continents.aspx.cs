@@ -112,4 +112,12 @@ public partial class Admin_Continents : System.Web.UI.Page
         txtKey.Text = "";
         txtDescription.Text = "";
     }
+    protected void txtKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

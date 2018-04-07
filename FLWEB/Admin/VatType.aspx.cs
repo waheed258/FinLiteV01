@@ -147,4 +147,16 @@ public partial class Admin_VatType : System.Web.UI.Page
 
         }
     }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtVatRate_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlApplicableTo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
