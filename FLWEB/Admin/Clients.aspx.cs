@@ -45,10 +45,10 @@ public partial class Admin_Clients : System.Web.UI.Page
             else
             {
                 string getId = Convert.ToString(Request.QueryString["ClientId"]);
-                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId), true);
 
             }
- 
+
             if (!string.IsNullOrEmpty(Request.QueryString["ClientId"]))
             {
                 int ClientId = Convert.ToInt32(qs);
@@ -1260,19 +1260,25 @@ public partial class Admin_Clients : System.Web.UI.Page
         ds = _objBOUtiltiy.CheckAccCodeExitorNot(AccCode, "Client");
 
         ds.Tables.Add(dt);
-
-
-        if (ds.Tables[0].Rows.Count != 0 || ds.Tables[0].Rows.Count > 0)
+        if (txtAccountNo.Text != "" && ddlClientType.SelectedIndex != 0)
         {
-            lblaccnoerr.Text = "Already Exist";
-            lblaccnoerr.ForeColor = System.Drawing.Color.Red;
-            txtAccountNo.Text = "";
+
+            if (ds.Tables[0].Rows.Count != 0 || ds.Tables[0].Rows.Count > 0)
+            {
+                lblaccnoerr.Text = "Already Exist";
+                lblaccnoerr.ForeColor = System.Drawing.Color.Red;
+                txtAccountNo.Text = "";
+            }
+            else
+            {
+                lblaccnoerr.Text = "Available";
+                lblaccnoerr.ForeColor = System.Drawing.Color.DarkBlue;
+
+            }
         }
         else
         {
-            lblaccnoerr.Text = "Available";
-            lblaccnoerr.ForeColor = System.Drawing.Color.DarkBlue;
-
+            lblaccnoerr.Text = "";
         }
     }
 }

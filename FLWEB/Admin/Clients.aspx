@@ -98,7 +98,7 @@
                     </label>
                 </div>
                 <div class="col-sm-2">
-                    <asp:TextBox ID="txtClientName" runat="server" CssClass="form-control" MaxLength="50" />
+                    <asp:TextBox ID="txtClientName" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtClientName_TextChanged" AutoPostBack="true" />
                     <asp:RequiredFieldValidator ControlToValidate="txtClientName" runat="server" ID="rfvtxtClientName"
                         Display="Dynamic" Text="Enter Client Name." ErrorMessage="Enter Client Name." ValidationGroup="client" ForeColor="Red" />
                 </div>
@@ -195,7 +195,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtTelephoneNo" runat="server" CssClass="form-control" MaxLength="15" />
+                        <asp:TextBox ID="txtTelephoneNo" runat="server" CssClass="form-control" MaxLength="15" OnTextChanged="txtTelephoneNo_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtTelephoneNo" runat="server" ID="rfvtxtTelephoneNo"
                             Display="Dynamic" Text="Enter Telephone No." ErrorMessage="Enter Telephone No." ValidationGroup="client" ForeColor="Red" />
                         <%--<asp:RegularExpressionValidator ControlToValidate="txtTelephoneNo" runat="server" ForeColor="Red"
@@ -240,7 +240,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="75" />
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="75" OnTextChanged="txtEmail_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtEmail" runat="server" ID="rfvtxtEmail"
                             Display="Dynamic" Text="Enter Email Id." ErrorMessage="Enter Email Id." ValidationGroup="client" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtEmail" runat="server"
@@ -1017,9 +1017,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="client"
                         Text="Submit"
                             UseSubmitBehavior="false" 
