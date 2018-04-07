@@ -23,6 +23,7 @@ public partial class Login : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            Session["UserLoginId"] = null;
           //  Session.Abandon();
          //   GetLanguages();
         }

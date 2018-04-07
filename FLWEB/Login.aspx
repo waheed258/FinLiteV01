@@ -28,7 +28,7 @@
                 var ctrl = document.getElementById(val.controltovalidate);
                 if (ctrl != null && ctrl.style != null) {
                     if (!val.isvalid)
-                        ctrl.style.border = '1px solid #a94442';
+                        ctrl.style.border = '1px solid #f7f7f7';
                     else
                         ctrl.style.border = null;
                 }
@@ -115,12 +115,12 @@
                                     autofocus="" ValidationGroup="login"></asp:TextBox>
                                 <asp:RequiredFieldValidator ControlToValidate="txtLoginId" runat="server" ID="rfvtxtLoginId"
                                     ValidationGroup="submit" ErrorMessage="Enter your UserId." Text="Enter your UserId."
-                                    class="validationred" />
+                                     ForeColor="White"  />
                                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" class="form-control"
                                     placeholder="Enter Password" ValidationGroup="submit" CausesValidation="true"></asp:TextBox>
                                 <asp:RequiredFieldValidator ControlToValidate="txtPassword" runat="server" ID="rfvtxtPassword"
                                     ValidationGroup="akki" ErrorMessage="Enter your Password." Text="Enter your Password."
-                                    class="validationred" />
+                                    ForeColor="White"  />
                                 <div>
 
                                     <asp:DropDownList ID="ddlLanguage" runat="server" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true"
@@ -163,14 +163,14 @@
                                 class="form-control placeholder-no-fix" ValidationGroup="prog"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtEmail" runat="server" ID="rfvtxtEmail"
                                 ValidationGroup="prog" ErrorMessage="Enter registered EmailId." Text="Enter registered EmailId."
-                                class="validationred" />
+                                ForeColor="White"  />
                             <p>
                             </p>
                             <asp:TextBox ID="txtLoginId2" runat="server" placeholder="Login Id" autocomplete="off"
                                 class="form-control placeholder-no-fix" ValidationGroup="prog"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtLoginId2" runat="server" ID="rfvtxtLoginId2"
                                 ValidationGroup="prog" ErrorMessage="Enter your login Id." Text="Enter your login Id."
-                                class="validationred" />
+                                ForeColor="White" />
                         </div>
                         <div>
                             <asp:Label ID="labelError2" class="linheight" runat="server" Text=""></asp:Label>
