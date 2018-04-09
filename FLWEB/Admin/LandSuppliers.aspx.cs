@@ -1221,4 +1221,24 @@ public partial class Admin_LandSuppliers : System.Web.UI.Page
 
         }
     }
+    protected void txtSupplierName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void dropStatus_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void dropServiceType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtGiAccount_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void dropPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -2225,6 +2225,10 @@ public partial class Admin_Invoice : System.Web.UI.Page
     {
         ExcusiveAmount();
     }
+    protected void ddlCreditCardType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SerPopupExtender.Show();
+    }
 
     protected void ddlservatType_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -3664,10 +3668,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
 
 
-    protected void ddlCreditCardType_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        SerPopupExtender.Show();
-    }
+  
 }
 
 

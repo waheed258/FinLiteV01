@@ -66,7 +66,7 @@
                                 <label class="control-label" runat="server">Supplier Name (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-2">
-                                <asp:TextBox ID="txtSupplierName" runat="server" CssClass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtSupplierName" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtSupplierName_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtSupplierName" runat="server" ID="rfvtxtSupplierName" ValidationGroup="airsupplier"
                                     ErrorMessage="Enter Supplier Name" Text="Enter Supplier Name" class="validationred" Display="Dynamic" ForeColor="Red" />
                                 <%--<asp:RegularExpressionValidator ControlToValidate="txtSupplierName" runat="server" ForeColor="Red"
@@ -79,7 +79,8 @@
                                 <label class="control-label">Status (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-2">
-                                <asp:DropDownList ID="dropStatus" runat="server" CssClass="form-control select populate" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropStatus" runat="server" CssClass="form-control select populate" 
+                                   OnSelectedIndexChanged="dropStatus_SelectedIndexChanged" AutoPostBack="true" AppendDataBoundItems="true">
                                     <%--<asp:ListItem Text="--Select--" Value="-1" Selected="True"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropStatus" runat="server" ID="rfvdropStatus" ValidationGroup="airsupplier"
@@ -100,7 +101,7 @@
                                 <label class="control-label">Service Type (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropServiceType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropServiceType" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropServiceType_SelectedIndexChanged" AutoPostBack="true">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropServiceType" runat="server" ID="rfvdropServiceType" ValidationGroup="airsupplier"
@@ -494,7 +495,8 @@
                                 <label class="control-label">Payment Method (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropPaymentMethod" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropPaymentMethod" runat="server" CssClass="form-control" 
+                                   OnSelectedIndexChanged="dropPaymentMethod_SelectedIndexChanged" AutoPostBack="true" AppendDataBoundItems="true">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropPaymentMethod" runat="server" ID="rfvdropPaymentMethod" ValidationGroup="airsupplier"
@@ -633,13 +635,12 @@
                         </div>
                     </div>
 
-                </ContentTemplate>
-            </asp:UpdatePanel>
+       
 
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="airsupplier"
                         Text="Submit" 
                             UseSubmitBehavior="false" 
@@ -652,7 +653,8 @@
 
                 </div>
             </div>
-
+         </ContentTemplate>
+            </asp:UpdatePanel>
 
         </div>
     </section>
