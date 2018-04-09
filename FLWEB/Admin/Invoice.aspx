@@ -206,7 +206,7 @@
             }).attr('readonly', 'true');;
 
 
-
+       
 
             $("#ContentPlaceHolder1_txtDate2").datepicker({
                 onSelect: function (selected) {
@@ -401,7 +401,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-2">
-                                <asp:DropDownList ID="ddlInvCosultant" runat="server" CssClass="form-control">
+                                <asp:DropDownList ID="ddlInvCosultant" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlInvCosultant_SelectedIndexChanged" AutoPostBack="true">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="ddlInvCosultant" runat="server" ID="rfvdrpInvCosultant" ValidationGroup="invoice"
                                     ErrorMessage="Select Consultant" Text="Select Consultant" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
@@ -414,7 +414,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-2">
-                                <asp:TextBox ID="txtInvOrder" runat="server" CssClass="form-control" MaxLength="30"  OnTextChanged="txtInvOrder_TextChanged"/>
+                                <asp:TextBox ID="txtInvOrder" runat="server" CssClass="form-control" MaxLength="30"  OnTextChanged="txtInvOrder_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtInvOrder" runat="server" ID="rfvtxtInvOrder" ValidationGroup="invoice"
                                     ErrorMessage="Enter Order Number" Text="Enter Order Number" class="validationred" Display="Dynamic" ForeColor="Red" />
                             </div>
@@ -549,7 +549,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtPnr" runat="server" CssClass="form-control uppercase" MaxLength="6" />
+                                                <asp:TextBox ID="txtPnr" runat="server" CssClass="form-control uppercase" MaxLength="6" OnTextChanged="txtPnr_TextChanged" AutoPostBack="true"/>
                                                 <asp:RequiredFieldValidator ControlToValidate="txtPnr" runat="server" ID="rfvtxtPnr" ValidationGroup="airticket"
                                                     ErrorMessage="Enter Pnr" Text="Enter PNR" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -580,7 +580,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="drpAirPassenger" runat="server" CssClass="form-control">
+                                                <asp:TextBox ID="drpAirPassenger" runat="server" CssClass="form-control" OnTextChanged="drpAirPassenger_TextChanged" AutoPostBack="true">
                                     
                                                 </asp:TextBox>
                                                 <asp:RequiredFieldValidator ControlToValidate="drpAirPassenger" runat="server" ID="rfvdrpAirPassenger" ValidationGroup="airticket"
@@ -820,7 +820,8 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtAirTravelDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD"  BackColor="White"/>
+                                                <asp:TextBox ID="txtAirTravelDate" runat="server" CssClass="form-control" 
+                                                    placeholder="YYYY-MM-DD"  AutoPostBack="true" BackColor="White"/>
                                                 <asp:RequiredFieldValidator ControlToValidate="txtAirTravelDate" runat="server" ID="rfvtxtAirTravelDate" ValidationGroup="airticket"
                                                     ErrorMessage="Select Travel Date" Text="Select Travel Date" class="validationred" Display="Dynamic" ForeColor="Red" />
                                             </div>
@@ -1103,7 +1104,7 @@
                                         </div>
                                         <div class="col-sm-2">
 
-                                            <asp:TextBox ID="txtlandPassName" runat="server" CssClass="form-control" placeholder="Passenger Name" MaxLength="50" />
+                                            <asp:TextBox ID="txtlandPassName" runat="server" CssClass="form-control" placeholder="Passenger Name" MaxLength="50" OnTextChanged="txtlandPassName_TextChanged" AutoPostBack="true" />
                                             <asp:RequiredFieldValidator ControlToValidate="txtlandPassName" runat="server" ID="rfvtxtlandPassName" ValidationGroup="landsupplier"
                                                 ErrorMessage="Enter Passenger Name" Text="Enter Passenger Name" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -1144,7 +1145,8 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <asp:TextBox ID="txtlandBookingRef" runat="server" CssClass="form-control" placeholder="Book ref NO" MaxLength="50" />
+                                            <asp:TextBox ID="txtlandBookingRef" runat="server" CssClass="form-control" placeholder="Book ref NO"
+                                                OnTextChanged="txtlandBookingRef_TextChanged" AutoPostBack="true" MaxLength="50" />
                                             <asp:RequiredFieldValidator ControlToValidate="txtlandBookingRef" runat="server" ID="rfvtxtlandBookingRef" ValidationGroup="landsupplier"
                                                 ErrorMessage="Enter Booking Ref No" Text="Enter Booking Ref No" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -1496,7 +1498,8 @@
                                                     Type<span class="style1">*</span></label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:DropDownList ID="ddlservatType" runat="server" Class="form-control" AppendDataBoundItems="true" AutoPostBack="true" >
+                                                <asp:DropDownList ID="ddlservatType" runat="server" Class="form-control" AppendDataBoundItems="true"
+                                                    OnSelectedIndexChanged="ddlservatType_SelectedIndexChanged" AutoPostBack="true" >
                                                  
                                                 </asp:DropDownList>
                                                 <asp:DropDownList ID="ddlServiceType" runat="server" Class="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlServiceType_SelectedIndexChanged">
@@ -1515,7 +1518,8 @@
 
                                             <div class="col-sm-2">
 
-                                                <asp:DropDownList ID="ddlSoureceref" runat="server" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnTextChanged="ddlSoureceref_TextChanged">
+                                                <asp:DropDownList ID="ddlSoureceref" runat="server" CssClass="form-control" AppendDataBoundItems="true"
+                                                     AutoPostBack="true" OnTextChanged="ddlSoureceref_TextChanged">
                                                     <%--<asp:ListItem Text="--Select TicketNo--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>
                                             </div>
@@ -1544,7 +1548,8 @@
                                                     Travel Date<span class="style1">*</span></label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtSerTravelDate" runat="server" CssClass="form-control" placeholder="YYYY-MM-DD" BackColor="White" />
+                                                <asp:TextBox ID="txtSerTravelDate" runat="server"
+                                                    OnTextChanged="txtSerTravelDate_TextChanged" AutoPostBack="true" CssClass="form-control" placeholder="YYYY-MM-DD" BackColor="White" />
                                                 <%--<asp:TextBox ID="txtSerTravelDate" runat="server" CssClass="form-control" />--%>
 
                                                 <asp:RequiredFieldValidator ControlToValidate="txtSerTravelDate" runat="server" ID="rfvtxtSerTravelDate"
@@ -1665,7 +1670,8 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:DropDownList ID="ddlCreditCardType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                                <asp:DropDownList ID="ddlCreditCardType" runat="server" CssClass="form-control" 
+                                                   OnSelectedIndexChanged="ddlCreditCardType_SelectedIndexChanged" AutoPostBack="true" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select Type--" Value="-1"></asp:ListItem>--%>
                                                 </asp:DropDownList>
 
@@ -1699,7 +1705,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <asp:TextBox ID="txtTASFMPD" runat="server" class="form-control" />
+                                                <asp:TextBox ID="txtTASFMPD" runat="server" class="form-control" OnTextChanged="txtTASFMPD_TextChanged" AutoPostBack="true" />
                                                 <asp:RequiredFieldValidator ControlToValidate="txtTASFMPD" runat="server" ID="rfvtxtTASFMPD"
                                                     ValidationGroup="servicefee" ErrorMessage="Enter TASF MPD" Text="Enter TASFMPD" ForeColor="red" Display="Dynamic" />
 
@@ -1710,9 +1716,9 @@
 
 
                                     <div class="form-group">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-4">
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <asp:Button runat="server" ID="SerSubmit" class="btn btn-primary"  ValidationGroup="servicefee"
                                                 Text="Submit" 
                                                     UseSubmitBehavior="false" 
@@ -1788,13 +1794,14 @@
 
                                             <div class="col-sm-3">
 
-                                                <asp:DropDownList ID="ddlPassengerNames" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                                <asp:DropDownList ID="ddlPassengerNames" runat="server" CssClass="form-control"
+                                                    OnSelectedIndexChanged="ddlPassengerNames_SelectedIndexChanged" AutoPostBack="true" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select Passenger Name--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>
-                                            </div>
+                                         
                                             <asp:RequiredFieldValidator ControlToValidate="ddlPassengerNames" runat="server" ID="rfvddlPassengerNames" ValidationGroup="generalcharge"
                                                 ErrorMessage="Select Passenger Name" Text="Select Passenger Name" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
-
+                                               </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -1815,7 +1822,8 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:DropDownList ID="ddlCrdCardType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                                <asp:DropDownList ID="ddlCrdCardType" runat="server" CssClass="form-control"
+                                                    OnSelectedIndexChanged="ddlCrdCardType_SelectedIndexChanged" AutoPostBack="true" AppendDataBoundItems="true">
                                                     <%--<asp:ListItem Text="--Select CreditCard--" Value="-1" Selected="True"></asp:ListItem>--%>
                                                 </asp:DropDownList>
                                                 <asp:RequiredFieldValidator ControlToValidate="ddlCrdCardType" runat="server" ID="rfvddlCrdCardType" ValidationGroup="generalcharge"

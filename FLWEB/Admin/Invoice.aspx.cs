@@ -67,6 +67,15 @@ public partial class Admin_Invoice : System.Web.UI.Page
         BindClientNames();
     }
 
+    protected void txtInvOrder_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlInvCosultant_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
     protected void drpInvClientName_TextChanged(object sender, EventArgs e)
     {
         BindInvoiceMessage();
@@ -1350,6 +1359,16 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
     }
 
+    protected void drpAirPassenger_TextChanged(object sender, EventArgs e)
+    {
+        VASPopupExtender.Show();
+    }
+    protected void txtPnr_TextChanged(object sender, EventArgs e)
+    {
+        VASPopupExtender.Show();
+    }
+
+   
     protected void ddlAirService_SelectedIndexChanged(object sender, EventArgs e)
     {
         DataTable dt = (DataTable)ViewState["AllCommissionTypes_GetComPercentage"];
@@ -1771,6 +1790,15 @@ public partial class Admin_Invoice : System.Web.UI.Page
         AirticketClear();
         btnAirSubmit.Text = "Submit";
     }
+
+    protected void ddlPassengerNames_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GenPopupExtender.Show();
+    }
+    protected void ddlCrdCardType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GenPopupExtender.Show();
+    }
     protected void txtUnits_TextChanged(object sender, EventArgs e)
     {
         try
@@ -2030,6 +2058,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 ddlCreditCardType.DataBind();
                 ddlCreditCardType.Items.Insert(0, new ListItem("--Select--", "0"));
             }
+         
         }
         catch (Exception ex)
         {
@@ -2195,6 +2224,19 @@ public partial class Admin_Invoice : System.Web.UI.Page
     protected void txtSerClientTotal_TextChanged(object sender, EventArgs e)
     {
         ExcusiveAmount();
+    }
+
+    protected void ddlservatType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SerPopupExtender.Show();
+    }
+    protected void txtTASFMPD_TextChanged(object sender, EventArgs e)
+    {
+        SerPopupExtender.Show();
+    }
+    protected void txtSerTravelDate_TextChanged(object sender, EventArgs e)
+    {
+        SerPopupExtender.Show();
     }
     protected void ddlSoureceref_TextChanged(object sender, EventArgs e)
     {
@@ -2583,7 +2625,16 @@ public partial class Admin_Invoice : System.Web.UI.Page
     protected void txtlandTotalIncl_TextChanged(object sender, EventArgs e)
     {
 
+        landPopExtender.Show();
+    }
 
+    protected void txtlandPassName_TextChanged(object sender, EventArgs e)
+    {
+        landPopExtender.Show();
+    }
+    protected void txtlandBookingRef_TextChanged(object sender, EventArgs e)
+    {
+        landPopExtender.Show();
     }
     protected void txtlandTotalExcl_TextChanged(object sender, EventArgs e)
     {
@@ -3607,9 +3658,15 @@ public partial class Admin_Invoice : System.Web.UI.Page
             VASPopupExtender.Show();
         }
     }
-    protected void txtInvOrder_TextChanged(object sender, EventArgs e)
-    {
 
+
+
+
+
+
+    protected void ddlCreditCardType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SerPopupExtender.Show();
     }
 }
 
