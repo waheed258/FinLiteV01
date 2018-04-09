@@ -642,7 +642,11 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
                     gvCustomers.DataSource = null;
                     gvCustomers.DataBind();
                     lblSuppOpenAmt.Text = "";
-                    lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Invoice records not found for this client.");
+                    //lblMsg.Text = _objBOUtiltiy.ShowMessage("info", "Info", "Invoice records not found for this client.");
+
+                    string script = string.Format("alert('Please  Select The Valid Account No.');");
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(System.Web.UI.Page), "redirect", script, true);
+                    ddlAccountNo.SelectedIndex = 0;
                 }
                 //if (objDsInvLst.Tables[1].Rows.Count > 0)
                 //{
