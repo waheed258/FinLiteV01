@@ -242,7 +242,7 @@
                                 <asp:BoundField DataField="consultantName" HeaderText="Consultant Name" />
                                 <asp:BoundField DataField="InvOrder" HeaderText="Order No" />
                                 <asp:BoundField DataField="InvoiceTotal" HeaderText="Invoice Total" ItemStyle-HorizontalAlign="Right" />
-                                 <asp:BoundField DataField="receiptStatus" HeaderText="Receipt Status"  />
+
                                 <asp:TemplateField HeaderText="Sending Options">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click" title="Mail" />
@@ -847,7 +847,7 @@
                                     </div>
 
                                     <div class="col-sm-2">
-                                        <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control" OnTextChanged="txtSourceRef_TextChanged" AutoPostBack="true"></asp:TextBox>
                                         <asp:RequiredFieldValidator ControlToValidate="txtSourceRef" runat="server" ID="rfvtxtSourceRef" ValidationGroup="rct"
                                             ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
                                     </div>
@@ -884,7 +884,7 @@
                                             Receipt Type<span class="style1">*</span></label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control">
+                                        <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlReceiptType_SelectedIndexChanged" AutoPostBack="true">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ControlToValidate="ddlReceiptType" runat="server" ID="rfvddlReceiptType" ValidationGroup="rct"
                                             ErrorMessage="Select Receipt Type" Text="Select Receipt Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />

@@ -234,5 +234,17 @@ public partial class Admin_Airports : System.Web.UI.Page
     } 
 
     #endregion
-  
+
+    protected void txtAirKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtAirportName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void dropCity_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

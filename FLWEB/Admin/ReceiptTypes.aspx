@@ -8,7 +8,7 @@
     </style>
      <script>
 
-         $(document).ready(function () {
+        <%-- $(document).ready(function () {
              DrpSearch();
              var prm = Sys.WebForms.PageRequestManager.getInstance();
              prm.add_endRequest(function () {
@@ -21,7 +21,7 @@
              $('#<%= dropDepMethod.ClientID %>').select2();
             $('#<%= dropBankAccount.ClientID %>').select2();
             $('#<%= dropCreditType.ClientID %>').select2();
-        };
+        };--%>
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -67,7 +67,7 @@
                                 <label class="control-label">Description(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtDescription" runat="server" Cssclass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtDescription" runat="server" Cssclass="form-control" MaxLength="50" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtDescription" runat="server" ID="rfvtxtDescription" ValidationGroup="receipt"
                                     ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                                  <asp:RegularExpressionValidator ControlToValidate="txtDescription" runat="server" ForeColor="Red"
@@ -95,7 +95,7 @@
                                 <label class="control-label">Bank Account(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropBankAccount" runat="server" Cssclass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropBankAccount" runat="server" Cssclass="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dropBankAccount_SelectedIndexChanged">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropBankAccount" runat="server" ID="rfvdropBankAccount" ValidationGroup="receipt"
@@ -106,7 +106,7 @@
                                 <label class="control-label">C/Card Type(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropCreditType" runat="server" Cssclass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropCreditType" runat="server" Cssclass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropCreditType_SelectedIndexChanged" AutoPostBack="true">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropCreditType" runat="server" ID="rfvdropCreditType" ValidationGroup="receipt"
@@ -123,12 +123,10 @@
                         </div>
                     </div>
 
-                </ContentTemplate>
-            </asp:UpdatePanel>
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="receipt"
                         Text="Submit"
                             UseSubmitBehavior="false" 
@@ -141,6 +139,8 @@
                 </div>
             </div>
 
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
         </div>
     </section>

@@ -44,7 +44,7 @@
                         Name<span class="style1">*</span></label>
                 </div>
                 <div class="col-sm-2">
-                      <asp:TextBox ID="txtchartacName" runat="server" class="form-control" />
+                      <asp:TextBox ID="txtchartacName" runat="server" class="form-control" OnTextChanged="txtchartacName_TextChanged" AutoPostBack="true"/>
                     <asp:RequiredFieldValidator ID="rfvcName" runat="server" ControlToValidate="txtchartacName" ForeColor="Red" Display="Dynamic" ErrorMessage=" Enter Name" ValidationGroup="accounts"></asp:RequiredFieldValidator>
                   
                 </div>
@@ -89,7 +89,7 @@
               
                     <div class="col-sm-1">
                
-          <asp:TextBox ID="txtCharAcCommCode" runat="server" class="form-control"  ReadOnly="true"/>
+          <asp:TextBox ID="txtCharAcCommCode" runat="server" class="form-control"  ReadOnly="true" OnTextChanged="txtCharAcCommCode_TextChanged" AutoPostBack="true"/>
                          </div>
                        <div class="col-sm-2">
                      <asp:TextBox ID="txtCharAcountCode" runat="server" class="form-control" OnTextChanged="txtCharAcountCode_TextChanged" AutoPostBack="true" />
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-sm-3">
                           
-                             <asp:DropDownList ID="ddlCategory"  runat="server" CssClass="form-control">
+                             <asp:DropDownList ID="ddlCategory"  runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" AutoPostBack="true">
                                  <%--<asp:ListItem Text="--Select Category--" Value="-1" Selected="True"></asp:ListItem>--%>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="rfvcategory" runat="server" ControlToValidate="ddlCategory" ErrorMessage=" Select Category" Display="Dynamic" ForeColor="Red" ValidationGroup="accounts" InitialValue="0"></asp:RequiredFieldValidator>
@@ -130,7 +130,7 @@
                          </div>
                        <div class="col-sm-2">
                    
-                             <asp:DropDownList ID="ddlCurrency" runat="server" CssClass="form-control">
+                             <asp:DropDownList ID="ddlCurrency" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCurrency_SelectedIndexChanged" AutoPostBack="true">
                               
                             </asp:DropDownList>
                            <asp:RequiredFieldValidator ID="rfvCurrency" runat="server" ControlToValidate="ddlCurrency" ErrorMessage="Select Currency" ForeColor="Red" Display="Dynamic" InitialValue="0" ValidationGroup="accounts"></asp:RequiredFieldValidator>
@@ -138,9 +138,7 @@
                     </div>
                 </div>
 
-              </ContentTemplate>
-                </asp:UpdatePanel>
-
+            
             <br />
             <div class="form-group">
                 <div class="col-sm-5">
@@ -159,7 +157,9 @@
                 </div>
             </div>
 
-           
+             </ContentTemplate>
+                </asp:UpdatePanel>
+
         </div>
 
          

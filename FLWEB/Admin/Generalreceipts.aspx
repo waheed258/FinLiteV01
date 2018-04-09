@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-sm-2">
 
-                            <asp:DropDownList ID="ddlGRFmAccCode" runat="server" CssClass="form-control" AutoPostBack="true" >
+                            <asp:DropDownList ID="ddlGRFmAccCode" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlGRFmAccCode_SelectedIndexChanged">
                             </asp:DropDownList>
                            <asp:RequiredFieldValidator ID="rfvaccountfrom" ErrorMessage="Select from Account" Display="Dynamic" ControlToValidate="ddlGRFmAccCode" runat="server" ValidationGroup="GeneralReceipts" InitialValue="0" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-sm-2">
                         
-                            	  <asp:DropDownList ID="ddlGRToAccCode"  runat="server" CssClass="form-control" AutoPostBack="true" >
+                            	  <asp:DropDownList ID="ddlGRToAccCode"  runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlGRToAccCode_SelectedIndexChanged">
                             </asp:DropDownList>
                              <asp:RequiredFieldValidator ID="rfvtoAccount" ErrorMessage="Select to Account" Display="Dynamic" ControlToValidate="ddlGRToAccCode" runat="server" ValidationGroup="GeneralReceipts" InitialValue="0" ForeColor="Red"></asp:RequiredFieldValidator>
                            
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-sm-2">
 
-                            <asp:TextBox ID="txtGRPaymentAmount" runat="server"  CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtGRPaymentAmount" runat="server"  CssClass="form-control" OnTextChanged="txtGRPaymentAmount_TextChanged" AutoPostBack="true"></asp:TextBox>
                         </div>
                          <asp:RequiredFieldValidator ID="rfvAmount" ControlToValidate="txtGRPaymentAmount" Display="Dynamic" runat="server" ValidationGroup="GeneralReceipts" ErrorMessage="Please Enter Amount" ForeColor="Red"></asp:RequiredFieldValidator>
 

@@ -269,4 +269,24 @@ public partial class MainAccounts : System.Web.UI.Page
 
         }
     }
+    protected void txtMainAccName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlCurrency_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlMainAcType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void DropDownCategory_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

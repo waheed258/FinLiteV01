@@ -15,7 +15,7 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
     BAReceiptType objBAReceipt = new BAReceiptType();
     BOUtiltiy _BOUtility = new BOUtiltiy();
 
-
+    #region Events
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -46,7 +46,20 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
     {
         InsertUpdateReceipt();
     }
+    protected void dropCreditType_SelectedIndexChanged(object sender, EventArgs e)
+    {
 
+    }
+    protected void dropBankAccount_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+#endregion
     private void InsertUpdateReceipt()
     {
         try
@@ -242,4 +255,5 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
 
         }
     }
+ 
 }

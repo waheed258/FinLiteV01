@@ -249,4 +249,20 @@ public partial class Finance_charteredaccountants : System.Web.UI.Page
         }
 
     }
+    protected void txtchartacName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtCharAcCommCode_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlCurrency_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

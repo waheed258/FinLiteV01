@@ -29,7 +29,7 @@
                                 <label class="control-label">Key(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtCityKey" runat="server" CssClass="form-control" MaxLength="5" />
+                                <asp:TextBox ID="txtCityKey" runat="server" CssClass="form-control" MaxLength="5" OnTextChanged="txtCityKey_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtCityKey" runat="server" ID="rfvtxtCityKey" ValidationGroup="city"
                                     ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -40,7 +40,7 @@
                                 <label class="control-label">Description(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtDescription" runat="server" ID="rfvtxtDescription" ValidationGroup="city"
                                     ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                                  <asp:RegularExpressionValidator ControlToValidate="txtDescription" runat="server" ForeColor="Red"
@@ -58,7 +58,8 @@
                                 <label class="control-label">Country (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropCountry" runat="server" CssClass="form-control" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dropCountry_SelectedIndexChanged">
+                                <asp:DropDownList ID="dropCountry" runat="server" CssClass="form-control" AppendDataBoundItems="true" 
+                                    AutoPostBack="true" OnSelectedIndexChanged="dropCountry_SelectedIndexChanged">
                                     <asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>
 
                                 </asp:DropDownList>
@@ -71,7 +72,7 @@
                                 <label class="control-label">Province (<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropState" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropState_SelectedIndexChanged" AutoPostBack="true">
                                     <asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropState" runat="server" ID="rfvdropState" ValidationGroup="city"
@@ -94,13 +95,12 @@
                             </div>
                         </div>
                     
-                </ContentTemplate>
-            </asp:UpdatePanel>
+             
             <div class="form-group"></div>
             <div class="form-group">
                 <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="city"
                         Text="Submit"
                             UseSubmitBehavior="false" 
@@ -113,7 +113,8 @@
                 </div>
             </div>
 
-
+   </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </section>
 </asp:Content>

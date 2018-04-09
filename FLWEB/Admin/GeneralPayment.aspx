@@ -136,7 +136,7 @@
                         </div>
                         <div class="col-sm-2">
 
-                            <asp:TextBox ID="txtpytmAmount" runat="server"  CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtpytmAmount" runat="server"  CssClass="form-control" OnTextChanged="txtpytmAmount_TextChanged" AutoPostBack="true"></asp:TextBox>
 
 				             <asp:RequiredFieldValidator ControlToValidate="txtpytmAmount" runat="server" ID="rfvtxtpytmAmount" ValidationGroup="rct"
                                 ErrorMessage="Enter Amount" Text="Enter Amount" class="validationred" Display="Dynamic" ForeColor="Red"/>

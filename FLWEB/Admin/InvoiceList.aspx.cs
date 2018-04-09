@@ -1376,5 +1376,13 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     {
         ReceiptPopupExtender.Show();
     }
+    protected void txtSourceRef_TextChanged(object sender, EventArgs e)
+    {
+        ReceiptPopupExtender.Show();
+    }
+    protected void ddlReceiptType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ReceiptPopupExtender.Show();
+    }
 }
 

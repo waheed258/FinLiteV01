@@ -30,7 +30,7 @@
                         <label class="control-label">Branch Code(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtBranchCode" runat="server" CssClass="form-control" MaxLength="3" />
+                        <asp:TextBox ID="txtBranchCode" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtBranchCode_TextChanged" AutoPostBack="true" />
                         <asp:RequiredFieldValidator ControlToValidate="txtBranchCode" runat="server" ID="rfvtxtBranchCode" ValidationGroup="branch"
                             ErrorMessage="Enter Branch Code" Text="Enter Branch Code" class="validationred" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -39,7 +39,7 @@
                         <label class="control-label">Branch Name(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtBranchName" runat="server" CssClass="form-control" MaxLength="50" />
+                        <asp:TextBox ID="txtBranchName" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtBranchName_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtBranchName" runat="server" ID="rfvtxtBranchName" ValidationGroup="branch"
                             ErrorMessage="Enter Branch Name" Text="Enter Branch Name" class="validationred" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -69,7 +69,7 @@
                         <label class="control-label">Telephone Number(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtTelephoneNumber" runat="server" CssClass="form-control" MaxLength="30" />
+                        <asp:TextBox ID="txtTelephoneNumber" runat="server" CssClass="form-control" MaxLength="30" OnTextChanged="txtTelephoneNumber_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtTelephoneNumber" runat="server" ID="rfvtxtTelephoneNumber" ValidationGroup="branch"
                             ErrorMessage="Enter Telephone Number" Text="Enter Telephone Number" class="validationred" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -81,7 +81,7 @@
                          <label class="control-label">Fax Number(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                         <asp:TextBox ID="txtFaxNumber" runat="server" CssClass="form-control" MaxLength="30" />
+                         <asp:TextBox ID="txtFaxNumber" runat="server" CssClass="form-control" MaxLength="30" OnTextChanged="txtFaxNumber_TextChanged" AutoPostBack="true" />
                          <asp:RequiredFieldValidator ControlToValidate="txtFaxNumber" runat="server" ID="rfvtxtFaxNumber" ValidationGroup="branch"
                             ErrorMessage="Enter Fax Number" Text="Enter Fax Number" class="validationred" Display="Dynamic" ForeColor="Red" />
                     </div>
@@ -101,7 +101,7 @@
                         <label class="control-label">Email Address(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" MaxLength="75" />
+                        <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" MaxLength="75" OnTextChanged="txtEmailAddress_TextChanged" AutoPostBack="true"/>
                          <asp:RequiredFieldValidator ControlToValidate="txtEmailAddress" runat="server" ID="rfvtxtEmailAddress" ValidationGroup="branch"
                             ErrorMessage="Enter Email Address" Text="Enter Email Address" class="validationred" Display="Dynamic" ForeColor="Red" />
                         <asp:RegularExpressionValidator ControlToValidate="txtEmailAddress" runat="server" ID="revtxtEmailAddress"
@@ -131,7 +131,7 @@
                         <label class="control-label">City(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlCity" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlCity" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCity_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ControlToValidate="ddlCity" runat="server" ID="rfvddlCity"
@@ -215,12 +215,11 @@
                     </div>
                 </div>
             </div>
-            </ContentTemplate>
-            </asp:UpdatePanel>
+         
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="branch"
                         Text="Submit" 
                             UseSubmitBehavior="false" 
@@ -232,6 +231,9 @@
 
                 </div>
             </div>
+
+                       </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </section>
 </asp:Content>

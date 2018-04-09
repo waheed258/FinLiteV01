@@ -92,7 +92,7 @@
 
                             <div class="col-sm-3">
 
-                                <asp:TextBox ID="txtMainAccName" runat="server" class="form-control" />
+                                <asp:TextBox ID="txtMainAccName" runat="server" class="form-control" OnTextChanged="txtMainAccName_TextChanged" AutoPostBack="true" />
                                 <asp:RequiredFieldValidator ID="rfvmainAccName" runat="server" ControlToValidate="txtMainAccName" ValidationGroup="mainAccount" ErrorMessage="Please Enter Account Name" Display="Dynamic" ForeColor="Red"> </asp:RequiredFieldValidator>
                             </div>
 
@@ -109,7 +109,8 @@
                             </div>
                             <div class="col-sm-3">
 
-                                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control" AutoPostBack="true">
+                                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-control"
+                                    OnSelectedIndexChanged="ddlDepartment_SelectedIndexChanged" AutoPostBack="true">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvddlDepartment" runat="server" InitialValue="0" ControlToValidate="ddlDepartment" ValidationGroup="mainAccount" ErrorMessage="Please Select Department" Display="Dynamic" ForeColor="Red"> </asp:RequiredFieldValidator>
                             </div>
@@ -128,7 +129,7 @@
                             </div>
                             <div class="col-sm-2">
 
-                                <asp:DropDownList ID="ddlCurrency" runat="server" CssClass="form-control">
+                                <asp:DropDownList ID="ddlCurrency" runat="server" OnSelectedIndexChanged="ddlCurrency_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvddlCurrency" runat="server" InitialValue="0" ControlToValidate="ddlCurrency" ValidationGroup="mainAccount" ErrorMessage="Please Select Currency" Display="Dynamic" ForeColor="Red"> </asp:RequiredFieldValidator>
                             </div>
@@ -143,7 +144,7 @@
                             </div>
                             <div class="col-sm-3">
 
-                                <asp:DropDownList ID="ddlMainAcType" runat="server" CssClass="form-control" AutoPostBack="true">
+                                <asp:DropDownList ID="ddlMainAcType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlMainAcType_SelectedIndexChanged" AutoPostBack="true">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="rfvddlMainAcType" runat="server" InitialValue="0" ControlToValidate="ddlMainAcType" ValidationGroup="mainAccount" ErrorMessage="Please Select Currency" Display="Dynamic" ForeColor="Red"> </asp:RequiredFieldValidator>
 
@@ -156,7 +157,7 @@
                             </div>
                             <div class="col-sm-3">
 
-                                <asp:DropDownList ID="DropDownCategory" runat="server" CssClass="form-control">
+                                <asp:DropDownList ID="DropDownCategory" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropDownCategory_SelectedIndexChanged" AutoPostBack="true">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorCategory" runat="server" InitialValue="0" ControlToValidate="DropDownCategory" ValidationGroup="mainAccount" ErrorMessage="Please Select Category" Display="Dynamic" ForeColor="Red"> </asp:RequiredFieldValidator>
 
@@ -164,8 +165,7 @@
                         </div>
                     </div>
 
-                </ContentTemplate>
-            </asp:UpdatePanel>
+             
 
             <br />
             <div class="form-group">
@@ -185,7 +185,8 @@
                 </div>
             </div>
 
-
+   </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
 
 

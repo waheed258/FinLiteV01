@@ -317,7 +317,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control" OnTextChanged="txtSourceRef_TextChanged" AutoPostBack="true"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtSourceRef" runat="server" ID="rfvtxtSourceRef" ValidationGroup="rct"
                                 ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
                         </div>
@@ -342,7 +342,7 @@
                                 Division<span class="style1">*</span></label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlDivision_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDivision" ValidationGroup="rct"
                                 ErrorMessage="Select Division" Text="Select Division" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
@@ -355,7 +355,7 @@
                                 Payment Type<span class="style1">*</span></label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlPaymentType" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlPaymentType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlPaymentType_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlPaymentType" runat="server" ID="rfvddlPaymentType" ValidationGroup="rct"
                                 ErrorMessage="Select Payment Type" Text="Select Payment Type" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
@@ -367,7 +367,7 @@
                                 From Account No<span class="style1">*</span></label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlAutoDepositeAccount" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlAutoDepositeAccount_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlAutoDepositeAccount" runat="server" ID="rfvddlAutoDepositeAccount" ValidationGroup="rct"
                                 ErrorMessage="Select From Account" Text="Select From Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />

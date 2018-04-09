@@ -259,6 +259,7 @@ public partial class Admin_GeneralPayment : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         InsertGeneralPayment();
+       // System.Threading.Thread.Sleep(2000);
 
     }
    
@@ -269,5 +270,9 @@ public partial class Admin_GeneralPayment : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("GeneralPaymentList.aspx");
+    }
+    protected void txtpytmAmount_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }

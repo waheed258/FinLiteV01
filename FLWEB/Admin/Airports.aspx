@@ -47,7 +47,7 @@
                                 <label class="control-label">Key(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtAirKey" runat="server" CssClass="form-control" MaxLength="3" />
+                                <asp:TextBox ID="txtAirKey" runat="server" CssClass="form-control" MaxLength="3" OnTextChanged="txtAirKey_TextChanged" AutoPostBack="true"/>
                                 <asp:RequiredFieldValidator ControlToValidate="txtAirKey" runat="server" ID="rfvtxtAirKey" ValidationGroup="airport"
                                     ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -66,7 +66,7 @@
                                 <label class="control-label">Name(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtAirportName" runat="server" CssClass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtAirportName" runat="server" CssClass="form-control" MaxLength="50" OnTextChanged="txtAirportName_TextChanged" AutoPostBack="true" />
                                 <asp:RequiredFieldValidator ControlToValidate="txtAirportName" runat="server" ID="rfvtxtAirportName" ValidationGroup="airport"
                                     ErrorMessage="Enter Name" Text="Enter Name" class="validationred" Display="Dynamic" ForeColor="Red" />
                                  <asp:RegularExpressionValidator ControlToValidate="txtAirportName" runat="server" ForeColor="Red"
@@ -114,7 +114,7 @@
 
                          </div>
                            <div class="col-sm-3">
-                                <asp:DropDownList ID="dropCity" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropCity" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropCity_SelectedIndexChanged" AutoPostBack="true">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ControlToValidate="dropCity" runat="server" ID="rfvdropCity" ValidationGroup="airport"
@@ -136,13 +136,12 @@
                             </div>
                         </div>
 
-                </ContentTemplate>
-            </asp:UpdatePanel>
+            
             <div class="form-group"></div>
             <div class="form-group">
                 <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" CssClass="btn btn-success" ValidationGroup="airport"
                         Text="Submit"
                             UseSubmitBehavior="false" 
@@ -154,7 +153,8 @@
 
                 </div>
             </div>
-
+    </ContentTemplate>
+            </asp:UpdatePanel>
 
         </div>
     </section>

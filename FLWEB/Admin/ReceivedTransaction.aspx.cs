@@ -808,6 +808,18 @@ public partial class Admin_ReceivedTransaction : System.Web.UI.Page
         }
     }
 
-   
+
+    protected void txtSourceRef_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlDivision_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlReceiptType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
  #endregion PrivateMethods

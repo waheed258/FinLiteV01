@@ -1025,5 +1025,21 @@ public partial class Admin_LatestPaymentTransaction : System.Web.UI.Page
 
     #endregion GridEvents
 
- 
+
+    protected void txtSourceRef_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlDivision_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlPaymentType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlAutoDepositeAccount_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

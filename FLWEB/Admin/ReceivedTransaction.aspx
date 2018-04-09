@@ -128,7 +128,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtSourceRef" runat="server" CssClass="form-control" OnTextChanged="txtSourceRef_TextChanged" AutoPostBack="true"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtSourceRef" runat="server" ID="rfvtxtSourceRef" ValidationGroup="rct"
                                 ErrorMessage="Enter SourceRef" Text="Enter SourceRef" class="validationred" Display="Dynamic" ForeColor="Red" />
                         </div>
@@ -152,7 +152,7 @@
                                 Division<span class="style1">*</span></label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlDivision_SelectedIndexChanged" AutoPostBack="true">
                               
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlDivision" runat="server" ID="rfvddlDevission" ValidationGroup="rct"
@@ -166,7 +166,7 @@
                                 Receipt Type<span class="style1">*</span></label>
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlReceiptType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlReceiptType_SelectedIndexChanged" AutoPostBack="true">
                                
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ControlToValidate="ddlReceiptType" runat="server" ID="rfvddlReceiptType" ValidationGroup="rct"

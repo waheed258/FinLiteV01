@@ -331,7 +331,7 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
     }
     protected void btnDepositSave_Click(object sender, EventArgs e)
     {
-
+        btnDepositSave.Enabled = false;
 
         DataTable leftGirdRecords = (DataTable)ViewState["getLeftGirdRecords"];
         // int rows = leftGirdRecords.Rows.Count;
@@ -515,5 +515,13 @@ public partial class Admin_DepositTransaction : System.Web.UI.Page
         txtDpstSourceRef.Text = "";
         txtDpstComments.Text = "";
         Response.Redirect("DepositTransaction.aspx");
+    }
+    protected void txtDpstSourceRef_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlDepositAcoount_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }

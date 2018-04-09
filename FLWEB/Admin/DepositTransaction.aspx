@@ -82,7 +82,7 @@
                                 Source Ref No<span class="Error">*</span></label>
                         </div>
                         <div class="col-sm-3">
-                            <asp:TextBox ID="txtDpstSourceRef" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtDpstSourceRef" runat="server" CssClass="form-control" OnTextChanged="txtDpstSourceRef_TextChanged" AutoPostBack="true"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="txtDpstSourceRef" runat="server" ID="rfvtxtDpstSourceRef" ValidationGroup="deposit"
                                 ErrorMessage="Enter Source Ref No" Text= "Enter Source Ref No" class="validationred" Display="Dynamic" ForeColor="Red" />
                         </div>
@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="col-sm-3">
-                             <asp:DropDownList ID="ddlDepositAcoount" runat="server"  CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+                             <asp:DropDownList ID="ddlDepositAcoount" runat="server"  CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlDepositAcoount_SelectedIndexChanged"></asp:DropDownList>
                          
                                       <asp:RequiredFieldValidator ControlToValidate="ddlDepositAcoount" runat="server" ID="rfvddlDepositAcoount" ValidationGroup="deposit"
                                 ErrorMessage="Select Deposit Account" Text="Select Deposit Account" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0"/>

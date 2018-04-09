@@ -241,4 +241,16 @@ public partial class Admin_Generalreceipts : System.Web.UI.Page
     {
         Response.Redirect("GeneralreceiptsList.aspx");
     }
+    protected void ddlGRFmAccCode_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlGRToAccCode_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtGRPaymentAmount_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

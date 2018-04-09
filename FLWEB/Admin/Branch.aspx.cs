@@ -13,6 +13,7 @@ public partial class Admin_Branch : System.Web.UI.Page
     EMBranch objEMBranch = new EMBranch();
     BOUtiltiy _objBOUtility = new BOUtiltiy();
     BABranch objBABranch = new BABranch();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -36,6 +37,30 @@ public partial class Admin_Branch : System.Web.UI.Page
                 getBranchDetails(branchid);
             }
         }
+    }
+    protected void txtBranchCode_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtBranchName_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtTelephoneNumber_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtFaxNumber_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtEmailAddress_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
     protected void cmdSubmit_Click(object sender, EventArgs e)
     {
@@ -226,4 +251,5 @@ public partial class Admin_Branch : System.Web.UI.Page
 
     #endregion
 
+ 
 }

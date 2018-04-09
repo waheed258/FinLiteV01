@@ -180,4 +180,16 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
         dropCountry.SelectedValue = "-1";
         dropState.SelectedValue = "-1";
     }
+    protected void txtCityKey_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void dropState_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
