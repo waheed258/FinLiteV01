@@ -395,7 +395,7 @@
                         <div class="col-sm-2">
 
                             <label class="control-label">
-                                Account No</label>
+                                Account No <span class="style1">*</span></label>
                         </div>
                         <div class="col-sm-2">
                             <%-- <asp:DropDownList ID="ddlAccountNo" runat="server"  multiple="multiple" CssClass="multiselect" AutoPostBack="true" OnSelectedIndexChanged="ddlAccountNo_SelectedIndexChanged">
@@ -405,8 +405,8 @@
                             <asp:Label ID="lblMainAcc" runat="server" CssClass="form-control" Visible="false"></asp:Label>
 
 
-                            <%--<asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
-                                ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />--%>
+                            <asp:RequiredFieldValidator ControlToValidate="ddlAccountNo" runat="server" ID="rfvddlAccountNo" ValidationGroup="rct"
+                                ErrorMessage="Select Account No" Text="Select Account No" class="validationred" Display="Dynamic" ForeColor="Red" InitialValue="0" />
                         </div>
 
                       <div class="col-sm-2">
