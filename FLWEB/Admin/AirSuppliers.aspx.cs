@@ -451,7 +451,7 @@ public partial class Admin_AirSuppliers : System.Web.UI.Page
                 }
                 else
                 {
-                    txtCommPerc.Text = objds.Tables[0].Rows[0]["CommPercentage"].ToString().Trim();
+                    txtCommPerc.Text = _BOUtility.FormatTwoDecimal(objds.Tables[0].Rows[0]["CommPercentage"].ToString().Trim());
                 }
 
                 dropPaymentMethod.SelectedIndex = dropPaymentMethod.Items.IndexOf(dropPaymentMethod.Items.FindByValue(objds.Tables[0].Rows[0]["PaymentMethod"].ToString()));
