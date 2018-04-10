@@ -505,8 +505,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
             int comapnyId = Convert.ToInt32(Session["UserCompanyId"].ToString());
 
-            int mergeId = 0;
-            string TempuniqCode = "";
+           // int mergeId = 0;
+            //string TempuniqCode = "";
 
             //     mergeId = Convert.ToInt32(objBALInvoice.GetServiceFeeMergeValue(Convert.ToInt32(lblID.Text), TempuniqCode));
 
@@ -561,8 +561,15 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
             bool Sendmail = _BOUtility.SendEmail(SmtpHost, SmtpPort, MailFrom, "", FromPassword, MailTo.TrimEnd(','), DisplayNameTo, MailCc,
                           DisplayNameCc, MailBcc, Subject, MailText, Attachment);
 
-
-            lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Message Successfully Send..");
+            if(Sendmail == true)
+            {
+                lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Message Successfully Send..");
+            }
+            else
+            {
+                lblMsg.Text = _BOUtility.ShowMessage("danger", "Failed", "Message was not Sent..");
+            }
+          
 
         }
         catch (Exception ex)
