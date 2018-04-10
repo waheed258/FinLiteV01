@@ -80,7 +80,7 @@
                         <label class="control-label">Category(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged" AutoPostBack="true"> 
                                     <asp:ListItem Text="--Select Category--" Value="0" Selected="True"></asp:ListItem>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ControlToValidate="ddlCategory" runat="server" ID="rfvddlCategory" ValidationGroup="CommType"
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:DropDownList ID="ddlLandSubCategory" runat="server" CssClass="form-control">
-                           <asp:ListItem Text="-Select-" Value="-1" />
+                           <asp:ListItem Text="-Select-" Value="0" />
                         </asp:DropDownList>
                     </div>
                     <div class="col-sm-1"></div>

@@ -1,6 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.master" AutoEventWireup="true" CodeFile="Branch.aspx.cs" Inherits="Admin_Branch" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+     <script>
+
+         $(document).ready(function () {
+             DrpSearch();
+             var prm = Sys.WebForms.PageRequestManager.getInstance();
+             prm.add_endRequest(function () {
+                 DrpSearch();
+             });
+
+         });
+
+         function DrpSearch() {
+            $('#<%= ddlProvince.ClientID %>').select2();
+            $('#<%= ddlCity.ClientID %>').select2();
+        };
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 <asp:Label ID="labelError" runat="server"></asp:Label>

@@ -70,5 +70,11 @@ namespace DataManager
             return ExecuteDataSet("Vat_GetData",htparams);
 
         }
+        public DataSet GetLandSubCategory()
+        {
+
+            return ExecuteDataSet("LandSubCategories_Get");
+
+        }
     }
 }

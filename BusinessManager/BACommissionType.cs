@@ -32,5 +32,10 @@ namespace BusinessManager
        {
            return objDACommType.GetVAT(vatId);
        }
+       public DataSet GetLandSubCategory()
+       {
+           return objDACommType.GetLandSubCategory();
+       }
+   
     }
 }
