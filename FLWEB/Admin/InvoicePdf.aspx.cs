@@ -886,11 +886,12 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
 
                     GenerateHTML_TO_PDF(StrContent, true, strFileSavePath, true);
                 }
+                else
+                {
+                    Response.Redirect("../Login.aspx");
+                }
             }
-            else
-            {
-
-            }
+           
         }
             
         catch (Exception ex)
