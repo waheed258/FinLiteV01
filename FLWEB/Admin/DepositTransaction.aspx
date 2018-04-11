@@ -140,7 +140,7 @@
                                 <asp:label ID="lblCurDepoist"  runat="server" ForeColor="Blue">On this Deposit <span id="spnCurDpstCount" runat="server"> 0  </span> Recipts,R  <span id="spnThisDepositAmnt" runat="server"> 0.00</span></asp:label>
                             </div>
                             <div class="col-sm-6">
-                                 <asp:label ID="lblUnbankRecipts" runat="server"  ForeColor="Blue">Unbanked <span id="unBankCount" runat="server">0</span> Recipts,R <span id="unBankAmount" runat="server">0.00</span></asp:label>
+                                 <asp:label ID="lblUnbankRecipts" runat="server"  ForeColor="Blue">Unbanked <span id="unBankCount" runat="server">0</span> Receipts,R <span id="unBankAmount" runat="server">0.00</span></asp:label>
                             </div>
 
                          </div>
