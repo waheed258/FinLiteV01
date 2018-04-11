@@ -25,6 +25,7 @@ public partial class Login : System.Web.UI.Page
         {
             Session["UserLoginId"] = null;
             Session["TempUniqCode"] = null;
+            Session["UserCompanyId"] = null;
           //  Session.Abandon();
          //   GetLanguages();
         }
