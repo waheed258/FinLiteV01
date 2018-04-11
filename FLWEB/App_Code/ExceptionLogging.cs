@@ -25,18 +25,20 @@ using context = System.Web.HttpContext;
         }
         public static void SendExcepToDB(Exception exdb)
         {
-            int userid= Convert.ToInt32(HttpContext.Current.Session["UserLoginId"].ToString());
-            connecttion();
-            exepurl = context.Current.Request.Url.ToString();
-            SqlCommand com = new SqlCommand("Exception_ExceptionLoggingToDataBase", con);
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@ExceptionMsg", exdb.Message.ToString());
-            com.Parameters.AddWithValue("@ExceptionType", exdb.GetType().Name.ToString());
-            com.Parameters.AddWithValue("@ExceptionURL", exepurl);
-            com.Parameters.AddWithValue("@ExceptionSource", exdb.StackTrace.ToString());
-            com.Parameters.AddWithValue("@UserId", userid);
-            com.ExecuteNonQuery();
-
+            if (HttpContext.Current.Session["UserLoginId"] != null)
+            {
+                int userid = Convert.ToInt32(HttpContext.Current.Session["UserLoginId"].ToString());
+                connecttion();
+                exepurl = context.Current.Request.Url.ToString();
+                SqlCommand com = new SqlCommand("Exception_ExceptionLoggingToDataBase", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@ExceptionMsg", exdb.Message.ToString());
+                com.Parameters.AddWithValue("@ExceptionType", exdb.GetType().Name.ToString());
+                com.Parameters.AddWithValue("@ExceptionURL", exepurl);
+                com.Parameters.AddWithValue("@ExceptionSource", exdb.StackTrace.ToString());
+                com.Parameters.AddWithValue("@UserId", userid);
+                com.ExecuteNonQuery();
+            }
 
 
         }
