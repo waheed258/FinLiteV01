@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -496,7 +497,19 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
     }
 
+    private byte[] BytesFromString(string str)
+    {
 
+        return Encoding.ASCII.GetBytes(str);
+
+    }
+
+    private int GetResponseCode(string ResponseString)
+    {
+
+        return int.Parse(ResponseString.Substring(0, 3));
+
+    }
     protected void btnSendmailSubmit_Click(object sender, EventArgs e)
     {
         try
@@ -552,23 +565,76 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                 }
             }
 
+            TcpClient tClient = new TcpClient("gmail-smtp-in.l.google.com", 25);
+
+            string CRLF = "\r\n";
+
+            byte[] dataBuffer;
+
+            string ResponseString;
+
+            NetworkStream netStream = tClient.GetStream();
+
+            StreamReader reader = new StreamReader(netStream);
+
+            ResponseString = reader.ReadLine();
+
+            /* Perform HELO to SMTP Server and get Response */
+
+            dataBuffer = BytesFromString("HELO KirtanHere" + CRLF);
+
+            netStream.Write(dataBuffer, 0, dataBuffer.Length);
+
+            ResponseString = reader.ReadLine();
+
+            dataBuffer = BytesFromString("MAIL FROM:<"+MailFrom+">" + CRLF);
+
+            netStream.Write(dataBuffer, 0, dataBuffer.Length);
+
+            ResponseString = reader.ReadLine();
+
+            /* Read Response of the RCPT TO Message to know from google if it exist or not */
+
+            dataBuffer = BytesFromString("RCPT TO:<" + MailTo + ">" + CRLF);
+
+            netStream.Write(dataBuffer, 0, dataBuffer.Length);
+
+            ResponseString = reader.ReadLine();
+
+            if (GetResponseCode(ResponseString) == 550)
+            {
+                lblMsg.Text = _BOUtility.ShowMessage("danger", "Failed", " Mail Address Does not Exist !");
+                
+            }
+            else
+            {
+                bool Sendmail = _BOUtility.SendEmail(SmtpHost, SmtpPort, MailFrom, "", FromPassword, MailTo.TrimEnd(','), DisplayNameTo, MailCc,
+                         DisplayNameCc, MailBcc, Subject, MailText, Attachment);
+
+                if (Sendmail == true)
+                {
+                    lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Message Successfully Send..");
+                }
+                else
+                {
+                    lblMsg.Text = _BOUtility.ShowMessage("danger", "Failed", "Message was not Sent..");
+                }
+            }
+            /* QUITE CONNECTION */
+
+            dataBuffer = BytesFromString("QUITE" + CRLF);
+
+            netStream.Write(dataBuffer, 0, dataBuffer.Length);
+
+            tClient.Close();
+
             // string MailText = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><title>Invoice</title><style>.clearfix:after {content: '';display: table;clear: both;}</style></head><body style=' position: relative;width: 100%;height: 20%;margin: 0 auto;color: #555555;background: #FFFFFF;font-family: Arial, sans-serif;font-size: 14px;font-family: SourceSansPro;'><header class='clearfix' style='padding: 10px 0;margin-bottom: 20px;border-bottom: 1px solid #AAAAAA;'><div id='' style='float:right;'><h1 class=''>Rapid Acconting Program For Travel <br>Industry</h1><address>Albania<br>Flat No:A1,konadpur<br>Hyderabad<br>Telangana,500084</address></div><div id='' style='width:15%;'><img src='Untitled.png'></div></header><main><div id='details' class='clearfix' style='margin-bottom: 50px;'><center><strong><h2>COMPUTER GENERATED TAX INVOICE<h2></strong></center><div id='' style='float: right;text-align: right;'><h3></h3><div><span style='margin-right:100px;font-weight:bold;'>Document No</span><span>Hofinvoice143</span></div><div><span style='margin-right:98px;font-weight:bold'>Date</span><span>Wednesday,June 28,2017 </span></div><div><span style='margin-right:128px;font-weight:bold'>Consultant</span><span>Bruce Rodda</span></div><div><span style='margin-right:110px;font-weight:bold'>Client</span><span>Sales Travel & Tours</span></div><div><span style='margin-right:60px;font-weight:bold'>Currency</span><span>ZAR(South African Rand)</span></div></div></div><table style='border: 1px ridge black; width: 100%;margin-bottom: 20px;border-collapse:collapse;'><thead style='border: 1px ridge black;'><tr><th style='font-weight:bold;border: 1px ridge black;padding: 5px;background: weight; border-bottom: 1px ridge black;border-radius:5px;'>Prn</th><th style='font-weight:bold;border: 1px ridge black;padding: 5px;background: weight; border-bottom: 1px ridge black;'>Ticket No</th><th style='font-weight:bold;border: 1px ridge black;padding: 5px;background: weight;border-bottom: 1px ridge black;'>Passenger/Dep Date/Route/Class</th><th style='font-weight:bold;border: 1px ridge black;padding: 5px;background: weight;border-bottom: 1px ridge black;'>Excl Amt</th><th style='font-weight:bold;border: 1px ridge black;padding: 5px;background: weight;border-bottom: 1px ridge black;'>VAT</th><th style='font-weight:bold;border:1px ridge black;padding: 5px;background: weight;border-bottom: 1px ridge black;'>Incl Amt</th></tr></thead><tbody><tr><td style='border: 1px ridge black; font-weight:bold;padding:3px;'>157</td><td style='border: 1px ridge black; font-weight:bold;padding:3px;'>9148253270</td><td style='border: 1px ridge black;font-weight:bold;padding:3px;'>HANIF/MUHAMMAD 27May<br>2016-01 January 1900<br>LAHORE-DOHA DOHA-<br>JOHANNESBURG Cls 0 <br>Airport Taxes<br><br><span>Ticket Totals</span></td><td style='border: 1px ridge black;font-weight:bold;padding:3px;'>8140.00<br><br><br>0.00<br><br>8140.00</td><td style='border: 1px ridge black;font-weight:bold;padding:3px;'>2423.00<br><br><br><br><br>2423.00</td><td style='border: 1px ridge black;font-weight:bold;padding:3px;'>10563.00<br><br><br>0.00<br><br>10563.00</td></tr></tbody></table><hr></main><footer><div style='width:33.3%;float:right;'><img src='4.jpg' style='margin-left:200px;'></div><div style='width:33.3%;float:right;'><img src='3.jpg' style='margin-left:100px;'></div><div style='width:33.3%;float:left;'><img src='2.jpg'></div></footer></body></html>";
 
 
             //string Sendmail = _BOUtility.SendEmail.SendEmail(SmtpHost, SmtpPort, MailFrom, FromPassword, MailTo.TrimEnd(','), DisplayNameTo, MailCc,
             //              DisplayNameCc, MailBcc,  MailText, "");
 
-            bool Sendmail = _BOUtility.SendEmail(SmtpHost, SmtpPort, MailFrom, "", FromPassword, MailTo.TrimEnd(','), DisplayNameTo, MailCc,
-                          DisplayNameCc, MailBcc, Subject, MailText, Attachment);
-
-            if(Sendmail == true)
-            {
-                lblMsg.Text = _BOUtility.ShowMessage("success", "Success", "Message Successfully Send..");
-            }
-            else
-            {
-                lblMsg.Text = _BOUtility.ShowMessage("danger", "Failed", "Message was not Sent..");
-            }
+           
           
 
         }
