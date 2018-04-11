@@ -24,6 +24,7 @@ public partial class Login : System.Web.UI.Page
         if (!IsPostBack)
         {
             Session["UserLoginId"] = null;
+            Session["TempUniqCode"] = null;
           //  Session.Abandon();
          //   GetLanguages();
         }
