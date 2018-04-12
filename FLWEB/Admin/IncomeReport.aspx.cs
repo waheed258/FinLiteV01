@@ -236,7 +236,7 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                         foreach (DataRow dtlRrow in objds.Tables[3].Rows)
                         {
 
-                            TotalIncomeTaxes = Convert.ToInt32(dtlRrow["Amount"].ToString()) + TotalIncomeTaxes;
+                            TotalIncomeTaxes = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalIncomeTaxes;
                         }
                         incomedata = 1;
 
@@ -419,8 +419,9 @@ public partial class Admin_IncomeReport : System.Web.UI.Page
                     {
                         foreach (DataRow dtlRrow in objds.Tables[1].Rows)
                         {
+                          //  string amount = dtlRrow["Amount"].ToString();
 
-                            TotalIncome = Convert.ToInt32(dtlRrow["Amount"].ToString()) + TotalIncome;
+                            TotalIncome = Convert.ToDecimal(dtlRrow["Amount"].ToString()) + TotalIncome;
 
                         }
 
