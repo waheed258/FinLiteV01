@@ -257,7 +257,7 @@
                                         <asp:ImageButton ID="imgDelete" ToolTip="Delete" runat="server" ImageUrl="~/images/icon_imageDelete.png" Height="20" Width="20"
                                             CommandName="Delete Invoice" CommandArgument='<%#Eval("InvId") %>' OnClientClick="javascript:return confirm('Are You Sure You Want To Delete Invoice')" />
                                      
-                                         <asp:ImageButton ID="imgReceiptPdf" CommandArgument='<%#Eval("InvId") %>' ToolTip="Receipt PDF" ImageUrl="~/images/rece1.jpg" runat="server" Width="20" Height="20" OnClick="imgReceiptPdf_Click" 
+                                         <asp:ImageButton ID="imgReceiptPdf" CommandArgument='<%#Eval("InvId") %>' ToolTip="Receipt PDF" ImageUrl="~/images/re2.jpg" runat="server" Width="20" Height="20" OnClick="imgReceiptPdf_Click" 
                       title="Receipt PDF"  /> 
                                            <asp:ImageButton ID="imgInvReceipt"  ToolTip="Receipt" runat="server" ImageUrl="~/images/receipt.png" Height="20" Width="20" OnClick="imgInvReceipt_Click"
                                             title="Receipt" />
