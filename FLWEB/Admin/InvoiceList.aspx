@@ -97,7 +97,7 @@
             var updateProgress = $get("<%= UpdateProgress.ClientID %>");
             updateProgress.style.display = "block";
         }
-
+ 
         $(function () {
             $("#txtSearch").autocomplete({
                 source: function (request, response) {
@@ -243,6 +243,8 @@
                                 <asp:BoundField DataField="InvOrder" HeaderText="Order No" />
                                 <asp:BoundField DataField="InvoiceTotal" HeaderText="Invoice Total" ItemStyle-HorizontalAlign="Right" />
                                  <asp:BoundField DataField="receiptStatus" HeaderText="Receipt Status"  />
+                               
+
                                 <asp:TemplateField HeaderText="Sending Options">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgSendMail" ImageUrl="~/images/icon-email.png" runat="server" Width="30" Height="20" OnClick="imgSendMail_Click" title="Mail" />
@@ -254,9 +256,15 @@
                                             CommandName="Edit Invoice" CommandArgument='<%#Eval("InvId")%>' title="Edit" />
                                         <asp:ImageButton ID="imgDelete" ToolTip="Delete" runat="server" ImageUrl="~/images/icon_imageDelete.png" Height="20" Width="20"
                                             CommandName="Delete Invoice" CommandArgument='<%#Eval("InvId") %>' OnClientClick="javascript:return confirm('Are You Sure You Want To Delete Invoice')" />
-                                        <asp:ImageButton ID="imgInvReceipt" ToolTip="Receipt" runat="server" ImageUrl="~/images/receipt.png" Height="20" Width="20" OnClick="imgInvReceipt_Click"
+                                     
+                                         <asp:ImageButton ID="imgReceiptPdf" CommandArgument='<%#Eval("InvId") %>' ToolTip="Receipt PDF" ImageUrl="~/images/rece1.jpg" runat="server" Width="20" Height="20" OnClick="imgReceiptPdf_Click" 
+                      title="Receipt PDF"  /> 
+                                           <asp:ImageButton ID="imgInvReceipt"  ToolTip="Receipt" runat="server" ImageUrl="~/images/receipt.png" Height="20" Width="20" OnClick="imgInvReceipt_Click"
                                             title="Receipt" />
-                                    </ItemTemplate>
+                                        <%--   <asp:ImageButton ID="imgReceiptPdf" ImageUrl="~/images/PdfIcon.png" runat="server" Width="30" Height="20" OnClick="imgReceiptPdf_Click" title="Receipt PDF" />
+                                  --%>
+                                         
+                                          </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
                             <EmptyDataTemplate>
@@ -343,6 +351,7 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <asp:TextBox ID="txtTo" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:Label ID="lbltomailexist" runat="server" ForeColor="Red"></asp:Label>
                                             <asp:RequiredFieldValidator ID="rfvmail" runat="server" ValidationGroup="emailGrp" ControlToValidate="txtTo" ErrorMessage="Please Enter Email ID" Display="Dynamic"></asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ID="revmail" runat="server" ForeColor="Red" ValidationGroup="emailGrp" ControlToValidate="txtTo" ErrorMessage="Please Enter Email ID" ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" Display="Dynamic"></asp:RegularExpressionValidator>
                                         </div>

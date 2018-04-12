@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Web;
@@ -37,6 +38,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
 
         }
+        lbltomailexist.Text = "";
+        lblMsg.Text = "";
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -514,6 +517,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     {
         try
         {
+            lbltomailexist.Text = "";
+            lblMsg.Text = "";
             // DataSet objDs = objBALInvoice.GetPdfDetails(Convert.ToInt32(lblID.Text));
 
             int comapnyId = Convert.ToInt32(Session["UserCompanyId"].ToString());
@@ -603,8 +608,8 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
 
             if (GetResponseCode(ResponseString) == 550)
             {
-                lblMsg.Text = _BOUtility.ShowMessage("danger", "Failed", " Mail Address Does not Exist !");
-                
+                lbltomailexist.Text =  "Mail Address Does not Exist !";
+                SendMailPopupExtender.Show();
             }
             else
             {
@@ -970,6 +975,26 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
                     else
                     {
                         ImgeReceiptBtn.Visible = true;
+                    }
+                }
+                else
+                {
+
+                }
+
+                ImageButton ImgeReceiptpdfBtn = (ImageButton)e.Row.FindControl("imgReceiptPdf");
+                lblID.Text = gvInvoiceList.DataKeys[e.Row.RowIndex].Value.ToString();
+                int invid = Convert.ToInt32(lblID.Text);
+                DataSet invData = objBALInvoice.GetInvoice(invid);
+                if (invData.Tables[0].Rows.Count >= 1)
+                {
+                    if (invData.Tables[0].Rows[0]["PaymentStatus"].ToString() == "1")
+                    {
+                        ImgeReceiptpdfBtn.Enabled = true;
+                    }
+                    else
+                    {
+                        ImgeReceiptpdfBtn.Enabled = false;
                     }
                 }
                 else
@@ -1457,5 +1482,33 @@ public partial class Admin_InvoiceList : System.Web.UI.Page
     {
         ReceiptPopupExtender.Show();
     }
+    protected void imgReceiptPdf_Click(object sender, ImageClickEventArgs e)
+    {
+        
+        try
+        {
+
+            ImageButton btndetails = sender as ImageButton;
+            GridViewRow gvrow = (GridViewRow)btndetails.NamingContainer;
+            //int invid = Convert.ToInt32(gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString());
+            string invid = gvInvoiceList.DataKeys[gvrow.RowIndex].Value.ToString();
+            //Response.Redirect("InvoicePdf.aspx?id=" + invid);
+            string url = "ReceiptPdf.aspx?id=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(invid, true));
+            string fullURL = "window.open('" + url + "', '_blank');";
+            ScriptManager.RegisterStartupScript(this, typeof(string), "_blank", fullURL, true);
+
+            //ImageButton b = (ImageButton)gvInvoiceList.FindControl("imgSendMail");
+            //b.Visible = true;
+        }
+        catch (Exception ex)
+        {
+            ExceptionLogging.SendExcepToDB(ex);
+        }
+           
+    }
+
+
+
+ 
 }
 
