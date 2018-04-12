@@ -179,7 +179,17 @@ namespace DataManager
             return ExecuteDataSet("Transaction_GetAccount", htparams);
         }
 
-      
+        public DataSet Get_PrintReceipt(int Invid)
+        {
+            Hashtable htparams = new Hashtable
+            {
+               
+                  {"@Invid",Invid},
+            };
+
+
+            return ExecuteDataSet("GetReceipt_Print", htparams);
+        }
 
     }
 }

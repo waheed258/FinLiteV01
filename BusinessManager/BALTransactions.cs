@@ -60,5 +60,10 @@ namespace BusinessManager
         {
             return _objDALTransactions.Transaction_GetAccountsData(ChartedAccId, BankAccount, RefType, Category);
         }
+
+        public DataSet Get_PrintReceipt(int invid)
+        {
+            return _objDALTransactions.Get_PrintReceipt(invid);
+        }
     }
 }
