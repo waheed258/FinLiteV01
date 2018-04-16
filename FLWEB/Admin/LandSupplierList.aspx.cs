@@ -9,6 +9,7 @@ using EntityManager;
 using DataManager;
 using BusinessManager;
 using System.Data;
+using System.Drawing;
 
 public partial class Admin_LandSupplierList : System.Web.UI.Page
 {
@@ -17,7 +18,7 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
     BOUtiltiy _BOUtility = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             ViewState["ps"] = 10;
             BindLandSupplierList();
@@ -31,14 +32,14 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
     {
         gvLandSupplierList.PageIndex = e.NewPageIndex;
         SearchItemFromList(txtSearch.Text.Trim());
-      //  BindLandSupplierList();
+        //  BindLandSupplierList();
     }
     protected void gvLandSupplierList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string LsupplierId = e.CommandArgument.ToString();
         if (e.CommandName == "Edit LSupplier")
         {
-            Response.Redirect("LandSuppliers.aspx?LSupplierId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(LsupplierId,true)));
+            Response.Redirect("LandSuppliers.aspx?LSupplierId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(LsupplierId, true)));
         }
 
         if (e.CommandName == "Delete LSupplier")
@@ -107,7 +108,7 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
     {
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
         SearchItemFromList(txtSearch.Text.Trim());
-       // BindLandSupplierList();
+        // BindLandSupplierList();
     }
     protected void gvLandSupplierList_Sorting(object sender, GridViewSortEventArgs e)
     {
@@ -169,6 +170,22 @@ public partial class Admin_LandSupplierList : System.Web.UI.Page
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void gvLandSupplierList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "LIsActive"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

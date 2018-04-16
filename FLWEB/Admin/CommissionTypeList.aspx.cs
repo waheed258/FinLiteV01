@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EntityManager;
 using BusinessManager;
 using System.Data;
+using System.Drawing;
 using System.Data.SqlClient;
 
 public partial class Admin_CommissionTypeList : System.Web.UI.Page
@@ -166,6 +167,22 @@ public partial class Admin_CommissionTypeList : System.Web.UI.Page
             {
                 lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
                 ExceptionLogging.SendExcepToDB(ex);
+            }
+        }
+        protected void gvCommTypeList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ComDeactivate"));
+
+                foreach (TableCell cell in e.Row.Cells)
+                {
+                    if (ToolTipString == "1")
+                    {
+                        // cell.BackColor = Color.Red;
+                        cell.ForeColor = Color.Red;
+                    }
+                }
             }
         }
 }

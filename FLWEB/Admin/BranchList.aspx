@@ -65,7 +65,7 @@
                         <asp:HiddenField ID="hf_branchid" runat="server" Value="0" />
 
                         <asp:GridView ID="gvBranchDetailsList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvBranchDetailsList_RowDataBound"
                             OnRowCommand="gvBranchDetailsList_RowCommand" OnPageIndexChanging="gvBranchDetailsList_PageIndexChanging" OnSorting="gvBranchDetailsList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

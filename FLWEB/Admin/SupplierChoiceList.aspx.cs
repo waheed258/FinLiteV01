@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using EntityManager;
 using BusinessManager;
+using System.Drawing;
 
 public partial class Admin_SupplierChoiceList : System.Web.UI.Page
 {
@@ -157,5 +158,21 @@ public partial class Admin_SupplierChoiceList : System.Web.UI.Page
     protected void imgsearch_Click(object sender, ImageClickEventArgs e)
     {
         SearchItemFromList(txtSearch.Text.Trim());
+    }
+    protected void gvSupChoiceList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ChoiceDeactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
     }
 }

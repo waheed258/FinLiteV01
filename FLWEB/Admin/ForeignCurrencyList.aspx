@@ -64,7 +64,7 @@
                         <div class="row">&nbsp;</div>
                         <asp:HiddenField ID="hf_FcId" runat="server" Value="0" />
                         <asp:GridView ID="gvForeignCurrencyList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvForeignCurrencyList_RowDataBound"
                             OnRowCommand="gvForeignCurrencyList_RowCommand" OnPageIndexChanging="gvForeignCurrencyList_PageIndexChanging" OnSorting="gvForeignCurrencyList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

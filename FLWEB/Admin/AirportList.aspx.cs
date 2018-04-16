@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using EntityManager;
 using BusinessManager;
+using System.Drawing;
 public partial class Admin_AirportList : System.Web.UI.Page
 {
     EMAirport objemAirport = new EMAirport();
@@ -155,7 +156,23 @@ public partial class Admin_AirportList : System.Web.UI.Page
         }
     }
 
+ 
 
+    protected void gvAirportList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
 
-        
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Deactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
+    }
 }

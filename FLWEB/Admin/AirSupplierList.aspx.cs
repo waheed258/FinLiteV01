@@ -9,6 +9,7 @@ using EntityManager;
 using DataManager;
 using BusinessManager;
 using System.Data;
+using System.Drawing;
 
 public partial class Admin_AirSupplierList : System.Web.UI.Page
 {
@@ -434,4 +435,20 @@ where T : Control
     //        }
     //    }
 
+    protected void gvAirSupplierList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IsActive"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
+    }
 }

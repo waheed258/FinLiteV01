@@ -64,7 +64,7 @@
 
                 <asp:HiddenField ID="hf_ReceiptId" runat="server" Value="0" />
                         <asp:GridView ID="gvReceiptList" runat="server" AllowPaging="true" PageSize="10"
-                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
+                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer" OnRowDataBound="gvReceiptList_RowDataBound"
                             Width="100%" OnRowCommand="gvReceiptList_RowCommand" OnPageIndexChanging="gvReceiptList_PageIndexChanging" OnSorting="gvReceiptList_Sorting">
 
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />

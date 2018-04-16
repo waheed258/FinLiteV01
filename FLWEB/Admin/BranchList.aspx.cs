@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EntityManager;
 using BusinessManager;
 using System.Data;
+using System.Drawing;
 using System.Data.SqlClient;
 public partial class Admin_BranchList : System.Web.UI.Page
 {
@@ -168,4 +169,19 @@ public partial class Admin_BranchList : System.Web.UI.Page
         }
     }
 
+    protected void gvBranchDetailsList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+         
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Deactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+         
+    }
 }

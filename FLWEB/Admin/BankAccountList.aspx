@@ -65,7 +65,7 @@
                         <asp:HiddenField ID="hf_BankAcId" runat="server" Value="0" />
 
                         <asp:GridView ID="gvBankAccountList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvBankAccountList_RowDataBound"
                             OnRowCommand="gvBankAccountList_RowCommand" OnPageIndexChanging="gvBankAccountList_PageIndexChanging" OnSorting="gvBankAccountList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

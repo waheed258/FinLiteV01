@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using EntityManager;
 using BusinessManager;
+using System.Drawing;
 
 public partial class Admin_ClientsList : System.Web.UI.Page
 {
@@ -476,7 +477,23 @@ public partial class Admin_ClientsList : System.Web.UI.Page
         //}
     }
 
-   
 
 
+
+    protected void gvClientsList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IsActive"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "false")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
+    }
 }

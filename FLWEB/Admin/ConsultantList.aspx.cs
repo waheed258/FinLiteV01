@@ -8,6 +8,7 @@ using System.Data;
 using EntityManager;
 using DataManager;
 using BusinessManager;
+using System.Drawing;
 
 public partial class Admin_ConsultantList : System.Web.UI.Page
 {
@@ -175,6 +176,22 @@ public partial class Admin_ConsultantList : System.Web.UI.Page
         {
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void gvConsultantList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "ClientStutus"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

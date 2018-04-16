@@ -8,6 +8,7 @@ using EntityManager;
 using BusinessManager;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 public partial class Admin_BankAccountList : System.Web.UI.Page
 {
     EMBankAccount objBankAc = new EMBankAccount();
@@ -167,5 +168,21 @@ public partial class Admin_BankAccountList : System.Web.UI.Page
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
         SearchItemFromList(txtSearch.Text.Trim());
        // BindBankAccDetails();
+    }
+    protected void gvBankAccountList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IsDeactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
     }
 }

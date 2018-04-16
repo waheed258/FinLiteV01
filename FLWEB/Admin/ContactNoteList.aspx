@@ -65,7 +65,7 @@
 
                 <asp:HiddenField ID="hf_ContactNoteId" runat="server" Value="0" />
                         <asp:GridView ID="gvConNoteList" runat="server" AllowPaging="true" PageSize="10"
-                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
+                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer" OnRowDataBound="gvConNoteList_RowDataBound"
                             Width="100%" OnRowCommand="gvConNoteList_RowCommand" OnPageIndexChanging="gvConNoteList_PageIndexChanging" OnSorting="gvConNoteList_Sorting">
 
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />

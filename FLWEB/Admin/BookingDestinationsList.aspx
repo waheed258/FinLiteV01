@@ -65,7 +65,7 @@
 
                         <asp:HiddenField ID="hf_BookDestId" runat="server" Value="0" />
                         <asp:GridView ID="gvDestinationsList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvDestinationsList_RowDataBound"
                             OnRowCommand="gvDestinationsList_RowCommand" OnPageIndexChanging="gvDestinationsList_PageIndexChanging" OnSorting="gvDestinationsList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

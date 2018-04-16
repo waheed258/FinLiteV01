@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Drawing;
 using BusinessManager;
 
 public partial class Admin_BookingDestinationsList : System.Web.UI.Page
@@ -160,6 +161,22 @@ public partial class Admin_BookingDestinationsList : System.Web.UI.Page
         {
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void gvDestinationsList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "BookDestStatus"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

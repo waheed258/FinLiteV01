@@ -65,7 +65,7 @@
 
                 <asp:HiddenField ID="hf_CashBookId" runat="server" Value="0" />
                         <asp:GridView ID="gvCashBookList" runat="server" AllowPaging="true" PageSize="10"
-                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
+                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer" OnRowDataBound="gvCashBookList_RowDataBound"
                             Width="100%" OnRowCommand="gvCashBookList_RowCommand" OnPageIndexChanging="gvCashBookList_PageIndexChanging" OnSorting="gvCashBookList_Sorting">
 
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />

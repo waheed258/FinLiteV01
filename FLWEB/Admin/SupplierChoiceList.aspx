@@ -66,7 +66,7 @@
 
                 <asp:HiddenField ID="hf_SupChoiceId" runat="server" Value="0" />
                         <asp:GridView ID="gvSupChoiceList" runat="server" AllowPaging="true" PageSize="10"
-                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
+                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer" OnRowDataBound="gvSupChoiceList_RowDataBound"
                             Width="100%" OnRowCommand="gvSupChoiceList_RowCommand" OnPageIndexChanging="gvSupChoiceList_PageIndexChanging" OnSorting="gvSupChoiceList_Sorting">
 
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />

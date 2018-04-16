@@ -66,7 +66,7 @@
                         <asp:HiddenField ID="hf_CommId" runat="server" Value="0" />
 
                         <asp:GridView ID="gvCommTypeList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvCommTypeList_RowDataBound"
                             OnRowCommand="gvCommTypeList_RowCommand" OnPageIndexChanging="gvCommTypeList_PageIndexChanging" OnSorting="gvCommTypeList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

@@ -114,7 +114,7 @@
 
                         <asp:HiddenField ID="hf_ClientId" runat="server" Value="0" />
                         <asp:GridView ID="gvClientsList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvClientsList_RowDataBound"
                             OnRowCommand="gvClientsList_RowCommand" OnPageIndexChanging="gvClientsList_PageIndexChanging" OnSorting="gvClientsList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

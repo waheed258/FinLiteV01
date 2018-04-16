@@ -65,7 +65,7 @@
 
                         <asp:HiddenField ID="hf_ConsultantId" runat="server" Value="0" />
                         <asp:GridView ID="gvConsultantList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvConsultantList_RowDataBound"
                             OnRowCommand="gvConsultantList_RowCommand" OnPageIndexChanging="gvConsultantList_PageIndexChanging" OnSorting="gvConsultantList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>

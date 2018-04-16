@@ -64,7 +64,7 @@
 
                 <asp:HiddenField ID="hf_AirportId" runat="server" Value="0" />
                         <asp:GridView ID="gvAirportList" runat="server" AllowPaging="true" PageSize="10"
-                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
+                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer" OnRowDataBound="gvAirportList_RowDataBound"
                             Width="100%" OnRowCommand="gvAirportList_RowCommand" OnPageIndexChanging="gvAirportList_PageIndexChanging" OnSorting="gvAirportList_Sorting">
 
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />

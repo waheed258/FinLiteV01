@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using EntityManager;
 using BusinessManager;
+using System.Drawing;
 
 public partial class Admin_ReceiptTypeList : System.Web.UI.Page
 {
@@ -16,7 +17,7 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
     BOUtiltiy _BOUtility = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             ViewState["ps"] = 10;
             BindReceiptType();
@@ -29,11 +30,11 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
     protected void gvReceiptList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string receiptId = e.CommandArgument.ToString();
-        if(e.CommandName == "Edit Receipt")
+        if (e.CommandName == "Edit Receipt")
         {
-            Response.Redirect("ReceiptTypes.aspx?ReceiptId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(receiptId,true)));
+            Response.Redirect("ReceiptTypes.aspx?ReceiptId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(receiptId, true)));
         }
-        if(e.CommandName == "Delete Receipt")
+        if (e.CommandName == "Delete Receipt")
         {
             DeleteReceipt(Convert.ToInt32(receiptId));
             BindReceiptType();
@@ -44,7 +45,7 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
     {
         gvReceiptList.PageIndex = e.NewPageIndex;
         SearchItemFromList(txtSearch.Text.Trim());
-       // BindReceiptType();
+        // BindReceiptType();
     }
 
     private void BindReceiptType()
@@ -55,10 +56,10 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
             int ReceiptId = 0;
             DataSet ds = objBAReceipt.GetReceiptType(ReceiptId);
             Session["dt"] = ds.Tables[0];
-            if(ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 gvReceiptList.DataSource = ds.Tables[0];
-                 string sortDirection = "ASC", sortExpression;
+                string sortDirection = "ASC", sortExpression;
                 if (ViewState["so"] != null)
                 {
                     sortDirection = ViewState["so"].ToString();
@@ -78,7 +79,7 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
                 lblEmptyMessage.Text = "Currently there are no records in System";
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
@@ -93,7 +94,7 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
     {
         ViewState["ps"] = DropPage.SelectedItem.ToString().Trim();
         SearchItemFromList(txtSearch.Text.Trim());
-       // BindReceiptType();
+        // BindReceiptType();
     }
     protected void imgsearch_Click(object sender, ImageClickEventArgs e)
     {
@@ -138,7 +139,7 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
     }
     protected void gvReceiptList_Sorting(object sender, GridViewSortEventArgs e)
     {
-          try
+        try
         {
             ViewState["se"] = e.SortExpression;
             if (ViewState["so"] == null)
@@ -155,4 +156,20 @@ public partial class Admin_ReceiptTypeList : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+    protected void gvReceiptList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Deactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
     }
+}

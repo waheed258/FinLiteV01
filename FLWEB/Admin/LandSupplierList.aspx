@@ -64,7 +64,7 @@
 
                 <asp:HiddenField ID="hf_LSupplierId" runat="server" Value="0" />
                         <asp:GridView ID="gvLandSupplierList" runat="server" AllowPaging="true" PageSize="10"
-                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer"
+                            AutoGenerateColumns="False" CssClass="table table-bordered table-striped mb-none dataTable no-footer" OnRowDataBound="gvLandSupplierList_RowDataBound"
                             Width="100%" OnRowCommand="gvLandSupplierList_RowCommand" OnPageIndexChanging="gvLandSupplierList_PageIndexChanging" OnSorting="gvLandSupplierList_Sorting">
 
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />

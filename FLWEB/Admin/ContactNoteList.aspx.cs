@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Text;
 using EntityManager;
+using System.Drawing;
 using BusinessManager;
 
 public partial class Admin_ContactNoteList : System.Web.UI.Page
@@ -150,6 +151,22 @@ public partial class Admin_ContactNoteList : System.Web.UI.Page
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void gvConNoteList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Deactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EntityManager;
 using BusinessManager;
 using System.Data;
+using System.Drawing;
 using System.Data.SqlClient;
 
 public partial class Admin_BookingSourceList : System.Web.UI.Page
@@ -165,4 +166,20 @@ public partial class Admin_BookingSourceList : System.Web.UI.Page
         }
     }
 
+    protected void gvBookList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "IsActive"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
+        }
+    }
 }

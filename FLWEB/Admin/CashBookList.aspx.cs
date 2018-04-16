@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using EntityManager;
 using BusinessManager;
+using System.Drawing;
 
 public partial class Admin_CashBookList : System.Web.UI.Page
 {
@@ -16,7 +17,7 @@ public partial class Admin_CashBookList : System.Web.UI.Page
     BOUtiltiy _BOUtility = new BOUtiltiy();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             ViewState["ps"] = 10;
             BindCashBook();
@@ -29,12 +30,12 @@ public partial class Admin_CashBookList : System.Web.UI.Page
     protected void gvCashBookList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string cashBookId = e.CommandArgument.ToString();
-        if(e.CommandName == "Edit Cash")
+        if (e.CommandName == "Edit Cash")
         {
-            Response.Redirect("CashBookType.aspx?CashBookId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(cashBookId,true)));
-           
+            Response.Redirect("CashBookType.aspx?CashBookId=" + HttpUtility.UrlEncode(_BOUtility.Encrypts(cashBookId, true)));
+
         }
-        if(e.CommandName == "Delete Cash")
+        if (e.CommandName == "Delete Cash")
         {
             DeleteCashBook(Convert.ToInt32(cashBookId));
             BindCashBook();
@@ -60,7 +61,7 @@ public partial class Admin_CashBookList : System.Web.UI.Page
             int CashBookId = 0;
             DataSet ds = objBACash.GetCashBook(CashBookId);
             Session["dt"] = ds.Tables[0];
-            if(ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 gvCashBookList.DataSource = ds.Tables[0];
                 string sortDirection = "ASC", sortExpression;
@@ -82,10 +83,10 @@ public partial class Admin_CashBookList : System.Web.UI.Page
 
                 Label lblEmptyMessage = gvCashBookList.Controls[0].Controls[0].FindControl("lblEmptyMessage") as Label;
                 lblEmptyMessage.Text = "Currently there are no records in System";
-              
+
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
@@ -156,6 +157,22 @@ public partial class Admin_CashBookList : System.Web.UI.Page
         {
             lblMsg.Text = _BOUtility.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
+        }
+    }
+    protected void gvCashBookList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            var ToolTipString = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Deactivate"));
+
+            foreach (TableCell cell in e.Row.Cells)
+            {
+                if (ToolTipString == "1")
+                {
+                    // cell.BackColor = Color.Red;
+                    cell.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

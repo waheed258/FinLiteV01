@@ -64,7 +64,7 @@
                         <div class="row">&nbsp;</div>
                         <asp:HiddenField ID="hf_BookId" runat="server" Value="0" />
                         <asp:GridView ID="gvBookList" runat="server" AllowPaging="true" Width="100%" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered"
+                            AutoGenerateColumns="False" DataKeyNames="" CssClass="table table-striped table-bordered" OnRowDataBound="gvBookList_RowDataBound"
                             OnRowCommand="gvBookList_RowCommand" OnPageIndexChanging="gvBookList_PageIndexChanging" OnSorting="gvBookList_Sorting" ShowHeaderWhenEmpty="true">
                             <PagerStyle BackColor="#efefef" ForeColor="black" HorizontalAlign="Left" CssClass="pagination1" />
                             <Columns>
