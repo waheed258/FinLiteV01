@@ -98,8 +98,9 @@ public partial class Admin_CharteredAccountsList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                    "ChartedAccName='" + SearchText +
-                    "' OR MainAcName LIKE '%" + SearchText +
+                  
+                    "ChartedAccName LIKE '%" + SearchText  +  
+                    "%' OR MainAcName LIKE '%" + SearchText +
                     "%' OR AccCode LIKE '%" + SearchText + "%'");
 
                 if (dr.Count() > 0)
