@@ -64,20 +64,22 @@ public partial class Admin_Invoice : System.Web.UI.Page
     }
     protected void drpInvClientType_TextChanged(object sender, EventArgs e)
     {
+        drpInvClientName.Focus();
         BindClientNames();
     }
 
     protected void txtInvOrder_TextChanged(object sender, EventArgs e)
     {
-
+        txtInvBookNo.Focus();
     }
     protected void ddlInvCosultant_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        txtInvOrder.Focus();
     }
 
     protected void drpInvClientName_TextChanged(object sender, EventArgs e)
     {
+        ddlInvCosultant.Focus();
         BindInvoiceMessage();
     }
 
@@ -1740,6 +1742,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             if (txtUnits.Text != "")
 
                 txtRateNet_TextChanged(null, null);
+
+            ddlPassengerNames.Focus();
             GenPopupExtender.Show();
         }
         catch (Exception ex)
@@ -1773,6 +1777,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 decimal clientTotal = ExclTotal + vatAmount;
                 txtClientTotal.Text = _objBOUtiltiy.FormatTwoDecimal(clientTotal.ToString());
             }
+            txtRateNet.Focus();
             GenPopupExtender.Show();
         }
         catch (Exception ex)
@@ -1802,10 +1807,12 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
     protected void ddlPassengerNames_SelectedIndexChanged(object sender, EventArgs e)
     {
+        txtDetails.Focus();
         GenPopupExtender.Show();
     }
     protected void ddlCrdCardType_SelectedIndexChanged(object sender, EventArgs e)
     {
+        txtUnits.Focus();
         GenPopupExtender.Show();
     }
     protected void txtUnits_TextChanged(object sender, EventArgs e)
@@ -1817,7 +1824,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             if (txtRateNet.Text != "")
 
                 txtRateNet_TextChanged(null, null);
-
+            txtRateNet.Focus();
             GenPopupExtender.Show();
         }
         catch (Exception ex)
@@ -2232,10 +2239,12 @@ public partial class Admin_Invoice : System.Web.UI.Page
     #region ServiceFeeEvents
     protected void txtSerClientTotal_TextChanged(object sender, EventArgs e)
     {
+        txtSerClientTotal.Focus();
         ExcusiveAmount();
     }
     protected void ddlCreditCardType_SelectedIndexChanged(object sender, EventArgs e)
     {
+        ddlCollectVia.Focus();
         SerPopupExtender.Show();
     }
 
@@ -2249,12 +2258,14 @@ public partial class Admin_Invoice : System.Web.UI.Page
     }
     protected void txtSerTravelDate_TextChanged(object sender, EventArgs e)
     {
+        txtserDetails.Focus();
         SerPopupExtender.Show();
     }
     protected void ddlSoureceref_TextChanged(object sender, EventArgs e)
     {
         ddlPassengerName.Items.Clear();
         BindSerPassengerNames();
+        chkMerge.Focus();
         SerPopupExtender.Show();
     }
     protected void ddlPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
@@ -2288,6 +2299,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 rfvddlCreditCardType.Enabled = false;
                 rfvtxtTASFMPD.Enabled = false;
             }
+            txtSerClientTotal.Focus();
             SerPopupExtender.Show();
         }
         catch (Exception ex)
@@ -2295,6 +2307,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+
     }
     protected void ddlCollectVia_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -2310,7 +2324,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
                 txtTASFMPD.Enabled = false;
                 rfvtxtTASFMPD.Enabled = false;
             }
-
+            txtTASFMPD.Focus();
             SerPopupExtender.Show();
         }
         catch (Exception ex)
@@ -2351,6 +2365,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
                 getClientTotal();
             }
+
+            ddlSoureceref.Focus();
             SerPopupExtender.Show();
         }
         catch (Exception ex)
