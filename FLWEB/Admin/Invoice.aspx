@@ -161,6 +161,8 @@
                     $("#ContentPlaceHolder1_txtDate3").datepicker("option", "maxDate", dtFormatted)
                     $("#ContentPlaceHolder1_txtDate4").datepicker("option", "maxDate", dtFormatted)
                     $("#ContentPlaceHolder1_txtAirTravelDate").val(dtFormatted);
+
+                    $("#ContentPlaceHolder1_txtAirTravelDate").focus();
                 }
             }).attr('readonly', 'true');;
 
@@ -174,7 +176,7 @@
                     var dtFormatted = mm + '/' + dd + '/' + y;
                     $("#ContentPlaceHolder1_txtAirTravelDate").datepicker("option", "maxDate", dtFormatted)
                     $("#ContentPlaceHolder1_txtAirReturnDate").val(dtFormatted);
-
+                    $("#ContentPlaceHolder1_txtAirReturnDate").focus();
                 }
             }).attr('readonly', 'true');;
 
@@ -199,7 +201,7 @@
                     $("#ContentPlaceHolder1_txtAirTravelDate").val($("#ContentPlaceHolder1_txtDate1").val());
 
 
-
+                    $("#ContentPlaceHolder1_txtDate1").focus();
                 }
 
 
@@ -222,6 +224,8 @@
                     $("#ContentPlaceHolder1_txtDate4").val('');
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtDate2").val(dtFormatted);
+
+                    $("#ContentPlaceHolder1_txtDate2").focus();
                 }
             }).attr('readonly', 'true');;
             $("#ContentPlaceHolder1_txtDate3").datepicker({
@@ -237,6 +241,8 @@
                     $("#ContentPlaceHolder1_txtDate4").val('');
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtDate3").val(dtFormatted);
+
+                    $("#ContentPlaceHolder1_txtDate3").focus();
                 }
             }).attr('readonly', 'true');;
 
@@ -252,6 +258,8 @@
                     $("#ContentPlaceHolder1_txtAirReturnDate").datepicker("option", "minDate", dtFormatted);
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtDate4").val(dtFormatted);
+
+                    $("#ContentPlaceHolder1_txtDate4").focus();
                 }
 
             }).attr('readonly', 'true');;
@@ -269,6 +277,7 @@
                     $("#ContentPlaceHolder1_txtlandTravelto").datepicker("option", "minDate", dtFormatted);
                     $("#ContentPlaceHolder1_txtlandTravelFrom").val(dtFormatted);
 
+                    $("#ContentPlaceHolder1_txtlandTravelFrom").focus();
                 }
             }).attr('readonly', 'true');;
 
@@ -283,7 +292,7 @@
                     $("#ContentPlaceHolder1_txtlandTravelFrom").datepicker("option", "maxDate", dtFormatted)
                     $("#ContentPlaceHolder1_txtlandTravelto").val(dtFormatted);
 
-
+                    $("#ContentPlaceHolder1_txtlandBookingRef").focus();
                 }
             }).attr('readonly', 'true');;
 

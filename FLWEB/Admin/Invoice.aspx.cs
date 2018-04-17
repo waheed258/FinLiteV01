@@ -1312,6 +1312,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+        txtAirVatinclTax.Focus();
     }
 
     protected void txtAirCommisionper_TextChanged(object sender, EventArgs e)
@@ -1327,6 +1328,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+        txtAirCommExclu.Focus();
     }
     protected void txtAirRouting_TextChanged(object sender, EventArgs e)
     {
@@ -1356,16 +1358,18 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
-
+        txtAirMiles.Focus();
     }
 
     protected void drpAirPassenger_TextChanged(object sender, EventArgs e)
     {
         VASPopupExtender.Show();
+        txtAirConjunction.Focus();
     }
     protected void txtPnr_TextChanged(object sender, EventArgs e)
     {
         VASPopupExtender.Show();
+        ddlAirLine.Focus();
     }
 
    
@@ -1384,6 +1388,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
         txtAirCommisionper.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
         VASPopupExtender.Show();
+        ddlAirService.Focus();
     }
 
     protected void btnAirSubmit_Click1(object sender, EventArgs e)
@@ -1417,6 +1422,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             {
                 txtAirCommisionper_TextChanged(null, null);
             }
+
         }
         catch (Exception ex)
         {
@@ -1424,6 +1430,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
 
         }
+        txtAirCommisionper.Focus();
     }
     protected void ddlType_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -1443,7 +1450,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
-
+        txtAirRouting.Focus();
 
     }
     protected void ddlAirLine_SelectedIndexChanged(object sender, EventArgs e)
@@ -1510,6 +1517,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+        drpAirPassenger.Focus();
 
     }
 
@@ -2423,6 +2432,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+        txtlandPassName.Focus();
         landPopExtender.Show();
 
     }
@@ -2449,7 +2460,7 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
         txtlandCommPer.Text = _objBOUtiltiy.FormatTwoDecimal(commperc.ToString());
 
-
+        DDlandType.Focus();
         landPopExtender.Show();
     }
 
@@ -2625,6 +2636,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+        DDlandService.Focus();
     }
     protected void txtlandTotalIncl_TextChanged(object sender, EventArgs e)
     {
@@ -2634,10 +2647,12 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
     protected void txtlandPassName_TextChanged(object sender, EventArgs e)
     {
+        txtlandTravelFrom.Focus();
         landPopExtender.Show();
     }
     protected void txtlandBookingRef_TextChanged(object sender, EventArgs e)
     {
+        txtlandVocher.Focus();
         landPopExtender.Show();
     }
     protected void txtlandTotalExcl_TextChanged(object sender, EventArgs e)
@@ -2678,6 +2693,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+        txtlandRateIncl.Focus();
     }
     protected void txtlandRateIncl_TextChanged(object sender, EventArgs e)
     {
@@ -2690,13 +2707,15 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
                 txtlandTotalcmblIncl.Text = txtlandCmblIncl.Text;
             }
-            landPopExtender.Show();
+           
         }
         catch (Exception ex)
         {
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+        txtlandRateIncl.Focus();
+        landPopExtender.Show();
     }
     protected void txtlandUnits_TextChanged(object sender, EventArgs e)
     {
@@ -2708,13 +2727,15 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
                 txtlandTotalcmblIncl.Text = txtlandCmblIncl.Text;
             }
-            landPopExtender.Show();
+           
         }
         catch (Exception ex)
         {
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+        txtlandTotalExcl.Focus();
+        landPopExtender.Show();
     }
     protected void txtlandOtherCmblIncl_TextChanged(object sender, EventArgs e)
     {
@@ -2773,6 +2794,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             lblMsg.Text = _objBOUtiltiy.ShowMessage("danger", "Danger", ex.Message);
             ExceptionLogging.SendExcepToDB(ex);
         }
+
+        txtlandTotalIncl.Focus();
     }
 
 
@@ -3661,6 +3684,8 @@ public partial class Admin_Invoice : System.Web.UI.Page
             }
             VASPopupExtender.Show();
         }
+
+        drpTicketType.Focus();
     }
 
 
