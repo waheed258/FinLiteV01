@@ -61,9 +61,9 @@ namespace BusinessManager
             return _objDALTransactions.Transaction_GetAccountsData(ChartedAccId, BankAccount, RefType, Category);
         }
 
-        public DataSet Get_PrintReceipt(int invid)
+        public DataSet Get_PrintReceipt(int invid, int companyId)
         {
-            return _objDALTransactions.Get_PrintReceipt(invid);
+            return _objDALTransactions.Get_PrintReceipt(invid, companyId);
         }
     }
 }

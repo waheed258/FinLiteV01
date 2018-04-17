@@ -161,7 +161,7 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                         }
                         if (objDs.Tables[0].Rows.Count == 0)
                         {
-                            readFile = readFile.Replace("{Document_No}", "123456546256");
+                            readFile = readFile.Replace("{Document_No}", "");
                             readFile = readFile.Replace("{Date}", " ");
                             readFile = readFile.Replace("{Consultant}", " ");
                             readFile = readFile.Replace("{clientAddress}", " ");
@@ -519,6 +519,10 @@ public partial class Admin_InvoicePdf : System.Web.UI.Page
                             }
 
                             readFile = readFile.Replace("{LandData}", sbLandrow.ToString());
+                        }
+                        else
+                        {
+                            readFile = readFile.Replace("{LandData}", " ");
                         }
                         #endregion
 

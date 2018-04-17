@@ -179,12 +179,13 @@ namespace DataManager
             return ExecuteDataSet("Transaction_GetAccount", htparams);
         }
 
-        public DataSet Get_PrintReceipt(int Invid)
+        public DataSet Get_PrintReceipt(int Invid, int companyId)
         {
             Hashtable htparams = new Hashtable
             {
                
                   {"@Invid",Invid},
+                  {"@UsercomapnyId",companyId},
             };
 
 
