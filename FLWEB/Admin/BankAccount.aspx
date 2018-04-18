@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-sm-3">
                         <asp:DropDownList ID="ddlAccountType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlAccountType_SelectedIndexChanged" AutoPostBack="true">
-                            <asp:ListItem Text="-Please Select-" Value="-1" />
+                            <asp:ListItem Text="-Please Select-" Value="0" />
                             <asp:ListItem Text="Savings" Value="Savings" />
                             <asp:ListItem Text="Current" Value="Current" />
                         </asp:DropDownList>
