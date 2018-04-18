@@ -882,10 +882,10 @@ public partial class Admin_Invoice : System.Web.UI.Page
             ds = _boAirSupplier.GetAirSuppliers(supplId);
             ViewState["CommissionBasedonAirline"] = ds.Tables[2];
 
-            if (ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[1].Rows.Count > 0)
             {
 
-                ddlAirLine.DataSource = ds.Tables[0];
+                ddlAirLine.DataSource = ds.Tables[1];
                 ddlAirLine.DataTextField = "SupplierName";
                 ddlAirLine.DataValueField = "SupplierId";
                 ddlAirLine.DataBind();

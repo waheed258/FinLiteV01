@@ -274,10 +274,10 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
             ds = _boAirSupplier.GetAirSuppliers(supplierid);
             ViewState["PFCommissionBasedonAirline"] = ds.Tables[2];
 
-            if (ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[1].Rows.Count > 0)
             {
 
-                ddlPFAirLine.DataSource = ds.Tables[0];
+                ddlPFAirLine.DataSource = ds.Tables[1];
                 ddlPFAirLine.DataTextField = "SupplierName";
                 ddlPFAirLine.DataValueField = "SupplierId";
                 ddlPFAirLine.DataBind();
