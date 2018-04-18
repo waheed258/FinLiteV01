@@ -74,23 +74,24 @@ public partial class Admin_BankAccount : System.Web.UI.Page
             lblaccNumber.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+        txtBranchCode.Focus();
     }
 
     protected void txtBankName_TextChanged(object sender, EventArgs e)
     {
-
+        ddlAccountType.Focus();
     }
     protected void ddlAccountType_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        txtAccountNumber.Focus();
     }
     protected void txtBranchName_TextChanged(object sender, EventArgs e)
     {
-
+        txtAccountHolder.Focus();
     }
     protected void txtAccountHolder_TextChanged(object sender, EventArgs e)
     {
-
+        ddlGraphic.Focus();
     }
 #endregion
 
@@ -319,7 +320,17 @@ public partial class Admin_BankAccount : System.Web.UI.Page
                lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
 
            }
+
+           chkDeactivate.Focus();
        }
 
-       
+
+       protected void ddlGraphic_SelectedIndexChanged(object sender, EventArgs e)
+       {
+           ddlOwnerBranch.Focus();
+       }
+       protected void ddlOwnerBranch_SelectedIndexChanged(object sender, EventArgs e)
+       {
+           txtQuickGICode.Focus();
+       }
 }

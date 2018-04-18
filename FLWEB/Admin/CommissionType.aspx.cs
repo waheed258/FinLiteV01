@@ -231,6 +231,8 @@ public partial class CommissionType : System.Web.UI.Page
             lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+
+        chkDeactivate.Focus();
     }
     protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -250,5 +252,22 @@ public partial class CommissionType : System.Web.UI.Page
         {
             ddlLandSubCategory.Enabled = false;
         }
+        ddlCategory.Focus();
+    }
+    protected void txtDescription_TextChanged(object sender, EventArgs e)
+    {
+        ddlCategory.Focus();
+    }
+    protected void ddlDefaultType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtDefaultComm.Focus();
+    }
+    protected void ddlZeroUnitsType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ddlIncomeCharges.Focus();
+    }
+    protected void ddlDefaultVAT_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ChkNonTravelFee.Focus();
     }
 }

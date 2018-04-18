@@ -67,7 +67,7 @@
                         <label class="control-label">Description(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control"/>
+                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true"/>
                         <asp:RequiredFieldValidator ControlToValidate="txtDescription" runat="server" ID="rfvtxtDescription"
                             Display="Dynamic" Text="Enter Description." ErrorMessage="Enter Description." ValidationGroup="CommType" ForeColor="Red" />
                          <%-- <asp:RegularExpressionValidator ControlToValidate="txtDescription" runat="server"
@@ -103,7 +103,7 @@
                         <label class="control-label">Default Type(<span class="style1">*</span>)</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlDefaultType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlDefaultType" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlDefaultType_SelectedIndexChanged" AutoPostBack="true">
                                     <asp:ListItem Text="--Select Default Type--" Value="0" Selected="True"></asp:ListItem>
 
                         </asp:DropDownList>
@@ -143,7 +143,7 @@
 
                    </div>
                    <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlDefaultVAT" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlDefaultVAT" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlDefaultVAT_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="-Select-" Value="0"></asp:ListItem>
                         </asp:DropDownList>
                      <%--  <asp:RequiredFieldValidator ControlToValidate="ddlDefaultVAT" runat="server" ID="rfvddlDefaultVAT" ValidationGroup="CommType"
@@ -165,7 +165,7 @@
                      <label class="control-label">Zero Units Type?(<span class="style1">*</span>)</label>
                   </div>
                   <div class="col-sm-3" >
-                     <asp:DropDownList ID="ddlZeroUnitsType" runat="server" CssClass="form-control">
+                     <asp:DropDownList ID="ddlZeroUnitsType" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlZeroUnitsType_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Text="-Select-" Value="-1" />
                         <asp:ListItem Text="Yes" Value="1"/>
                         <asp:ListItem Text="No" Value="0"/>
@@ -202,9 +202,9 @@
               </div>
            </div>
            <div class="form-group">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <asp:Button runat="server" ID="btnSubmit" class="btn btn-success" ValidationGroup="CommType"
                     Text="Submit" 
                         UseSubmitBehavior="false" 

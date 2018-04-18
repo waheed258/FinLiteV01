@@ -144,14 +144,14 @@
                         <label>Graphic</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlGraphic" runat="server" CssClass="form-control" AppendDataBoundItems="true" />
+                        <asp:DropDownList ID="ddlGraphic" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlGraphic_SelectedIndexChanged" AutoPostBack="true"/>
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
                         <label>Owner Branch</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlOwnerBranch" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlOwnerBranch" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlOwnerBranch_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="-Please Select-" Value="-1" />
                             <asp:ListItem Text="Serendipity Tours Cc" Value="0" />
                         </asp:DropDownList>
