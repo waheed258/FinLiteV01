@@ -39,6 +39,13 @@
          function DatePickerSet() {
             // $('#ContentPlaceHolder1_txtEffectiveDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
              $("#ContentPlaceHolder1_txtEffectiveDate").datepicker({
+
+                 onSelect: function (selected) {
+                     $("#ContentPlaceHolder1_txtEffectiveDate").focus();
+                     $("#ContentPlaceHolder1_btnSubmit").val("Submit");
+
+                     $('#ContentPlaceHolder1_btnSubmit').removeAttr("disabled");
+                 },
                  format: 'yyyy-mm-dd',
                  autoclose: true
              }).attr('readonly', 'false');;

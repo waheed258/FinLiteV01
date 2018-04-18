@@ -135,14 +135,20 @@
 
 
          function DatePickerSet() {
+             debugger;
              $('#ContentPlaceHolder1_txtInvDate').val('<%=System.DateTime.Now.ToShortDateString()%>');
-            $("#ContentPlaceHolder1_txtInvDate").datepicker({
-                format: 'yyyy-mm-dd',
-                startDate: '-9d',
-                endDate: '0d',
-                autoclose: true
-            }).attr('readonly', 'false');;
+             $("#ContentPlaceHolder1_txtInvDate").datepicker({
 
+                 onSelect: function (selected) {
+                     $("#ContentPlaceHolder1_txtInvDate").focus();
+                 },
+                 format: 'yyyy-mm-dd',
+                 startDate: '-9d',
+                 endDate: '0d',
+                 autoclose: true
+               
+            }).attr('readonly', 'false');;
+            
 
 
             $("#ContentPlaceHolder1_txtAirTravelDate").datepicker({
@@ -163,6 +169,10 @@
                     $("#ContentPlaceHolder1_txtAirTravelDate").val(dtFormatted);
 
                     $("#ContentPlaceHolder1_txtAirTravelDate").focus();
+                //    $("#ContentPlaceHolder1_btnAirSubmit")
+                    $("#ContentPlaceHolder1_btnAirSubmit").val("Submit");
+                  
+                    $('#ContentPlaceHolder1_btnAirSubmit').removeAttr("disabled");
                 }
             }).attr('readonly', 'true');;
 
@@ -200,6 +210,8 @@
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtAirTravelDate").val($("#ContentPlaceHolder1_txtDate1").val());
 
+                    $("#ContentPlaceHolder1_btnAirSubmit").val("Submit");
+                    $('#ContentPlaceHolder1_btnAirSubmit').removeAttr("disabled");
 
                     $("#ContentPlaceHolder1_txtDate1").focus();
                 }
@@ -225,6 +237,8 @@
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtDate2").val(dtFormatted);
 
+                    $("#ContentPlaceHolder1_btnAirSubmit").val("Submit");
+                    $('#ContentPlaceHolder1_btnAirSubmit').removeAttr("disabled");
                     $("#ContentPlaceHolder1_txtDate2").focus();
                 }
             }).attr('readonly', 'true');;
@@ -242,6 +256,8 @@
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtDate3").val(dtFormatted);
 
+                    $("#ContentPlaceHolder1_btnAirSubmit").val("Submit");
+                    $('#ContentPlaceHolder1_btnAirSubmit').removeAttr("disabled");
                     $("#ContentPlaceHolder1_txtDate3").focus();
                 }
             }).attr('readonly', 'true');;
@@ -259,6 +275,8 @@
                     $("#ContentPlaceHolder1_txtAirReturnDate").val('');
                     $("#ContentPlaceHolder1_txtDate4").val(dtFormatted);
 
+                    $("#ContentPlaceHolder1_btnAirSubmit").val("Submit");
+                    $('#ContentPlaceHolder1_btnAirSubmit').removeAttr("disabled");
                     $("#ContentPlaceHolder1_txtDate4").focus();
                 }
 
@@ -277,6 +295,8 @@
                     $("#ContentPlaceHolder1_txtlandTravelto").datepicker("option", "minDate", dtFormatted);
                     $("#ContentPlaceHolder1_txtlandTravelFrom").val(dtFormatted);
 
+                    $("#ContentPlaceHolder1_LandArrSubmit").val("Submit");
+                    $('#ContentPlaceHolder1_LandArrSubmit').removeAttr("disabled");
                     $("#ContentPlaceHolder1_txtlandTravelFrom").focus();
                 }
             }).attr('readonly', 'true');;
@@ -300,7 +320,11 @@
 
 
             $("#ContentPlaceHolder1_txtSerTravelDate").datepicker({
-
+                onSelect: function (selected) {
+                    $("#ContentPlaceHolder1_txtSerTravelDate").focus();
+                    $("#ContentPlaceHolder1_SerSubmit").val("Submit");
+                    $('#ContentPlaceHolder1_SerSubmit').removeAttr("disabled");
+                },
                 numberOfMonths: 1,
                 dateFormat: 'yy-mm-dd',
                 autoclose: true,

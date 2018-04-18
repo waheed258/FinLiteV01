@@ -88,8 +88,8 @@ public partial class Admin_GeneralPaymentList : System.Web.UI.Page
             {
                 DataTable dt = (DataTable)Session["dt"];
                 DataRow[] dr = dt.Select(
-                    "MainAcCode='" + SearchText +
-                    "' OR Convert(PaymentDate, 'System.String') LIKE '%" + SearchText +
+                    "MainAcCode LIKE '%" + SearchText +
+                    "%' OR Convert(PaymentDate, 'System.String') LIKE '%" + SearchText +
                     "%' OR BankName LIKE '%" + SearchText +
                     "%' OR ToMainAcCode LIKE '%" + SearchText +
                     "%' OR Convert(PaymentAmount, 'System.String') LIKE '%" + SearchText + "%'");
