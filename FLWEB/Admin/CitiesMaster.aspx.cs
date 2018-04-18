@@ -168,7 +168,9 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
     }
     protected void dropCountry_SelectedIndexChanged(object sender, EventArgs e)
     {
+
         Get_State_Country();
+        dropCountry.Focus();
     }
 
     void ClearControls()
@@ -182,14 +184,14 @@ public partial class Admin_CitiesMaster : System.Web.UI.Page
     }
     protected void txtCityKey_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        dropCountry.Focus();
     }
     protected void dropState_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        txtTimeZone.Focus();
     }
 }

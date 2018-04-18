@@ -49,7 +49,7 @@ public partial class Admin_Airports : System.Web.UI.Page
 
     protected void dropCountry_SelectedIndexChanged(object sender, EventArgs e)
     {
-        dropCountry.Focus();
+        dropState.Focus();
         dropState.Items.Clear();
         dropCity.Items.Clear();
         Get_State_Country();
@@ -57,7 +57,7 @@ public partial class Admin_Airports : System.Web.UI.Page
     }
     protected void dropState_SelectedIndexChanged(object sender, EventArgs e)
     {
-        dropState.Focus();
+        dropCity.Focus();
         Get_City_State();
     }
 
@@ -230,6 +230,7 @@ public partial class Admin_Airports : System.Web.UI.Page
         chkDeactivate.Checked = false;
         chkCountryDetails.Checked = false;
         dropCity.SelectedValue = "-1";
+        dropState.SelectedValue = "-1";
         dropCountry.SelectedValue = "-1";
     } 
 
@@ -237,14 +238,14 @@ public partial class Admin_Airports : System.Web.UI.Page
 
     protected void txtAirKey_TextChanged(object sender, EventArgs e)
     {
-
+        chkDeactivate.Focus();
     }
     protected void txtAirportName_TextChanged(object sender, EventArgs e)
     {
-
+        dropCountry.Focus();
     }
     protected void dropCity_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        dropCity.Focus();
     }
 }

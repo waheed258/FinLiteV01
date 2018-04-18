@@ -146,17 +146,19 @@ public partial class Admin_VatType : System.Web.UI.Page
             lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+
+        txtKey.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
     protected void txtVatRate_TextChanged(object sender, EventArgs e)
     {
-
+        txtVatRate.Focus();
     }
     protected void ddlApplicableTo_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        ddlApplicableTo.Focus();
     }
 }
