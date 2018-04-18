@@ -45,11 +45,11 @@ public partial class Admin_ContactLog : System.Web.UI.Page
     }
     protected void txtLogKey_TextChanged(object sender, EventArgs e)
     {
-
+        txtLogDescription.Focus();
     }
     protected void txtLogDescription_TextChanged(object sender, EventArgs e)
     {
-
+        txtLogDescription.Focus();
     }
 
 #endregion

@@ -71,7 +71,7 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlGroup" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlGroup" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlGroup_SelectedIndexChanged" AutoPostBack="true">
                               <%--<asp:ListItem Text="--Select--" Value="-1"> </asp:ListItem>--%>
                         </asp:DropDownList>
                        
@@ -83,7 +83,8 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                          <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                          <asp:DropDownList ID="ddlDivision" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlDivision_SelectedIndexChanged"
+                              AutoPostBack="true">
                                 <%--<asp:ListItem Text="--Select--" Value="-1"> </asp:ListItem>--%>
                       </asp:DropDownList>
                     </div>
@@ -159,7 +160,8 @@
                         </label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="ddlClientType" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="ddlClientType" runat="server" CssClass="form-control" AppendDataBoundItems="true"
+                            OnSelectedIndexChanged="ddlClientType_SelectedIndexChanged" AutoPostBack="true">
                               <%--<asp:ListItem Text="--Select--" Value="-1"> </asp:ListItem>--%>
                      </asp:DropDownList>
                     </div>

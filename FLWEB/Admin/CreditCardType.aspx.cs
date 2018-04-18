@@ -94,6 +94,19 @@ public partial class Admin_CreditCardType : System.Web.UI.Page
             ExceptionLogging.SendExcepToDB(ex);
         }
     }
+
+    protected void txtCreditKey_TextChanged(object sender, EventArgs e)
+    {
+        txtCreDescription.Focus();
+    }
+    protected void txtCreDescription_TextChanged(object sender, EventArgs e)
+    {
+        txtNumberPrefix.Focus();
+    }
+    protected void txtNumberPrefix_TextChanged(object sender, EventArgs e)
+    {
+        txtNumberPrefix.Focus();
+    }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("CreditCardList.aspx");
@@ -110,4 +123,5 @@ public partial class Admin_CreditCardType : System.Web.UI.Page
         txtCreDescription.Text = "";
         txtNumberPrefix.Text = "";
     }
+   
 }

@@ -43,7 +43,7 @@ public partial class Admin_PaymentTypes : System.Web.UI.Page
 
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        chkdefaultpayment.Focus();
     }
 #endregion
 
@@ -138,6 +138,8 @@ public partial class Admin_PaymentTypes : System.Web.UI.Page
             lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+
+        txtDescription.Focus();
     }
    
 }

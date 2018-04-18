@@ -61,7 +61,7 @@
                         <label class="control-label">Default Action</label>
                     </div>
                     <div class="col-sm-3">
-                        <asp:DropDownList ID="dropDefaultAction" runat="server" CssClass="form-control" AppendDataBoundItems="true">
+                        <asp:DropDownList ID="dropDefaultAction" runat="server" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropDefaultAction_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="--Select--" Value="-1" Selected="True"></asp:ListItem>
                         </asp:DropDownList>
                     </div>

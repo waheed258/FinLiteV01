@@ -54,11 +54,11 @@ public partial class Admin_TemplateCategory : System.Web.UI.Page
 
     protected void txtKey_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
 
 #endregion

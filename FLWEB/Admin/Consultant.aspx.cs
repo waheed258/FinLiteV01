@@ -61,15 +61,15 @@ public partial class Admin_Consultant : System.Web.UI.Page
 
     protected void txtName_TextChanged(object sender, EventArgs e)
     {
-
+        txtKey.Focus();
     }
     protected void txtEmail_TextChanged(object sender, EventArgs e)
     {
-
+        txtTelephoneNo.Focus();
     }
     protected void txtTelephoneNo_TextChanged(object sender, EventArgs e)
     {
-
+        txtCellNo.Focus();
     }
 
 #endregion
@@ -386,7 +386,21 @@ public partial class Admin_Consultant : System.Web.UI.Page
             lblaccnoerr.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+
+        ddlGroup.Focus();
     }
-    
+
+    protected void ddlGroup_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ddlDivision.Focus();
+    }
+    protected void ddlDivision_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtEmail.Focus();
+    }
+    protected void ddlClientType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        chkDeActivate.Focus();
+    }
 }
 

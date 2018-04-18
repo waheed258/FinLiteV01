@@ -30,7 +30,7 @@
                                 <label class="control-label">Key(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtCreditKey" runat="server" Cssclass="form-control" MaxLength="3" />
+                                <asp:TextBox ID="txtCreditKey" runat="server" Cssclass="form-control" MaxLength="3" OnTextChanged="txtCreditKey_TextChanged"  AutoPostBack="true"/>
                                  <asp:RequiredFieldValidator ControlToValidate="txtCreditKey" runat="server" ID="rfvtxtCreditKey" ValidationGroup="credit"
                                     ErrorMessage="Enter Key" Text="Enter Key" class="validationred" Display="Dynamic" ForeColor="Red" />
 
@@ -40,7 +40,7 @@
                                 <label class="control-label">Description(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtCreDescription" runat="server" Cssclass="form-control" MaxLength="50" />
+                                <asp:TextBox ID="txtCreDescription" runat="server" Cssclass="form-control" MaxLength="50" OnTextChanged="txtCreDescription_TextChanged" AutoPostBack="true"/>
                                  <asp:RequiredFieldValidator ControlToValidate="txtCreDescription" runat="server" ID="rfvtxtCreDescription" ValidationGroup="credit"
                                     ErrorMessage="Enter Description" Text="Enter Description" class="validationred" Display="Dynamic" ForeColor="Red" />
                                  <asp:RegularExpressionValidator ControlToValidate="txtCreDescription" runat="server" ForeColor="Red"
@@ -59,7 +59,7 @@
                                 <label class="control-label">Number Prefix(<span class="style1">*</span>)</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:TextBox ID="txtNumberPrefix" runat="server" Cssclass="form-control" MaxLength="3" />
+                                <asp:TextBox ID="txtNumberPrefix" runat="server" Cssclass="form-control" MaxLength="3" OnTextChanged="txtNumberPrefix_TextChanged" AutoPostBack="true"/>
                                  <asp:RequiredFieldValidator ControlToValidate="txtNumberPrefix" runat="server" ID="rfvtxtNumberPrefix" ValidationGroup="credit"
                                     ErrorMessage="Enter Number Prefix" Text="Enter Number Prefix" class="validationred" Display="Dynamic" ForeColor="Red" />
                                  <asp:RegularExpressionValidator ControlToValidate="txtNumberPrefix" runat="server" ForeColor="Red"
@@ -71,13 +71,11 @@
                             </div>
                         </div>
 
-                    
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                
             <div class="form-group">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <asp:Button runat="server" ID="cmdSubmit" class="btn btn-success" ValidationGroup="credit"
                         Text="Submit"
                             UseSubmitBehavior="false" 
@@ -90,7 +88,9 @@
                 </div>
             </div>
 
-
+    
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </section>
 </asp:Content>

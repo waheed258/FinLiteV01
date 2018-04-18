@@ -40,27 +40,27 @@ public partial class Admin_Branch : System.Web.UI.Page
     }
     protected void txtBranchCode_TextChanged(object sender, EventArgs e)
     {
-
+        txtBranchName.Focus();
     }
     protected void txtBranchName_TextChanged(object sender, EventArgs e)
     {
-
+        chkDeActivate.Focus();
     }
     protected void txtTelephoneNumber_TextChanged(object sender, EventArgs e)
     {
-
+        txtFaxNumber.Focus();
     }
     protected void txtFaxNumber_TextChanged(object sender, EventArgs e)
     {
-
+        txtCellNumber.Focus();
     }
     protected void txtEmailAddress_TextChanged(object sender, EventArgs e)
     {
-
+        txtWebAddress.Focus();
     }
     protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        txtPostalAddress.Focus();
     }
     protected void cmdSubmit_Click(object sender, EventArgs e)
     {
@@ -79,6 +79,7 @@ public partial class Admin_Branch : System.Web.UI.Page
     {
 
         getCityState();
+        ddlCity.Focus();
     }
 
 

@@ -203,14 +203,14 @@ public partial class Admin_Countries : System.Web.UI.Page
     #endregion PublicMethods
     protected void ddlContinent_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        txtTimeZone.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        ddlContinent.Focus();
     }
     protected void txtKey_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
 }

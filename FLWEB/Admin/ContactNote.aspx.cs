@@ -116,7 +116,7 @@ public partial class Admin_ContactNote : System.Web.UI.Page
 
     protected void txtNoteDescription_TextChanged(object sender, EventArgs e)
     {
-
+        txtHelpText.Focus();
     }
 
 #endregion
@@ -150,6 +150,8 @@ public partial class Admin_ContactNote : System.Web.UI.Page
             lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+
+        chkNoteDeactivate.Focus();
     }
    
 }

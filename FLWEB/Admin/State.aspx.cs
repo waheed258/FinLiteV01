@@ -134,14 +134,14 @@ public partial class State : System.Web.UI.Page
     #endregion
       protected void txtKey_TextChanged(object sender, System.EventArgs e)
       {
-
+          txtDescription.Focus();
       }
       protected void txtDescription_TextChanged(object sender, System.EventArgs e)
       {
-
+          ddlCountry.Focus();
       }
       protected void ddlCountry_SelectedIndexChanged(object sender, System.EventArgs e)
       {
-
+          ddlCountry.Focus();
       }
 }

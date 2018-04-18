@@ -48,15 +48,15 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
     }
     protected void dropCreditType_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        ChkDefaultReciepts.Focus();
     }
     protected void dropBankAccount_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        dropCreditType.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        dropDepMethod.Focus();
     }
 
 #endregion
@@ -254,6 +254,12 @@ public partial class Admin_ReceiptTypes : System.Web.UI.Page
             lblKeyerr.ForeColor = System.Drawing.Color.DarkBlue;
 
         }
+
+        chkDeactivate.Focus();
     }
- 
+
+    protected void dropDepMethod_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        dropBankAccount.Focus();
+    }
 }

@@ -113,15 +113,15 @@ public partial class Admin_CashBookType : System.Web.UI.Page
     }
     protected void txtCashKey_TextChanged(object sender, EventArgs e)
     {
-
+        chkDeactivate.Focus();
     }
     protected void txtCashDescription_TextChanged(object sender, EventArgs e)
     {
-
+        dropDefaultAction.Focus();
     }
     protected void txtGICode_TextChanged(object sender, EventArgs e)
     {
-
+        txtRefFormat.Focus();
     }
 #endregion
     private void BindTansactionAction()
@@ -152,5 +152,9 @@ public partial class Admin_CashBookType : System.Web.UI.Page
         chkDeactivate.Checked = false;
         dropDefaultAction.SelectedValue = "-1";
     }
-  
+
+    protected void dropDefaultAction_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtGICode.Focus();
+    }
 }

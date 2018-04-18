@@ -81,7 +81,7 @@
                                 <label class="control-label">Dep list Method</label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:DropDownList ID="dropDepMethod" runat="server" Cssclass="form-control" AppendDataBoundItems="true">
+                                <asp:DropDownList ID="dropDepMethod" runat="server" Cssclass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="dropDepMethod_SelectedIndexChanged" AutoPostBack="true">
                                     <%--<asp:ListItem Text="-Select-" Value="-1"></asp:ListItem>--%>
                                 </asp:DropDownList>
                                

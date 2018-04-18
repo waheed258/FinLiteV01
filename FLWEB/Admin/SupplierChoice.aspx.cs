@@ -47,11 +47,11 @@ public partial class Admin_SupplierChoice : System.Web.UI.Page
 
     protected void txtChoiceKey_TextChanged(object sender, EventArgs e)
     {
-
+        chkDeactivate.Focus();
     }
     protected void txtChoiceDescription_TextChanged(object sender, EventArgs e)
     {
-
+        txtChoiceDescription.Focus();
     }
 
 #endregion

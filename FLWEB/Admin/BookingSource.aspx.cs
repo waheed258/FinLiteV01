@@ -42,11 +42,11 @@ public partial class Admin_BookingSource : System.Web.UI.Page
 
     protected void txtKey_TextChanged(object sender, EventArgs e)
     {
-
+        ChkDeactivate.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {

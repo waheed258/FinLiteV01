@@ -117,14 +117,14 @@ public partial class Admin_ForeignCurrency : System.Web.UI.Page
     #endregion
     protected void txtKey_TextChanged(object sender, EventArgs e)
     {
-
+        txtDescription.Focus();
     }
     protected void txtDescription_TextChanged(object sender, EventArgs e)
     {
-
+        ddlAction.Focus();
     }
     protected void ddlAction_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        ddlAction.Focus();
     }
 }
