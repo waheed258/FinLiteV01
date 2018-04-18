@@ -199,7 +199,7 @@ public partial class CommissionType : System.Web.UI.Page
         chkDeactivate.Checked = false;
         txtDescription.Text = "";
         ddlCategory.SelectedValue = "0";
-        ddlLandSubCategory.SelectedValue = "-1";
+        ddlLandSubCategory.SelectedValue = "0";
         ddlDefaultType.SelectedValue = "0";
         txtDefaultComm.Text = "";
         txtDefaultRate.Text = "";
