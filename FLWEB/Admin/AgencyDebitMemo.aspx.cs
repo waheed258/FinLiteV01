@@ -96,9 +96,9 @@ public partial class Admin_AgencyDebitMemo : System.Web.UI.Page
             int landSupId = 0;
             DataSet datasetland = new DataSet();
             datasetland = objBalandSuppliers.GetLandSupplier(landSupId);
-            if (datasetland.Tables[0].Rows.Count > 0)
+            if (datasetland.Tables[2].Rows.Count > 0)
             {
-                DDLADMSupplier.DataSource = datasetland.Tables[0];
+                DDLADMSupplier.DataSource = datasetland.Tables[2];
                 DDLADMSupplier.DataTextField = "LSupplierName";
                 DDLADMSupplier.DataValueField = "LSupplierId";
                 DDLADMSupplier.DataBind();

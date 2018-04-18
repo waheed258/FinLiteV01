@@ -2831,9 +2831,9 @@ public partial class Admin_Invoice : System.Web.UI.Page
 
             ViewState["AllCommissionTypes_Land"] = datasetland.Tables[1];
 
-            if (datasetland.Tables[0].Rows.Count > 0)
+            if (datasetland.Tables[2].Rows.Count > 0)
             {
-                DDlandSupplier.DataSource = datasetland.Tables[0];
+                DDlandSupplier.DataSource = datasetland.Tables[2];
                 DDlandSupplier.DataTextField = "LSupplierName";
                 DDlandSupplier.DataValueField = "LSupplierId";
                 DDlandSupplier.DataBind();

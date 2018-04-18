@@ -138,9 +138,9 @@ public partial class Admin_AgencyCreditMemo : System.Web.UI.Page
             int landSupId = 0;
             DataSet datasetland = new DataSet();
             datasetland = objBalandSuppliers.GetLandSupplier(landSupId);
-            if (datasetland.Tables[0].Rows.Count > 0)
+            if (datasetland.Tables[2].Rows.Count > 0)
             {
-                DDLACMSupplier.DataSource = datasetland.Tables[0];
+                DDLACMSupplier.DataSource = datasetland.Tables[2];
                 DDLACMSupplier.DataTextField = "LSupplierName";
                 DDLACMSupplier.DataValueField = "LSupplierId";
                 DDLACMSupplier.DataBind();

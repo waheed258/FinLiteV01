@@ -1890,9 +1890,9 @@ public partial class Admin_ProformaInvoice : System.Web.UI.Page
 
             ViewState["PFAllCommissionTypes_Land"] = datasetland.Tables[1];
 
-            if (datasetland.Tables[0].Rows.Count > 0)
+            if (datasetland.Tables[2].Rows.Count > 0)
             {
-                DDPFlandSupplier.DataSource = datasetland.Tables[0];
+                DDPFlandSupplier.DataSource = datasetland.Tables[2];
                 DDPFlandSupplier.DataTextField = "LSupplierName";
                 DDPFlandSupplier.DataValueField = "LSupplierId";
                 DDPFlandSupplier.DataBind();

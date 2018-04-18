@@ -47,10 +47,10 @@ public partial class Admin_Clients : System.Web.UI.Page
             else
             {
                 string getId = Convert.ToString(Request.QueryString["ClientId"]);
-                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId),true);
+                qs = _objBOUtiltiy.Decrypts(HttpUtility.UrlDecode(getId), true);
 
             }
- 
+
             if (!string.IsNullOrEmpty(Request.QueryString["ClientId"]))
             {
                 int ClientId = Convert.ToInt32(qs);
@@ -560,13 +560,15 @@ public partial class Admin_Clients : System.Web.UI.Page
 
         try
         {
-            int ConsultantId = 0;
-            BAConsultant objBAConsultant = new BAConsultant();
-            DataSet ds = new DataSet();
-            ds = objBAConsultant.GetConsultant(ConsultantId);
-            if (ds.Tables.Count > 0)
+            //int ConsultantId = 0;
+            //BAConsultant objBAConsultant = new BAConsultant();
+            //DataSet ds = new DataSet();
+            //ds = objBAConsultant.GetConsultant(ConsultantId);
+            //if (ds.Tables.Count > 0)
+            //{
+            DataSet ds = _objBOUtiltiy.GetConsultants();
+            if (ds.Tables[0].Rows.Count > 0)
             {
-
                 ddlConsultant.DataSource = ds.Tables[0];
                 ddlConsultant.DataTextField = "Name";
                 ddlConsultant.DataValueField = "ConsultantId";
@@ -1297,5 +1299,5 @@ public partial class Admin_Clients : System.Web.UI.Page
             lblaccnoerr.Text = "";
         }
     }
-    
+
 }
