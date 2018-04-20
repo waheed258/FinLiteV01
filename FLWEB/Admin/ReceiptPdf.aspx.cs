@@ -162,7 +162,7 @@ public partial class Admin_ReceiptPdf : System.Web.UI.Page
 
                             foreach (DataRow dtlRow in objDs.Tables[2].Rows)
                             {
-                                decimal invPaid = 0;
+                                invTotal = invNet;
 
                                 if (header == 0)
                                 {
@@ -179,13 +179,14 @@ public partial class Admin_ReceiptPdf : System.Web.UI.Page
                                     sbMainrow.Append("<td style='font-weight:bold;border: 1px ridge black;padding: 5px;background-color: white;border-bottom: 1px ridge black;border-radius:5px;'>Net Balance</td>");
 
                                     sbMainrow.Append("</tr>");
+                                    invTotal = Convert.ToDecimal(dtlRow["InvoiceTotal"]);
                                     header = 1;
                                 }
                                 sbMainrow.Append("<tr>");
                                 sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'>" + dtlRow["InvId"] + "</td>");
                                 sbMainrow.Append("<td style='border: 1px ridge black; font-weight:bold;padding:3px;'>" + dtlRow["ClientName"] + "</td>");
 
-                                invTotal = Math.Abs(Convert.ToDecimal(dtlRow["InvoiceTotal"]) - allocate);
+                               
                                 allocate = Convert.ToDecimal(dtlRow["AllocatedAmount"]);
                                 invNet = invTotal - allocate;
 
