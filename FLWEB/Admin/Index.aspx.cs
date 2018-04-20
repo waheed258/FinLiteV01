@@ -16,6 +16,7 @@ public partial class Admin_Index : System.Web.UI.Page
     BAReport objBAReport = new BAReport();
     BOUtiltiy _objBOUtiltiy = new BOUtiltiy();
 
+
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -144,8 +145,9 @@ public partial class Admin_Index : System.Web.UI.Page
             //setting Chart type   
             MontlyChartAmt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
-            MontlyChartAmt.Series[0].Points[0].Color = Color.Coral;
-            MontlyChartAmt.Series[0].Points[1].Color = Color.LightSeaGreen;
+            MontlyChartAmt.Series[0].Points[0].Color = Color.DodgerBlue;
+            var MAcolor = System.Drawing.ColorTranslator.FromHtml("#005580");
+            MontlyChartAmt.Series[0].Points[1].Color = MAcolor;
             MontlyChartAmt.Series[0].Points[2].Color = Color.SlateBlue;
 
             //Hide or show chart back GridLines  
@@ -188,8 +190,9 @@ public partial class Admin_Index : System.Web.UI.Page
             //setting Chart type   
             MontlyChartCnt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
-            MontlyChartCnt.Series[0].Points[0].Color = Color.Coral;
-            MontlyChartCnt.Series[0].Points[1].Color = Color.LightSeaGreen;
+            MontlyChartCnt.Series[0].Points[0].Color = Color.DodgerBlue;
+            var MCcolor = System.Drawing.ColorTranslator.FromHtml("#005580");
+            MontlyChartCnt.Series[0].Points[1].Color = MCcolor;
             //Hide or show chart back GridLines  
             MontlyChartCnt.ChartAreas["ChartArea2"].AxisX.MajorGrid.Enabled = false;
             MontlyChartCnt.ChartAreas["ChartArea2"].AxisY.MajorGrid.Enabled = false;
@@ -251,8 +254,9 @@ public partial class Admin_Index : System.Web.UI.Page
             DailyChartAmt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
 
-            DailyChartAmt.Series[0].Points[0].Color = Color.Coral;
-            DailyChartAmt.Series[0].Points[1].Color = Color.LightSeaGreen;
+            DailyChartAmt.Series[0].Points[0].Color = Color.DodgerBlue;
+            var DAcolor = System.Drawing.ColorTranslator.FromHtml("#005580");
+            DailyChartAmt.Series[0].Points[1].Color = DAcolor;
             DailyChartAmt.Series[0].Points[2].Color = Color.SlateBlue;
 
             //Hide or show chart back GridLines  
@@ -296,8 +300,9 @@ public partial class Admin_Index : System.Web.UI.Page
             //setting Chart type   
             DailyChartCnt.Series[0].ChartType = SeriesChartType.Column;
             //Chart1.Series[0].ChartType = SeriesChartType.StackedColumn;  
-            DailyChartCnt.Series[0].Points[0].Color = Color.Coral;
-            DailyChartCnt.Series[0].Points[1].Color = Color.LightSeaGreen;
+            DailyChartCnt.Series[0].Points[0].Color = Color.DodgerBlue;
+            var DCcolor = System.Drawing.ColorTranslator.FromHtml("#005580");
+            DailyChartCnt.Series[0].Points[1].Color = DCcolor;//#005580
             //Hide or show chart back GridLines  
             DailyChartCnt.ChartAreas["ChartArea4"].AxisX.MajorGrid.Enabled = false;
             DailyChartCnt.ChartAreas["ChartArea4"].AxisY.MajorGrid.Enabled = false;
