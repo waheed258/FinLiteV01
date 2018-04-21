@@ -46,7 +46,7 @@ namespace DataManager
              {"@BankAcId",BankAcId}
            };
 
-           return ExecuteDataSet("BankAccounts_Get", htparams);
+           return ExecuteDataSet("BankAccountsList_Get", htparams);
 
        }
        public int DeleteBankAccount(int BankAcId)
