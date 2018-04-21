@@ -307,7 +307,7 @@ namespace DataManager
             Hashtable htparams = new Hashtable{
                                                  {"@ReceiptId",RecieptId}
             };
-            return ExecuteDataSet("ReceiptType_Get",htparams);
+            return ExecuteDataSet("ReceiptType_DropDown_Get", htparams);
         }
 
         public DataSet GetBankAccounts(int bankId)
